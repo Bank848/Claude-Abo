@@ -165,6 +165,13 @@
       "note": "Confirmed self-authored by the user (2026-06-18). No upstream; checker skips it."
     },
     {
+      "name": "plan-pro",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Self-authored meta/wrapper skill (confirmed 2026-06-18): orchestrates superpowers:writing-plans + spawned review + HTML/Mermaid + ecc /code-review & /simplify. No single upstream; the only external part (superpowers:writing-plans) is already tracked via the superpowers plugin. Checker skips it."
+    },
+    {
       "name": "second-brain",
       "source_repo_url": "https://github.com/coreyhaines31/makerskills",
       "subpath_in_repo": "skills/second-brain",

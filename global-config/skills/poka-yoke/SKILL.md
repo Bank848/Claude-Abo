@@ -73,3 +73,6 @@ Shigeo Shingo / Toyota. หัวใจ: เลื่อน effort จาก *de
 ## หมายเหตุ
 - เป็น skill **flexible** — ปรับหลักให้เข้า context ได้ ไม่ใช่ rigid checklist บังคับทุกข้อ
 - เคสเฉพาะโปรเจกต์ (เช่น scorecard เกม Ren'Py) เก็บแยกใน memory/doc ของ project นั้น แล้ว skill นี้เป็นกรอบกลาง
+
+## Related — ตัวอย่างจริงของหลักการนี้ในสกิลอื่น
+- `shipping-a-branch` = **Motion-step** ใช้จริง: บังคับลำดับ push→PR→review→merge ทุกสเต็ปเสี่ยงปิด "ประตูข้าง" ไว้ (ห้าม force-push แทนการ fix reject, ห้าม approve PR ตัวเอง) — ทุกทางออกต้อง confirm ก่อนเสมอ ไม่มีทาง bypass เงียบๆ

@@ -1,6 +1,6 @@
 # Claude Code Clone Template
 
-A portable snapshot of one person's Claude Code setup — global instructions, engineering rules, **43 curated skills** (1 self-authored, the rest adopted from upstream repos with per-skill provenance in `sources.json`), real memory examples, a skill-provenance manifest, and a cross-project knowledge vault — packaged so a fresh Claude Code instance (or the person setting one up) can bootstrap the same workflow habits and capabilities on a new machine. This is a **template to adapt, not a config to run as-is**: personal identifiers have been scrubbed and replaced with placeholders, and several sections only make sense if you also adopt the tools they describe.
+A portable snapshot of one person's Claude Code setup — global instructions, engineering rules, **45 curated skills** (3 self-authored, the rest adopted from upstream repos with per-skill provenance in `sources.json`), real memory examples, a skill-provenance manifest, and a cross-project knowledge vault — packaged so a fresh Claude Code instance (or the person setting one up) can bootstrap the same workflow habits and capabilities on a new machine. This is a **template to adapt, not a config to run as-is**: personal identifiers have been scrubbed and replaced with placeholders, and several sections only make sense if you also adopt the tools they describe.
 
 ## Getting started (quickstart)
 
@@ -12,7 +12,7 @@ A portable snapshot of one person's Claude Code setup — global instructions, e
 6. **Find-and-replace the placeholders** in everything you kept — see step 8 of "How to adopt this" below for the full list.
 7. **Install the plugin ecosystems referenced** (superpowers, ecc, etc.) — see "What you'll still need to install separately" below.
 8. **Optionally copy `notes/`** into your own second-brain vault location, and **`memory-examples/`** into your Claude Code auto-memory folder for the relevant project.
-9. **Start a Claude Code session and verify** it picked up the new CLAUDE.md — e.g. ask about model routing and see if the cost ladder comes back.
+9. **Start a Claude Code session and verify** it picked up the new CLAUDE.md — e.g. ask for an implementation plan and check that `/plan-pro` gets invoked, or ask about model routing and see if the cost ladder comes back.
 
 The rest of this README explains each piece in detail.
 
@@ -29,12 +29,12 @@ claude-clone-template/
 │   ├── agents/                            # 3 pinned-model subagent definitions (opus, haiku-batch, fable-medium)
 │   ├── hooks/block-dangerous-git.py       # PreToolUse gate that asks before risky git commands
 │   ├── rules/ecc-common/                  # 10 engineering-discipline rule files (ecc plugin ecosystem)
-│   ├── skills/                            # 43 curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
+│   ├── skills/                            # 45 curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
 │   ├── SKILLS_INDEX.md                    # Personal index of installed skills/plugins + when to use which
 │   ├── memory-examples/                   # 3 real auto-memory entries showing the memory system's format/patterns
 │   ├── templates/                         # 2 starter templates to copy into a new repo (project-CLAUDE.md, conventions.md)
 │   └── tools/
-│       ├── sources.json                   # Real provenance manifest: 38 personal skills + 3 pip + 1 npm + 1 binary tool
+│       ├── sources.json                   # Real provenance manifest: 39 personal skills + 3 pip + 1 npm + 1 binary tool
 │       ├── skill-update-check/check.ps1   # Weekly update checker that reads sources.json
 │       └── ollama/ollama-digest.ps1       # On-demand local-model pre-digest helper (see the Ollama section below)
 └── notes/                                 # ~46 notes: a personal cross-project "second brain" vault (example content)
@@ -45,7 +45,7 @@ The heart of the setup. It encodes:
 
 - **Cost-aware model routing** — main loop on Sonnet as orchestrator, delegating to Haiku/Opus/Fable subagents by task difficulty, with hard rules about who reads raw files vs. who reads conclusions.
 - **Heavy-execution offloading** — spawning big jobs into separate sessions instead of bloating (and billing) the current one.
-- **Planning workflow** — a slot to declare your default planner (the owner's personal planner isn't included; `superpowers:writing-plans` is the baseline).
+- **Planning workflow** — `/plan-pro` as the default planner.
 - **Second-brain vault convention** — a single rule ("is it tied to one repo?") deciding what lives in the vault vs. in a repo's docs/ADRs.
 - **Git safety hook** — a PreToolUse gate that asks before destructive git commands.
 - **Shell gotchas** — Bash tool vs. PowerShell tool heredoc syntax rules (Windows-specific pain, learned the hard way).
@@ -55,13 +55,13 @@ The heart of the setup. It encodes:
 General engineering discipline from the ecc (everything-claude-code) plugin ecosystem: TDD workflow, immutability, commit format, security checklist, code-review severity levels, agent delegation. Only useful if you also run ecc (see "What you'll still need to install" below).
 
 ### `global-config/skills/`
-43 curated `SKILL.md` folders (plus supporting scripts/reference/data files where a skill has them) covering writing/marketing craft (copywriting, copy-editing, hallmark, marketing-council, pricing...), engineering process (debug-mantra, poka-yoke, second-brain, dependency-audit, secrets-audit...), design (design-system, ui-ux-pro-max, banner-design, mobbin-references...), and meta-skills for managing Claude Code itself (skillify, grilling, second-brain, graphify...). Only `poka-yoke` is self-authored; the rest are adopted from upstream repos — see `sources.json` for per-skill provenance and `ATTRIBUTION.md` for upstream credits. These are genuinely reusable prompt-engineering artifacts, not just descriptions of skills — copy them into `~/.claude/skills/` and they work immediately.
+45 curated `SKILL.md` folders (plus supporting scripts/reference/data files where a skill has them) covering writing/marketing craft (copywriting, copy-editing, hallmark, marketing-council, pricing...), engineering process (debug-mantra, poka-yoke, second-brain, dependency-audit, secrets-audit...), design (design-system, ui-ux-pro-max, banner-design, mobbin-references...), and meta-skills for managing Claude Code itself (skillify, grilling, second-brain, graphify, plan-pro, shipping-a-branch...). `poka-yoke`, `plan-pro`, and `shipping-a-branch` are self-authored; the rest are adopted from upstream repos — see `sources.json` for per-skill provenance and `ATTRIBUTION.md` for upstream credits. These are genuinely reusable prompt-engineering artifacts, not just descriptions of skills — copy them into `~/.claude/skills/` and they work immediately.
 
 ### `global-config/memory-examples/`
 3 real entries from the owner's Claude Code auto-memory system (not project-specific facts — portable "how I work" habits): a naming-convention disambiguation for cross-session messaging, the local-Ollama-as-pre-compression pattern, and a rule about what "update the skill notebook" actually means operationally. These exist to show the *shape* of a good memory entry (rule + why + how-to-apply) as much as their specific content — see `global-config/rules/ecc-common/` for how memory fits into the broader workflow, and CLAUDE.md's "จำ/บัญญัติ" section for the local-vs-global memory distinction this owner uses.
 
 ### `global-config/tools/sources.json`
-The owner's actual skill/tool adoption manifest — real provenance data (source repo URLs, install notes, version history) for all 38 personal skills plus 3 pip packages, 1 npm package, and 1 binary tool. Paired with `check.ps1`, this is what lets a `claude-clone-template` adopter track upstream updates to the skills they copied into `~/.claude/skills/`, the same way the original owner does. Update `last_seen_commit` values are mostly `unknown`/stale from the recipient's perspective until they run `check.ps1 -Ack` once to establish their own baseline.
+The owner's actual skill/tool adoption manifest — real provenance data (source repo URLs, install notes, version history) for all 39 personal skills plus 3 pip packages, 1 npm package, and 1 binary tool. Paired with `check.ps1`, this is what lets a `claude-clone-template` adopter track upstream updates to the skills they copied into `~/.claude/skills/`, the same way the original owner does. Update `last_seen_commit` values are mostly `unknown`/stale from the recipient's perspective until they run `check.ps1 -Ack` once to establish their own baseline.
 
 ### `global-config/templates/`
 Two small starter files (`project-CLAUDE.md`, `conventions.md`) to copy into a new repo on first setup — a ≤45-line "router" project CLAUDE.md and a conventions/green-gate template. Each has a comment block with a fill-in-the-blank PRESET for the stack you're bootstrapping (currently just a Python-web example); add your own preset the same way if your stack needs one.
@@ -73,7 +73,7 @@ Example content from the owner's Obsidian second-brain vault: local Ollama model
 
 1. **Copy `global-config/CLAUDE.md`** into your own `~/.claude/CLAUDE.md`. Merge it with what you already have, or replace outright — your call. Read it first; delete sections that don't apply to you.
 2. **Copy `global-config/agents/*.md`** into `~/.claude/agents/` and **`global-config/hooks/block-dangerous-git.py`** into `~/.claude/hooks/`. These are what make the model-routing rules and the git safety gate in CLAUDE.md actually functional, rather than just prose.
-3. **Copy `global-config/skills/*`** into `~/.claude/skills/`. This is the bulk of the actual value — 43 working skill folders, not just descriptions of them.
+3. **Copy `global-config/skills/*`** into `~/.claude/skills/`. This is the bulk of the actual value — 45 working skill folders, not just descriptions of them.
 4. **Merge `global-config/settings.example.json`** into your own `~/.claude/settings.json` (replace `<YOUR_HOME>` with your real home path first). Merge, don't overwrite, if you already have a settings.json — take the `hooks.PreToolUse` entry and whatever else you want from `enabledPlugins`.
 5. **Copy `global-config/rules/ecc-common/`** into `~/.claude/rules/` **only if** you install the ecc plugin. Otherwise skip.
 6. **Copy `global-config/memory-examples/*.md`** into the auto-memory folder for whichever project you want them to apply to (Claude Code auto-memory is per-project, at `~/.claude/projects/<project>/memory/`), or read them as reference and write your own from scratch.

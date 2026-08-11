@@ -24,12 +24,12 @@ metadata:
 
 ## ⭐ Daily drivers — ของที่หยิบจริง จัดตามงานที่ทำ
 
-> 10-12 ตัวนี้คือที่ใช้ซ้ำๆ ตามงานจริง (UI / วางแผน / รีวิว). ถ้าจำไม่ได้ว่ามีอะไร — อ่านแค่บล็อกนี้
+> 10-13 ตัวนี้คือที่ใช้ซ้ำๆ ตามงานจริง (UI / วางแผน / รีวิว / ship). ถ้าจำไม่ได้ว่ามีอะไร — อ่านแค่บล็อกนี้
 
 | งานที่ทำบ่อย | หยิบตัวนี้ |
 |---|---|
 | 🔄 **แปลงไฟล์ → Markdown / feed RAG** | `markitdown` |
-| 🧠 **วางแผน feature** | `superpowers:brainstorming` → `superpowers:writing-plans` · อยากให้ AI ซักแผนสดก่อนลงมือ → `/grilling` |
+| 🧠 **วางแผน feature** | `superpowers:brainstorming` → `/plan-pro` (ข้าม spec.md แยกถ้างานเล็ก-กลาง) · อยากให้ AI ซักแผนสดก่อนลงมือ → `/grilling` |
 | 🔍 **รีวิว/ตรวจงาน มุมคนนอก** | `/scrutinize` (plan/PR/diff) |
 | 🐞 **ดีบั๊ก** | `/debug-mantra` (ท่อง 4 ขั้น) + `superpowers:systematic-debugging` |
 | 🎨 **ออกแบบ/ปรับ UI** | `ui-ux-pro-max` → `ui-styling` · build เต็มหน้า/audit anti-slop: `hallmark` · polish เล็ก: `make-interfaces-feel-better` + `deslop-defaults` |
@@ -40,6 +40,7 @@ metadata:
 | 📚 **ติว/เรียนเรื่องใหม่ (stateful หลาย session)** | `/teach` |
 | ⚙️ **แก้ settings/hook/permission** | `update-config` |
 | 🪤 **กันพลาดตอนออกแบบ** | `/poka-yoke` |
+| 🚀 **commit→push→PR→review→merge ครบ flow** | `shipping-a-branch` (`/ship`) — ทุก action เสี่ยง (push/PR/merge/delete branch) confirm แยกทีละครั้ง ไม่เหมาสั่งครั้งเดียวยาว |
 
 **Cost routing (ทุกงาน):** main = Opus orchestrator · งานกลไก→`haiku-batch` · อ่านไฟล์เยอะ→`Explore` · ร่างแรก/review→spawn `sonnet` · ยากจริง→ทำใน main. (กติกาเต็มใน `~/.claude/CLAUDE.md`)
 
@@ -72,13 +73,16 @@ metadata:
 |---|---|
 | `graphify` | any input → knowledge graph + HTML/JSON + audit report — `/graphify`. Engine = pip `graphifyy` (source: [safishamsi/graphify](https://github.com/safishamsi/graphify) — confirmed via `pip show graphifyy` Home-page, 2026-08-08; unrelated to `Graphify-Labs/graphify` seen on trendshift.io, different repo) |
 | `poka-yoke` | กันพลาดตั้งแต่ออกแบบ (mistake-proofing): ทำให้ bad state เกิดไม่ได้/เห็นชัด แทนจับผิดทีหลัง. ชั้น1 prevent > ชั้น2 detect + checklist กันมือบอน/กันโกง/dev-guardrail. ใช้ตอนออกแบบ-รีวิว feature/มินิเกม/UI/anticheat/build หรือจะเขียน "อย่าลืม X" — `/poka-yoke` |
+| `plan-pro` | ต่อยอด `superpowers:writing-plans`: (1) spawn 1-2 reviewer agent หา gap+critical แล้ว fix+รายงาน (2) plan เป็น **HTML** section บน = side-by-side before/after diagram (Mermaid) สำหรับคนอ่าน, ล่าง = plan ปกติ (3) parallelization analysis → parallel execute + ปิดท้าย `/code-review`+`/simplify` ขนาน — `/plan-pro` |
 | `markitdown` | แปลงไฟล์ (PDF/PPTX/DOCX/XLSX/image/audio/HTML/CSV/JSON/EPUB/ZIP/YouTube) → Markdown ด้วย Microsoft MarkItDown. ใช้ตอนต้องการ convert doc เป็น .md, prep ไฟล์ feed RAG/LLM, batch แปลงทั้งโฟลเดอร์, transcribe audio. CLI `markitdown` (ลงแล้วใน Python313). ใช้คู่กับ Claude อ่าน PDF ตรงๆ: งาน semantic/รูปเยอะ → Claude, งาน convert/batch/index → MarkItDown |
 | `deslop-defaults` | กฎ "deslop" แบบ stack-agnostic กัน AI UI ดูเฉลี่ย/ไม่เสร็จ: z-index scale, accent เดียวต่อ view, ไม่ปน primitive system, pattern มาตรฐาน destructive/loading/error/empty, visual restraint. **companion ของ `make-interfaces-feel-better`** (อันนั้น = optical craft, อันนี้ = structural restraint). harvested จาก ibelick/ui-skills baseline-ui. ใช้ตอน quick check/แก้เล็ก — งาน build เต็มหน้า/audit ใช้ `hallmark` แทน (ดูล่าง) |
 | `hallmark` | **Anti-AI-slop design system เต็มรูปแบบ** (Together AI, source: [Nutlope/hallmark](https://github.com/Nutlope/hallmark), ลง 2026-08-09 จาก trendshift.io candidate evaluation — ดู `projects/claude-skills-trendshift-2026-08/CANDIDATE-EVALUATION.md`). 57 numbered slop-test gates + macrostructure diversity engine (21 themes, กันซ้ำ theme ข้าม session ผ่าน `.hallmark/log.json`) + mobile-responsiveness hard floor (320/375/414/768px) + 4 verb: default(build)/`audit`(read-only score, ไม่แก้โค้ด)/`redesign`/`study`(ดึง DNA จาก screenshot/URL). จับได้มากกว่า `deslop-defaults`: fake metrics/testimonial, re-drawn fake browser chrome, italic header (AI tell), token discipline, 8-state component checklist. **ใช้เป็นตัวหลักตอน build หน้าใหม่เต็มหน้า/audit UI ที่มีอยู่** — `deslop-defaults` เก็บไว้เป็น quick-check เบา ๆ คนละ scope กัน ไม่ทับซ้ำ. เทียบแล้วไม่ลง `Leonxlnx/taste-skill` (74k★ เหมือนชื่อจะแข่ง แต่เนื้อจริงเป็น style generator เฉพาะทาง 2 ตัว — brutalist theme + brand-kit image — ไม่ใช่ deslop checklist) |
-| `grilling` | **ซักแผนแบบ relentless ก่อนลงมือ** (Matt Pocock, source: [mattpocock/skills](https://github.com/mattpocock/skills) — เพิ่ง track ใน `sources.json` 2026-08-08, ก่อนหน้านี้ไม่มี baseline). ยิงคำถามทีละข้อ เดินไล่ทุกกิ่งของ design-tree แก้ dependency ทีละจุด แต่ละข้อแนะคำตอบให้ด้วย — ถ้าตอบได้จาก codebase มันไปอ่านเองแทนถาม. **auto-trigger** ได้ (พูด "grill"/stress-test) หรือ `/grilling`. **สำหรับ Ren'Py/แปล/งานทั่วไป → ใช้ตัวนี้ (engine เปล่า)** ไม่เขียนไฟล์อะไรลง repo. เติมช่อง "ให้ AI ซักเราสดๆ" ที่ brainstorm/scrutinize ไม่มี |
+| `grilling` | **ซักแผนแบบ relentless ก่อนลงมือ** (Matt Pocock, source: [mattpocock/skills](https://github.com/mattpocock/skills) — เพิ่ง track ใน `sources.json` 2026-08-08, ก่อนหน้านี้ไม่มี baseline). ยิงคำถามทีละข้อ เดินไล่ทุกกิ่งของ design-tree แก้ dependency ทีละจุด แต่ละข้อแนะคำตอบให้ด้วย — ถ้าตอบได้จาก codebase มันไปอ่านเองแทนถาม. **auto-trigger** ได้ (พูด "grill"/stress-test) หรือ `/grilling`. **สำหรับ Ren'Py/แปล/งานทั่วไป → ใช้ตัวนี้ (engine เปล่า)** ไม่เขียนไฟล์อะไรลง repo. เติมช่อง "ให้ AI ซักเราสดๆ" ที่ brainstorm/plan-pro/scrutinize ไม่มี |
 | `teach` | ครูส่วนตัวแบบ **stateful หลาย session** (Matt Pocock, source: [mattpocock/skills](https://github.com/mattpocock/skills) — เพิ่ง track ใน `sources.json` 2026-08-08, ก่อนหน้านี้ไม่มี baseline). ใช้ current dir เป็น teaching workspace: `MISSION.md` (ทำไมอยากเรียน) + `./lessons/*.html` (บทเรียนสวยๆ ทีละเรื่องเล็ก) + `./learning-records/*.md` (จำว่าเรียนอะไรไปแล้ว→คำนวณ zone of proximal development) + `RESOURCES.md` + glossary. เน้น storage strength (retrieval/spacing/interleaving) ไม่ใช่ illusory fluency. `disable-model-invocation` → เรียก `/teach <หัวข้อ>` เอง. **ใหม่ — ไม่ทับของเดิม** |
 | `wait-what` | **stop-and-re-pitch prompt** (Matt Pocock, source: [mattpocock/skills](https://github.com/mattpocock/skills), ลง 2026-08-09). แค่ template คำเดียว — บอกให้ user re-explain สิ่งที่เพิ่งพูดแบบสั้น ใช้ ASD-STE100 Simplified Technical English + ubiquitous language จาก `CONTEXT.md`. `disable-model-invocation` → ไม่ auto-trigger, เรียกเองเมื่ออยากให้ AI (หรือตัวเอง) หยุดแล้วอธิบายใหม่ให้ชัดก่อนไปต่อ |
 | `wizard` | **สร้าง interactive bash wizard** สำหรับ manual procedure ที่ agent ทำเองไม่ได้ (Matt Pocock, source: [mattpocock/skills](https://github.com/mattpocock/skills), ลง 2026-08-09). ใช้ตอน provision infra / ตั้งค่า credential-CI secret / เดิน third-party dashboard ที่ไม่คุ้น / migration ครั้งเดียว. มี `template.sh` เป็น library สำเร็จรูป (stage progress, `open_url` cross-platform รวม WSL, `ask`/`ask_secret`, `write_env` idempotent, `set_secret`/`set_var` ผ่าน `gh`, closing summary) — งานของ skill คือ scope ขั้นตอน + author stage เท่านั้น ห้ามแก้ library ส่วนบน `STAGES` marker เอง. **ไม่ใช้กับ step ที่ agent ทำเองได้อยู่แล้ว** |
+| `shipping-a-branch` | **end-to-end git ship flow** (วางแผนโดย fable-medium, ลง 2026-08-02). commit → confirm push → reuse-or-create PR (เช็ค `gh pr list --head` กันซ้ำ) → เลือก review mode (human/self/both) → loop แก้ feedback → confirm merge (method) → ask cleanup branch. ทุก checkpoint เสี่ยง (push/PR/merge/delete) **confirm แยกทุกครั้ง** ไม่ใช้ "ตกลงตอนแรก" มาครอบคลุมทีหลัง (ตาม instruction-priority ของ system). ใช้แทน `ecc:pr`/`ecc:review-pr` เมื่อต้องการ flow เต็ม ไม่ใช่แค่ phase เดียว. ใช้ทุก project (repo-agnostic ผ่าน `git`/`gh` ล้วน ไม่ hardcode ชื่อ branch/repo) — เรียกด้วย `/ship` หรือพูด "ship this"/"commit and open a PR" |
+
 ---
 
 ## superpowers (obra/superpowers) — process discipline

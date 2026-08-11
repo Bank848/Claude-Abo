@@ -51,9 +51,11 @@ harness auto-notify session แม่เองอยู่แล้วเมื�
 2. สรุปสั้น ๆ ให้ user: ลูกทำอะไรเสร็จ, ผลเป็นยังไง, พังตรงไหนไหม
 3. ถ้ามีอะไรต้องตัดสินใจต่อ (เช่น review diff, merge branch, commit ที่ค้างอยู่ใน worktree ของ session ลูก) ให้เสนอ/ถามทันที — อย่าปล่อยให้ค้างเงียบ ๆ
 
-# Planning: declare your default planner here (global)
-- เมื่อต้องเขียน implementation plan (หลัง brainstorm/spec approve) ให้ route ไปที่ planner ตัวเดียวเป็น default เสมอ — อย่าปล่อยให้สุ่มเลือกทุก session
-- เจ้าของ setup นี้ใช้ wrapper skill ส่วนตัว (ไม่ได้แถมมาในเทมเพลตนี้) ต่อยอดจาก `superpowers:writing-plans` — ถ้าลง plugin superpowers ไว้ `superpowers:writing-plans` ใช้เป็น baseline ได้เลย ถ้าจะสร้าง/adopt planner ของตัวเอง ให้มาเขียนชื่อ skill ไว้ตรงนี้แทน
+# Planning: use /plan-pro by default (global)
+- เมื่อต้องเขียน implementation plan (หลัง brainstorm/spec approve) ให้ใช้ **`/plan-pro`** เป็น planner หลัก — ไม่ใช่ `superpowers:writing-plans` ธรรมดา
+- เหตุผล: plan-pro ต่อยอด writing-plans ด้วย spawned review loop + HTML before/after diagrams + parallel execution → แผนรีวิว/อัพเดทตัวเองได้
+- ใช้กับทุก project (global). brainstorming ที่ปกติจบที่ writing-plans ให้สลับมาเรียก /plan-pro แทน
+- **ประหยัด token — ข้าม spec.md แยก:** ถ้า brainstorm จน design ได้รับ approve แล้วในแชต และเป็น feature เล็ก–กลาง (แผนเดียว) ให้ **ข้ามการเขียนไฟล์ spec `.md` แยก** แล้วไป `/plan-pro` เลย — plan-pro = artifact หลักไฟล์เดียว (ดูด design ที่ approve มาใส่หัวแผนเอง). เก็บ spec แยกเฉพาะงานใหญ่ multi-session / หลายแผนที่ต้องมี design durable จริง ๆ. (brainstorming skill ปกติบังคับเขียน spec ก่อน — override ตรงนี้เพื่อลด token ซ้ำซ้อนกับ plan-pro)
 
 # Persist glossary after grilling/brainstorm (global)
 - จบ session `grilling` / `brainstorming` (หรือทุกครั้งที่คุยจนตกลงนิยามศัพท์/ข้อตกลงร่วมกัน) → ถ้ามี **ศัพท์เฉพาะหรือข้อตกลงที่ขัดกับความเข้าใจทั่วไป** (คำเดียวความหมายต่างจากที่คนนอกวงจะเดา เช่น "platform", "quest", "layer") ให้ **เซฟลง memory เป็น type `reference` (glossary) ทันที** โดยไม่ต้องรอให้ user สั่ง
