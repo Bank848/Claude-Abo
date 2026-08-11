@@ -2,7 +2,7 @@
 
 Most of `global-config/skills/` in this repo is **adopted from other people's public work**, not written by the owner of this template. This file credits the upstream sources. Per-skill provenance (subpath, commit baseline) lives in `global-config/tools/sources.json`.
 
-Only `poka-yoke` is self-authored. `graphify` is a self-written wrapper skill around the third-party `graphifyy` pip package (credited separately below).
+Seven skills are self-authored: `poka-yoke`, `plan-pro`, and `shipping-a-branch` were written from scratch, and `graphify`, `dembrandt`, `markitdown`, and `mobbin-references` are self-written wrapper skills around third-party tools or services (the underlying tools are credited below and version-tracked in `global-config/tools/sources.json`). One skill, `deslop-defaults`, is adapted — harvested from an upstream skill repo and rewritten. Everything else is adopted.
 
 ## Upstream repos the adopted skills came from
 
@@ -17,12 +17,18 @@ Only `poka-yoke` is self-authored. `graphify` is a self-written wrapper skill ar
 | [`briiirussell/cybersecurity-skills`](https://github.com/briiirussell/cybersecurity-skills) | MIT | `prompt-injection`, `secrets-audit`, `dependency-audit` |
 | [`Nutlope/hallmark`](https://github.com/Nutlope/hallmark) | see upstream repo | `hallmark` |
 
+## Self-written wrappers around third-party tools
+
+The SKILL.md prose for these is self-authored, but each one drives a third-party engine that deserves its own credit:
+
+- `graphify` — wrapper around the `graphifyy` pip package ([safishamsi/graphify](https://github.com/safishamsi/graphify)).
+- `markitdown` — wrapper around Microsoft's [MarkItDown](https://github.com/microsoft/markitdown) (pip dist `markitdown`).
+- `dembrandt` — wrapper around the third-party [`dembrandt`](https://github.com/dembrandt/dembrandt) CLI (`npx dembrandt <url>`).
+- `mobbin-references` — wrapper around the (paid, third-party) [Mobbin](https://mobbin.com) MCP server.
+
 ## Adapted, no single fixed upstream
 
-- `deslop-defaults` — harvested from `ibelick/ui-skills` (baseline-ui), rewritten stack-agnostic.
-- `dembrandt` — a wrapper skill around the third-party `dembrandt` CLI (`npx dembrandt`); the wrapper itself has no separate upstream skill repo.
-- `mobbin-references` — a wrapper skill around the (paid, third-party) Mobbin MCP server; no separate upstream skill repo.
-- `graphify` — self-written wrapper; the underlying engine is the `graphifyy` pip package ([safishamsi/graphify](https://github.com/safishamsi/graphify)).
+- `deslop-defaults` — harvested from [`ibelick/ui-skills`](https://github.com/ibelick/ui-skills) (baseline-ui), rewritten stack-agnostic. Neither self-authored nor a verbatim adoption.
 
 ## A note on completeness
 

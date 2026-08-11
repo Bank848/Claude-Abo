@@ -13,6 +13,12 @@
       "dist_name": "@earendil-works/pi-coding-agent",
       "source_repo_url": "https://github.com/earendil-works/pi",
       "note": "Standalone agent-building toolkit (unified multi-provider LLM API + agent runtime + TUI + coding CLI). Installed 2026-08-09 via npm. RE-TESTED 2026-08-09: original v0.74.2 install had lost its `pi` shim (likely from an earlier interrupted npm operation) -- `pi: command not found`. Reinstalled cleanly with `npm i -g @earendil-works/pi-coding-agent@0.74.2` (pinned; @latest is 0.84.1 and requires Node >=22.19.0, this machine has v22.12.0 -- EBADENGINE warning). CONFIRMED WORKING: `pi --version` -> 0.74.2, `pi --help` renders full usage, `pi -p \"...\" @missingfile` correctly reports file-not-found, and `pi -p \"...\"` against a real prompt correctly detects no provider API key configured and prints /login guidance. Fully functional CLI, just needs a provider key or `pi /login` (OAuth) to do real work. Update with: npm i -g @earendil-works/pi-coding-agent@latest (watch the Node engine requirement before jumping past 0.74.x)."
+    },
+    {
+      "tool": "dembrandt",
+      "dist_name": "dembrandt",
+      "source_repo_url": "https://github.com/dembrandt/dembrandt",
+      "note": "Design-token extractor CLI, invoked on demand via `npx dembrandt <url>` (not globally installed, so no pinned version on this machine; npx pulls latest each run). The dembrandt SKILL is a self-authored wrapper tracked in personal_skills; this entry tracks the third-party ENGINE only. Source URL taken from the SKILL.md body (https://github.com/dembrandt/dembrandt/, https://dembrandt.com/)."
     }
   ],
   "binary_tools": [
@@ -317,6 +323,48 @@
       "subpath_in_repo": "skills/marketing-council",
       "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
       "note": "marketingskills (Corey Haines). Borderline pick (reviewer flagged as 11th/12th, adopted anyway — MIT, zero install risk) 2026-08-09 — multi-perspective marketer-advisor framework, needs no infra. Confirmed in repo tree."
+    },
+    {
+      "name": "shipping-a-branch",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Self-authored end-to-end git shipping workflow skill (confirmed during 2026-08-11 sources.json completeness pass; re-added alongside poka-yoke and plan-pro). No upstream; checker skips it."
+    },
+    {
+      "name": "graphify",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Self-authored wrapper skill (/graphify). This entry covers the wrapper prose only; the ENGINE (pip dist 'graphifyy', safishamsi/graphify) is tracked in pip_packages under skill 'graphify' -- do not duplicate its provenance here. Checker skips it."
+    },
+    {
+      "name": "markitdown",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Self-authored usage-pattern wrapper around Microsoft MarkItDown. This entry covers the wrapper prose only; the ENGINE (pip dist 'markitdown', microsoft/markitdown) is tracked in pip_packages under skill 'markitdown'. Checker skips it."
+    },
+    {
+      "name": "dembrandt",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Self-authored wrapper skill around the third-party dembrandt CLI (run via `npx dembrandt <url>`). This entry covers the wrapper prose only; the ENGINE (npm dist 'dembrandt', https://github.com/dembrandt/dembrandt) is tracked in npm_packages under tool 'dembrandt'. Checker skips it."
+    },
+    {
+      "name": "mobbin-references",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Self-authored wrapper skill around the paid, third-party Mobbin MCP server (hosted service -- no upstream skill repo and no pip/npm engine to version-track). Checker skips it."
+    },
+    {
+      "name": "deslop-defaults",
+      "source_repo_url": "https://github.com/ibelick/ui-skills",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "ADAPTED, not adopted and not self-authored: harvested from ibelick/ui-skills (baseline-ui) and rewritten stack-agnostic, so upstream commits do not apply 1:1. No commit baseline was recorded at harvest time (last_seen_commit intentionally empty) -- the first weekly check will flag it; review, then run check.ps1 -Ack to set the baseline. subpath_in_repo left empty pending verification of baseline-ui's exact path upstream."
     }
   ]
 }
