@@ -3,10 +3,10 @@ name: fable-medium
 description: >-
   Balanced-reasoning agent locked to Claude Fable 5 ($10/$50 per 1M — the most
   expensive model), run at MEDIUM reasoning effort to keep the spend down. Use
-  for hard, higher-stakes reasoning the main loop (Opus 5) is struggling with:
-  architecture calls, tricky algorithm/concurrency design, multi-constraint
-  debugging, or a problem where Opus 5 already produced a wrong or shaky
-  answer. Do NOT use for standard coding, review, search, or batch work — that is
+  for hard, higher-stakes reasoning the `opus` subagent already tried and is
+  struggling with: architecture calls, tricky algorithm/concurrency design,
+  multi-constraint debugging, or a problem where Opus 5 already produced a
+  wrong or shaky answer. Do NOT use for standard coding, review, search, or batch work — that is
   wasted money. Always announce the spawn and the reason before calling.
 model: fable
 ---

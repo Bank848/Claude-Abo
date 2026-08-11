@@ -25,7 +25,7 @@
 
 ## Suno Translation
 
-Style-field tags name the role and its placement, not just the instrument: `guitar countermelody answering the vocal phrases`, `horn stabs in the gaps between vocal lines`, `sparse verse arrangement: vocal, bass, and hi-hat only, full band re-enters on the chorus`, `pad sits low in the mix, staying out of the vocal's way`. This is the same "expand, don't add" principle as [style-prompt-formula.md](style-prompt-formula.md), applied specifically to *who's doing what and where* rather than just tone/technique.
+Style-field tags name the role and its placement, not just the instrument: `guitar countermelody answering the vocal phrases`, `horn stabs in the gaps between vocal lines`, `sparse verse arrangement: vocal, bass, and hi-hat only, full band re-enters on the chorus`, `pad sits low in the mix, staying out of the vocal's way`. This is the same "expand, don't add" principle as [style-prompt-formula.md](../04-suno/style-prompt-formula.md), applied specifically to *who's doing what and where* rather than just tone/technique.
 
 Judging output: does the vocal ever feel buried or competing for space, especially in a section meant to be vocal-forward? Is there a moment where a secondary instrumental line is audible answering the vocal, or does everything just play continuously and simultaneously throughout? A generation where every instrument plays constantly, at the same density, throughout every section, is a signal the role/register vocabulary above wasn't specified — that's a prompt-language problem, worth a Replace Section retry with explicit role-thinning language rather than just an EQ/mix judgment.
 

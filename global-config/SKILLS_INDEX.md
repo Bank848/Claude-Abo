@@ -35,14 +35,14 @@ metadata:
 | 🎨 **ออกแบบ/ปรับ UI** | `ui-ux-pro-max` → `ui-styling` · build เต็มหน้า/audit anti-slop: `hallmark` · polish เล็ก: `make-interfaces-feel-better` + `deslop-defaults` |
 | ✅ **ก่อนเคลมว่าเสร็จ** | `superpowers:verification-before-completion` |
 | 🛠️ **สร้าง/แก้ skill** | `superpowers:writing-skills` หรือ `anthropic-skills:skill-creator` |
-| 🔬 **verify claim ของ review ก่อนแก้** | workflow `adversarial-verify` (`~/.claude/workflows/`) — CONFIRMED ต้องมี quote file:line · feed เข้า receiving-code-review |
+| 🔬 **verify claim ของ review ก่อนแก้** | workflow `adversarial-verify` (`~/.claude/workflows/` — **not included in this template**, write your own or skip) — CONFIRMED ต้องมี quote file:line · feed เข้า receiving-code-review |
 | 🕸️ **input → knowledge graph** | `/graphify` |
 | 📚 **ติว/เรียนเรื่องใหม่ (stateful หลาย session)** | `/teach` |
 | ⚙️ **แก้ settings/hook/permission** | `update-config` |
 | 🪤 **กันพลาดตอนออกแบบ** | `/poka-yoke` |
 | 🚀 **commit→push→PR→review→merge ครบ flow** | `shipping-a-branch` (`/ship`) — ทุก action เสี่ยง (push/PR/merge/delete branch) confirm แยกทีละครั้ง ไม่เหมาสั่งครั้งเดียวยาว |
 
-**Cost routing (ทุกงาน):** main = Opus orchestrator · งานกลไก→`haiku-batch` · อ่านไฟล์เยอะ→`Explore` · ร่างแรก/review→spawn `sonnet` · ยากจริง→ทำใน main. (กติกาเต็มใน `~/.claude/CLAUDE.md`)
+**Cost routing (ทุกงาน):** main = Sonnet 5 orchestrator · งานกลไก→`haiku-batch` · อ่านไฟล์เยอะ→`Explore` · ยากจริง→spawn `opus` · เดิมพันสูงสุดที่ Opus ยังส่าย→spawn `fable-medium`. (กติกาเต็มใน `~/.claude/CLAUDE.md`)
 
 ---
 
@@ -187,7 +187,7 @@ metadata:
 
 ---
 
-## ECC (affaan-m/everything-claude-code) — 230 skills
+## ECC (affaan-m/everything-claude-code) — 284 skills (per CLAUDE.md's "Installed Plugins" section; this list below covers a subset, not all of them)
 
 ### Agentic / agent systems
 
@@ -608,7 +608,7 @@ Per-language build/review/test commands: `/cpp-build`, `/cpp-review`, `/cpp-test
 |--------|-----------|
 | เช็คว่าสกิล/ปลั๊กอินมีอัปเดตใหม่ไหม (รายสัปดาห์ อัตโนมัติ, deterministic 0-token, รายงานอย่างเดียว ไม่อัปเดตเอง) | `~/.claude/tools/skill-update-check/check.ps1` (manifest: `sources.json`, รายงาน: `~/.claude/skill-update-report.md`) |
 
-- เช็ค git plugins (ecc/superpowers) ด้วย `git fetch`+`rev-list`, pip (graphifyy/markitdown) ด้วย `pip list --outdated`, personal skills ด้วย `git ls-remote` เทียบ baseline ใน `sources.json`.
+- เช็ค git plugins (ecc/superpowers) ด้วย `git fetch`+`rev-list`, pip (graphifyy/markitdown/ifixai) ด้วย `pip list --outdated`, personal skills ด้วย `git ls-remote` เทียบ baseline ใน `sources.json`.
 - รัน Task Scheduler ทุกวันอาทิตย์ 10:00 (`schtasks /Query /TN ClaudeSkillUpdateCheck`). รันมือ: `powershell -NoProfile -ExecutionPolicy Bypass -File ~/.claude/tools/skill-update-check/check.ps1`
 - **review-before-apply:** อ่านรายงานแล้วอัปเดตเองทีละตัว → หลังอัปแล้วรัน `check.ps1 -Ack` เพื่อรีเซ็ต baseline.
 - **⚠️ ข้อจำกัดที่รู้แล้ว (2026-08-08):** `claude plugin update` ไม่ได้ทำ `git pull` ในโฟลเดอร์เดิม — มันแตก version dir ใหม่ (เช่น `ecc/2.2.0`) ที่ไม่มี `.git` เลย (extract จาก release archive) แล้วทิ้ง dir เวอร์ชันเก่าที่ยังมี `.git` ค้างไว้. `check.ps1` สแกนหา `.git` เจอแต่ dir เก่า เลยรายงาน ecc/superpowers ว่า "ตามหลังหลายร้อย commit" ตลอดไป **ทั้งที่จริงอัปเดตแล้ว** (เช็คจริงด้วย `claude plugin list`). แก้ถาวร: ลบ dir เวอร์ชันเก่าทิ้ง (เช่น `~/.claude/plugins/cache/ecc/ecc/2.0.0-rc.1`, `.../superpowers/superpowers/5.1.0`) — ยังไม่ได้ลบ (session นี้ถูก permission classifier บล็อกไว้ตอนลอง `rm -rf`), รอผู้ใช้ลบเองหรืออนุญาตครั้งหน้า. ไม่กระทบ `-Ack`/`sources.json` เพราะ `git_plugins` ไม่มี baseline ให้พัง.

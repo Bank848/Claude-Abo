@@ -27,7 +27,7 @@ metadata:
 |---|---|---|
 | `/scrutinize` | รีวิวมุมคนนอก — เช็คก่อนว่ามีทางที่เรียบกว่าไหม แล้วไล่โค้ดจริง (ไม่ใช่แค่ diff) | ใช้ตรวจ plan/PR/diff ก่อนส่งจริง |
 | `/debug-mantra` + `superpowers:systematic-debugging` | บังคับท่อง 4 ขั้นก่อนเสนอ fix: reproduce → trace fail path → falsify hypothesis → cross-reference | trigger อัตโนมัติเมื่อเจอบั๊ก/error/stack trace |
-| `adversarial-verify` (workflow) | verify claim ของ code review ก่อนแก้จริง — ต้อง CONFIRMED พร้อม quote file:line ถึงจะเชื่อ | feed ต่อจาก `receiving-code-review` |
+| `adversarial-verify` (workflow, **not included in this template**) | verify claim ของ code review ก่อนแก้จริง — ต้อง CONFIRMED พร้อม quote file:line ถึงจะเชื่อ | feed ต่อจาก `receiving-code-review` |
 | `superpowers:verification-before-completion` | บังคับรัน verify จริงก่อนเคลมว่า "เสร็จ" | ใช้ก่อนตอบว่าทำเสร็จทุกครั้ง |
 
 ---

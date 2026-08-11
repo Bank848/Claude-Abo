@@ -4,12 +4,12 @@ A portable snapshot of one person's Claude Code setup — global instructions, e
 
 ## Getting started (quickstart)
 
-**Shortcut:** clone the repo, open it in Claude Code, and run `/adopt` — it interviews you (which optional pieces you want, plugin list, target paths) and does steps 2-9 below for you, checking off progress in a resumable journal file as it goes. The manual steps below are what `/adopt` automates, and are also there for anyone who'd rather do it by hand or review exactly what changes before running it.
+**Shortcut:** clone the repo, open it in Claude Code, and run `/adopt` — it interviews you (which optional pieces you want, plugin list, target paths) and does steps 2-6 and 8-9 below for you, checking off progress in a resumable journal file as it goes. Step 7 (installing the plugin ecosystems themselves) is deliberately out of `/adopt`'s scope — that one's still on you. The manual steps below are what `/adopt` automates, and are also there for anyone who'd rather do it by hand or review exactly what changes before running it.
 
 1. **Clone the repo** to anywhere convenient on the target machine.
 2. **Decide the two optional pieces now** — answer yes/no to each, since it determines what you delete in step 5: Local AI (Ollama) pre-compression, Suno music-production notes. See the "Optional: ___" sections below for details on each.
-3. **Copy `global-config/CLAUDE.md`, `agents/*.md`, `hooks/block-dangerous-git.py`, and `skills/*`** to your own `~/.claude/` (merge or replace — your call). These are what make the routing rules, git safety gate, and skill catalog actually work, not just read as prose.
-4. **Merge `global-config/settings.example.json`** into your `~/.claude/settings.json` (after replacing `<YOUR_HOME>`).
+3. **Copy `global-config/CLAUDE.md`, `agents/*.md`, `hooks/block-dangerous-git.py`, `skills/*`, and `tools/`** to your own `~/.claude/` (merge or replace — your call). These are what make the routing rules, git safety gate, skill catalog, and update checker actually work, not just read as prose. **Before copying `CLAUDE.md`, rewrite its "Installed Plugins" section to list only what you actually have installed** — the original owner's copy claims specific plugins are enabled; carrying that over verbatim makes your Claude lie about available tooling.
+4. **Merge `global-config/settings.example.json`** into your `~/.claude/settings.json` (after replacing `<YOUR_HOME>`; on macOS/Linux also change the hook command's `py` launcher to `python3`, that entry is Windows-specific as shipped).
 5. **Delete what you said "no" to in step 2.** Fast pass: Ollama → the Ollama paragraphs in your CLAUDE.md copy + `notes/local-ollama-models.md` + `tools/ollama/`; Suno → `notes/suno-music-production/`.
 6. **Find-and-replace the placeholders** in everything you kept — see step 8 of "How to adopt this" below for the full list.
 7. **Install the plugin ecosystems referenced** (superpowers, ecc, etc.) — see "What you'll still need to install separately" below.
@@ -37,8 +37,9 @@ claude-clone-template/
 │   ├── memory-examples/                   # 3 real auto-memory entries showing the memory system's format/patterns
 │   ├── templates/                         # 2 starter templates to copy into a new repo (project-CLAUDE.md, conventions.md)
 │   └── tools/
-│       ├── sources.json                   # Real provenance manifest: 45 personal skills + 3 pip + 2 npm + 1 binary tool
-│       ├── skill-update-check/check.ps1   # Weekly update checker that reads sources.json
+│       ├── skill-update-check/
+│       │   ├── check.ps1                  # Weekly update checker — reads sources.json from this same folder
+│       │   └── sources.json               # Real provenance manifest: 45 personal skills + 3 pip + 2 npm + 1 binary tool
 │       └── ollama/ollama-digest.ps1       # On-demand local-model pre-digest helper (see the Ollama section below)
 └── notes/                                 # ~46 notes: a personal cross-project "second brain" vault (example content)
 ```
@@ -63,7 +64,7 @@ General engineering discipline from the ecc (everything-claude-code) plugin ecos
 ### `global-config/memory-examples/`
 3 real entries from the owner's Claude Code auto-memory system (not project-specific facts — portable "how I work" habits): a naming-convention disambiguation for cross-session messaging, the local-Ollama-as-pre-compression pattern, and a rule about what "update the skill notebook" actually means operationally. These exist to show the *shape* of a good memory entry (rule + why + how-to-apply) as much as their specific content — see `global-config/rules/ecc-common/` for how memory fits into the broader workflow, and CLAUDE.md's "จำ/บัญญัติ" section for the local-vs-global memory distinction this owner uses.
 
-### `global-config/tools/sources.json`
+### `global-config/tools/skill-update-check/sources.json`
 The owner's actual skill/tool adoption manifest — real provenance data (source repo URLs, install notes, version history) for all 45 personal skills (including the self-authored and adapted ones) plus 3 pip packages, 2 npm packages, and 1 binary tool. Paired with `check.ps1`, this is what lets a `claude-clone-template` adopter track upstream updates to the skills they copied into `~/.claude/skills/`, the same way the original owner does. Update `last_seen_commit` values are mostly `unknown`/stale from the recipient's perspective until they run `check.ps1 -Ack` once to establish their own baseline.
 
 ### `global-config/templates/`
@@ -74,18 +75,18 @@ Example content from the owner's Obsidian second-brain vault: local Ollama model
 
 ## How to adopt this
 
-1. **Copy `global-config/CLAUDE.md`** into your own `~/.claude/CLAUDE.md`. Merge it with what you already have, or replace outright — your call. Read it first; delete sections that don't apply to you.
+1. **Copy `global-config/CLAUDE.md`** into your own `~/.claude/CLAUDE.md`. Merge it with what you already have, or replace outright — your call. Read it first; delete sections that don't apply to you. **Rewrite the "Installed Plugins" section before you do anything else with this file** — it currently asserts specific plugins (superpowers, ecc, pordee, lazyweb, andrej-karpathy-skills) are installed and enabled, and tells Claude not to mention installing them. That's true for the original owner, not for you. Replace it with your own actual plugin list, or delete it until you've installed something.
 2. **Copy `global-config/agents/*.md`** into `~/.claude/agents/` and **`global-config/hooks/block-dangerous-git.py`** into `~/.claude/hooks/`. These are what make the model-routing rules and the git safety gate in CLAUDE.md actually functional, rather than just prose.
 3. **Copy `global-config/skills/*`** into `~/.claude/skills/`. This is the bulk of the actual value — 45 working skill folders, not just descriptions of them.
-4. **Merge `global-config/settings.example.json`** into your own `~/.claude/settings.json` (replace `<YOUR_HOME>` with your real home path first). Merge, don't overwrite, if you already have a settings.json — take the `hooks.PreToolUse` entry and whatever else you want from `enabledPlugins`.
+4. **Merge `global-config/settings.example.json`** into your own `~/.claude/settings.json` (replace `<YOUR_HOME>` with your real home path first). Merge, don't overwrite, if you already have a settings.json — take the `hooks.PreToolUse` entry and whatever else you want from `enabledPlugins`. The shipped hook command uses the Windows `py` launcher; on macOS/Linux, change it to `python3` first.
 5. **Copy `global-config/rules/ecc-common/`** into `~/.claude/rules/` **only if** you install the ecc plugin. Otherwise skip.
 6. **Copy `global-config/memory-examples/*.md`** into the auto-memory folder for whichever project you want them to apply to (Claude Code auto-memory is per-project, at `~/.claude/projects/<project>/memory/`), or read them as reference and write your own from scratch.
 7. **Copy `notes/`** into your own second-brain vault location (any folder Obsidian or plain markdown tools can see), or skip entirely if you don't want a vault.
 8. **Find-and-replace every placeholder** — this is the most important step:
    - `<YOUR_USERNAME>`, `<YOUR_HOME>` → your actual Windows/system username and home path
    - `<YOUR_VAULT_PATH>` → wherever you keep (or plan to keep) your second-brain vault
-   - `<YOUR_SONGS_DIR>` → only present in `notes/suno-music-production/` (kept it in step 5? then run this one too) — your actual songs/projects directory. Grep for it yourself before assuming it's done: this one is easy to miss since it only lives in the optional Suno notes.
-9. **Set your own baseline in `sources.json`**: run `check.ps1 -Ack` once after copying the skills over, so `last_seen_commit` reflects a starting point you control rather than the original owner's history.
+   - `<YOUR_SONGS_DIR>` → only present in `notes/suno-music-production/` (kept it in step 7? then run this one too) — your actual songs/projects directory. Grep for it yourself before assuming it's done: this one is easy to miss since it only lives in the optional Suno notes.
+9. **Copy `global-config/tools/`** (both `skill-update-check/` and, if you kept Ollama, `ollama/`) into `~/.claude/tools/`, then **set your own baseline in `sources.json`**: run `check.ps1 -Ack` once after copying the skills over, so `last_seen_commit` reflects a starting point you control rather than the original owner's history.
 
 ## What you'll still need to install separately
 
@@ -123,7 +124,7 @@ This is 100% optional and skippable. It exists purely to shave token costs on bu
 
 ## Optional: Suno AI music production notes
 
-`notes/suno-music-production/` is roughly 30 files of music knowledge: music theory (chords, scales, progressions), instrument-specific production notes, songwriting craft, and Suno-platform-specific technique — style prompts, meta-tags, multi-language lyrics, stems/remix workflow, credits/economics. It's the largest single chunk of the vault.
+`notes/suno-music-production/` is 43 files of music knowledge: music theory (chords, scales, progressions), instrument-specific production notes, songwriting craft, and Suno-platform-specific technique — style prompts, meta-tags, multi-language lyrics, stems/remix workflow, credits/economics. It's the largest single chunk of the vault.
 
 **Question to answer for yourself: do you make music with Suno — or care about music production knowledge at all?**
 

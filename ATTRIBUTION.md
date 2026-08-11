@@ -1,8 +1,8 @@
 # Attribution
 
-Most of `global-config/skills/` in this repo is **adopted from other people's public work**, not written by the owner of this template. This file credits the upstream sources. Per-skill provenance (subpath, commit baseline) lives in `global-config/tools/sources.json`.
+Most of `global-config/skills/` in this repo is **adopted from other people's public work**, not written by the owner of this template. This file credits the upstream sources. Per-skill provenance (subpath, commit baseline) lives in `global-config/tools/skill-update-check/sources.json`.
 
-Seven skills are self-authored: `poka-yoke`, `plan-pro`, and `shipping-a-branch` were written from scratch, and `graphify`, `dembrandt`, `markitdown`, and `mobbin-references` are self-written wrapper skills around third-party tools or services (the underlying tools are credited below and version-tracked in `global-config/tools/sources.json`). One skill, `deslop-defaults`, is adapted — harvested from an upstream skill repo and rewritten. Everything else is adopted.
+Seven skills are self-authored: `poka-yoke`, `plan-pro`, and `shipping-a-branch` were written from scratch, and `graphify`, `dembrandt`, `markitdown`, and `mobbin-references` are self-written wrapper skills around third-party tools or services (the underlying tools are credited below and version-tracked in `global-config/tools/skill-update-check/sources.json`). One skill, `deslop-defaults`, is adapted — harvested from an upstream skill repo and rewritten. Everything else is adopted.
 
 ## Upstream repos the adopted skills came from
 
@@ -32,6 +32,6 @@ The SKILL.md prose for these is self-authored, but each one drives a third-party
 
 ## A note on completeness
 
-This list was compiled from `global-config/tools/sources.json` plus a manual pass over the skills that weren't in that manifest. If you spot a missing or incorrect credit, please open an issue or PR — this repo wants to get attribution right, not just look like it does.
+This list was compiled from `global-config/tools/skill-update-check/sources.json` plus a manual pass over the skills that weren't in that manifest. If you spot a missing or incorrect credit, please open an issue or PR — this repo wants to get attribution right, not just look like it does.
 
 Each upstream repo retains its own license. Check the linked repo before redistributing its skill folder outside this template. The MIT license in this repo's `LICENSE` file covers this repo's own original content only (see the note at the bottom of that file).
