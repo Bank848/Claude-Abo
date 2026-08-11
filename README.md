@@ -4,6 +4,8 @@ A portable snapshot of one person's Claude Code setup — global instructions, e
 
 ## Getting started (quickstart)
 
+**Shortcut:** clone the repo, open it in Claude Code, and run `/adopt` — it interviews you (which optional pieces you want, plugin list, target paths) and does steps 2-9 below for you, checking off progress in a resumable journal file as it goes. The manual steps below are what `/adopt` automates, and are also there for anyone who'd rather do it by hand or review exactly what changes before running it.
+
 1. **Clone the repo** to anywhere convenient on the target machine.
 2. **Decide the two optional pieces now** — answer yes/no to each, since it determines what you delete in step 5: Local AI (Ollama) pre-compression, Suno music-production notes. See the "Optional: ___" sections below for details on each.
 3. **Copy `global-config/CLAUDE.md`, `agents/*.md`, `hooks/block-dangerous-git.py`, and `skills/*`** to your own `~/.claude/` (merge or replace — your call). These are what make the routing rules, git safety gate, and skill catalog actually work, not just read as prose.
@@ -23,6 +25,7 @@ claude-clone-template/
 ├── README.md
 ├── LICENSE                                # MIT license for this repo's own content
 ├── ATTRIBUTION.md                         # Credits for the upstream repos the third-party skills were adopted from
+├── .claude/commands/adopt.md              # Run `/adopt` in this repo to interview + auto-apply the steps below
 ├── global-config/
 │   ├── CLAUDE.md                          # Global instruction file (~/.claude/CLAUDE.md equivalent)
 │   ├── settings.example.json              # Sanitized ~/.claude/settings.json — hooks, plugins, model default
@@ -81,6 +84,7 @@ Example content from the owner's Obsidian second-brain vault: local Ollama model
 8. **Find-and-replace every placeholder** — this is the most important step:
    - `<YOUR_USERNAME>`, `<YOUR_HOME>` → your actual Windows/system username and home path
    - `<YOUR_VAULT_PATH>` → wherever you keep (or plan to keep) your second-brain vault
+   - `<YOUR_SONGS_DIR>` → only present in `notes/suno-music-production/` (kept it in step 5? then run this one too) — your actual songs/projects directory. Grep for it yourself before assuming it's done: this one is easy to miss since it only lives in the optional Suno notes.
 9. **Set your own baseline in `sources.json`**: run `check.ps1 -Ack` once after copying the skills over, so `last_seen_commit` reflects a starting point you control rather than the original owner's history.
 
 ## What you'll still need to install separately
