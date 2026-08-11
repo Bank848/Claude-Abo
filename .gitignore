@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.coverage
+.ruff_cache/
+
+# /adopt writes this into the clone as it runs; it records the adopter's
+# real home path/username/vault path, so it must never be committed.
+.claude-adopt-journal.md

@@ -1,0 +1,3 @@
+- [Cross-session "send message"](cross-session-send-message.md) — naming convention disambiguating mcp__ccd_session_mgmt__send_message vs spawn_task vs SendMessage
+- [Ollama digest tool](ollama-digest-tool.md) — on-demand local-model pre-compression helper: call qwen on-demand, never auto/hooked
+- ["จดลงสมุดสกิล" means sources.json](skill-notebook-means-sources-json.md) — updating a skills index alone isn't enough, must update the update-checker's sources.json too

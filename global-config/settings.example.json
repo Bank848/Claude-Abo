@@ -1,0 +1,46 @@
+{
+  "_comment": "Template settings.json — replace <YOUR_HOME> with your actual home path. The hook command below uses the Windows 'py' launcher; on macOS/Linux change it to 'python3' first. Only the hooks/agents shipped in this template are wired here; the original setup also had two personal/unrelated hooks (a reminder-flag script and a game-specific nudge) that are intentionally NOT included.",
+  "env": {
+    "ECC_GATEGUARD": "off",
+    "ECC_DISABLED_HOOKS": "pre:edit-write:gateguard-fact-force,pre:bash:gateguard-fact-force"
+  },
+  "includeCoAuthoredBy": false,
+  "model": "sonnet",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py \"<YOUR_HOME>/.claude/hooks/block-dangerous-git.py\""
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "superpowers@superpowers-marketplace": true,
+    "ecc@ecc": true
+  },
+  "extraKnownMarketplaces": {
+    "superpowers-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers"
+      }
+    },
+    "ecc": {
+      "source": {
+        "source": "github",
+        "repo": "affaan-m/everything-claude-code"
+      }
+    }
+  },
+  "effortLevel": "medium",
+  "tui": "fullscreen",
+  "skipWorkflowUsageWarning": true,
+  "theme": "dark",
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true
+}

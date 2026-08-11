@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--
+  plan-pro HTML plan template.
+  Fill every {{PLACEHOLDER}}. Section A (top) is for the human reader — keep it tight and
+  diagram-first. Section B (bottom) is the literal executable plan from writing-plans.
+  Self-contained: opens by double-click, no build step. Mermaid loads from CDN.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{FEATURE_NAME}} — Plan</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: "dark", securityLevel: "loose" });</script>
+<style>
+  :root { --bg:#0d1117; --panel:#161b22; --border:#30363d; --fg:#e6edf3; --muted:#9da7b3;
+          --accent:#58a6ff; --add:#3fb950; --mod:#d29922; --del:#f85149; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:15px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+  .wrap { max-width:1100px; margin:0 auto; padding:32px 24px 96px; }
+  h1 { font-size:28px; margin:0 0 4px; }
+  h2 { font-size:21px; margin:40px 0 12px; padding-bottom:6px; border-bottom:1px solid var(--border); }
+  h3 { font-size:17px; margin:24px 0 8px; }
+  .tag { display:inline-block; font-size:12px; color:var(--muted); border:1px solid var(--border);
+         border-radius:999px; padding:2px 10px; margin-right:6px; }
+  .meta { color:var(--muted); margin:8px 0 0; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin:14px 0; }
+  /* side-by-side before/after */
+  .ba { display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start; }
+  .ba > figure { margin:0; background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:12px; }
+  .ba figcaption { font-weight:600; margin-bottom:8px; color:var(--muted); }
+  .ba .before figcaption::before { content:"◀ BEFORE  "; color:var(--del); }
+  .ba .after  figcaption::before { content:"AFTER ▶  ";  color:var(--add); }
+  @media (max-width:820px){ .ba { grid-template-columns:1fr; } }
+  .mermaid { background:#0b0f14; border-radius:8px; padding:10px; overflow:auto; }
+  /* changes summary */
+  .changes li { list-style:none; margin:4px 0; }
+  .changes .add::before { content:"+ "; color:var(--add); font-weight:700; }
+  .changes .mod::before { content:"~ "; color:var(--mod); font-weight:700; }
+  .changes .del::before { content:"− "; color:var(--del); font-weight:700; }
+  code, pre { font-family:ui-monospace,SFMono-Regular,Consolas,monospace; }
+  pre { background:#0b0f14; border:1px solid var(--border); border-radius:8px; padding:12px 14px; overflow:auto; font-size:13px; }
+  code:not(pre code){ background:#0b0f14; border:1px solid var(--border); border-radius:4px; padding:1px 5px; font-size:13px; }
+  .step { margin:6px 0; }
+  .step input { margin-right:8px; }
+  .pathline { color:var(--muted); font-size:13px; }
+  hr.section { border:0; border-top:2px dashed var(--border); margin:48px 0; }
+  .note { color:var(--muted); font-size:13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>{{FEATURE_NAME}}</h1>
+  <p class="meta">
+    <span class="tag">{{DATE}}</span>
+    <span class="tag">plan-pro</span>
+    {{#TECH_TAGS}}<span class="tag">{{TECH}}</span>{{/TECH_TAGS}}
+  </p>
+
+  <!-- ===================== SECTION A — READ THIS (≈90%) ===================== -->
+  <h2>📖 Read this first</h2>
+
+  <div class="card">
+    <strong>Goal.</strong> {{ONE_PARAGRAPH_GOAL}}
+    <br><br>
+    <strong>Key decisions.</strong> {{KEY_DECISIONS_PLAIN_LANGUAGE}}
+  </div>
+
+  <h3>Before → After</h3>
+  <p class="note">The change at a glance. Left = how it works today. Right = after this plan lands.</p>
+  <div class="ba">
+    <figure class="before"><figcaption>{{BEFORE_CAPTION}}</figcaption>
+      <div class="mermaid">
+{{BEFORE_DIAGRAM_MERMAID}}
+      </div>
+    </figure>
+    <figure class="after"><figcaption>{{AFTER_CAPTION}}</figcaption>
+      <div class="mermaid">
+{{AFTER_DIAGRAM_MERMAID}}
+      </div>
+    </figure>
+  </div>
+  <!-- Duplicate the .ba block above for each additional before/after pair the change needs. -->
+
+  <h3>What's changing</h3>
+  <ul class="changes">
+    {{#CHANGES}}<li class="{{KIND}}">{{PATH_AND_RESPONSIBILITY}}</li>{{/CHANGES}}
+  </ul>
+
+  <h3>⚡ Parallelization analysis</h3>
+  <div class="card">
+    <p>{{PARALLEL_OVERVIEW}}</p>
+    <ul>
+      {{#BATCHES}}<li><strong>{{BATCH_NAME}}:</strong> {{TASKS_IN_BATCH}} — {{WHY_SAFE_OR_DEP}}</li>{{/BATCHES}}
+    </ul>
+    <p class="note">Critical path (longest sequential chain): {{CRITICAL_PATH}}.
+       Tasks that share a file and therefore <em>cannot</em> run in parallel: {{NO_PARALLEL_NOTES}}.</p>
+  </div>
+
+  <hr class="section" />
+
+  <!-- ===================== SECTION B — IMPLEMENTATION PLAN ===================== -->
+  <h2>🛠 Implementation plan</h2>
+  <p class="note">For agentic workers: use <code>superpowers:subagent-driven-development</code> or
+     <code>superpowers:executing-plans</code> (or plan-pro's parallel execution). Steps use checkboxes for tracking.</p>
+
+  <div class="card">
+    <strong>Goal:</strong> {{GOAL_ONE_SENTENCE}}<br>
+    <strong>Architecture:</strong> {{ARCHITECTURE_2_3_SENTENCES}}<br>
+    <strong>Tech Stack:</strong> {{TECH_STACK}}
+  </div>
+
+  <h3>File structure</h3>
+  <ul class="changes">
+    {{#FILE_STRUCTURE}}<li class="{{KIND}}">{{PATH}} — {{RESPONSIBILITY}}</li>{{/FILE_STRUCTURE}}
+  </ul>
+
+  <!-- Repeat this block per Task. Keep writing-plans content verbatim — full code, no summarizing. -->
+  {{#TASKS}}
+  <h3>Task {{N}}: {{TASK_NAME}}</h3>
+  <p class="pathline">
+    Create: <code>{{CREATE_PATHS}}</code> · Modify: <code>{{MODIFY_PATHS}}</code> · Test: <code>{{TEST_PATHS}}</code>
+  </p>
+  {{#STEPS}}
+  <div class="step"><label><input type="checkbox"> <strong>Step {{S}}: {{STEP_TITLE}}</strong></label></div>
+  {{#STEP_CODE}}<pre><code>{{CODE}}</code></pre>{{/STEP_CODE}}
+  {{#STEP_RUN}}<p class="note">Run: <code>{{RUN_CMD}}</code> — Expected: {{EXPECTED}}</p>{{/STEP_RUN}}
+  {{/STEPS}}
+  {{/TASKS}}
+
+</div>
+</body>
+</html>

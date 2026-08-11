@@ -1,0 +1,370 @@
+﻿{
+  "_README": "Manifest for the weekly skill/plugin update checker. The CHECK is deterministic (git/pip only, ZERO LLM tokens). It only REPORTS what is new — REVIEW-BEFORE-APPLY: it NEVER auto-updates anything. You read skill-update-report.md and update each item yourself, one at a time.",
+  "_baseline_rule": "last_seen_commit is the baseline used to detect 'something changed upstream'. The normal weekly check NEVER edits the baseline (so you cannot miss an update). Only `check.ps1 -Ack` records the current upstream HEAD as the new baseline — run it ONLY after you have actually applied the update.",
+  "_ls_remote_caveat": "Personal skills are checked with `git ls-remote <repo> HEAD`, which returns the WHOLE repo's HEAD, not the HEAD of subpath_in_repo. So a change anywhere in the source repo will flag the skill as 'maybe updated' even if your subpath did not change. This over-reports on purpose — it is safe because you review before applying.",
+  "git_plugins": {
+    "_note": "Git-backed plugin caches are discovered AUTOMATICALLY by check.ps1 (it scans ~/.claude/plugins/cache for .git dirs). Listed here for documentation only; the script does not read this block.",
+    "ecc": "https://github.com/affaan-m/everything-claude-code.git",
+    "superpowers": "https://github.com/obra/superpowers.git"
+  },
+  "npm_packages": [
+    {
+      "tool": "pi",
+      "dist_name": "@earendil-works/pi-coding-agent",
+      "source_repo_url": "https://github.com/earendil-works/pi",
+      "note": "Standalone agent-building toolkit (unified multi-provider LLM API + agent runtime + TUI + coding CLI). Installed 2026-08-09 via npm. RE-TESTED 2026-08-09: original v0.74.2 install had lost its `pi` shim (likely from an earlier interrupted npm operation) -- `pi: command not found`. Reinstalled cleanly with `npm i -g @earendil-works/pi-coding-agent@0.74.2` (pinned; @latest is 0.84.1 and requires Node >=22.19.0, this machine has v22.12.0 -- EBADENGINE warning). CONFIRMED WORKING: `pi --version` -> 0.74.2, `pi --help` renders full usage, `pi -p \"...\" @missingfile` correctly reports file-not-found, and `pi -p \"...\"` against a real prompt correctly detects no provider API key configured and prints /login guidance. Fully functional CLI, just needs a provider key or `pi /login` (OAuth) to do real work. Update with: npm i -g @earendil-works/pi-coding-agent@latest (watch the Node engine requirement before jumping past 0.74.x)."
+    },
+    {
+      "tool": "dembrandt",
+      "dist_name": "dembrandt",
+      "source_repo_url": "https://github.com/dembrandt/dembrandt",
+      "note": "Design-token extractor CLI, invoked on demand via `npx dembrandt <url>` (not globally installed, so no pinned version on this machine; npx pulls latest each run). The dembrandt SKILL is a self-authored wrapper tracked in personal_skills; this entry tracks the third-party ENGINE only. Source URL taken from the SKILL.md body (https://github.com/dembrandt/dembrandt/, https://dembrandt.com/)."
+    }
+  ],
+  "binary_tools": [
+    {
+      "tool": "witr",
+      "source_repo_url": "https://github.com/pranshuparmar/witr",
+      "install_path": "~/bin/witr.exe",
+      "installed_version": "0.3.3",
+      "note": "Process/port/container/file ancestry tracer CLI ('why is this running?'). Installed 2026-08-09: downloaded the Windows release zip directly (not the curl|iex installer), verified its SHA256 against the published SHA256SUMS before extracting, confirmed working via `witr --version`/`--help`. NOT auto-checked by check.ps1 yet (no GitHub-releases-polling logic wired in) -- check https://github.com/pranshuparmar/witr/releases manually for updates."
+    }
+  ],
+  "pip_packages": [
+    {
+      "skill": "ifixai",
+      "dist_name": "ifixai[anthropic]",
+      "source_repo_url": "https://github.com/ifixai-ai/iFixAi",
+      "note": "Standalone CLI that audits/grades an AI agent or LLM endpoint against a provider+judge+test-suite. Installed 2026-08-09 via `pip install \"ifixai[anthropic]\"` (v3.3.0). RE-TESTED 2026-08-09: `ifixai run --provider mock --strategic` (smoke test with the built-in mock target, no target API key needed) still requires a real provider key for the grading judge -- fails cleanly with \"no provider credentials found in the environment. Set at least one of OPENAI_API_KEY, ANTHROPIC_API_KEY, ...\". No such key is exported in this environment (only ANTHROPIC_BASE_URL is set, not ANTHROPIC_API_KEY) -- did not fabricate one. `ifixai setup` is interactive (prompts), not runnable non-interactively either. CLI itself, --help, and error handling all work correctly -- purely blocked on a missing key. Once the user exports one: `ANTHROPIC_API_KEY=sk-... ifixai run --provider anthropic --strategic` (or `ifixai setup` interactively). Update with: pip install -U ifixai[anthropic]"
+    },
+    {
+      "skill": "graphify",
+      "dist_name": "graphifyy",
+      "source_repo_url": "https://github.com/safishamsi/graphify",
+      "note": "The /graphify skill wrapper is user-authored; its ENGINE ships as pip dist 'graphifyy'. Update with: pip install -U graphifyy. Provenance confirmed 2026-08-08 via pip show graphifyy Home-page field = safishamsi/graphify; Graphify-Labs/graphify (seen on trendshift.io) is a different, unrelated repo — no fork/rename relationship found."
+    },
+    {
+      "skill": "markitdown",
+      "dist_name": "markitdown",
+      "source_repo_url": "https://github.com/microsoft/markitdown",
+      "note": "Skill wraps Microsoft MarkItDown (pip dist 'markitdown'). Update with: pip install -U markitdown"
+    }
+  ],
+  "personal_skills": [
+    {
+      "name": "debug-mantra",
+      "source_repo_url": "https://github.com/thananon/9arm-skills",
+      "subpath_in_repo": "skills/engineering/debug-mantra",
+      "last_seen_commit": "a1fc303b274ed06c32d405ba5a6db00ded6e5663",
+      "note": "9arm-skills (thananon). Confirmed in repo tree."
+    },
+    {
+      "name": "scrutinize",
+      "source_repo_url": "https://github.com/thananon/9arm-skills",
+      "subpath_in_repo": "skills/engineering/scrutinize",
+      "last_seen_commit": "a1fc303b274ed06c32d405ba5a6db00ded6e5663",
+      "note": "9arm-skills (thananon). Confirmed in repo tree."
+    },
+    {
+      "name": "post-mortem",
+      "source_repo_url": "https://github.com/thananon/9arm-skills",
+      "subpath_in_repo": "skills/engineering/post-mortem",
+      "last_seen_commit": "a1fc303b274ed06c32d405ba5a6db00ded6e5663",
+      "note": "9arm-skills (thananon). Confirmed in repo tree."
+    },
+    {
+      "name": "management-talk",
+      "source_repo_url": "https://github.com/thananon/9arm-skills",
+      "subpath_in_repo": "skills/productivity/management-talk",
+      "last_seen_commit": "a1fc303b274ed06c32d405ba5a6db00ded6e5663",
+      "note": "9arm-skills (thananon). Confirmed in repo tree."
+    },
+    {
+      "name": "ui-styling",
+      "source_repo_url": "https://github.com/mrgoonie/claudekit-skills",
+      "subpath_in_repo": ".claude/skills/ui-styling",
+      "last_seen_commit": "80113d86bc4407f105af40a2c4ea58194f7c370a",
+      "note": "claudekit-skills (mrgoonie / ClaudeKit.cc). Confirmed in repo tree."
+    },
+    {
+      "name": "ui-ux-pro-max",
+      "source_repo_url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+      "subpath_in_repo": ".claude/skills/ui-ux-pro-max",
+      "last_seen_commit": "abb7f2fd5a083fa1ff55c326a963ff0d95c33f99",
+      "note": "nextlevelbuilder. Confirmed in repo tree. (CLI alt: npm i -g uipro-cli)"
+    },
+    {
+      "name": "design",
+      "source_repo_url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+      "subpath_in_repo": ".claude/skills/design",
+      "last_seen_commit": "abb7f2fd5a083fa1ff55c326a963ff0d95c33f99",
+      "note": "ckm:design (author: claudekit, MIT) — redistributed inside the nextlevelbuilder ui-ux-pro-max bundle. Confirmed in repo tree."
+    },
+    {
+      "name": "design-system",
+      "source_repo_url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+      "subpath_in_repo": ".claude/skills/design-system",
+      "last_seen_commit": "abb7f2fd5a083fa1ff55c326a963ff0d95c33f99",
+      "note": "ckm:design-system (author: claudekit, MIT) — redistributed inside the nextlevelbuilder ui-ux-pro-max bundle. Confirmed in repo tree."
+    },
+    {
+      "name": "banner-design",
+      "source_repo_url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+      "subpath_in_repo": ".claude/skills/banner-design",
+      "last_seen_commit": "abb7f2fd5a083fa1ff55c326a963ff0d95c33f99",
+      "note": "ckm:banner-design (author: claudekit, MIT) — redistributed inside the nextlevelbuilder ui-ux-pro-max bundle. Confirmed in repo tree."
+    },
+    {
+      "name": "brand",
+      "source_repo_url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+      "subpath_in_repo": ".claude/skills/brand",
+      "last_seen_commit": "abb7f2fd5a083fa1ff55c326a963ff0d95c33f99",
+      "note": "ckm:brand (author: claudekit) — redistributed inside the nextlevelbuilder ui-ux-pro-max bundle. Confirmed in repo tree."
+    },
+    {
+      "name": "slides",
+      "source_repo_url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+      "subpath_in_repo": ".claude/skills/slides",
+      "last_seen_commit": "abb7f2fd5a083fa1ff55c326a963ff0d95c33f99",
+      "note": "ckm:slides (author: claudekit) — redistributed inside the nextlevelbuilder ui-ux-pro-max bundle. Confirmed in repo tree."
+    },
+    {
+      "name": "grilling",
+      "source_repo_url": "https://github.com/mattpocock/skills",
+      "subpath_in_repo": "skills/productivity/grilling",
+      "last_seen_commit": "84fdeffd12f2ee307994d1eb6feb48173b6e0502",
+      "note": "mattpocock/skills. Confirmed same file structure as installed (SKILL.md + agents/openai.yaml) via diff 2026-08-08; content has drifted since original install (untracked until now). Added AFTER the single check.ps1 -Ack call in this session so baseline is not overwritten. NOTE (added after fable-5 review 2026-08-08): the recorded last_seen_commit is upstream HEAD at add-time, NOT a claim that installed content matches that commit -- installed content is drifted/stale as of this baseline. Future ok-baseline reports will not surface that pre-existing drift; sync manually if you want the installed skill current."
+    },
+    {
+      "name": "teach",
+      "source_repo_url": "https://github.com/mattpocock/skills",
+      "subpath_in_repo": "skills/productivity/teach",
+      "last_seen_commit": "84fdeffd12f2ee307994d1eb6feb48173b6e0502",
+      "note": "mattpocock/skills. Confirmed same file structure as installed (SKILL.md, GLOSSARY-FORMAT.md, LEARNING-RECORD-FORMAT.md, MISSION-FORMAT.md, RESOURCES-FORMAT.md + agents/openai.yaml) via diff 2026-08-08; content has drifted since original install (untracked until now). Added AFTER the single check.ps1 -Ack call in this session so baseline is not overwritten. NOTE (added after fable-5 review 2026-08-08): the recorded last_seen_commit is upstream HEAD at add-time, NOT a claim that installed content matches that commit -- installed content is drifted/stale as of this baseline. Future ok-baseline reports will not surface that pre-existing drift; sync manually if you want the installed skill current."
+    },
+    {
+      "name": "wait-what",
+      "source_repo_url": "https://github.com/mattpocock/skills",
+      "subpath_in_repo": "skills/productivity/wait-what",
+      "last_seen_commit": "84fdeffd12f2ee307994d1eb6feb48173b6e0502",
+      "note": "mattpocock/skills. Copied verbatim from source (SKILL.md only, disable-model-invocation) 2026-08-09; agents/openai.yaml intentionally not copied (Codex-only metadata). Baseline commit confirmed current via git ls-remote at add-time."
+    },
+    {
+      "name": "wizard",
+      "source_repo_url": "https://github.com/mattpocock/skills",
+      "subpath_in_repo": "skills/engineering/wizard",
+      "last_seen_commit": "84fdeffd12f2ee307994d1eb6feb48173b6e0502",
+      "note": "mattpocock/skills. Copied verbatim from source (SKILL.md + template.sh) 2026-08-09; agents/openai.yaml intentionally not copied (Codex-only metadata). Baseline commit confirmed current via git ls-remote at add-time."
+    },
+    {
+      "name": "hallmark",
+      "source_repo_url": "https://github.com/Nutlope/hallmark",
+      "subpath_in_repo": "skills/hallmark",
+      "last_seen_commit": "13ac0ec7e148655948100b6396439e481361d690",
+      "note": "Together AI. Anti-AI-slop design skill (57 numbered slop-test gates, audit/redesign/study/build verbs, macrostructure diversity engine, mobile-responsiveness hard floor). Added 2026-08-09 from trendshift.io candidate evaluation (see CANDIDATE-EVALUATION.md). Installed via git clone --depth 1 + copy of skills/hallmark/ (107 files: SKILL.md + references/). Adopted as the default for full-page/greenfield UI generation + audit; deslop-defaults kept as the lighter structural-restraint companion for smaller edits -- not fully redundant, different scope (cross-reference added in both SKILL.md files)."
+    },
+    {
+      "name": "poka-yoke",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Confirmed self-authored by the user (2026-06-18). No upstream; checker skips it."
+    },
+    {
+      "name": "plan-pro",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Self-authored meta/wrapper skill (confirmed 2026-06-18): orchestrates superpowers:writing-plans + spawned review + HTML/Mermaid + ecc /code-review & /simplify. No single upstream; the only external part (superpowers:writing-plans) is already tracked via the superpowers plugin. Checker skips it."
+    },
+    {
+      "name": "second-brain",
+      "source_repo_url": "https://github.com/coreyhaines31/makerskills",
+      "subpath_in_repo": "skills/second-brain",
+      "last_seen_commit": "17218de201e94f7aebe8b0ddfb507175caf37343",
+      "note": "makerskills (Corey Haines). Selected (of 19) 2026-08-09 for fit with the <YOUR_VAULT_PATH> Obsidian vault workflow — wraps the Karpathy LLM Wiki schema (capture/compile/query/lint/connect/search over a markdown vault). MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "decide",
+      "source_repo_url": "https://github.com/coreyhaines31/makerskills",
+      "subpath_in_repo": "skills/decide",
+      "last_seen_commit": "17218de201e94f7aebe8b0ddfb507175caf37343",
+      "note": "makerskills (Corey Haines). Selected (of 19) 2026-08-09 — 37signals decision framework, archives rationale + revisit date. MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "unstuck",
+      "source_repo_url": "https://github.com/coreyhaines31/makerskills",
+      "subpath_in_repo": "skills/unstuck",
+      "last_seen_commit": "17218de201e94f7aebe8b0ddfb507175caf37343",
+      "note": "makerskills (Corey Haines). Selected (of 19) 2026-08-09 — lateral-thinking roadblock-breaker, upstream of decide. MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "skillify",
+      "source_repo_url": "https://github.com/coreyhaines31/makerskills",
+      "subpath_in_repo": "skills/skillify",
+      "last_seen_commit": "17218de201e94f7aebe8b0ddfb507175caf37343",
+      "note": "makerskills (Corey Haines). Selected (of 19) 2026-08-09 — directly matches this user's habitual skill-vetting/adoption workflow (create/adapt/update skills, license+attribution check). MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "deep-research",
+      "source_repo_url": "https://github.com/coreyhaines31/makerskills",
+      "subpath_in_repo": "skills/deep-research",
+      "last_seen_commit": "17218de201e94f7aebe8b0ddfb507175caf37343",
+      "note": "makerskills (Corey Haines). Selected (of 19) 2026-08-09 — multi-source research with citations + archive. MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "watch-video",
+      "source_repo_url": "https://github.com/coreyhaines31/makerskills",
+      "subpath_in_repo": "skills/watch-video",
+      "last_seen_commit": "17218de201e94f7aebe8b0ddfb507175caf37343",
+      "note": "makerskills (Corey Haines). Selected (of 19) 2026-08-09 — video transcript/summary extraction, occasional use for tutorial content. MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "prompt-injection",
+      "source_repo_url": "https://github.com/briiirussell/cybersecurity-skills",
+      "subpath_in_repo": "skills/prompt-injection",
+      "last_seen_commit": "c9ade0349f8ecd5c9c68a82a05d2b6012c5fa1d7",
+      "note": "cybersecurity-skills (briiirussell). Subset selected via fable-medium review 2026-08-09 (adopt 3 of 29, 1 optional): audits agent/LLM/MCP permission boundaries and indirect injection — relevant since the user builds Claude Code workflows and a custom renpy MCP server. MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "secrets-audit",
+      "source_repo_url": "https://github.com/briiirussell/cybersecurity-skills",
+      "subpath_in_repo": "skills/secrets-audit",
+      "last_seen_commit": "c9ade0349f8ecd5c9c68a82a05d2b6012c5fa1d7",
+      "note": "cybersecurity-skills (briiirussell). Subset selected via fable-medium review 2026-08-09: git-history/build-artifact secret scanning + rotation posture, complements the existing pre-commit git-safety hook rather than duplicating it. MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "dependency-audit",
+      "source_repo_url": "https://github.com/briiirussell/cybersecurity-skills",
+      "subpath_in_repo": "skills/dependency-audit",
+      "last_seen_commit": "c9ade0349f8ecd5c9c68a82a05d2b6012c5fa1d7",
+      "note": "cybersecurity-skills (briiirussell). Subset selected via fable-medium review 2026-08-09: CVE/known-vuln checks for adopted packages/tools — matches the user's frequent tool-curation habit. MIT license. Confirmed in repo tree. NOTE: threat-modeling from this same repo was flagged 'optional/borderline' by the reviewer (Ren'Py anticheat design) but NOT adopted — add manually if ever wanted."
+    },
+    {
+      "name": "product-marketing",
+      "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
+      "subpath_in_repo": "skills/product-marketing",
+      "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 (adopt 12 of 46): hub doc other marketing skills in this pack read for context — required foundation for the rest. MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "launch",
+      "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
+      "subpath_in_repo": "skills/launch",
+      "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — product/game release planning, waitlist, early access. MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "copywriting",
+      "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
+      "subpath_in_repo": "skills/copywriting",
+      "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — store/landing page copy for game releases. MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "copy-editing",
+      "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
+      "subpath_in_repo": "skills/copy-editing",
+      "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — polishing existing copy/devlogs. MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "social",
+      "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
+      "subpath_in_repo": "skills/social",
+      "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — zero-budget social content, the cheapest promo channel. MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "community-marketing",
+      "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
+      "subpath_in_repo": "skills/community-marketing",
+      "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — Discord/subreddit community building, flagged as the primary growth channel for adult indie games (Patreon/itch ecosystem). MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "content-strategy",
+      "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
+      "subpath_in_repo": "skills/content-strategy",
+      "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — planning devlogs/what to post pre-launch. MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "image",
+      "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
+      "subpath_in_repo": "skills/image",
+      "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — marketing graphics/banners/listing visuals, pairs with the existing banner-design skill. MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "marketing-ideas",
+      "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
+      "subpath_in_repo": "skills/marketing-ideas",
+      "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — brainstorming aid, no infra required. MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "marketing-psychology",
+      "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
+      "subpath_in_repo": "skills/marketing-psychology",
+      "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — persuasion/behavioral-science framework, works as a planning aid pre-product. MIT license. Confirmed in repo tree."
+    },
+    {
+      "name": "pricing",
+      "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
+      "subpath_in_repo": "skills/pricing",
+      "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+      "note": "marketingskills (Corey Haines). Borderline pick (reviewer flagged as 11th/12th, adopted anyway — MIT, zero install risk) 2026-08-09 — Patreon-tier / game-pricing willingness-to-pay frameworks. Confirmed in repo tree."
+    },
+    {
+      "name": "marketing-council",
+      "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
+      "subpath_in_repo": "skills/marketing-council",
+      "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+      "note": "marketingskills (Corey Haines). Borderline pick (reviewer flagged as 11th/12th, adopted anyway — MIT, zero install risk) 2026-08-09 — multi-perspective marketer-advisor framework, needs no infra. Confirmed in repo tree."
+    },
+    {
+      "name": "shipping-a-branch",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Self-authored end-to-end git shipping workflow skill (confirmed during 2026-08-11 sources.json completeness pass; re-added alongside poka-yoke and plan-pro). No upstream; checker skips it."
+    },
+    {
+      "name": "graphify",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Self-authored wrapper skill (/graphify). This entry covers the wrapper prose only; the ENGINE (pip dist 'graphifyy', safishamsi/graphify) is tracked in pip_packages under skill 'graphify' -- do not duplicate its provenance here. Checker skips it."
+    },
+    {
+      "name": "markitdown",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Self-authored usage-pattern wrapper around Microsoft MarkItDown. This entry covers the wrapper prose only; the ENGINE (pip dist 'markitdown', microsoft/markitdown) is tracked in pip_packages under skill 'markitdown'. Checker skips it."
+    },
+    {
+      "name": "dembrandt",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Self-authored wrapper skill around the third-party dembrandt CLI (run via `npx dembrandt <url>`). This entry covers the wrapper prose only; the ENGINE (npm dist 'dembrandt', https://github.com/dembrandt/dembrandt) is tracked in npm_packages under tool 'dembrandt'. Checker skips it."
+    },
+    {
+      "name": "mobbin-references",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Self-authored wrapper skill around the paid, third-party Mobbin MCP server (hosted service -- no upstream skill repo and no pip/npm engine to version-track). Checker skips it."
+    },
+    {
+      "name": "deslop-defaults",
+      "source_repo_url": "https://github.com/ibelick/ui-skills",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "ADAPTED, not adopted and not self-authored: harvested from ibelick/ui-skills (baseline-ui) and rewritten stack-agnostic, so upstream commits do not apply 1:1. No commit baseline was recorded at harvest time (last_seen_commit intentionally empty) -- the first weekly check will flag it; review, then run check.ps1 -Ack to set the baseline. subpath_in_repo left empty pending verification of baseline-ui's exact path upstream."
+    }
+  ]
+}
