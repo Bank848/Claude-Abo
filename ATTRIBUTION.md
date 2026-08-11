@@ -8,14 +8,14 @@ Seven skills are self-authored: `poka-yoke`, `plan-pro`, and `shipping-a-branch`
 
 | Upstream repo | License (as adopted) | Skills taken |
 |---|---|---|
-| [`thananon/9arm-skills`](https://github.com/thananon/9arm-skills) | see upstream repo | `debug-mantra`, `post-mortem`, `scrutinize`, `management-talk` |
+| [`thananon/9arm-skills`](https://github.com/thananon/9arm-skills) | **no license file upstream** — all rights reserved by default; redistributed here on assumed permissive intent, contact upstream before reuse elsewhere | `debug-mantra`, `post-mortem`, `scrutinize`, `management-talk` |
 | [`nextlevelbuilder/ui-ux-pro-max-skill`](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | MIT (per upstream) | `ui-ux-pro-max`, `design`, `design-system`, `banner-design`, `brand`, `slides` |
-| [`mrgoonie/claudekit-skills`](https://github.com/mrgoonie/claudekit-skills) | see upstream repo | `ui-styling` |
+| [`mrgoonie/claudekit-skills`](https://github.com/mrgoonie/claudekit-skills) | **no license file upstream** — all rights reserved by default; redistributed here on assumed permissive intent, contact upstream before reuse elsewhere | `ui-styling` |
 | [`coreyhaines31/makerskills`](https://github.com/coreyhaines31/makerskills) | MIT | `second-brain`, `decide`, `unstuck`, `skillify`, `deep-research`, `watch-video` |
 | [`coreyhaines31/marketingskills`](https://github.com/coreyhaines31/marketingskills) | MIT | `product-marketing`, `launch`, `copywriting`, `copy-editing`, `social`, `community-marketing`, `content-strategy`, `image`, `marketing-ideas`, `marketing-psychology`, `pricing`, `marketing-council` |
-| [`mattpocock/skills`](https://github.com/mattpocock/skills) | see upstream repo | `grilling`, `teach`, `wait-what`, `wizard` |
+| [`mattpocock/skills`](https://github.com/mattpocock/skills) | MIT (per upstream) | `grilling`, `teach`, `wait-what`, `wizard` |
 | [`briiirussell/cybersecurity-skills`](https://github.com/briiirussell/cybersecurity-skills) | MIT | `prompt-injection`, `secrets-audit`, `dependency-audit` |
-| [`Nutlope/hallmark`](https://github.com/Nutlope/hallmark) | see upstream repo | `hallmark` |
+| [`Nutlope/hallmark`](https://github.com/Nutlope/hallmark) | MIT (per upstream) | `hallmark` |
 
 ## Self-written wrappers around third-party tools
 

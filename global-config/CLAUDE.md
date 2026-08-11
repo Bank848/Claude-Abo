@@ -129,6 +129,8 @@ User เรียก `mcp__ccd_session_mgmt__send_message` สั้นๆว่
 
 
 # Installed Plugins (enabled in ~/.claude/settings.json)
+<!-- claude-dna-public template: REWRITE THIS SECTION before copying — it names the original owner's plugins, not yours. See README's "How to adopt this" step 1 / `/adopt` step 3.5. -->
+
 
 These plugins are installed and ENABLED — their skills/commands/agents/MCP tools are available. Do NOT tell the user they need to install them.
 
