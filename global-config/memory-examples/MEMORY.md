@@ -1,3 +1,7 @@
 - [Cross-session "send message"](cross-session-send-message.md) — naming convention disambiguating mcp__ccd_session_mgmt__send_message vs spawn_task vs SendMessage
 - [Ollama digest tool](ollama-digest-tool.md) — on-demand local-model pre-compression helper: call qwen on-demand, never auto/hooked
 - ["จดลงสมุดสกิล" means sources.json](skill-notebook-means-sources-json.md) — updating a skills index alone isn't enough, must update the update-checker's sources.json too
+- [Backslash-b escaping hazard](backslash-b-escaping-hazard.md) — inline python -c/shell snippets corrupt paths containing \b (interpreted as backspace); use Edit tool or script files, verify via Read not tool success message
+- [Context bloat trim risk tolerance](context-bloat-trim-risk-tolerance.md) — ok to disconnect unused MCP connectors/plugins, but not to compress CLAUDE.md/rules files
+- [Anti-AI-tell patterns: Thai detail](anti-ai-tell-thai-detail.md) — full backing detail + before/after examples for CLAUDE.md's Thai anti-AI-tell rule, adapted from Wikipedia:Signs_of_AI_writing
+- [Anti-AI-tell patterns: English detail](anti-ai-tell-english-detail.md) — full vocab tables + before/after examples for CLAUDE.md's English anti-AI-tell rule

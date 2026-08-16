@@ -163,3 +163,75 @@ Claude ต้อง **เฝ้าดูขนาด context ของตัว�
 - อย่า dump ไฟล์ทั้งไฟล์เข้า context ถ้าต้องการแค่ข้อสรุป → ใช้ `Explore`/subagent ย่อยมา (ตามบัญญัติ cost-aware routing)
 - อย่าอ่านไฟล์เดิมซ้ำเพื่อ "เช็คว่าแก้ติดไหม" — Edit/Write มัน error เองถ้าพลาด
 - log/doc ยาว low-stakes → pre-compress ด้วย ollama ก่อนเข้า context
+
+# Terse narration during routine command execution
+This rule only governs how much narration to produce — it does not change when to ask for permission. Always decide first whether an action falls under "explicit permission required" / "prohibited" categories, and if so, ask/stop exactly as normal regardless of this rule. It only relaxes narration for commands that already cleared that gate (scans, builds, test loops, long-running batch jobs).
+- **Brief before running**: one line saying what you're about to do and why, before firing off a long-running command.
+- **Quiet while waiting**: don't report every failed attempt/every retry/every parameter tweak — accumulate and summarize once you get a result or hit a real blocker.
+- **Brief when done**: a short result line, then move to the next step.
+- **Still always speak up, even mid-wait**: anything that changes the plan (a critical finding, a credential/secret encountered, discovering you're targeting the wrong thing), an error that requires a different approach, and any "announce before spawning a subagent" convention you're following — none of these count as "chatter."
+- **Exception that overrides this rule**: destructive actions, irreversible/risky commands, or any point that genuinely needs the user's judgment — those still always get a stop-and-ask, per the normal "explicit permission required"/"prohibited" categories.
+- Why: users often want to read progress from the command's own output, not a running commentary from Claude — heavy narration makes it harder to follow and burns tokens for no benefit.
+
+# PR & review defaults — draft-first
+- Every time you open a new PR → default to `--draft` (`gh pr create --draft`, including `--fill` variants) unless the user has explicitly said in this session to open it ready-for-review. If the repo/plan doesn't support drafts (some private-repo tiers), say so and ask before opening a ready PR silently.
+- Code review on a PR → **don't use `gh pr review`** (it submits immediately, no pending mode) — create a **pending review** via `gh api repos/{owner}/{repo}/pulls/{pr}/reviews` with **no `event` field**, then tell the user the review is waiting to be submitted in the GitHub UI (pending reviews are invisible to anyone else — if you don't say so, the user will forget it's there). Note: only one pending review can exist per PR at a time — if the API errors that one already exists, tell the user to go submit/delete the existing one first.
+- Draft PRs **cannot be merged** — before merging you need `gh pr ready` first, and marking ready publishes the PR to reviewers, so that's its own separate confirmation checkpoint, never bundled silently into a merge.
+- Why: most people want to review/tweak their own work before it's visible to reviewers.
+
+# Scheduled cloud agents/cron — you may propose and create these on your own initiative, but always say so or ask first
+You're free to **propose and create** a scheduled cloud agent / cron job (whatever your harness's equivalent tool is for recurring automated runs) on your own initiative when you spot a good fit — e.g. a status check that should repeat daily, polling a long-running result, a maintenance task that recurs. You don't need to wait for the user to ask first.
+
+**But before actually creating one, always say so or ask first** (never create silently and mention it after the fact) — tell the user at minimum: what it will run, the schedule/frequency, and the consequence (e.g. cost per run if any), then wait for confirmation before calling the tool. Why: a scheduled/cron job is **standing/persistent config** that keeps running after this session ends — creating one without telling the user leaves something running in the background that they don't know about.
+
+# claude-in-chrome shared tab group across parallel sessions
+If you're running with browser automation tools (e.g. an in-Chrome MCP) alongside another parallel session that also uses browser tools, **all sessions typically share the same Chrome tab group** — they are not automatically isolated into separate tabs, even if the tool's own description claims each conversation gets its own tab.
+
+**Why this matters (real incident):** one session was polling a tab (kept the same tab ID from when it first opened) waiting on a long-running job to finish. Meanwhile a parallel session opened a browser tab too, got back the *same* tab ID via a "list tabs" call, and navigated it somewhere else entirely — without the first session knowing. The first session kept reading page content from the wrong page for a while before noticing the title had changed.
+
+**How to avoid it:** if you know you're running in parallel with another session that also uses browser tools → **open your own new tab immediately** rather than relying on a "list tabs" call and reusing whatever tab ID comes back (it may be a tab another session just created/is using). If you're polling something for a while and the tab's title/URL changes without you having navigated it yourself → suspect immediately that another session took over the tab, and open a fresh one rather than debugging further on the same tab.
+
+# Thai writing anti-AI-tell rules
+When drafting Thai-language content (homework, essays, reports, articles, chat) avoid these patterns — they're the clearest fingerprints of AI-generated Thai text:
+- **Formal essay connectives opening paragraphs**: don't use "อย่างไรก็ตาม / นอกจากนี้ / ในขณะเดียวกัน / ทั้งนี้ / ดังนั้น" to open a paragraph more than once in a whole piece, and don't rotate through this connective family so every paragraph gets a different one.
+- **Symmetrical three-item lists**: don't give examples in threes with identical parallel sentence structure and equal length every time — mix in twos or fours, vary the length, and avoid the "ไม่ว่าจะเป็น... หรือ..." opening formula.
+- **Restate-everything closing sentences**: don't close with "สรุปได้ว่า / กล่าวโดยสรุป / ท้ายที่สุดแล้ว" followed by a recap of every point — end on a specific detail or personal opinion instead, shorter than you'd expect.
+- **Uniform sentence length + no specific detail**: mix short punchy sentences with longer ones, and narrative/essay writing needs at least one genuinely specific detail (a name, place, event, real number) — ask the user rather than writing something generic if you don't know one.
+- **Register**: know what you're writing (homework/academic/article/chat/creative) and match it — don't default to essay-formal tone every time. Chat should have particles and dropped subjects; student homework should use first-person pronouns and direct personal experience.
+- **English-calque nominalization**: avoid "มีความสามารถในการ X", "อย่างมีประสิทธิภาพ/อย่างมีนัยสำคัญ" — use plain Thai verbs instead (except in genuinely academic writing that needs the formal terminology).
+- **Copula avoidance**: AI likes to replace a plain "X คือ Y" statement with "ทำหน้าที่เป็น", "ถือเป็น", "สะท้อนให้เห็นถึง", "นับว่าเป็น" — if you can say it plainly, say it plainly.
+- **"ไม่ใช่แค่ X แต่ยังเป็น/แต่ยังรวมถึง Y" negative-parallelism**: this template manufactures false depth for simple points — use it rarely, only for a genuinely sharp contrast, never as a recurring sentence shape in one piece.
+- **Floating attribution with no real source**: avoid "ผู้เชี่ยวชาญระบุว่า", "มีการศึกษาพบว่า", "จากสถิติชี้ให้เห็นว่า" without a real name/source behind it — state it as your own opinion instead ("ผมว่า...") rather than manufacturing fake authority.
+- **Hedge-then-emphasize closing formula**: avoid closing every paragraph/piece with "แม้จะมี [good point] แต่ก็ยังคงเผชิญกับความท้าทาย/ปัญหาอยู่" — it's a formula for fake balance, not real analysis.
+- **Excessive synonym-swapping (elegant variation)**: AI tends to avoid repeating a word by calling the same thing by 2-3 different names within one paragraph — real writers repeat the same word naturally, no need to avoid it.
+- **Tourist-brochure tone in neutral contexts**: avoid overused positive words like "งดงาม", "เต็มไปด้วยเสน่ห์", "มีชีวิตชีวา", "น่าประทับใจอย่างยิ่ง" in content that wasn't asked to be a review/ad — especially describing ordinary places/objects.
+- **Formatting overkill for the context**: bolding whole paragraphs, decorative emoji as section markers, unnecessary horizontal rules, tables in a chat/homework context where plain prose is fine — reserve heavy formatting for content actually requested as a document/deck.
+- **Suspiciously flawless (zero human noise)**: real human writing (especially chat/personal narrative) has natural stumbles, mid-sentence changes of mind, idiosyncratic word choices — don't polish every sentence to identical smoothness; let some natural voice through appropriate to the register.
+- **Overused Thai "GPT-isms"**: words like "เจาะลึก" (delve), "พลิกโฉม"/"เปลี่ยนโฉม" (revolutionize, overused), "ยกระดับ" (elevate, overused), "ตอกย้ำ" (underscore), "ตกผลึก" (used outside genuine idea-crystallization contexts), "หลากหลายมิติ"/"รอบด้าน" (multifaceted filler), "โอบรับ" (embrace, calqued), "องค์รวม" overused — only use these when they're genuinely the right word, not because they sound impressive.
+- Why: these aren't just word-level tells (em dash, quote marks) — they're structural/rhetorical patterns, and readers used to AI text catch these as easily as, or more easily than, individual words. See `global-config/memory-examples/anti-ai-tell-thai-detail.md` for the full backing detail and before/after examples.
+
+# Don't wrap emphasized words/phrases in quote marks ("") in Thai writing
+When drafting Thai content, don't put quote marks around a word or phrase just to emphasize it — rewrite the sentence so the word carries weight from context instead, or use **bold** if emphasis is genuinely needed.
+- Why: quoting a word for emphasis (e.g. "คน-ประสบการณ์-ความทรงจำ") is a pattern readers immediately recognize as AI-assisted writing, especially in homework/writing that might get checked for AI content.
+
+# English writing anti-AI-tell rules
+When drafting English content (chat, email, DM, essay, report, post) avoid these patterns — full detail + vocab tables + before/after examples in `global-config/memory-examples/anti-ai-tell-english-detail.md`:
+- **Em dash**: don't use an em dash to join two clauses, especially the "X — because Y" pattern — use a comma, a new sentence, or "and"/"so" instead.
+- **GPT-ism vocabulary**: avoid "delve", "tapestry", "boasts", "underscore(s)", "landscape" (metaphorical), "realm", "crucial/pivotal/vital" as a default intensifier, "intricate", "multifaceted", "leverage" (verb), "seamless(ly)", "robust", "foster", "navigate (challenges)", "embark", "elevate", "unlock", "game-changer", "in today's fast-paced world" — when unsure, use the plain verb ("use" not "utilize", "help" not "facilitate").
+- **"not just X, but Y"**: use at most once per piece, and never "It's not about X. It's about Y."
+- **Rule-of-three throttle**: don't reflexively list three parallel items ("clear, concise, and compelling") — use two or four items of uneven length, or expand a single point instead.
+- **Copula avoidance**: write "is/are/has" plainly — don't swap in "serves as", "stands as", "represents", "acts as", "functions as".
+- **Opener/closer formulas**: don't open with "In today's world / digital age / ever-evolving landscape"; don't close with "In conclusion / Ultimately / At the end of the day" followed by a full recap; avoid hedge-then-emphasize closings ("While challenges remain, X continues to...") — end on a specific detail or a shorter opinion than you'd expect.
+- **Vague attribution**: don't write "experts say / studies show / many believe" without a real citable source — ask the user, or state it as your own view.
+- **Elegant variation**: repeat the same word naturally rather than swapping synonyms (dog → canine → four-legged friend) to avoid repetition.
+- **Promotional inflation**: neutral/factual context calls for neutral language — avoid "vibrant", "stunning", "rich cultural heritage", "must-see", "nestled" outside genuine advertising copy.
+- **Formatting overkill**: chat/DM/email should be plain prose — no bold-term-colon lists, headers, emoji bullets, horizontal rules, or tables unless the user actually asked for a structured document.
+- **Contractions**: conversational writing (chat, DM, casual email, blog post) needs contractions ("don't/it's/I'll") — zero contractions is itself a tell, and vary sentence/paragraph length so it doesn't read too uniform.
+- **Register first**: decide chat / professional email / essay / creative before writing, then match it — defaulting to polished-neutral-formal every time is the single biggest tell.
+- Priority order when self-editing a draft: (1) GPT-ism vocab + em dash, (2) promotional inflation + copula avoidance, (3) "not just X but Y" + rule-of-three, (4) opener/closer formula + vague attribution, (5) contractions + register match, (6) sentence/paragraph rhythm, (7) formatting overkill.
+
+# Proactive Supabase RLS/security check on new work
+Whenever you start work on a project that uses **Supabase** (dependency on `@supabase/supabase-js`, a `.env` with `SUPABASE_URL`/`SUPABASE_ANON_KEY`, or the user says so directly), proactively offer (don't wait to be asked) to run a security check via the Supabase MCP/CLI (`get_advisors` type `security` + `list_tables` verbose) to confirm **RLS is enabled on every table exposed via PostgREST** — especially before deploying or sharing a link with anyone else.
+- Why: it's a common pattern for a table to end up with real data in it and RLS still off, invisible until someone points the anon key straight at PostgREST. The problem isn't the anon key leaking (that's expected to be public) — it's a table with no RLS/policy behind it.
+- How to check: list the relevant Supabase project → `get_advisors(type:"security")` + `list_tables(verbose:true)` for every table's `rls_enabled` → flag immediately if any table with real/expected data has `rls_enabled:false`.
+- **Don't auto-apply a fix** — turning on RLS with no policy attached will immediately lock the app itself out of its own data. Ask first whether the project has auth/login: if yes, policies should key off `auth.uid()`; if no, offer alternatives like revoking anon direct grants and proxying through an Edge Function/API route instead.

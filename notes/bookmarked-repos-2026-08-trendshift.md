@@ -7,7 +7,7 @@ separately) matched the actual workflow closely enough to get a real evaluation 
 `projects/claude-skills-trendshift-2026-08/LINK-VERIFICATION.md` and `CANDIDATE-EVALUATION.md`, one was
 adopted (`hallmark`).
 
-These 31 didn't match anything currently in use (Ren'Py dev, Suno KB, Claude Code skill library, design/UI,
+These 31 didn't match anything currently in use (Claude Code skill library, design/UI,
 this Obsidian vault, cost-aware model routing) — but no reason to lose the pointer. If a future need shows
 up that matches one of these, come back here first before re-researching from scratch.
 
