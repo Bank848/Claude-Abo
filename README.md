@@ -54,6 +54,8 @@ The heart of the setup. It encodes:
 - **Git safety hook** — a PreToolUse gate that asks before destructive git commands.
 - **Shell gotchas** — Bash tool vs. PowerShell tool heredoc syntax rules (Windows-specific pain, learned the hard way).
 - **Context self-monitoring** — when Claude should proactively suggest `/compact`.
+- **Anti-AI-tell writing rules** — a full Thai + English ruleset for making drafted text read as human-written (vocab to avoid, structural patterns, register matching); the largest, most broadly reusable piece in the file. Backing detail lives in `memory-examples/`.
+- **PR draft-first default**, **ask-before-scheduling cron/cloud agents**, **terse narration during long-running commands**, a **claude-in-chrome shared-tab-group gotcha** for parallel sessions, and a **proactive Supabase RLS check** for any project using Supabase.
 
 ### `global-config/rules/ecc-common/`
 General engineering discipline from the ecc (everything-claude-code) plugin ecosystem: TDD workflow, immutability, commit format, security checklist, code-review severity levels, agent delegation. Only useful if you also run ecc (see "What you'll still need to install" below).
