@@ -1,3 +1,5 @@
+English | **[ภาษาไทย](README.th.md)**
+
 # Claude Code Clone Template
 
 A portable snapshot of one person's Claude Code setup — global instructions, engineering rules, **45 curated skills** (7 self-authored — 3 written from scratch, 4 self-written wrappers around third-party tools — 1 adapted from an upstream skill, the rest adopted from upstream repos, all with per-skill provenance in `sources.json`), real memory examples, a skill-provenance manifest, and a cross-project knowledge vault — packaged so a fresh Claude Code instance (or the person setting one up) can bootstrap the same workflow habits and capabilities on a new machine. This is a **template to adapt, not a config to run as-is**: personal identifiers have been scrubbed and replaced with placeholders, and several sections only make sense if you also adopt the tools they describe.
