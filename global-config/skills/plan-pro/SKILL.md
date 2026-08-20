@@ -36,7 +36,7 @@ file structure, bite-sized TDD tasks, exact paths, complete code in every step, 
 placeholders, type consistency. Do all of its own Self-Review checklist too.
 
 **Before drafting:** if the feature likely has a reusable cross-project pattern (not tied to this
-repo — e.g. a general Ren'Py idiom, a Python pattern, a UX approach used elsewhere), glance at
+repo — e.g. a general game-engine idiom, a Python pattern, a UX approach used elsewhere), glance at
 `<YOUR_VAULT_PATH>\notes\` for an existing note first instead of re-deriving it from scratch.
 
 **Override these two things from writing-plans:**

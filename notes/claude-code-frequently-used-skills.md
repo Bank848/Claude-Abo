@@ -17,7 +17,7 @@ metadata:
 |---|---|---|
 | `superpowers:brainstorming` | สำรวจ intent + requirement + design ก่อนเริ่มงาน creative ใด ๆ — บังคับใช้ก่อนแตะโค้ด | อัตโนมัติเมื่อเริ่มงานใหม่ที่ยังไม่ตกผลึก |
 | `/plan-pro` | เขียน implementation plan ต่อยอด `writing-plans`: spawn agent รีวิวหา gap ก่อนส่ง, output เป็น HTML มี before/after diagram (Mermaid) ให้อ่านง่าย, มี parallelization analysis | ใช้แทน `writing-plans` เปล่าเสมอ — ถ้า design approve แล้วในแชตและงานเล็ก-กลาง ข้ามการเขียน spec.md แยกได้เลย |
-| `/grilling` | ให้ AI "ซัก" แผนแบบ relentless ก่อนลงมือ ไล่ทุกกิ่งของ design-tree ทีละคำถาม แนะคำตอบให้ด้วย | พูด "grill"/"stress-test" หรือ `/grilling` — ใช้กับ Ren'Py/แปล/งานทั่วไป (ไม่เขียนไฟล์ลง repo) |
+| `/grilling` | ให้ AI "ซัก" แผนแบบ relentless ก่อนลงมือ ไล่ทุกกิ่งของ design-tree ทีละคำถาม แนะคำตอบให้ด้วย | พูด "grill"/"stress-test" หรือ `/grilling` — ใช้กับงานเกม/แปล/งานทั่วไป (ไม่เขียนไฟล์ลง repo) |
 
 ---
 

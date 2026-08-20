@@ -32,7 +32,7 @@ Record the six scores in a one-line stamp comment at the top of the file: `/* Ha
 3. Is there a 3-equal-column card grid with icon-above-heading tiles?
 4. Is any card nested inside another card?
 5. Is any card using a thick coloured left/right side-stripe border?
-6. **Hero shape — centred-everything.** Is the hero `min-height: 100vh` with everything centred, OR are the eyebrow, title, lede, AND CTA all stacked on the same centred vertical axis? Auto-fail. Pick at most two centred elements and break alignment for the rest; the eyebrow or CTA should sit off-axis (margin-aligned, right-flush, numeral-anchored). *Genre note: atmospheric and playful allow a centred hero when the canvas itself is the design (Suno-style); editorial / atelier allow a centred-narrow hero, but even then the eyebrow or CTA sits off-axis.*
+6. **Hero shape — centred-everything.** Is the hero `min-height: 100vh` with everything centred, OR are the eyebrow, title, lede, AND CTA all stacked on the same centred vertical axis? Auto-fail. Pick at most two centred elements and break alignment for the rest; the eyebrow or CTA should sit off-axis (margin-aligned, right-flush, numeral-anchored). *Genre note: atmospheric and playful allow a centred hero when the canvas itself is the design (generative-canvas style); editorial / atelier allow a centred-narrow hero, but even then the eyebrow or CTA sits off-axis.*
 7. Is pure `#000` or pure `#fff` used as a base colour anywhere? *Genre note: modern-minimal allows pure `#fff` paper (the Stripe / ElevenLabs school).*
 
 ## Structural

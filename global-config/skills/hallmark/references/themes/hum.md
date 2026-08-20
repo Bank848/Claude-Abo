@@ -332,7 +332,7 @@ Mono labels — UPPERCASE, used for ordinals, stats, and tags:
 | vs | difference |
 |---|---|
 | **Coral** (modern-minimal, the closest sibling) | Coral is warm-grey paper with a single restrained coral accent — Stripe-not-Linear register, motion optional. Hum uses coral only as its pop accent, on yellower cream with two other accents and mandatory motion. Coral is the friendly-but-quiet register (a quiet bakery card); Hum is exuberant and alive (a brilliant.org-style learning app). When a brief wants one restrained accent, route to Coral; when it wants multi-accent and a character moment, route to Hum. |
-| **Bloom** (atmospheric) | Bloom is dark/cream with warm radial blooms behind the content (Suno register). Hum is fully light, no blooms, mandatory hover-and-paint motion. Different genres entirely. |
+| **Bloom** (atmospheric) | Bloom is dark/cream with warm radial blooms behind the content (generative-AI-tool register). Hum is fully light, no blooms, mandatory hover-and-paint motion. Different genres entirely. |
 | **Specimen** (editorial) | Specimen is italic-serif on warm oat with classical typography. Hum is rounded sans on cream with vibrant character. Opposite registers. |
 
 ## Test brief expectations

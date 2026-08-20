@@ -238,7 +238,7 @@
       "source_repo_url": "https://github.com/briiirussell/cybersecurity-skills",
       "subpath_in_repo": "skills/dependency-audit",
       "last_seen_commit": "c9ade0349f8ecd5c9c68a82a05d2b6012c5fa1d7",
-      "note": "cybersecurity-skills (briiirussell). Subset selected via fable-medium review 2026-08-09: CVE/known-vuln checks for adopted packages/tools — matches the user's frequent tool-curation habit. MIT license. Confirmed in repo tree. NOTE: threat-modeling from this same repo was flagged 'optional/borderline' by the reviewer (Ren'Py anticheat design) but NOT adopted — add manually if ever wanted."
+      "note": "cybersecurity-skills (briiirussell). Subset selected via fable-medium review 2026-08-09: CVE/known-vuln checks for adopted packages/tools — matches the user's frequent tool-curation habit. MIT license. Confirmed in repo tree. NOTE: threat-modeling from this same repo was flagged 'optional/borderline' by the reviewer (game anticheat design) but NOT adopted — add manually if ever wanted."
     },
     {
       "name": "product-marketing",

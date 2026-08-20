@@ -20,7 +20,7 @@ surface or when you just need the short checklist, not the full system.
 
 These rules are intentionally stack-agnostic. They describe *intent*; map them
 to whatever the project uses (Tailwind tokens, CSS variables, design-system
-constants, Ren'Py styles, native theme values).
+constants, game-engine styles, native theme values).
 
 ## When to Use
 

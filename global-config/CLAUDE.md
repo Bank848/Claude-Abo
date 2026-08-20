@@ -71,7 +71,7 @@ harness auto-notify session แม่เองอยู่แล้วเมื�
 - ถ้าไม่แน่ใจว่า user หมายถึง local หรือ global (เช่นพูดคำว่า "จำ" แต่เนื้อหาฟังดูเป็นกฎข้ามโปรเจกต์ชัดๆ) → ถามให้ชัดก่อนเซฟ อย่าเดา
 
 # Second brain vault — <YOUR_VAULT_PATH> (global)
-Obsidian vault ส่วนตัว เก็บเฉพาะสิ่งที่ **ไม่ผูกกับ repo ใด repo หนึ่งเลย** — ความรู้ข้าม project (Ren'Py patterns, Python idioms ทั่วไป ฯลฯ), web clippings, และ scratch thinking ก่อนตกผลึกเป็น decision จริง
+Obsidian vault ส่วนตัว เก็บเฉพาะสิ่งที่ **ไม่ผูกกับ repo ใด repo หนึ่งเลย** — ความรู้ข้าม project (game-dev patterns, Python idioms ทั่วไป ฯลฯ), web clippings, และ scratch thinking ก่อนตกผลึกเป็น decision จริง
 
 **เส้นแบ่งเดียว (ใช้ตัดสินทันที):** "ผูกกับ repo ใด repo หนึ่งไหม?"
 - ผูก repo → อยู่ในระบบของ repo นั้นเสมอ: decision → `docs/adr/`, session → `docs/log/`, ทำไม → docs ของ repo, fact ที่อยากจำข้าม session → memory ของ project นั้น

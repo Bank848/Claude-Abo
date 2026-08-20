@@ -400,7 +400,7 @@ Brand wordmarks — lowercase: `cinder`, `wright`, `stratum`. Legal entity names
 |---|---|
 | **Midnight** (atmospheric, closest) | Midnight is geometric Geist on cool dark (`H 250`), no apparatus, no italic pivot, no grid. Lumen sits 25° hue away (`H 265`) with classical Instrument Serif, hand-built apparatus + leader callouts, blueprint grid, meter strip. The differentiation is large at every signature axis. |
 | **Aurora** (atmospheric) | Aurora is cool cyan blooms on dark, Sentient serif body. Lumen is brass-on-violet apparatus + Instrument Serif headline. Different temperature, different focal-element philosophy (Aurora: ambient blooms; Lumen: built apparatus). |
-| **Bloom** (atmospheric) | Bloom is warm cream paper, expressive content (Suno/Runway). Lumen is dark or cool-bone, technical content (Modal/Anthropic). Different register entirely. |
+| **Bloom** (atmospheric) | Bloom is warm cream paper, expressive content (generative-AI-tool school). Lumen is dark or cool-bone, technical content (Modal/Anthropic). Different register entirely. |
 | **Atelier** (editorial) | Atelier is Playfair Display Didone on warm cream — luxury fashion. Lumen's Instrument Serif is a 1960s technical-journal serif. Atelier sells perfume; Lumen sells inference. |
 
 ## Test brief expectations
