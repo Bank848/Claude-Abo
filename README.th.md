@@ -103,6 +103,19 @@ Repo นี้มีแค่ **การอ้างอิงถึงและ
 
 ---
 
+## เรื่อง plan ที่ใช้กับ tier Fable 5
+
+บันได model routing ใน `CLAUDE.md` สุดท้ายมี subagent `fable-medium` เป็นด่านบนสุด — เป็น tier แพงสุดที่ตั้งใจให้ใช้น้อยๆ เฉพาะงานยากจริงๆ เจ้าของ setup ต้นฉบับใช้ **Max** plan ซึ่งเรียก model นี้ได้ ถ้าคุณใช้ **Pro** (หรือ plan ไหนก็ตามที่ไม่มีสิทธิ์เข้า Fable 5) การ spawn `fable-medium` จะ fail เฉยๆ
+
+ก่อน copy `CLAUDE.md` ไปใช้ตรงๆ เช็คก่อนว่าตัวเองใช้ plan ไหน ถ้าไม่มี Fable 5:
+- ลบย่อหน้า `fable-medium` และ bullet "สุดบันได" ออกจากส่วน model routing
+- เปลี่ยนเพดานบันไดให้จบที่ `opus` แทน — ตรรกะ escalate ขึ้น Opus ตอนงานยาก/เดิมพันสูงยังใช้ได้เหมือนเดิม แค่ไม่มีด่านที่สูงกว่า Opus ให้ escalate ต่อ
+- ตัด `global-config/agents/fable-medium.md` ออกจากไฟล์ที่ copy ไปที่ `~/.claude/agents/`
+
+`/adopt` จะถามเรื่องนี้เป็นส่วนหนึ่งของการสัมภาษณ์และแก้ให้อัตโนมัติ ถ้า copy ไฟล์เองด้วยมือให้ทำขั้นตอนนี้เองด้วย จะได้ไม่ต้องเจอ Claude พยายาม spawn subagent ที่ plan ตัวเองเรียกไม่ได้
+
+---
+
 ## Optional: Local AI (Ollama) pre-compression
 
 Setup ต้นฉบับใช้ local Ollama model เป็น **tier pre-compression แบบ lossy ที่ฟรี** — pipe ข้อความยาว low-stakes (log, doc ยาว) ผ่าน local model ให้ย่อยก่อน *ก่อนที่* จะเข้า context ของ paid model มันอยู่ **ต่ำกว่า Haiku** ในบันได cost ไม่ใช่ routing tier: ไม่มี tool access, ไม่มี repo context, รับข้อความเข้า-ออกเท่านั้น มันช่วยประหยัดเงิน แต่ไม่เพิ่ม capability อะไร ไม่มีส่วนอื่นใน repo นี้ที่พึ่งพามัน

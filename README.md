@@ -103,6 +103,19 @@ Install them via Claude Code's plugin system on the new machine, then reconcile 
 
 ---
 
+## A note on subscription plan and the Fable 5 tier
+
+The model-routing ladder in `CLAUDE.md` tops out at a `fable-medium` subagent — a deliberately expensive, rarely-used escalation tier for the hardest problems. The original owner is on a **Max** plan, where that model is available. If you're on **Pro** (or any plan without Fable 5 access), spawning `fable-medium` will just fail.
+
+Before copying `CLAUDE.md` as-is, check which plan you're on. If you don't have Fable 5:
+- Delete the `fable-medium` paragraphs and the "สุดบันได" (top-of-ladder) bullet from the model-routing section.
+- Change the ladder's ceiling to stop at `opus` — the routing logic (escalate to Opus on hard/high-stakes work) still holds, it just won't have a level above Opus to escalate to.
+- Drop `global-config/agents/fable-medium.md` from what you copy into `~/.claude/agents/`.
+
+`/adopt` asks this as part of its interview and does this edit for you; if you're copying files by hand instead, do it yourself so Claude doesn't keep trying to spawn a subagent your plan can't reach.
+
+---
+
 ## Optional: Local AI (Ollama) pre-compression
 
 The original setup uses local Ollama models as a **free, lossy pre-compression tier** — piping long low-stakes text (logs, verbose docs) through a local model to digest it *before* it enters a paid model's context. It sits **below Haiku** in the cost ladder and is not a routing tier: no tool access, no repo context, text in / text out only. It saves money; it adds no capability. Nothing else in this repo depends on it.
