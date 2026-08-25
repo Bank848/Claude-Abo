@@ -224,7 +224,7 @@
       "source_repo_url": "https://github.com/briiirussell/cybersecurity-skills",
       "subpath_in_repo": "skills/prompt-injection",
       "last_seen_commit": "c9ade0349f8ecd5c9c68a82a05d2b6012c5fa1d7",
-      "note": "cybersecurity-skills (briiirussell). Subset selected via fable-medium review 2026-08-09 (adopt 3 of 29, 1 optional): audits agent/LLM/MCP permission boundaries and indirect injection — relevant since the user builds Claude Code workflows and a custom renpy MCP server. MIT license. Confirmed in repo tree."
+      "note": "cybersecurity-skills (briiirussell). Subset selected via fable-medium review 2026-08-09 (adopt 3 of 29, 1 optional): audits agent/LLM/MCP permission boundaries and indirect injection — relevant since the user builds Claude Code workflows and a custom MCP server. MIT license. Confirmed in repo tree."
     },
     {
       "name": "secrets-audit",
@@ -238,7 +238,7 @@
       "source_repo_url": "https://github.com/briiirussell/cybersecurity-skills",
       "subpath_in_repo": "skills/dependency-audit",
       "last_seen_commit": "c9ade0349f8ecd5c9c68a82a05d2b6012c5fa1d7",
-      "note": "cybersecurity-skills (briiirussell). Subset selected via fable-medium review 2026-08-09: CVE/known-vuln checks for adopted packages/tools — matches the user's frequent tool-curation habit. MIT license. Confirmed in repo tree. NOTE: threat-modeling from this same repo was flagged 'optional/borderline' by the reviewer (game anticheat design) but NOT adopted — add manually if ever wanted."
+      "note": "cybersecurity-skills (briiirussell). Subset selected via fable-medium review 2026-08-09: CVE/known-vuln checks for adopted packages/tools — matches the user's frequent tool-curation habit. MIT license. Confirmed in repo tree. NOTE: threat-modeling from this same repo was flagged 'optional/borderline' by the reviewer (application threat modeling) but NOT adopted — add manually if ever wanted."
     },
     {
       "name": "product-marketing",
@@ -252,21 +252,21 @@
       "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
       "subpath_in_repo": "skills/launch",
       "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
-      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — product/game release planning, waitlist, early access. MIT license. Confirmed in repo tree."
+      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — product release planning, waitlist, early access. MIT license. Confirmed in repo tree."
     },
     {
       "name": "copywriting",
       "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
       "subpath_in_repo": "skills/copywriting",
       "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
-      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — store/landing page copy for game releases. MIT license. Confirmed in repo tree."
+      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — store/landing page copy for product launches. MIT license. Confirmed in repo tree."
     },
     {
       "name": "copy-editing",
       "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
       "subpath_in_repo": "skills/copy-editing",
       "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
-      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — polishing existing copy/devlogs. MIT license. Confirmed in repo tree."
+      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — polishing existing copy/release notes. MIT license. Confirmed in repo tree."
     },
     {
       "name": "social",
@@ -280,14 +280,14 @@
       "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
       "subpath_in_repo": "skills/community-marketing",
       "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
-      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — Discord/subreddit community building, flagged as the primary growth channel for adult indie games (Patreon/itch ecosystem). MIT license. Confirmed in repo tree."
+      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — Discord/subreddit community building, flagged as the primary growth channel for small independent software products. MIT license. Confirmed in repo tree."
     },
     {
       "name": "content-strategy",
       "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
       "subpath_in_repo": "skills/content-strategy",
       "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
-      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — planning devlogs/what to post pre-launch. MIT license. Confirmed in repo tree."
+      "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — planning release notes/what to post pre-launch. MIT license. Confirmed in repo tree."
     },
     {
       "name": "image",
@@ -315,7 +315,7 @@
       "source_repo_url": "https://github.com/coreyhaines31/marketingskills",
       "subpath_in_repo": "skills/pricing",
       "last_seen_commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
-      "note": "marketingskills (Corey Haines). Borderline pick (reviewer flagged as 11th/12th, adopted anyway — MIT, zero install risk) 2026-08-09 — Patreon-tier / game-pricing willingness-to-pay frameworks. Confirmed in repo tree."
+      "note": "marketingskills (Corey Haines). Borderline pick (reviewer flagged as 11th/12th, adopted anyway — MIT, zero install risk) 2026-08-09 — subscription-tier / product-pricing willingness-to-pay frameworks. Confirmed in repo tree."
     },
     {
       "name": "marketing-council",
