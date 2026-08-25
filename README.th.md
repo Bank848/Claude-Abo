@@ -127,6 +127,19 @@ Setup ต้นฉบับใช้ local Ollama model เป็น **tier pre-
 
 ---
 
+## ใช้กับเครื่องมืออื่นได้ไหม (Codex, ChatGPT, Antigravity ฯลฯ)
+
+template นี้สร้างมาสำหรับ **Claude Code โดยเฉพาะ** — กลไกที่ใช้ทั้งหมด (ไฟล์ `CLAUDE.md` ที่โหลดอัตโนมัติ, `Skill` tool, hook ใน `settings.json`, ไฟล์ subagent) เป็นฟีเจอร์เฉพาะของ Claude Code ไม่ใช่ format ที่พกไปใช้ที่ไหนก็ได้ เอา repo นี้ไปชี้ให้ Codex CLI, ChatGPT, Antigravity, Cursor หรือเครื่องมืออื่นใช้ **จะไม่ทำงานทันที** — มันไม่มีกลไกดึง skill/กฎไปใช้เองอัตโนมัติ
+
+สิ่งที่ **ปรับมือได้**:
+- `global-config/CLAUDE.md` เป็น plain text ธรรมดา — เอาส่วนที่ต้องการไปใส่ใน `AGENTS.md` (ที่ Codex CLI และเครื่องมือบางตัวอ่าน) หรือ custom system prompt ได้ แต่ต้องตัดส่วนที่อ้างถึงกลไกเฉพาะของ Claude Code ออกก่อน (spawn_task, Skill tool, subagent routing) เพราะที่อื่นไม่มีความหมาย
+- แต่ละ skill ที่ `global-config/skills/<name>/SKILL.md` เป็นแค่ไฟล์คำสั่ง markdown — เอาไปวางใน custom instruction ของเครื่องมืออื่นได้ แต่จะเสีย automatic triggering ไป และ script ที่แนบมาด้วยก็สมมติว่ามี shell ให้รันแบบที่ Claude Code รันได้
+- Hook (`settings.json`) และไฟล์ subagent (`agents/*.md`) เป็นของเฉพาะ Claude Code — ไม่มีอะไรให้ port ไปที่อื่น
+
+ถ้าใช้ Codex/ChatGPT/Antigravity เป็นหลักอยู่แล้ว repo นี้ก็ยังมีประโยชน์เป็น *เอกสารอ้างอิง* ได้ (กฎการเขียน, การแก้ .docx, logic ของ git-safety hook) — แค่ต้อง copy/paste ส่วนที่ต้องการเอง ไม่ใช่ลากทั้งโฟลเดอร์ไปใช้แล้วทำงานเลย
+
+---
+
 ## ข้อควรรู้: นี่คือ setup ของคนคนเดียว
 
 สแนปช็อตนี้มาจาก workflow เฉพาะ: user สองภาษาไทย-อังกฤษบนเครื่อง Windows เห็นได้ทุกที่ — ส่วนสองภาษาใน CLAUDE.md, จุดพลาดเรื่อง PowerShell-กับ-Bash

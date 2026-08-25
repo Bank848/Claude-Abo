@@ -127,6 +127,19 @@ This is 100% optional and skippable. It exists purely to shave token costs on bu
 
 ---
 
+## Compatibility with other AI coding tools
+
+This template is built specifically for **Claude Code**. The mechanisms it relies on — an auto-loaded `CLAUDE.md`, the `Skill` tool, `settings.json` hooks, subagent definitions — are Claude Code features, not a portable file format. Pointing Codex CLI, ChatGPT, Antigravity, Cursor, or any other tool at this repo won't make it "pick up" the skills or rules automatically; nothing here works out of the box outside Claude Code.
+
+What *can* be adapted by hand:
+- `global-config/CLAUDE.md` is plain text — copy the parts you want into an `AGENTS.md` (which Codex CLI and a few other tools read) or a custom system prompt. Strip anything that references Claude Code-specific mechanisms (spawn_task, the Skill tool, subagent routing) first — those won't mean anything elsewhere.
+- Each skill under `global-config/skills/<name>/SKILL.md` is just a markdown instruction file. You can paste one into another tool's custom instructions, but you lose automatic triggering, and any bundled scripts assume a shell the tool can actually run.
+- Hooks (`settings.json`) and the subagent files (`agents/*.md`) are Claude Code-only — there's no equivalent to port them to.
+
+If you use Codex/ChatGPT/Antigravity day to day, this repo is still useful as *reference material* (the writing rules, the .docx fixes, the git-safety hook logic) — just expect to copy/paste the relevant parts rather than drop the folder in and have it work.
+
+---
+
 ## Caveat: this is one person's setup
 
 This snapshot comes from a specific workflow: a Thai-English bilingual user on a Windows machine. That shows everywhere — the bilingual sections in CLAUDE.md, the PowerShell-vs-Bash gotchas.
