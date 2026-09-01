@@ -31,7 +31,7 @@ Ask these questions together (one message, not one-by-one back-and-forth) so the
 3. **Second-brain vault path** — for `<YOUR_VAULT_PATH>`. "Skip" is fine.
 4. **Username / home path** — for `<YOUR_USERNAME>` / `<YOUR_HOME>`. Prefer auto-detecting from the environment and just confirming, same as Q1.
 5. **Which of these plugins do you already have installed (or plan to install right now)?** List them explicitly: `superpowers`, `ecc` (everything-claude-code), `pordee`, `lazyweb`, `andrej-karpathy-skills`. This answer controls what the copied CLAUDE.md is allowed to claim — see Step 3 item 5's plugin-honesty fix, which is the most important correctness step in this whole command.
-6. **What Claude subscription plan are you on — Max, or something without Fable 5 access (Pro, etc.)?** The model-routing ladder in CLAUDE.md tops out at a `fable-medium` subagent (Fable 5), which only Max-tier plans can spawn. If the answer isn't Max, see Step 3 item 5b — the ladder gets capped at `opus` instead and the `fable-medium` agent file doesn't get copied.
+6. **What Claude subscription plan are you on — Max, or something without Fable 5.1 access (Pro, etc.)?** The model-routing ladder in CLAUDE.md tops out at a `fable-medium` subagent (Fable 5.1), which only Max-tier plans can spawn. If the answer isn't Max, see Step 3 item 5b — the ladder gets capped at `opus` instead and the `fable-medium` agent file doesn't get copied.
 
 ## Step 3 — apply, in this order (safe-first, per journal)
 

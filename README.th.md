@@ -103,11 +103,11 @@ Repo นี้มีแค่ **การอ้างอิงถึงและ
 
 ---
 
-## เรื่อง plan ที่ใช้กับ tier Fable 5
+## เรื่อง plan ที่ใช้กับ tier Fable 5.1
 
-บันได model routing ใน `CLAUDE.md` สุดท้ายมี subagent `fable-medium` เป็นด่านบนสุด — เป็น tier แพงสุดที่ตั้งใจให้ใช้น้อยๆ เฉพาะงานยากจริงๆ เจ้าของ setup ต้นฉบับใช้ **Max** plan ซึ่งเรียก model นี้ได้ ถ้าคุณใช้ **Pro** (หรือ plan ไหนก็ตามที่ไม่มีสิทธิ์เข้า Fable 5) การ spawn `fable-medium` จะ fail เฉยๆ
+บันได model routing ใน `CLAUDE.md` สุดท้ายมี subagent `fable-medium` เป็นด่านบนสุด — เป็น tier แพงสุดที่ตั้งใจให้ใช้น้อยๆ เฉพาะงานยากจริงๆ เจ้าของ setup ต้นฉบับใช้ **Max** plan ซึ่งเรียก model นี้ได้ ถ้าคุณใช้ **Pro** (หรือ plan ไหนก็ตามที่ไม่มีสิทธิ์เข้า Fable 5.1) การ spawn `fable-medium` จะ fail เฉยๆ
 
-ก่อน copy `CLAUDE.md` ไปใช้ตรงๆ เช็คก่อนว่าตัวเองใช้ plan ไหน ถ้าไม่มี Fable 5:
+ก่อน copy `CLAUDE.md` ไปใช้ตรงๆ เช็คก่อนว่าตัวเองใช้ plan ไหน ถ้าไม่มี Fable 5.1:
 - ลบย่อหน้า `fable-medium` และ bullet "สุดบันได" ออกจากส่วน model routing
 - เปลี่ยนเพดานบันไดให้จบที่ `opus` แทน — ตรรกะ escalate ขึ้น Opus ตอนงานยาก/เดิมพันสูงยังใช้ได้เหมือนเดิม แค่ไม่มีด่านที่สูงกว่า Opus ให้ escalate ต่อ
 - ตัด `global-config/agents/fable-medium.md` ออกจากไฟล์ที่ copy ไปที่ `~/.claude/agents/`

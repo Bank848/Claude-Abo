@@ -103,11 +103,11 @@ Install them via Claude Code's plugin system on the new machine, then reconcile 
 
 ---
 
-## A note on subscription plan and the Fable 5 tier
+## A note on subscription plan and the Fable 5.1 tier
 
-The model-routing ladder in `CLAUDE.md` tops out at a `fable-medium` subagent — a deliberately expensive, rarely-used escalation tier for the hardest problems. The original owner is on a **Max** plan, where that model is available. If you're on **Pro** (or any plan without Fable 5 access), spawning `fable-medium` will just fail.
+The model-routing ladder in `CLAUDE.md` tops out at a `fable-medium` subagent — a deliberately expensive, rarely-used escalation tier for the hardest problems. The original owner is on a **Max** plan, where that model is available. If you're on **Pro** (or any plan without Fable 5.1 access), spawning `fable-medium` will just fail.
 
-Before copying `CLAUDE.md` as-is, check which plan you're on. If you don't have Fable 5:
+Before copying `CLAUDE.md` as-is, check which plan you're on. If you don't have Fable 5.1:
 - Delete the `fable-medium` paragraphs and the "สุดบันได" (top-of-ladder) bullet from the model-routing section.
 - Change the ladder's ceiling to stop at `opus` — the routing logic (escalate to Opus on hard/high-stakes work) still holds, it just won't have a level above Opus to escalate to.
 - Drop `global-config/agents/fable-medium.md` from what you copy into `~/.claude/agents/`.
