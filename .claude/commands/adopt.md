@@ -1,5 +1,5 @@
 ---
-description: Interview the person who cloned this template, then copy/customize the pieces they want into their own ~/.claude/ setup.
+description: Interview the person who cloned this template, then copy/customize the pieces they want into their own Claude Code (~/.claude/) setup, or a portable AGENTS.md if they're on a different AI coding agent.
 argument-hint: (no arguments)
 ---
 
@@ -15,7 +15,23 @@ Before asking anything, check whether `.claude-adopt-journal.md` exists in the c
 
 If no journal exists, create it now with a header (timestamp placeholder is fine as text, you don't need a real clock) and append one line per step as you complete it, e.g. `- [done] copied CLAUDE.md -> ~/.claude/CLAUDE.md`. This is what makes a crash mid-way resumable and idempotent — always check the journal before writing a file, so re-running never duplicates or clobbers a step that already succeeded.
 
-## Step 1 — quick persona check (affects tone only, not which steps run)
+## Step 1 — which agent is this for (branches which steps run)
+
+Ask: **"Is this setup for Claude Code, or for a different AI coding agent (Codex CLI, ChatGPT, Cursor, Gemini CLI, etc.)?"**
+
+- **Claude Code** → continue to Step 1a and the rest of this file as written.
+- **A different agent** → skip straight to "Non-Claude-Code path" below. Everything else in this file (skills, hooks, subagent files, `settings.json`, the ecc rules, the model-routing ladder) is Claude Code-only and won't do anything for another tool — don't run those steps, and don't waste the user's time being asked about them.
+
+### Non-Claude-Code path
+
+1. Ask which project root to set up (an `AGENTS.md` lives at a project root, not in a home-directory config folder like `~/.claude/`).
+2. Ask which of these two the user wants:
+   - **Copy `global-config/AGENTS.md` as-is (recommended)** — it's already the portable, Claude Code-agnostic subset (coding style, git workflow, testing, code review, security, common patterns), with every Claude Code-only mechanism stripped out. Most people should pick this.
+   - **Use `global-config/CLAUDE.md` as a reference instead** — for someone who wants to hand-pick and reword rules from the fuller file rather than take the curated subset. If they pick this, point them at both files (`global-config/CLAUDE.md` for the source material, `global-config/AGENTS.md` for what "already stripped of Claude Code-only mechanisms" looks like) and stop — writing a custom `AGENTS.md` from that reference is manual work for the user, not something this command auto-generates. Offer to help draft it interactively if they ask, but don't just copy `CLAUDE.md` verbatim; it still references `spawn_task`, the `Skill` tool, and other mechanisms with no meaning outside Claude Code.
+3. If they picked "copy as-is": copy `global-config/AGENTS.md` to `<project-root>/AGENTS.md`. If a file already exists there, don't overwrite — show a diff-style summary and ask whether to merge (append distinct sections by hand, not a blind overwrite), same rule as the `CLAUDE.md` copy step below.
+4. Report what was copied (or what reference material was pointed to) and stop — the rest of this file's steps don't apply.
+
+## Step 1a — quick persona check (Claude Code path only; affects tone only, not which steps run)
 
 Ask one question: **"Have you used Claude Code before — skills, agents, CLAUDE.md, hooks?"**
 
@@ -51,7 +67,8 @@ Do the low-risk, easily-reversible steps first, and check off each one in the jo
 8. Copy `global-config/templates/*` into wherever the user is about to start a new project, only if they ask — this is a "use later" set of files, not part of the core adopt flow.
 9. Copy `global-config/tools/skill-update-check/` into `<target>/tools/skill-update-check/` always (it's what `check.ps1 -Ack` in the final report depends on). Copy `global-config/tools/ollama/` too, only if the Ollama answer was "keep".
 10. If a vault path was given: copy `notes/` there, EXCEPT `notes/local-ollama-models.md` if the Ollama answer was "delete" (skip the whole vault-copy step if the user only wanted content you're excluding — ask if unsure).
-11. Apply the remaining placeholder find-and-replace (`<YOUR_USERNAME>`, `<YOUR_HOME>`, `<YOUR_VAULT_PATH>`) across whatever was actually copied in steps 1-10 — do not touch files that were skipped/deleted per the user's yes/no answers. Before running a broad find-and-replace, `grep` the target files first so you know the real count going in — don't trust any number written in this file or in README.md, they can go stale; verify live, every time.
+11. Ask if the user also works with other AI coding agents (Codex CLI, Cursor, Gemini CLI, etc.) on any of their projects. If yes, ask which project root(s), and copy `global-config/AGENTS.md` to `<project-root>/AGENTS.md` for each one — same no-overwrite rule as the `CLAUDE.md` copy in item 5 above. This is additive and optional; skip silently (no need to ask) if the user only ever uses Claude Code.
+12. Apply the remaining placeholder find-and-replace (`<YOUR_USERNAME>`, `<YOUR_HOME>`, `<YOUR_VAULT_PATH>`) across whatever was actually copied in steps 1-10 — do not touch files that were skipped/deleted per the user's yes/no answers. `AGENTS.md` from item 11 has no placeholders to replace, so it's out of scope for this step. Before running a broad find-and-replace, `grep` the target files first so you know the real count going in — don't trust any number written in this file or in README.md, they can go stale; verify live, every time.
 
 ## Step 4 — final report
 
