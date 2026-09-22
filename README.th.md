@@ -33,7 +33,7 @@ claude-clone-template/
 │   ├── CLAUDE.md                          # ไฟล์ instruction หลัก (เทียบเท่า ~/.claude/CLAUDE.md)
 │   ├── AGENTS.md                          # ส่วนที่พกไปใช้กับ agent อื่นได้ (Codex, Cursor, Gemini CLI ฯลฯ) ตัดกลไกเฉพาะ Claude Code ออก
 │   ├── settings.example.json              # ~/.claude/settings.json ที่ถูก sanitize แล้ว — hooks, plugin, model default
-│   ├── agents/                            # นิยาม subagent 3 ตัวที่ pin model ไว้ (opus, haiku-batch, fable-medium)
+│   ├── agents/                            # นิยาม subagent 4 ตัวที่ pin model ไว้ (opus, sonnet-worker, haiku-batch, fable-medium)
 │   ├── hooks/block-dangerous-git.py       # PreToolUse gate ที่ถามก่อนรันคำสั่ง git เสี่ยงๆ
 │   ├── hooks/graphify-auto-update.py      # PostToolUse hook — sync knowledge graph ของ graphify ให้สดหลังแก้ไฟล์
 │   ├── rules/ecc-common/                  # กฎวินัยวิศวกรรม 10 ไฟล์ (จาก ecc plugin ecosystem)
@@ -52,7 +52,7 @@ claude-clone-template/
 ### `global-config/CLAUDE.md`
 หัวใจของ setup นี้ มันเข้ารหัส:
 
-- **Cost-aware model routing** — main loop เป็นหัวหน้างานบน Sonnet คอยส่งงานให้ subagent Haiku/Opus/Fable ตามความยากของงาน พร้อมกฎว่าใครอ่านไฟล์ดิบ ใครอ่านแค่ข้อสรุป
+- **Cost-aware model routing** — main loop เป็นหัวหน้างาน เลือกได้ระหว่าง Opus 5.5 (งานที่ต้องตัดสินใจเยอะ) หรือ Sonnet 5 (session routine ที่อยากประหยัด) คอยส่งงานให้ subagent Haiku/Sonnet/Opus/Fable ตามความยากของงาน พร้อมกฎว่าใครอ่านไฟล์ดิบ ใครอ่านแค่ข้อสรุป
 - **Offload งานหนักออกไป session แยก** — แทนที่จะปล่อยให้ session ปัจจุบันบวม (และเสียเงิน) เพิ่ม
 - **Workflow การวางแผน** — `/plan-pro` เป็น planner ค่าเริ่มต้น
 - **ข้อตกลง second-brain vault** — กฎเดียว ("ผูกกับ repo เดียวไหม") ตัดสินว่าอะไรอยู่ใน vault กับอะไรอยู่ใน docs/ADR ของ repo
