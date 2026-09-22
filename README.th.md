@@ -10,7 +10,7 @@
 
 1. **Clone repo** ไปที่ไหนก็ได้บนเครื่องปลายทาง
 2. **ตัดสินใจส่วนเสริมที่เป็นทางเลือกตอนนี้เลย** — ตอบใช่/ไม่ใช่ เพราะมันกำหนดว่าขั้นตอน 5 จะลบอะไรบ้าง: Local AI (Ollama) pre-compression ดูรายละเอียดที่หัวข้อ "Optional: ___" ด้านล่าง
-3. **Copy `global-config/CLAUDE.md`, `agents/*.md`, `hooks/block-dangerous-git.py`, `skills/*`, และ `tools/`** ไปที่ `~/.claude/` ของตัวเอง (จะ merge หรือแทนที่ก็แล้วแต่) พวกนี้คือสิ่งที่ทำให้กฎ routing, git safety gate, catalog สกิล, และตัวเช็ค update ทำงานได้จริง ไม่ใช่แค่ข้อความเฉยๆ **ก่อน copy `CLAUDE.md` ให้เขียนส่วน "Installed Plugins" ใหม่ให้เหลือแค่ที่คุณติดตั้งจริง** — ต้นฉบับอ้างว่ามี plugin เฉพาะเจ้าของเดิมติดตั้งอยู่ ถ้า copy ไปทั้งดุ้น Claude ของคุณจะโกหกเรื่อง tooling ที่มีจริง
+3. **Copy `global-config/CLAUDE.md`, `agents/*.md`, `hooks/*.py`, `skills/*`, และ `tools/`** ไปที่ `~/.claude/` ของตัวเอง (จะ merge หรือแทนที่ก็แล้วแต่) พวกนี้คือสิ่งที่ทำให้กฎ routing, git safety gate, graphify auto-sync, catalog สกิล, และตัวเช็ค update ทำงานได้จริง ไม่ใช่แค่ข้อความเฉยๆ **ก่อน copy `CLAUDE.md` ให้เขียนส่วน "Installed Plugins" ใหม่ให้เหลือแค่ที่คุณติดตั้งจริง** — ต้นฉบับอ้างว่ามี plugin เฉพาะเจ้าของเดิมติดตั้งอยู่ ถ้า copy ไปทั้งดุ้น Claude ของคุณจะโกหกเรื่อง tooling ที่มีจริง
 4. **Merge `global-config/settings.example.json`** เข้ากับ `~/.claude/settings.json` ของตัวเอง (แทนที่ `<YOUR_HOME>` ก่อน; บน macOS/Linux ให้เปลี่ยน launcher `py` ในคำสั่ง hook เป็น `python3` ด้วย เพราะตัวที่ให้มาเจาะจงสำหรับ Windows)
 5. **ลบ Ollama ถ้าตอบ "ไม่" ในขั้นตอน 2** วิธีเร็วสุด: ย่อหน้า Ollama ใน CLAUDE.md ที่ copy มา + `notes/local-ollama-models.md` + `tools/ollama/`
 6. **Find-and-replace placeholder** ทุกตัวในไฟล์ที่เก็บไว้ — ดูรายการเต็มที่ขั้นตอน 8 ของหัวข้อ "วิธี adopt" ด้านล่าง
@@ -33,6 +33,7 @@ claude-clone-template/
 │   ├── settings.example.json              # ~/.claude/settings.json ที่ถูก sanitize แล้ว — hooks, plugin, model default
 │   ├── agents/                            # นิยาม subagent 3 ตัวที่ pin model ไว้ (opus, haiku-batch, fable-medium)
 │   ├── hooks/block-dangerous-git.py       # PreToolUse gate ที่ถามก่อนรันคำสั่ง git เสี่ยงๆ
+│   ├── hooks/graphify-auto-update.py      # PostToolUse hook — sync knowledge graph ของ graphify ให้สดหลังแก้ไฟล์
 │   ├── rules/ecc-common/                  # กฎวินัยวิศวกรรม 10 ไฟล์ (จาก ecc plugin ecosystem)
 │   ├── skills/                            # โฟลเดอร์สกิลคัดสรร 45 ตัว (เป็นเนื้อหา SKILL.md จริง ไม่ใช่แค่ดัชนี — ดู sources.json สำหรับ provenance)
 │   ├── SKILLS_INDEX.md                    # ดัชนีส่วนตัวของสกิล/plugin ที่ติดตั้งไว้ + ใช้ตัวไหนตอนไหน
@@ -54,6 +55,8 @@ claude-clone-template/
 - **Workflow การวางแผน** — `/plan-pro` เป็น planner ค่าเริ่มต้น
 - **ข้อตกลง second-brain vault** — กฎเดียว ("ผูกกับ repo เดียวไหม") ตัดสินว่าอะไรอยู่ใน vault กับอะไรอยู่ใน docs/ADR ของ repo
 - **Git safety hook** — PreToolUse gate ที่ถามก่อนรันคำสั่ง git ที่ทำลายข้อมูล
+- **graphify auto-sync hook** — PostToolUse hook ที่ sync knowledge graph ให้สดหลังแก้ไฟล์ทุกครั้ง โดยไม่บล็อกการแก้ไฟล์เอง
+- **ทางแก้ Auto Mode classifier** — ทำยังไงเมื่อ classifier ความปลอดภัยของ Auto Mode บล็อกคำสั่งที่คุยอนุมัติไปแล้วในแชทเงียบๆ ซ้ำ รวมถึงทางแก้ถาวรด้วย `permissions.ask` สำหรับเคส "แก้ config ของ Claude Code เอง" โดยเฉพาะ
 - **จุดพลาดของ shell** — กฎ heredoc syntax ของ Bash tool กับ PowerShell tool (ปัญหาเฉพาะ Windows ที่เจอมากับตัว)
 - **เฝ้าดู context เอง** — ตอนไหนที่ Claude ควรเสนอ `/compact` เอง
 - **กฎเขียนให้ไม่ดู AI** — ชุดกฎภาษาไทย + อังกฤษเต็มรูปแบบสำหรับทำให้ข้อความที่ร่างอ่านเหมือนคนเขียน (คำที่ควรเลี่ยง, pattern โครงสร้าง, การเลือก register) เป็นส่วนที่ใหญ่และเอาไปใช้ต่อได้กว้างที่สุดในไฟล์นี้ รายละเอียดหลังบ้านอยู่ใน `memory-examples/`
@@ -80,9 +83,9 @@ manifest การ adopt สกิล/เครื่องมือจริง
 ## วิธี adopt
 
 1. **Copy `global-config/CLAUDE.md`** ไปที่ `~/.claude/CLAUDE.md` ของตัวเอง จะ merge กับของเดิมหรือแทนที่เลยก็แล้วแต่ อ่านก่อน แล้วลบส่วนที่ไม่เกี่ยวกับคุณทิ้ง **เขียนส่วน "Installed Plugins" ใหม่ก่อนทำอย่างอื่นกับไฟล์นี้** — ตอนนี้มันอ้างว่ามี plugin เฉพาะ (superpowers, ecc, pordee, lazyweb, andrej-karpathy-skills) ติดตั้งและเปิดใช้อยู่ และบอก Claude ไม่ให้พูดเรื่องติดตั้งพวกนี้ นั่นจริงสำหรับเจ้าของเดิม ไม่ใช่สำหรับคุณ แทนที่ด้วย list plugin จริงของคุณ หรือลบทิ้งจนกว่าจะติดตั้งอะไรสักอย่าง
-2. **Copy `global-config/agents/*.md`** ไปที่ `~/.claude/agents/` และ **`global-config/hooks/block-dangerous-git.py`** ไปที่ `~/.claude/hooks/` พวกนี้คือสิ่งที่ทำให้กฎ model-routing และ git safety gate ใน CLAUDE.md ทำงานได้จริง ไม่ใช่แค่ข้อความ
+2. **Copy `global-config/agents/*.md`** ไปที่ `~/.claude/agents/` และ **`global-config/hooks/*.py`** ไปที่ `~/.claude/hooks/` พวกนี้คือสิ่งที่ทำให้กฎ model-routing, git safety gate, และ graphify auto-sync hook ใน CLAUDE.md ทำงานได้จริง ไม่ใช่แค่ข้อความ
 3. **Copy `global-config/skills/*`** ไปที่ `~/.claude/skills/` นี่คือคุณค่าหลักส่วนใหญ่ — สกิลที่ใช้งานได้จริง 45 โฟลเดอร์ ไม่ใช่แค่คำอธิบาย
-4. **Merge `global-config/settings.example.json`** เข้ากับ `~/.claude/settings.json` ของตัวเอง (แทนที่ `<YOUR_HOME>` ด้วย home path จริงก่อน) ให้ merge ไม่ใช่เขียนทับ ถ้ามี settings.json อยู่แล้ว — เอา entry `hooks.PreToolUse` กับอะไรที่อยากได้จาก `enabledPlugins` ไป ตัว hook ที่ให้มาใช้ launcher `py` ของ Windows บน macOS/Linux ให้เปลี่ยนเป็น `python3` ก่อน
+4. **Merge `global-config/settings.example.json`** เข้ากับ `~/.claude/settings.json` ของตัวเอง (แทนที่ `<YOUR_HOME>` ด้วย home path จริงก่อน) ให้ merge ไม่ใช่เขียนทับ ถ้ามี settings.json อยู่แล้ว — เอา entry `hooks.PreToolUse`/`hooks.PostToolUse`, block `permissions.ask`, และอะไรที่อยากได้จาก `enabledPlugins` ไป ตัว hook ที่ให้มาใช้ launcher `py` ของ Windows บน macOS/Linux ให้เปลี่ยนเป็น `python3` ก่อน
 5. **Copy `global-config/rules/ecc-common/`** ไปที่ `~/.claude/rules/` **เฉพาะกรณี** ที่ติดตั้ง ecc plugin ถ้าไม่ ข้ามได้เลย
 6. **Copy `global-config/memory-examples/*.md`** ไปที่โฟลเดอร์ auto-memory ของโปรเจกต์ที่อยากให้มันใช้ (Claude Code auto-memory ผูกกับแต่ละโปรเจกต์ ที่ `~/.claude/projects/<project>/memory/`) หรือจะอ่านเป็นตัวอย่างแล้วเขียนของตัวเองใหม่ก็ได้
 7. **Copy `notes/`** ไปไว้ใน second-brain vault ของตัวเอง (โฟลเดอร์ไหนก็ได้ที่ Obsidian หรือ markdown tool ทั่วไปมองเห็น) หรือข้ามไปเลยถ้าไม่อยากมี vault

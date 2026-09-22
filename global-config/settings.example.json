@@ -1,11 +1,21 @@
 {
-  "_comment": "Template settings.json — replace <YOUR_HOME> with your actual home path. The hook command below uses the Windows 'py' launcher; on macOS/Linux change it to 'python3' first. Only the hooks/agents shipped in this template are wired here; the original setup also had two personal/unrelated hooks (a reminder-flag script and a game-specific nudge) that are intentionally NOT included.",
+  "_comment": "Template settings.json — replace <YOUR_HOME> with your actual home path. The hook commands below use the Windows 'py' launcher; on macOS/Linux change them to 'python3' first. Only the hooks/agents shipped in this template are wired here; the original setup also had two personal/unrelated hooks (a reminder-flag script and a game-specific nudge) that are intentionally NOT included. The graphify-auto-update.py PostToolUse hook is a safe no-op if you haven't installed graphify (it checks for a graphify-out/graph.json before doing anything) — keep it wired or delete the PostToolUse block, your call. The permissions.ask block forces a real permission prompt before editing your own Claude Code config files (.claude/**, CLAUDE.md, .mcp.json) even in Auto Mode — without it, Auto Mode's own safety classifier may silently re-block those edits instead of asking.",
   "env": {
     "ECC_GATEGUARD": "off",
     "ECC_DISABLED_HOOKS": "pre:edit-write:gateguard-fact-force,pre:bash:gateguard-fact-force"
   },
   "includeCoAuthoredBy": false,
   "model": "sonnet",
+  "permissions": {
+    "ask": [
+      "Edit(.claude/**)",
+      "Edit(~/.claude/**)",
+      "Edit(CLAUDE.md)",
+      "Edit(CLAUDE.local.md)",
+      "Edit(.claude.json)",
+      "Edit(.mcp.json)"
+    ]
+  },
   "hooks": {
     "PreToolUse": [
       {
@@ -14,6 +24,17 @@
           {
             "type": "command",
             "command": "py \"<YOUR_HOME>/.claude/hooks/block-dangerous-git.py\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py \"<YOUR_HOME>/.claude/hooks/graphify-auto-update.py\""
           }
         ]
       }
