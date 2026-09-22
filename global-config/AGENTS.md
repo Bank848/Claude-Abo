@@ -32,8 +32,9 @@ Before writing new code:
 1. **Search for existing solutions first** — check package registries (npm, PyPI, crates.io, etc.), library docs, and open-source implementations that already solve most of the problem. Prefer adopting or porting a proven approach over writing net-new code that duplicates it.
 2. **Plan before implementing** — for anything beyond a trivial change, sketch the approach (what changes, what it touches, what could break) before touching code.
 3. **Write tests first where the project has a test suite** — red, green, refactor. See Testing below.
-4. **Review before merging** — see Code Review below.
-5. **Commit and push** — see Git Workflow below.
+4. **Verify as you go, not just at the end** — for any unit of work that has an automatic way to check itself (a test suite, a dev server plus a manual look, a lint/typecheck script), run that check right after finishing it and iterate a couple of rounds before moving on. Don't let unverified work pile up across an entire task and only find out something's broken at the very end.
+5. **Review before merging** — see Code Review below.
+6. **Commit and push** — see Git Workflow below.
 
 ## Testing
 
@@ -59,6 +60,8 @@ Checklist:
 Severity levels: **CRITICAL** (security/data loss — blocks merge), **HIGH** (bug or real quality issue — should fix before merge), **MEDIUM** (maintainability — worth fixing), **LOW** (style — optional).
 
 Watch specifically for: hardcoded credentials, SQL injection via string-concatenated queries, unescaped user input (XSS), unsanitized file paths (path traversal), missing auth checks, N+1 queries, unbounded queries without pagination or limits.
+
+If you delegate the review itself to another agent or sub-agent, point it at the project's actual review process (whatever checklist or command that is) instead of letting it invent a freeform one, and scale the review's depth to the size of the change — a one-line fix doesn't need the same scrutiny as a multi-file refactor.
 
 ## Security
 
@@ -97,3 +100,5 @@ Pull requests:
 2. Write a summary that explains the *why*, not just a restatement of the diff
 3. Include a test plan
 4. Push with `-u` on a new branch
+
+After a merge lands, fetch and fast-forward your local checkout of the base branch to match the remote as part of finishing that task — don't wait to be asked "did you pull yet." A squash-merge can leave the local base branch unable to fast-forward even though its content already matches the remote; diff against the remote branch first, and only reset away local commits once that diff comes back empty. Never discard something that turns out to be genuinely unpushed work. Deleting the now-merged branch is a separate decision — ask first, even right after a clean merge.
