@@ -2,10 +2,11 @@
 name: sonnet-worker
 description: >-
   Standard-judgment executor locked to Claude Sonnet 5 ($2/$10 per 1M — half
-  of Opus 5.5). Use for well-scoped standard work that is big enough to be worth
-  isolating from the main loop (most useful when the main loop runs on Opus 5.5): implementing a clearly specified plan
-  task, a multi-file change with known design, running and fixing tests, drafting
-  a long document from a clear brief, parallel independent tasks. Do NOT use for
+  of Opus 5.5). Use for well-scoped standard work that is big enough to be
+  worth isolating from the main loop (most useful when the main loop runs on
+  Opus 5.5): implementing a clearly specified plan task, a multi-file change
+  with known design, running and fixing tests, drafting a long document from a
+  clear brief, parallel independent tasks. Do NOT use for
   purely mechanical work (that's haiku-batch), for small tasks the main loop can
   finish in a few turns (spawn overhead eats the saving), or for work needing
   hard design calls (keep those in the main loop). Always announce the spawn
