@@ -60,7 +60,7 @@ metadata:
 
 ## 💰 Cost routing (ใช้ทุกงาน — ไม่ใช่ skill แต่เป็นกติกา)
 
-main loop = Sonnet 5 (orchestrator, วางแผน/ตัดสินใจ/ตรวจงาน) → งานกลไก spawn `haiku-batch` → อ่านไฟล์เยอะ spawn `Explore` → งานยากจริง spawn `opus` → งานเดิมพันสูงสุดที่ opus แล้วยังส่าย spawn `fable-medium` (medium effort). กติกาเต็มอยู่ `~/.claude/CLAUDE.md`
+main loop = Opus 5.5 หรือ Sonnet 5 เลือกเอง (orchestrator, วางแผน/ตัดสินใจ/ตรวจงาน) → งานกลไก spawn `haiku-batch` → อ่านไฟล์เยอะ spawn `Explore` → งานมาตรฐานก้อนใหญ่ (main=Opus) spawn `sonnet-worker` → งานยากจริง (main=Sonnet) spawn `opus` → งานเดิมพันสูงสุดที่ opus แล้วยังส่าย spawn `fable-medium` (medium effort). กติกาเต็มอยู่ `~/.claude/CLAUDE.md`
 
 ---
 

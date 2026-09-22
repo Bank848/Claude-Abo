@@ -42,7 +42,7 @@ metadata:
 | 🪤 **กันพลาดตอนออกแบบ** | `/poka-yoke` |
 | 🚀 **commit→push→PR→review→merge ครบ flow** | `shipping-a-branch` (`/ship`) — ทุก action เสี่ยง (push/PR/merge/delete branch) confirm แยกทีละครั้ง ไม่เหมาสั่งครั้งเดียวยาว |
 
-**Cost routing (ทุกงาน):** main = Sonnet 5 orchestrator · งานกลไก→`haiku-batch` · อ่านไฟล์เยอะ→`Explore` · ยากจริง→spawn `opus` · เดิมพันสูงสุดที่ Opus ยังส่าย→spawn `fable-medium`. (กติกาเต็มใน `~/.claude/CLAUDE.md`)
+**Cost routing (ทุกงาน):** main = Opus 5.5 หรือ Sonnet 5 (เลือกเอง) · งานกลไก→`haiku-batch` · อ่านไฟล์เยอะ→`Explore` · งานมาตรฐานก้อนใหญ่ (main=Opus)→`sonnet-worker` · ยากจริง (main=Sonnet)→spawn `opus` · เดิมพันสูงสุดที่ Opus ยังส่าย→spawn `fable-medium`. (กติกาเต็มใน `~/.claude/CLAUDE.md`)
 
 ---
 
