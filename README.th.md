@@ -11,6 +11,7 @@
 1. **Clone repo** ไปที่ไหนก็ได้บนเครื่องปลายทาง
 2. **ตัดสินใจส่วนเสริมที่เป็นทางเลือกตอนนี้เลย** — ตอบใช่/ไม่ใช่ เพราะมันกำหนดว่าขั้นตอน 5 จะลบอะไรบ้าง: Local AI (Ollama) pre-compression ดูรายละเอียดที่หัวข้อ "Optional: ___" ด้านล่าง
 3. **Copy `global-config/CLAUDE.md`, `agents/*.md`, `hooks/*.py`, `skills/*`, และ `tools/`** ไปที่ `~/.claude/` ของตัวเอง (จะ merge หรือแทนที่ก็แล้วแต่) พวกนี้คือสิ่งที่ทำให้กฎ routing, git safety gate, graphify auto-sync, catalog สกิล, และตัวเช็ค update ทำงานได้จริง ไม่ใช่แค่ข้อความเฉยๆ **ก่อน copy `CLAUDE.md` ให้เขียนส่วน "Installed Plugins" ใหม่ให้เหลือแค่ที่คุณติดตั้งจริง** — ต้นฉบับอ้างว่ามี plugin เฉพาะเจ้าของเดิมติดตั้งอยู่ ถ้า copy ไปทั้งดุ้น Claude ของคุณจะโกหกเรื่อง tooling ที่มีจริง
+   - **ทำงานข้าม AI coding agent หลายตัว (Codex, Cursor, Gemini CLI ฯลฯ) ด้วย?** ให้ copy `global-config/AGENTS.md` ไปวางใน project ที่ต้องการ (ที่ root ของ project ไม่ใช่ `~/.claude/`) แทนหรือคู่กับ `CLAUDE.md` ระดับ project ก็ได้ ดูหัวข้อ "ใช้กับเครื่องมืออื่นได้ไหม" ด้านล่างว่าสองไฟล์ทำงานร่วมกันยังไง
 4. **Merge `global-config/settings.example.json`** เข้ากับ `~/.claude/settings.json` ของตัวเอง (แทนที่ `<YOUR_HOME>` ก่อน; บน macOS/Linux ให้เปลี่ยน launcher `py` ในคำสั่ง hook เป็น `python3` ด้วย เพราะตัวที่ให้มาเจาะจงสำหรับ Windows)
 5. **ลบ Ollama ถ้าตอบ "ไม่" ในขั้นตอน 2** วิธีเร็วสุด: ย่อหน้า Ollama ใน CLAUDE.md ที่ copy มา + `notes/local-ollama-models.md` + `tools/ollama/`
 6. **Find-and-replace placeholder** ทุกตัวในไฟล์ที่เก็บไว้ — ดูรายการเต็มที่ขั้นตอน 8 ของหัวข้อ "วิธี adopt" ด้านล่าง
@@ -30,6 +31,7 @@ claude-clone-template/
 ├── .claude/commands/adopt.md              # รัน `/adopt` ใน repo นี้เพื่อสัมภาษณ์ + apply ขั้นตอนด้านล่างให้อัตโนมัติ
 ├── global-config/
 │   ├── CLAUDE.md                          # ไฟล์ instruction หลัก (เทียบเท่า ~/.claude/CLAUDE.md)
+│   ├── AGENTS.md                          # ส่วนที่พกไปใช้กับ agent อื่นได้ (Codex, Cursor, Gemini CLI ฯลฯ) ตัดกลไกเฉพาะ Claude Code ออก
 │   ├── settings.example.json              # ~/.claude/settings.json ที่ถูก sanitize แล้ว — hooks, plugin, model default
 │   ├── agents/                            # นิยาม subagent 3 ตัวที่ pin model ไว้ (opus, haiku-batch, fable-medium)
 │   ├── hooks/block-dangerous-git.py       # PreToolUse gate ที่ถามก่อนรันคำสั่ง git เสี่ยงๆ
@@ -143,16 +145,20 @@ Setup ต้นฉบับใช้ local Ollama model เป็น **tier pre-
 
 ---
 
-## ใช้กับเครื่องมืออื่นได้ไหม (Codex, ChatGPT, Antigravity ฯลฯ)
+## ใช้กับเครื่องมืออื่นได้ไหม (Codex, Cursor, Gemini CLI ฯลฯ)
 
-template นี้สร้างมาสำหรับ **Claude Code โดยเฉพาะ** — กลไกที่ใช้ทั้งหมด (ไฟล์ `CLAUDE.md` ที่โหลดอัตโนมัติ, `Skill` tool, hook ใน `settings.json`, ไฟล์ subagent) เป็นฟีเจอร์เฉพาะของ Claude Code ไม่ใช่ format ที่พกไปใช้ที่ไหนก็ได้ เอา repo นี้ไปชี้ให้ Codex CLI, ChatGPT, Antigravity, Cursor หรือเครื่องมืออื่นใช้ **จะไม่ทำงานทันที** — มันไม่มีกลไกดึง skill/กฎไปใช้เองอัตโนมัติ
+template นี้สร้างมาสำหรับ **Claude Code โดยเฉพาะ** แต่ตั้งแต่ Claude Code 2.1.277 (ก.ย. 2026) ตัว Claude Code เองก็อ่าน [`AGENTS.md`](https://agents.md) เป็น fallback ด้วยแล้ว ตอน project ไม่มี `CLAUDE.md` มันจะไปอ่านไฟล์นี้แทน — format เดียวกับที่ Codex CLI, Cursor, Gemini CLI, GitHub Copilot อ่านอยู่แล้ว เพราะแบบนี้ template ถึงมีไฟล์แยกสองไฟล์:
 
-สิ่งที่ **ปรับมือได้**:
-- `global-config/CLAUDE.md` เป็น plain text ธรรมดา — เอาส่วนที่ต้องการไปใส่ใน `AGENTS.md` (ที่ Codex CLI และเครื่องมือบางตัวอ่าน) หรือ custom system prompt ได้ แต่ต้องตัดส่วนที่อ้างถึงกลไกเฉพาะของ Claude Code ออกก่อน (spawn_task, Skill tool, subagent routing) เพราะที่อื่นไม่มีความหมาย
+- **`global-config/CLAUDE.md`** — setup เต็ม: cost-aware model routing, `/plan-pro`, skill catalog, hook, subagent routing, ทุกอย่างที่มีความหมายเฉพาะใน Claude Code เท่านั้น
+- **`global-config/AGENTS.md`** — ส่วนที่พกไปใช้ที่ไหนก็ได้ (coding style, git workflow, testing, code review, security checklist, pattern ที่ใช้ซ้ำได้) ตัดกลไกเฉพาะ Claude Code ออกหมดแล้ว วางใน project ไหนก็ได้ agent ตัวไหนที่อ่าน AGENTS.md จะหยิบไปใช้ต่อเอง รวม Claude Code เองด้วย
+
+ถ้า project มีทั้งสองไฟล์พร้อมกัน Claude Code จะอ่าน `CLAUDE.md` แล้วเมิน `AGENTS.md` ไปเลย สองไฟล์ไม่ merge กัน อย่าคาดว่ากฎเฉพาะ Claude Code จะใช้ได้แค่เพราะมี AGENTS.md วางอยู่ด้วย ส่วนเครื่องมืออื่น (Codex, Cursor ฯลฯ) อ่านแค่ `AGENTS.md` เท่านั้น — ไม่รู้จัก `CLAUDE.md`, `Skill` tool, hook ใน `settings.json`, หรือ subagent definition อยู่แล้ว พวกนี้เลยยังเป็นของเฉพาะ Claude Code เหมือนเดิม
+
+สิ่งที่ปรับมือได้เพิ่มถ้าอยากได้มากกว่าส่วนใน AGENTS.md:
 - แต่ละ skill ที่ `global-config/skills/<name>/SKILL.md` เป็นแค่ไฟล์คำสั่ง markdown — เอาไปวางใน custom instruction ของเครื่องมืออื่นได้ แต่จะเสีย automatic triggering ไป และ script ที่แนบมาด้วยก็สมมติว่ามี shell ให้รันแบบที่ Claude Code รันได้
 - Hook (`settings.json`) และไฟล์ subagent (`agents/*.md`) เป็นของเฉพาะ Claude Code — ไม่มีอะไรให้ port ไปที่อื่น
 
-ถ้าใช้ Codex/ChatGPT/Antigravity เป็นหลักอยู่แล้ว repo นี้ก็ยังมีประโยชน์เป็น *เอกสารอ้างอิง* ได้ (กฎการเขียน, การแก้ .docx, logic ของ git-safety hook) — แค่ต้อง copy/paste ส่วนที่ต้องการเอง ไม่ใช่ลากทั้งโฟลเดอร์ไปใช้แล้วทำงานเลย
+ถ้าใช้ Codex/Cursor/Gemini CLI เป็นหลักอยู่แล้ว `AGENTS.md` เอากฎ engineering-discipline ไปใช้ได้ทันที ส่วนที่เหลือของ repo (skill, hook, การแก้ .docx) ยังอยู่เป็นเอกสารอ้างอิงให้ copy/paste ต่อ
 
 ---
 

@@ -11,6 +11,7 @@ A portable snapshot of one person's Claude Code setup — global instructions, e
 1. **Clone the repo** to anywhere convenient on the target machine.
 2. **Decide the one optional piece now** — answer yes/no, since it determines what you delete in step 5: Local AI (Ollama) pre-compression. See the "Optional: ___" section below for details.
 3. **Copy `global-config/CLAUDE.md`, `agents/*.md`, `hooks/*.py`, `skills/*`, and `tools/`** to your own `~/.claude/` (merge or replace — your call). These are what make the routing rules, git safety gate, graphify auto-sync, skill catalog, and update checker actually work, not just read as prose. **Before copying `CLAUDE.md`, rewrite its "Installed Plugins" section to list only what you actually have installed** — the original owner's copy claims specific plugins are enabled; carrying that over verbatim makes your Claude lie about available tooling.
+   - **Working across multiple AI coding agents (Codex, Cursor, Gemini CLI, ...) too?** Also copy `global-config/AGENTS.md` into the projects you want it in (project root, not `~/.claude/`) instead of, or alongside, a project-level `CLAUDE.md`. See "Compatibility with other AI coding tools" below for how the two interact.
 4. **Merge `global-config/settings.example.json`** into your `~/.claude/settings.json` (after replacing `<YOUR_HOME>`; on macOS/Linux also change the hook command's `py` launcher to `python3`, that entry is Windows-specific as shipped).
 5. **Delete Ollama if you said "no" in step 2.** Fast pass: the Ollama paragraphs in your CLAUDE.md copy + `notes/local-ollama-models.md` + `tools/ollama/`.
 6. **Find-and-replace the placeholders** in everything you kept — see step 8 of "How to adopt this" below for the full list.
@@ -30,6 +31,7 @@ claude-clone-template/
 ├── .claude/commands/adopt.md              # Run `/adopt` in this repo to interview + auto-apply the steps below
 ├── global-config/
 │   ├── CLAUDE.md                          # Global instruction file (~/.claude/CLAUDE.md equivalent)
+│   ├── AGENTS.md                          # Portable subset of CLAUDE.md for non-Claude-Code agents (Codex, Cursor, Gemini CLI, ...)
 │   ├── settings.example.json              # Sanitized ~/.claude/settings.json — hooks, plugins, model default
 │   ├── agents/                            # 3 pinned-model subagent definitions (opus, haiku-batch, fable-medium)
 │   ├── hooks/block-dangerous-git.py       # PreToolUse gate that asks before risky git commands
@@ -145,14 +147,18 @@ This is 100% optional and skippable. It exists purely to shave token costs on bu
 
 ## Compatibility with other AI coding tools
 
-This template is built specifically for **Claude Code**. The mechanisms it relies on — an auto-loaded `CLAUDE.md`, the `Skill` tool, `settings.json` hooks, subagent definitions — are Claude Code features, not a portable file format. Pointing Codex CLI, ChatGPT, Antigravity, Cursor, or any other tool at this repo won't make it "pick up" the skills or rules automatically; nothing here works out of the box outside Claude Code.
+This template is built specifically for **Claude Code**, but as of Claude Code 2.1.277 (September 2026), Claude Code itself also reads [`AGENTS.md`](https://agents.md) as a fallback when a project has no `CLAUDE.md` — the same convention Codex CLI, Cursor, Gemini CLI, and GitHub Copilot already read. That's why this template ships two files instead of one:
 
-What *can* be adapted by hand:
-- `global-config/CLAUDE.md` is plain text — copy the parts you want into an `AGENTS.md` (which Codex CLI and a few other tools read) or a custom system prompt. Strip anything that references Claude Code-specific mechanisms (spawn_task, the Skill tool, subagent routing) first — those won't mean anything elsewhere.
+- **`global-config/CLAUDE.md`** — the full setup: cost-aware model routing, `/plan-pro`, the skill catalog, hooks, subagent routing, everything that only means something inside Claude Code.
+- **`global-config/AGENTS.md`** — the portable subset (coding style, git workflow, testing, code review, security checklist, common patterns) with every Claude Code-only mechanism stripped out. Drop it into any project and any AGENTS.md-aware agent picks it up, Claude Code included.
+
+If a project has **both** files, Claude Code reads `CLAUDE.md` and ignores `AGENTS.md` — the two aren't merged, so don't expect the Claude Code-specific rules to apply just because AGENTS.md is also present. Other tools (Codex, Cursor, etc.) only ever read `AGENTS.md`; they have no concept of `CLAUDE.md`, the `Skill` tool, `settings.json` hooks, or subagent definitions, so those stay Claude Code-only no matter what.
+
+What else *can* be adapted by hand if you want more than the AGENTS.md subset:
 - Each skill under `global-config/skills/<name>/SKILL.md` is just a markdown instruction file. You can paste one into another tool's custom instructions, but you lose automatic triggering, and any bundled scripts assume a shell the tool can actually run.
 - Hooks (`settings.json`) and the subagent files (`agents/*.md`) are Claude Code-only — there's no equivalent to port them to.
 
-If you use Codex/ChatGPT/Antigravity day to day, this repo is still useful as *reference material* (the writing rules, the .docx fixes, the git-safety hook logic) — just expect to copy/paste the relevant parts rather than drop the folder in and have it work.
+If you use Codex/Cursor/Gemini CLI day to day, `AGENTS.md` gets you the engineering-discipline rules out of the box; the rest of the repo (skills, hooks, the .docx fixes) is still there as reference material to copy/paste from.
 
 ---
 
