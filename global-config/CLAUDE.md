@@ -51,6 +51,21 @@ harness auto-notify session แม่เองอยู่แล้วเมื�
 2. สรุปสั้น ๆ ให้ user: ลูกทำอะไรเสร็จ, ผลเป็นยังไง, พังตรงไหนไหม
 3. ถ้ามีอะไรต้องตัดสินใจต่อ (เช่น review diff, merge branch, commit ที่ค้างอยู่ใน worktree ของ session ลูก) ให้เสนอ/ถามทันที — อย่าปล่อยให้ค้างเงียบ ๆ
 
+## Don't poll a background wakeup tool in a tight loop while waiting for the same spawn_task
+If your harness has a "schedule a wakeup" tool (self-pacing polling instead of a fixed cron), don't call it repeatedly back-to-back just to check whether a `spawn_task` chip finished — each wakeup re-injects a fresh chunk of system context even when nothing changed, which burns tokens for zero new information. Set the longest delay the tool allows, then actually wait quietly for the real completion notification instead of polling. After 2-3 wakeups in a row with nothing new, stop calling the tool at all and just wait. If the delay parameter doesn't seem to be honored (wakes up immediately regardless of what you set), that's a harness bug — switch to polling the underlying status directly (e.g. a CI API) instead of the wakeup tool.
+
+## Subagent review dispatch — tell a review subagent to invoke the real review skill, don't freelance
+When you spawn a subagent to review code/a diff (e.g. self-review before merge), don't write it a freeform "please review this" prompt — explicitly instruct it to invoke the project's actual code-review skill/command (whatever that is in your setup) rather than inventing its own review process. Match review depth/cost to the diff size: a tiny diff doesn't need the same multi-agent review depth as a large architectural change — if the user flags that a review spun up more sub-reviewers than the change warranted, scale down immediately for the rest of that review.
+
+## Self-verify loop during development, not just at the end
+For work that has an automatic way to check itself (a test suite, a dev server + screenshot, a lint/typecheck script), run that check immediately after finishing each independently-verifiable unit of work, then iterate up to 2-3 rounds before moving to the next unit — don't let unverified work pile up and only check everything at the very end. Stop and report to the user if it's still failing after 2-3 rounds. Exceptions: a change too small to plausibly break anything, or a check that costs more to set up than the work itself.
+
+# scrutinize — ทุกครั้งที่ user สั่งให้ "รีวิว/หา gap" ต้องเรียกสกิลนี้จริง
+`scrutinize` (`global-config/skills/scrutinize/`) = outsider-perspective review ของ plan/PR/diff/design doc — ตั้งคำถามก่อนว่ามีทางง่ายกว่าไหม แล้วไล่โค้ดจริงยืนยันว่า claim ตรงกับโค้ดจริง ไม่ใช่แค่อ่าน diff เฉยๆ
+- **Trigger**: user สั่งด้วยคำทำนอง "ไปรีวิว/หา gap/ตรวจดูหน่อย/audit/sanity-check/second opinion" → เรียกสกิลนี้จริง ห้าม freelance เขียน review เอง
+- เลือกความหนักตามเดิมพัน: architecture/design เดิมพันสูง → spawn subagent แยกพร้อมประกาศ. bounded/diff เล็ก → ทำเอง (main model)
+- คนละอย่างกับ self-review ตอนจบ implementation plan (เช่นของ `plan-pro`) ที่มี review loop ของตัวเองอยู่แล้ว — ไม่ต้องเรียก scrutinize ซ้ำหลังจากนั้นเป็น default
+
 # Planning: use /plan-pro by default (global)
 - เมื่อต้องเขียน implementation plan (หลัง brainstorm/spec approve) ให้ใช้ **`/plan-pro`** เป็น planner หลัก — ไม่ใช่ `superpowers:writing-plans` ธรรมดา
 - เหตุผล: plan-pro ต่อยอด writing-plans ด้วย spawned review loop + HTML before/after diagrams + parallel execution → แผนรีวิว/อัพเดทตัวเองได้
@@ -178,6 +193,9 @@ Claude ต้อง **เฝ้าดูขนาด context ของตัว�
 - อย่าอ่านไฟล์เดิมซ้ำเพื่อ "เช็คว่าแก้ติดไหม" — Edit/Write มัน error เองถ้าพลาด
 - log/doc ยาว low-stakes → pre-compress ด้วย ollama ก่อนเข้า context
 
+# MCP/Plugin context bloat audit
+If the user complains their context feels bloated, the biggest culprit is often not project-level settings but **marketplace plugins/connectors enabled at the account level** (in whatever settings surface your harness exposes for that, separate from the project's own config) — turned on ages ago and forgotten. Before recommending anything get disabled, check evidence of actual recent usage (search session history/transcripts if that's available) rather than guessing from a plugin's name or category — an unused-sounding name isn't proof it's unused, and a command that lists installed plugins/servers often only shows a subset. Priority order: disable unused account-level plugins first (biggest win, lowest risk) before touching project-level instruction files (CLAUDE.md/AGENTS.md/rules) — trimming those risks losing context the user actually wanted; suggest it but don't push.
+
 # Terse narration during routine command execution
 This rule only governs how much narration to produce — it does not change when to ask for permission. Always decide first whether an action falls under "explicit permission required" / "prohibited" categories, and if so, ask/stop exactly as normal regardless of this rule. It only relaxes narration for commands that already cleared that gate (scans, builds, test loops, long-running batch jobs).
 - **Brief before running**: one line saying what you're about to do and why, before firing off a long-running command.
@@ -193,12 +211,25 @@ This rule only governs how much narration to produce — it does not change when
 - Draft PRs **cannot be merged** — before merging you need `gh pr ready` first, and marking ready publishes the PR to reviewers, so that's its own separate confirmation checkpoint, never bundled silently into a merge.
 - Why: most people want to review/tweak their own work before it's visible to reviewers.
 
+## After merging a PR, sync the local base branch as part of the same job
+Every time a PR merge finishes, fetch and fast-forward your local checkout of the base branch to match origin as part of finishing that task, without waiting for the user to ask "did you pull yet." A squash-merge can leave the local base branch unable to fast-forward even though its content already matches origin — in that case diff against `origin/<base>` first; if it's empty for the affected paths, the local-only commits are safe to reset away, but never discard something that turns out to be genuinely unpushed work. Branch deletion is a separate question — always ask before deleting a branch, even right after a successful merge.
+
 # Scheduled cloud agents/cron — you may propose and create these on your own initiative, but always say so or ask first
 You're free to **propose and create** a scheduled cloud agent / cron job (whatever your harness's equivalent tool is for recurring automated runs) on your own initiative when you spot a good fit — e.g. a status check that should repeat daily, polling a long-running result, a maintenance task that recurs. You don't need to wait for the user to ask first.
 
 **But before actually creating one, always say so or ask first** (never create silently and mention it after the fact) — tell the user at minimum: what it will run, the schedule/frequency, and the consequence (e.g. cost per run if any), then wait for confirmation before calling the tool. Why: a scheduled/cron job is **standing/persistent config** that keeps running after this session ends — creating one without telling the user leaves something running in the background that they don't know about.
 
-# claude-in-chrome shared tab group across parallel sessions
+# Browser tool choice — ask once, don't assume
+<!-- Claude-Abo template: this section is intentionally a question, not a fixed answer — the "right" browser tool depends on what the adopter has installed, not on what the original author uses. Ask this once during /adopt (or the first time browser automation comes up) and write the answer back into this file so future sessions don't ask again. -->
+
+Before using any browser-automation tool for the first time in a fresh setup, ask the user which of these they want as the default, and record the answer here:
+1. **The Claude Code app's own built-in browser tool** (e.g. an in-app Chrome/DevTools MCP) — works out of the box, no extra setup, but has had real bugs in some versions (tabs not actually isolated per session — see the gotcha below — or the tool silently failing). If the user has hit that, don't default back to it.
+2. **The user's regular Chrome via a browser-extension MCP** — real logins/cookies, but shares the user's daily-driver browser, so treat tabs it opens as something a human might also be looking at.
+3. **A dedicated agent-only browser** (a browser instance/profile set up specifically for agent use, kept signed into accounts, separate from the user's daily browser) — often the cheapest on tokens per action of the three, and the safest to leave things open in since a human isn't using it at the same time. Recommend this by default if the user has one available and doesn't have an existing preference.
+
+Once the user picks, use that tool as the default for browser work in this project without asking again, and update the placeholder line above to name the chosen tool instead of re-describing all three options.
+
+## Shared tab group gotcha across parallel sessions
 If you're running with browser automation tools (e.g. an in-Chrome MCP) alongside another parallel session that also uses browser tools, **all sessions typically share the same Chrome tab group** — they are not automatically isolated into separate tabs, even if the tool's own description claims each conversation gets its own tab.
 
 **Why this matters (real incident):** one session was polling a tab (kept the same tab ID from when it first opened) waiting on a long-running job to finish. Meanwhile a parallel session opened a browser tab too, got back the *same* tab ID via a "list tabs" call, and navigated it somewhere else entirely — without the first session knowing. The first session kept reading page content from the wrong page for a while before noticing the title had changed.
