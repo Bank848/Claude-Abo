@@ -2,12 +2,14 @@
 - **graphify** (`~/.claude/skills/graphify/SKILL.md`) - any input to knowledge graph. Trigger: `/graphify`
 When the user types `/graphify`, invoke the Skill tool with `skill: "graphify"` before doing anything else.
 
-# Cost-aware model routing — Opus 5 / Sonnet 5 / Haiku 4.5 (global)
+# Cost-aware model routing — Opus 5.5 / Sonnet 5 / Haiku 4.5 (global, updated 2026-09-23: Opus 5 → Opus 5.5)
 ให้เลือกโมเดลตามความยากจริงของงาน เพื่อไม่ให้งานง่ายไปกินค่าโมเดลแพง
 
-**หมายเหตุ:** `fable-medium` (Fable 5.1 ที่ **medium reasoning** พอ ไม่ต้อง max) เปิด spawn ได้ตามปกติสำหรับงานเดิมพันสูง — ถ้าโดนแบนจะรู้เองตอน spawn fail ไม่ต้องเช็ควันที่ล่วงหน้า
+**หมายเหตุ:** `fable-medium` (Fable 5.1 ที่ **medium reasoning** พอ ไม่ต้อง max) เปิด spawn ได้ตามปกติสำหรับงานเดิมพันสูงสุดจริงๆ เท่านั้น (ดูหมายเหตุ Opus 5.5 ด้านล่าง — บาร์การเรียกสูงขึ้นมากแล้ว) — ถ้าโดนแบนจะรู้เองตอน spawn fail ไม่ต้องเช็ควันที่ล่วงหน้า
 
-**ราคา (ต่อ 1M tokens, input/output):** Opus 5 `$5/$25` (แพงสุด) · Sonnet 5 `$3/$15` (โปรเปิดตัว `$2/$10` ถึง 31 ส.ค. 2026) · Haiku 4.5 `$1/$5` (ถูกสุด). การประหยัด = "ดึงงานออกจากโมเดลแพง" ไม่ใช่ "เอาโมเดลแพงมาช่วย"
+**ราคา (ต่อ 1M tokens, input/output):** Opus 5.5 `$4/$20` (cache read `$0.20`) · Sonnet 5 `$3/$15` (โปรเปิดตัว `$2/$10` ถึง 31 ส.ค. 2026) · Haiku 4.5 `$1/$5` (ถูกสุด) · Fable 5.1 `$10/$50` (แพงสุด). การประหยัด = "ดึงงานออกจากโมเดลแพง" ไม่ใช่ "เอาโมเดลแพงมาช่วย"
+
+**Opus 5.5 (เปิดตัว 2026-09-22) แรงระดับ/แซง Fable 5.1 ในหลายเบนช์มาร์กสาธารณะแล้ว แต่ถูกกว่า Opus 5 เดิมราว 20-60% แล้วแต่หมวด** → เพดาน escalation ปกติเลื่อนขึ้นมาที่ Opus 5.5 (แทนที่ Opus 5 เดิมทุกจุด) **fable-medium เหลือไว้เป็น last-resort จริงๆ เท่านั้น ไม่ใช่ default ถัดจาก Opus เหมือนเดิม** — ช่องว่างคุณภาพระหว่างสองตัวนี้แคบลงมาก การขึ้น Fable ควรเกิดน้อยลงกว่าเดิมชัดเจน (ตัวเลขนี้เป็นข้อมูลวันเปิดตัวจาก Anthropic เอง ยังไม่ผ่านการใช้งานจริงนาน)
 
 **ข้อจำกัดจริง:** main loop เปลี่ยนโมเดลเองกลางเซสชันไม่ได้ (เปลี่ยนได้แค่ `/model` แล้วพัง cache). การ "สลับโมเดลไปมา" ทำผ่าน **subagent ที่ล็อกคนละโมเดล** — main อยู่ตัวเดียว แล้วโยนงานไปคนละ agent
 
@@ -15,14 +17,14 @@ When the user types `/graphify`, invoke the Skill tool with `skill: "graphify"` 
 
 **หัวหน้า (Sonnet 5 main) ทำเอง:** วางแผน, ตัดสินใจ, อ่าน *ข้อสรุป* จากลูกน้อง, ตรวจงาน, เขียนส่วนยาก/แก้ตอนลูกน้องไม่ไหว. **กฎเหล็ก:** อ่าน conclusion ไม่ใช่ file-dump — ให้ลูกน้องย่อยมา ไม่งั้น context บวม=แพง
 
-**escalate ขึ้น Opus เฉพาะงานยากจริง/เดิมพันสูง:** algorithm ลึก, debug ซับซ้อน, architecture, correctness สำคัญ, หรือตอน Sonnet 5 main ทำแล้วได้คำตอบผิด/สั่นคลอน → spawn `opus` subagent เอาเฉพาะจุด (แยก context) หรือ `/model` สลับเป็น Opus ชั่วคราว
+**escalate ขึ้น Opus 5.5 เฉพาะงานยากจริง/เดิมพันสูง:** algorithm ลึก, debug ซับซ้อน, architecture, correctness สำคัญ, หรือตอน Sonnet 5 main ทำแล้วได้คำตอบผิด/สั่นคลอน → spawn `opus` subagent เอาเฉพาะจุด (แยก context) หรือ `/model` สลับเป็น Opus ชั่วคราว
 
 **ลูกน้อง = `Agent` subagent (foreground เป็นหลัก):** สั่ง→รอ→ตรวจ→ไม่ไหวหัวหน้าทำเอง. เปิด `run_in_background` เฉพาะตอนยิงหลายตัว **ขนานกัน** (เช่นรีวิว 3 มุมพร้อมกัน). บันไดเลือก agentType:
 - งานกลไก/batch (rename, format, find-replace, scaffold) → **`haiku-batch`** (Haiku 4.5)
 - อ่านไฟล์เยอะแล้วคืน map/ข้อสรุป → **`Explore`** (อ่าน excerpt ไม่ dump)
 - งานมาตรฐาน/ร่างแรก (coding, review รายภาษา) → **ทำใน main (Sonnet 5) เอง** หรือ spawn `Sonnet` subagent (`model: sonnet`) ถ้าอยากแยก context / ยิงขนาน
-- งานยาก/เดิมพันสูง (algorithm, debug ลึก, architecture) → spawn **`opus`** subagent (claude-opus-5) หรือ `/model` สลับ Opus ชั่วคราว (Sonnet 5 main สู้ไม่ไหวค่อยขึ้น)
-- **สุดบันได = `fable-medium` (Fable 5.1 @ medium effort, แพงสุด) — gate ก่อนเรียก:** เรียกเฉพาะเมื่อ **Opus ด่านก่อนหน้าตอบผิด/สั่นคลอนแล้ว** (ไม่ใช่ข้าม Opus มาเรียกตรง) กับงาน architecture-เดิมพันสูง / algorithm-concurrency หิน / debug หลายเงื่อนไข / correctness proof. ใช้ **medium reasoning พอ** — ไม่ต้อง max เพื่อคุมค่าใช้จ่าย. **ข้าม** ถ้า: บั๊กชัดอ่านโค้ดก็เจอ, งาน format/rename, หรือ Opus ยังไม่ได้ลอง. **บรีฟ <400 คำ**: เป้าหมาย+ข้อจำกัด+พาธไฟล์+ลองอะไรไปแล้ว+เกณฑ์รับ+คำถามที่อยากให้ตอบ (อย่ายกทั้งแชต). Fable คืน**แผน/diff เป็นข้อความ** แล้ว orchestrator ลงมือเอง (advisor-only). ติดตรงไหนใช้ SendMessage คุยต่อ agent เดิม อย่า spawn ใหม่วนไปมา
+- งานยาก/เดิมพันสูง (algorithm, debug ลึก, architecture) → spawn **`opus`** subagent (claude-opus-5-5) หรือ `/model` สลับ Opus ชั่วคราว (Sonnet 5 main สู้ไม่ไหวค่อยขึ้น)
+- **สุดบันได = `fable-medium` (Fable 5.1 @ medium effort, แพงสุด) — gate ก่อนเรียก, บาร์สูงขึ้นมากตั้งแต่ Opus 5.5:** เรียกเฉพาะเมื่อ **Opus 5.5 ด่านก่อนหน้าตอบผิด/สั่นคลอนแล้ว** (ไม่ใช่ข้าม Opus มาเรียกตรง) กับงาน architecture-เดิมพันสูงสุด / algorithm-concurrency หิน / debug หลายเงื่อนไข / correctness proof ที่ Opus 5.5 เองยังพลาด — ควรเรียกน้อยกว่าตอนใช้ Opus 5 เดิมมาก เพราะช่องว่างคุณภาพแคบลง. ใช้ **medium reasoning พอ** — ไม่ต้อง max เพื่อคุมค่าใช้จ่าย. **ข้าม** ถ้า: บั๊กชัดอ่านโค้ดก็เจอ, งาน format/rename, หรือ Opus 5.5 ยังไม่ได้ลอง. **บรีฟ <400 คำ**: เป้าหมาย+ข้อจำกัด+พาธไฟล์+ลองอะไรไปแล้ว+เกณฑ์รับ+คำถามที่อยากให้ตอบ (อย่ายกทั้งแชต). Fable คืน**แผน/diff เป็นข้อความ** แล้ว orchestrator ลงมือเอง (advisor-only). ติดตรงไหนใช้ SendMessage คุยต่อ agent เดิม อย่า spawn ใหม่วนไปมา
 
 **กติกาบังคับ:**
 1. **ก่อน spawn ประกาศก่อน:** `🧠 spawn <agentType> → <งาน> (เพราะ <เหตุผล>)` ผู้ใช้ค้านได้ก่อนเสียเงิน
@@ -30,7 +32,7 @@ When the user types `/graphify`, invoke the Skill tool with `skill: "graphify"` 
 3. งานเล็ก/ตอบสั้น/แก้ inline เร็วๆ → ทำใน main เลย ไม่ต้อง spawn (spawn มี overhead)
 4. `spawn_task` (chip) = **คนละเรื่อง** — เปิด session ใหม่ บิลแยก หัวหน้าคุมสด/ตรวจไม่ได้ → ใช้เฉพาะโยนงานหนักทิ้งไปบิลที่อื่น ไม่ใช่ "ลูกน้อง" ในโมเดลนี้
 
-Agent ที่ pin โมเดลไว้แล้ว: `~/.claude/agents/haiku-batch.md` (Haiku 4.5), `~/.claude/agents/opus.md` (claude-opus-5), `~/.claude/agents/fable-medium.md` (claude-fable-5-1 @ medium reasoning — เฉพาะงานยาก/เดิมพันสูงจริงๆ เท่านั้น เพราะแพงสุด; ใช้ medium effort พอ ไม่ต้อง max)
+Agent ที่ pin โมเดลไว้แล้ว: `~/.claude/agents/haiku-batch.md` (Haiku 4.5), `~/.claude/agents/opus.md` (claude-opus-5-5), `~/.claude/agents/fable-medium.md` (claude-fable-5-1 @ medium reasoning — last-resort เหนือ Opus 5.5 เท่านั้น เพราะแพงสุด; ใช้ medium effort พอ ไม่ต้อง max)
 
 **Local Ollama (free, ad hoc — ไม่ใช่ routing tier, ต่ำกว่า Haiku):** มี `qwen2.5:7b-instruct` บนเครื่อง (no tools, no repo context) เรียกผ่าน Bash: `Get-Content <file> | ollama run qwen2.5:7b-instruct "<instruction>"` (pipe ไฟล์ อย่ายัด prompt ยาวใน argument). ใช้เฉพาะ lossy pre-compression ของ text ก้อนใหญ่ low-stakes (log/doc ยาว) ก่อนเข้า context โมเดลเสียเงิน — **ห้ามใช้ output เป็น source of truth**: ถ้า decision ขึ้นกับเนื้อหา ให้โมเดลหลักอ่านต้นฉบับเอง.
 
