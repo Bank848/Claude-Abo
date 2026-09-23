@@ -1,8 +1,8 @@
 ---
 name: skillify
-description: When you want to create, adapt, or update a Claude Code skill in one of your sibling repos (list your own repos in ~/.config/makerskills/skillify/repos.yaml; defaults to makerskills). Routes to the right mode automatically. Modes — CREATE (from-chat / from-video / from-dump / from-scratch) turns a workflow, brief, recording, or fresh idea into a new skill. ADAPT ports an external skill (GitHub URL, agentskills.io, local disk) into your namespace with three-bucket classification (keep/adapt/add) + license check + attribution. UPDATE improves existing skills from learnings with cross-skill propagation, memory-vs-skill triage, and semver discipline. Defers to Anthropic's guidance (compound-engineering:create-agent-skill, compound-engineering:skill-creator, compound-engineering:heal-skill) for schema and best-practice depth. Triggers on "/skillify," "create a skill," "make this a skill," "skill from this chat," "extract a skill from what we've been doing," "adapt this skill," "port this skill," "fork this skill," "borrow this skill," "update X skill," "apply this to the relevant skills," "propagate this learning," "improve [skill]," "fix [skill]," "iterate on [skill]." Part of the -ify trifecta (skillify / toolify / loopify) for extending Claude Code.
+description: When you want to create, adapt/install, or update a Claude Code skill. Defaults to the global personal skill store (~/.claude/skills/) unless the skill belongs in a sibling repo. Modes: CREATE (from chat/video/dump/scratch), ADAPT (port an external skill from a GitHub URL, agentskills.io, or disk into your namespace with license check + attribution), UPDATE (improve existing skills from learnings with semver discipline). Triggers on '/skillify', 'create a skill', 'make this a skill', 'skill from this chat', 'adapt/port/install this skill', 'ลงสกิล', 'update X skill', 'improve/fix [skill]'.
 metadata:
-  version: 0.2.0
+  version: 0.4.1
 ---
 
 # /skillify — Create, adapt, or update a skill
@@ -57,7 +57,7 @@ Call those directly when in doubt about format. `skillify` orchestrates *your* w
 
 ### Step 3 — Pick target repo
 
-Load the user's sibling repo list from `${MAKERSKILLS_CONFIG:-$HOME/.config/makerskills}/skillify/repos.yaml` if present. Otherwise default to `makerskills` (this repo). Example format:
+Load the user's sibling repo list from `${MAKERSKILLS_CONFIG:-$HOME/.config/makerskills}/skillify/repos.yaml` if present. Otherwise default to **`global`** — this machine's personal Claude Code skill store at `~/.claude/skills/<name>/`, which is how this user actually keeps skills (flat directory, not a sibling-repos setup). Example `repos.yaml` format, if one ever exists:
 
 ```yaml
 # ~/.config/makerskills/skillify/repos.yaml
@@ -70,7 +70,15 @@ repos:
     path: ~/code/marketingskills
 ```
 
-Infer target if obvious from the skill's domain; ask if ambiguous.
+Infer target if obvious from the skill's domain; ask if ambiguous. **On this machine, absent a `repos.yaml` match, `global` is the default target** — most skills here are personal cross-project tools, not scoped to one sibling repo.
+
+**`global` target specifics** (applies wherever this doc says "target repo" below):
+- Scaffold path: `~/.claude/skills/<name>/SKILL.md` (+ `references/` if needed) — not a repo clone.
+- No README skill table, no git push (unless the skill itself wraps an external git-tracked clone the user keeps elsewhere, e.g. under `<YOUR_VAULT_PATH>\references\`, in which case that clone's own repo is untouched — only the wrapper `SKILL.md` is new).
+- Completion step is **not** "commit + push" — it's the user's own two-file bookkeeping convention ("จดลงสมุดสกิล"):
+  1. Add a row to `~/.claude/SKILLS_INDEX.md` in the matching section, with a one-line "when to use" cheatsheet note.
+  2. Add an entry to `~/.claude/tools/skill-update-check/sources.json` — pick the right category (`personal_skills` for a self-authored/adapted SKILL.md, or `pip_packages`/`npm_packages`/`binary_tools` if it's actually installing a package/CLI rather than a skill). Match the exact field format of a couple of existing entries first — don't guess the schema. Be honest in the `note` field about whether the weekly checker can actually auto-track it (git-based repos: yes; hand-authored SKILL.md with no upstream repo: say so, no fake automation claim).
+  3. If the adapted skill is a pointer to a cloned external repo, confirm the clone lives somewhere sensible (`<YOUR_VAULT_PATH>\references\<name>\` for vault-wide reference material per `<YOUR_VAULT_PATH>\CLAUDE.md`'s filing convention — not inside `notes/`, which is authored markdown only) rather than assuming a sibling-repo path.
 
 ### Step 4 — Synthesize per sub-mode
 
@@ -139,15 +147,20 @@ Body follows existing skills' pattern (`pm`, `decide`, `second-brain`):
 - Composes-with cross-references
 - Quality notes at the end
 
-### Step 7 — Update README, commit, push
+### Step 7 — Register the skill
 
-Append to target repo's README skill table:
+**If target is a sibling repo:** append to its README skill table:
 
 ```markdown
 | [`<name>`](./skills/<name>/SKILL.md) | <one-line purpose> |
 ```
 
 Commit + push. Report new skill path, commit hash, and reminder that `/plugin install` or symlink may need a refresh.
+
+**If target is `global`** (default on this machine — see Step 3): no README, no commit/push. Instead:
+1. Add a row to `~/.claude/SKILLS_INDEX.md` (matching section, one-line cheatsheet).
+2. Add an entry to `~/.claude/tools/skill-update-check/sources.json` (right category, honest `note` on whether auto-tracking actually works — see Step 3 for detail).
+3. Report the new `~/.claude/skills/<name>/SKILL.md` path and confirm both bookkeeping files were updated — this is the user's "จดลงสมุดสกิล" convention, and skipping it means the skill silently falls out of the weekly update check.
 
 ### Step 8 — Offer follow-ups
 
@@ -204,6 +217,30 @@ Read the source's LICENSE. Per `references/adapt-license-check.md`:
 
 For permissive licenses, attribution is the only requirement — handled in Step 6.
 
+### Step 3.5 — Security scan (skill-scan, advisory only)
+
+If the source contains **executable code** — `scripts/`, `.py`, `.ps1`, `.sh`, hooks, anything
+that runs rather than just documents — run it through `skill-scan` before adapting:
+
+```bash
+cd "<YOUR_VAULT_PATH>\references\ai-infra-guard\skill-scan"
+aig-skill-scan --repo <path-to-cloned-source> -m deepseek-v4-flash --language en
+```
+
+(See the `ai-infra-guard` pointer skill for setup — first run needs `pip install -e .` and
+`LLM_API_KEY` set. Not `python main.py` — that's a dev shim for the Go backend, not the CLI.)
+
+**Skip this step** when the source is docs-only (a reference-table/prompt-bank skill with no
+scripts) or when the same source repo was already scanned on a prior adapt.
+
+**Advisory only — never block the adapt on the verdict.** `skill-scan`'s T01–T09 taxonomy
+flags normal skill behavior (network calls, shell exec, file writes) as `suspicious` by
+default — most legitimate skills (including this one) would trip it. Report the verdict to
+the user alongside the three-bucket classification in Step 8; let them decide whether to
+proceed, not the scanner. Don't re-run this on every future use of the adapted skill or
+attach it to `skill-update-check`'s cron — one scan per adopt, re-scan only on a major version
+bump of an already-adapted skill.
+
 ### Step 4 — Pick target repo
 
 Same table as CREATE Step 3.
@@ -256,14 +293,16 @@ Run `git ls-remote <repo-url> HEAD`. If SHA differs from above, re-run `/skillif
 
 For MIT / Apache / BSD, LICENSE text either gets copied into this file or the source LICENSE file gets copied to the skill dir.
 
-### Step 7 — Scaffold + commit
+### Step 7 — Scaffold + finalize
 
-Same as CREATE Steps 6–7. Commit message: `"Adapt <name> skill from <source-name>"`.
+Same as CREATE Steps 6–7, including the `global` target branch (scaffold to `~/.claude/skills/<name>/`, then update `SKILLS_INDEX.md` + `sources.json` instead of README + push). For a `global` adapt, still write `references/attribution.md` per Step 6 above — attribution isn't skipped just because there's no sibling repo. If the target is a real sibling repo, commit message: `"Adapt <name> skill from <source-name>"`.
 
 ### Step 8 — Report + offer follow-ups
 
 - Commit hash + new skill path
 - Show three-bucket classification one more time so the diff is clear
+- If Step 3.5 ran, show the `skill-scan` verdict alongside the classification (advisory, not a
+  gate — see Step 3.5 for why)
 - Offer:
   - *"Flesh out the adaptations? Some defaults may still need your touch."*
   - *"Run `compound-engineering:heal-skill` for a QA pass?"*
@@ -341,6 +380,12 @@ Example: *"links go in first comments, not body"* → applies to `jab-hook` AND 
 
 Offer the memory write explicitly: *"This looks like a principle, not just a skill rule. Save to memory as `feedback_<slug>.md`?"*
 
+### Step 4.5 — Gotchas section (event-driven, not mandatory)
+
+If this learning came from **the skill causing or failing to prevent a real mistake** (not a proactive improvement, not a nice-to-have), add or append a `## Gotchas` section to that skill's SKILL.md documenting: what happened, why the skill's guidance was insufficient, and the fix now in place. Keep entries terse and concrete — one incident per bullet.
+
+This is **not** a blanket requirement for every skill or every UPDATE. Don't scaffold an empty `## Gotchas` heading on skills that have never bitten anyone — an empty or placeholder section trains the reader to skip it, which defeats the point (per Thariq/Anthropic: "the highest-signal content in any skill is its Gotchas section" — signal comes from real failures, not from the heading existing). Skip this step entirely for corrections/validations/new-patterns/voice-tone/tool-change learnings that aren't "this skill let a mistake happen."
+
 ### Step 5 — Propose diffs per file
 
 For each affected file, show change as before/after or unified diff:
@@ -408,6 +453,9 @@ For one-line updates with no cross-skill implications: just Edit.
 - **`watch-video`** — load-bearing for CREATE / from-video. Visual-mode output (transcript + key visual moments + summary) is the input for skill synthesis. Always call in `visual` mode for process recordings — UI state matters as much as words.
 - **`second-brain`** — optionally capture source video/dump as `raw/call-<slug>.md` or `raw/note-<slug>.md` so the source artifact lives alongside the skill it produced.
 - **`toolify`** — sibling in the `-ify` trifecta. Use `toolify` when the goal is adding an integration/MCP/API, not authoring a skill.
+- **`ai-infra-guard`** — pointer to the `skill-scan` tool used in ADAPT Step 3.5 for
+  executable-code sources. Advisory only; see that step for the false-positive caveat before
+  treating a verdict as a gate.
 - **`loopify`** — sibling in the `-ify` trifecta. Use `loopify` for agent-loop setup rather than a skill.
 - **`compound-engineering:create-agent-skill`** (agent) — call for format and best-practices expertise
 - **`compound-engineering:skill-creator`** (skill) — deeper best-practices reference

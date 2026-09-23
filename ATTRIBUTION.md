@@ -2,7 +2,7 @@
 
 Most of `global-config/skills/` in this repo is **adopted from other people's public work**, not written by the owner of this template. This file credits the upstream sources. Per-skill provenance (subpath, commit baseline) lives in `global-config/tools/skill-update-check/sources.json`.
 
-Seven skills are self-authored: `poka-yoke`, `plan-pro`, and `shipping-a-branch` were written from scratch, and `graphify`, `dembrandt`, `markitdown`, and `mobbin-references` are self-written wrapper skills around third-party tools or services (the underlying tools are credited below and version-tracked in `global-config/tools/skill-update-check/sources.json`). One skill, `deslop-defaults`, is adapted — harvested from an upstream skill repo and rewritten. Everything else is adopted.
+Nine skills are self-authored: `poka-yoke`, `plan-pro`, `shipping-a-branch`, `close-out-log`, and `instruction-lint` were written from scratch, and `graphify`, `dembrandt`, `markitdown`, and `mobbin-references` are self-written wrapper skills around third-party tools or services (the underlying tools are credited below and version-tracked in `global-config/tools/skill-update-check/sources.json`). One skill, `deslop-defaults`, is adapted — harvested from an upstream skill repo and rewritten. Everything else is adopted.
 
 ## Upstream repos the adopted skills came from
 
@@ -16,6 +16,8 @@ Seven skills are self-authored: `poka-yoke`, `plan-pro`, and `shipping-a-branch`
 | [`mattpocock/skills`](https://github.com/mattpocock/skills) | MIT (per upstream) | `grilling`, `teach`, `wait-what`, `wizard` |
 | [`briiirussell/cybersecurity-skills`](https://github.com/briiirussell/cybersecurity-skills) | MIT | `prompt-injection`, `secrets-audit`, `dependency-audit` |
 | [`Nutlope/hallmark`](https://github.com/Nutlope/hallmark) | MIT (per upstream) | `hallmark` |
+| [`cloudflare/security-audit-skill`](https://github.com/cloudflare/security-audit-skill) | MIT | `security-audit` |
+| [`Awarexone/Agentic-Bug-Hunter`](https://github.com/Awarexone/Agentic-Bug-Hunter) | MIT | `bb-methodology`, `triage-validation`, `web2-vuln-classes`, `security-arsenal` |
 
 ## Self-written wrappers around third-party tools
 

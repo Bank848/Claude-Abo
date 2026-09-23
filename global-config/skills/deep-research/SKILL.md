@@ -1,6 +1,6 @@
 ---
 name: deep-research
-description: "When you want multi-source, multi-step research on a topic — competitor research before a sales call, market research for a new business idea, positioning angles, due diligence on a partnership or podcast guest, tech decision research (which DB, which auth), or any \"I need to actually understand X.\" Combines WebSearch, WebFetch, agent-browser, /last30days (Reddit/X/YouTube/HN/web recency), memory, and Notion. Outputs a structured brief with citations, contradictions, gaps, and recommended next steps. Archives every research run to ~/.config/makerskills/deep-research/archive/ so past work is searchable. Triggers on \"/deep-research,\" \"research X,\" \"investigate X,\" \"do a deep dive on X,\" \"look into X,\" \"what's actually happening with X,\" \"due diligence on X,\" \"validate this market.\" Differs from a one-shot WebSearch: this is multi-pass with verification."
+description: "When you want multi-source, multi-step research on a topic — competitor research before a sales call, market research for a new business idea, positioning angles, due diligence on a partnership or podcast guest, tech decision research (which DB, which auth), or any \"I need to actually understand X.\" Combines WebSearch, WebFetch, agent-browser, agent-reach (Reddit/X/YouTube/HN recency), memory, and Notion. Outputs a structured brief with citations, contradictions, gaps, and recommended next steps. Archives every research run to ~/.config/makerskills/deep-research/archive/ so past work is searchable. Triggers on \"/deep-research,\" \"research X,\" \"investigate X,\" \"do a deep dive on X,\" \"look into X,\" \"what's actually happening with X,\" \"due diligence on X,\" \"validate this market.\" Differs from a one-shot WebSearch: this is multi-pass with verification."
 metadata:
   version: 0.2.0
 ---
@@ -25,7 +25,7 @@ Pick from this menu based on the question type. Note which sources you'll hit an
 | Source | When to use | Tool |
 |---|---|---|
 | Web search (Google) | Authoritative articles, docs, official statements | `WebSearch` |
-| `/last30days` | What people are *actually saying* right now — Reddit, X, YouTube, HN, web recency | `Skill({skill: "last30days", args: "<topic>"})` |
+| `agent-reach` | What people are *actually saying* right now — Reddit, X, YouTube, web/HN recency | `Skill({skill: "agent-reach", args: "<topic>"})` |
 | Specific URLs | When the user hands over starting URLs | `WebFetch` |
 | Browsable pages (auth-walled, JS-heavy) | Pricing pages, product tours, profiles | `agent-browser` via the `compound-engineering:agent-browser` skill |
 | Memory | Prior research / decisions / context the user already captured | grep `~/.claude/memory/` |
@@ -112,7 +112,7 @@ After archiving:
 
 - `business-brainstorm` — calls this skill during the market validation step
 - `/domain` — when research includes "is the .com available"
-- `/last30days` — one of the data sources
+- `agent-reach` — one of the data sources (Reddit/X/YouTube/web recency sweep)
 
 ## Notes on quality
 

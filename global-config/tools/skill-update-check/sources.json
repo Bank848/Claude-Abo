@@ -210,7 +210,7 @@
       "source_repo_url": "https://github.com/coreyhaines31/makerskills",
       "subpath_in_repo": "skills/deep-research",
       "last_seen_commit": "17218de201e94f7aebe8b0ddfb507175caf37343",
-      "note": "makerskills (Corey Haines). Selected (of 19) 2026-08-09 — multi-source research with citations + archive. MIT license. Confirmed in repo tree."
+      "note": "makerskills (Corey Haines). Selected (of 19) 2026-08-09 — multi-source research with citations + archive. MIT license. Confirmed in repo tree. LOCAL DIVERGENCE 2026-08-26: last30days source repointed to agent-reach (see <YOUR_VAULT_PATH>\\projects\\claude-code-addons\\spec.md) — a naive upstream re-pull would reinstate the dangling last30days call; diff against upstream before auto-applying an update."
     },
     {
       "name": "watch-video",
@@ -329,7 +329,7 @@
       "source_repo_url": "self-authored",
       "subpath_in_repo": "",
       "last_seen_commit": "",
-      "note": "Self-authored end-to-end git shipping workflow skill (confirmed during 2026-08-11 sources.json completeness pass; re-added alongside poka-yoke and plan-pro). No upstream; checker skips it."
+      "note": "Self-authored /ship workflow (commit -> push -> draft PR -> mark-ready checkpoint -> merge -> base-branch sync), built to encode the draft-first PR and post-merge sync rules from CLAUDE.md section D. No upstream; checker skips it."
     },
     {
       "name": "graphify",
@@ -365,6 +365,55 @@
       "subpath_in_repo": "",
       "last_seen_commit": "",
       "note": "ADAPTED, not adopted and not self-authored: harvested from ibelick/ui-skills (baseline-ui) and rewritten stack-agnostic, so upstream commits do not apply 1:1. No commit baseline was recorded at harvest time (last_seen_commit intentionally empty) -- the first weekly check will flag it; review, then run check.ps1 -Ack to set the baseline. subpath_in_repo left empty pending verification of baseline-ui's exact path upstream."
+    },
+    {
+      "name": "close-out-log",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Self-authored repo-local close-out ritual, pattern adapted from a docs-driven continuity workflow. No upstream; checker skips it."
+    },
+    {
+      "name": "instruction-lint",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "User-authored, no upstream. Skipped by the checker. Sibling to memory-lint but audits auto-loaded instruction files (CLAUDE.md, RTK.md, resident rules/*.md) instead of the memory store."
+    },
+    {
+      "name": "security-audit",
+      "source_repo_url": "https://github.com/cloudflare/security-audit-skill",
+      "subpath_in_repo": "skills/security-audit",
+      "last_seen_commit": "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8",
+      "note": "Cloudflare, license per repo LICENSE file. Installed 2026-09-20 via `git clone --depth 1` to <YOUR_VAULT_PATH>\\references\\security-audit-skill (own .git, reference clone) then `cp -r skills/security-audit ~/.claude/skills/security-audit`. Adopted after comparing against the existing ecc:security-reviewer subagent (Explore-agent report 2026-09-20): this skill has a rigorous 6-phase pipeline (recon -> coverage-ledger hunting -> independent verifier-agent validation -> schema-validated findings.json -> re-verify -> report) with a confirmed/needs_validation/rejected state machine, vs. ecc:security-reviewer's single-pass OWASP checklist with no separate validation step. Coverage includes AI/LLM (prompt injection, MCP identity, tool-schema abuse) and desktop/IPC classes relevant to this user's Ren'Py/MCP/agent work, not just web/cloud. No dependencies (validate-findings.cjs / validate-coverage-ledger.cjs are stdlib-only Node, no package.json anywhere in the tree). Kept COMPLEMENTARY to ecc:security-reviewer, not a replacement -- use security-reviewer for quick post-edit passes, security-audit's full 6-phase workflow only for deliberate, budgeted audit/pen-test requests. To apply an update: `git -C \"<YOUR_VAULT_PATH>\\references\\security-audit-skill\" pull`, diff skills/security-audit/ against the installed ~/.claude/skills/security-audit/ copy, re-copy if changed."
+    },
+    {
+      "name": "web2-vuln-classes",
+      "source_repo_url": "https://github.com/Awarexone/Agentic-Bug-Hunter",
+      "subpath_in_repo": "skills/web2-vuln-classes",
+      "last_seen_commit": "114c90c731a0dac8b59dcef7d3f03a466e5d7179",
+      "note": "Extracted 2026-09-11 alongside bb-methodology (see that entry for context). Copied verbatim, no patches -- 1838-line reference for 26 web2 bug classes (IDOR, XSS, SSRF, SQLi, business logic, OAuth/OIDC, file upload, GraphQL, LLM/AI ASI01-ASI10, API misconfig, ATO, SSTI, subdomain takeover, HTTP smuggling, cache poisoning, MFA bypass, SAML, deserialization, dependency confusion, etc.) with root causes, bypass tables, and real paid examples. Some bypass-table entries mention an optional `tools/waf_encoder.py`/`tools/multipart_mutator.py` (source repo's helper scripts, not vendored) for generating payload variants -- left as informational hints, the manual bypass techniques themselves are fully described in prose. MIT license."
+    },
+    {
+      "name": "triage-validation",
+      "source_repo_url": "https://github.com/Awarexone/Agentic-Bug-Hunter",
+      "subpath_in_repo": "skills/triage-validation",
+      "last_seen_commit": "114c90c731a0dac8b59dcef7d3f03a466e5d7179",
+      "note": "Extracted 2026-09-11 alongside bb-methodology (see that entry for context). 7-Question Gate + 4 pre-submission gates + always-rejected list + CVSS 3.1 quick reference + 60-second pre-submit checklist, used BEFORE writing any bug-bounty report. One line patched from the original: the Q8 identity-check template referenced `BBHUNT_SESSION_ID hash from audit.jsonl` (the source repo's hunt-memory system, not vendored) -- changed to a generic 'note which login/session/credential found this' instruction so the template stands alone. MIT license."
+    },
+    {
+      "name": "bb-methodology",
+      "source_repo_url": "https://github.com/Awarexone/Agentic-Bug-Hunter",
+      "subpath_in_repo": "skills/bb-methodology",
+      "last_seen_commit": "114c90c731a0dac8b59dcef7d3f03a466e5d7179",
+      "note": "Extracted 2026-09-11 (methodology-only, not the full toolkit) after evaluating 7 repos surfaced from a Thai Claude Code community post -- see <YOUR_VAULT_PATH>\\notes\\agentic-bug-hunter-catalog.md. Copied verbatim (SKILL.md is pure markdown, no tool-script dependency): 5-phase non-linear bug-bounty hunting workflow + critical-thinking framework (developer psychology, anomaly detection, What-If experiments), routes to the sibling skills below by phase. Contains a routing table that mentions optional external tools (`tools/bypass_403.sh`, `tools/lead_board.py`, etc.) from the source repo that were NOT vendored -- those lines are left as-is since they're informational 'if you have this tool' hints, not hard dependencies; the workflow/mindset framework is fully usable without them. MIT license. Companion skills from the same extraction: triage-validation, web2-vuln-classes, report-writing, security-arsenal."
+    },
+    {
+      "name": "security-arsenal",
+      "source_repo_url": "https://github.com/Awarexone/Agentic-Bug-Hunter",
+      "subpath_in_repo": "skills/security-arsenal",
+      "last_seen_commit": "114c90c731a0dac8b59dcef7d3f03a466e5d7179",
+      "note": "Extracted 2026-09-11 alongside bb-methodology (see that entry for context). Source folder had no SKILL.md (just METHODOLOGY_CHEATSHEET.md + REFERENCES.md) -- wrote a new SKILL.md wrapper (self-authored frontmatter, content below it is copied verbatim from the source). Patched 2 lines that referenced the source repo's `tools/takeover_scanner.sh` (not vendored) to generic tool-agnostic phrasing (dnsReaper/subjack by name instead). Per-vuln-class 'try first' checklists + high-EV recon one-liners + curated external-repo reference list (KathanP19/HowToHunt, HolyBugx/HolyTips, daffainfo/AllAboutBugBounty, etc.). MIT license."
     }
   ]
 }
