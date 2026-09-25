@@ -13,21 +13,33 @@
 
 </div>
 
+Um retrato portátil da configuração de Claude Code de uma pessoa — instruções, skills, hooks e um cofre de conhecimento, empacotados para que uma instância nova do Claude Code consiga reproduzir os mesmos hábitos em uma máquina nova. **Um template para adaptar, não uma configuração para rodar como está.**
+
+<details>
+<summary>Leia a proposta completa</summary>
+
 Um retrato portátil da configuração de Claude Code de uma pessoa: instruções globais, regras de engenharia, **45 skills selecionadas** (7 de autoria própria — 3 escritas do zero, 4 wrappers próprios em torno de ferramentas de terceiros — 1 adaptada de uma skill upstream, e o restante adotado de repositórios upstream, todas com proveniência individual registrada em `sources.json`), exemplos reais de memória, um manifesto de proveniência de skills e um cofre de conhecimento entre projetos, empacotados para que uma instância nova do Claude Code (ou a pessoa que está configurando uma) possa reproduzir os mesmos hábitos de fluxo de trabalho e capacidades em uma máquina nova. Este é um **template para adaptar, não uma configuração para rodar como está**: identificadores pessoais foram removidos e substituídos por placeholders, e várias seções só fazem sentido se você também adotar as ferramentas que elas descrevem.
+
+</details>
 
 ## Começando (guia rápido)
 
-**Atalho:** clone o repositório, abra-o no Claude Code e rode `/adopt` — ele te entrevista (quais peças opcionais você quer, lista de plugins, caminhos de destino) e faz os passos 2-6 e 8-9 abaixo por você, marcando o progresso em um arquivo de diário retomável conforme avança. O passo 7 (instalar os próprios ecossistemas de plugins) fica deliberadamente fora do escopo do `/adopt` — esse ainda é por sua conta. Os passos manuais abaixo são o que o `/adopt` automatiza, e também servem para quem prefere fazer na mão ou revisar exatamente o que muda antes de rodá-lo.
+> **Atalho:** clone o repositório, abra-o no Claude Code e rode `/adopt` — ele te entrevista e faz os passos 2, 3, 5 e 7 abaixo por você, marcando o progresso em um arquivo de diário retomável conforme avança. O passo 6 (instalar os próprios ecossistemas de plugins) fica deliberadamente fora do escopo do `/adopt` — esse ainda é por sua conta.
 
-1. **Clone o repositório** para qualquer lugar conveniente na máquina de destino.
-2. **Decida agora a única peça opcional** — responda sim/não, pois isso determina o que você apaga no passo 5: pré-compressão com IA local (Ollama). Veja a seção "Opcional: ___" abaixo para detalhes.
-3. **Copie `global-config/CLAUDE.md`, `agents/*.md`, `hooks/block-dangerous-git.py`, `skills/*` e `tools/`** para o seu próprio `~/.claude/` (mesclar ou substituir — a decisão é sua). São essas cópias que fazem as regras de roteamento, o gate de segurança do git, o catálogo de skills e o verificador de atualizações realmente funcionarem, e não só existirem como texto. **Antes de copiar `CLAUDE.md`, reescreva a seção "Installed Plugins" para listar apenas o que você de fato tem instalado** — a cópia do dono original afirma que plugins específicos estão habilitados; carregar isso sem alterar faz seu Claude mentir sobre as ferramentas disponíveis.
-4. **Mescle `global-config/settings.example.json`** no seu `~/.claude/settings.json` (depois de substituir `<YOUR_HOME>`; no macOS/Linux também troque o launcher `py` do comando do hook para `python3` — essa entrada, como está, é específica do Windows).
-5. **Apague o Ollama se você respondeu "não" no passo 2.** Caminho rápido: os parágrafos do Ollama na sua cópia do CLAUDE.md + `notes/local-ollama-models.md` + `tools/ollama/`.
-6. **Faça find-and-replace dos placeholders** em tudo que você manteve — veja o passo 8 de "Como adotar isto" abaixo para a lista completa.
-7. **Instale os ecossistemas de plugins referenciados** (superpowers, ecc, etc.) — veja "O que você ainda vai precisar instalar separadamente" abaixo.
-8. **Opcionalmente copie `notes/`** para o seu próprio cofre de segundo cérebro, e **`memory-examples/`** para a pasta de auto-memória do Claude Code do projeto relevante.
-9. **Inicie uma sessão do Claude Code e confirme** que ele carregou o novo CLAUDE.md — por exemplo, peça um plano de implementação e verifique se `/plan-pro` é acionado, ou pergunte sobre roteamento de modelos e veja se a escada de custos aparece.
+<p align="center"><img src="assets/quickstart-flow.svg" alt="Clone, depois copie as configs, depois rode /adopt, depois verifique" width="100%"/></p>
+
+| # | Passo | Onde |
+|---|---|---|
+| 1 | Clone o repositório | em qualquer lugar conveniente |
+| 2 | Decida: quer pré-compressão com Ollama local? | veja [Opcional: IA local](#opcional-pré-compressão-com-ia-local-ollama) |
+| 3 | Copie as configs para `~/.claude/` | `CLAUDE.md`, `agents/*.md`, `hooks/*.py`, `skills/*`, `tools/` — **reescreva "Installed Plugins" primeiro** |
+| 4 | Mescle as settings | `global-config/settings.example.json` → `~/.claude/settings.json` (substitua `<YOUR_HOME>`) |
+| 5 | Faça find-and-replace dos placeholders | lista completa em [Como adotar isto](#como-adotar-isto), passo 8 |
+| 6 | Instale os ecossistemas de plugins | veja [O que você ainda vai precisar instalar](#o-que-você-ainda-vai-precisar-instalar-separadamente) |
+| 7 | Copie `notes/` + `memory-examples/` (opcional) | seu próprio cofre / pasta de auto-memória |
+| 8 | Verifique | peça um plano de implementação — `/plan-pro` é acionado? |
+
+Equipe multi-agente (Codex, Cursor, Gemini CLI, ...)? Copie também `global-config/AGENTS.md` para a raiz de cada projeto — veja [Compatibilidade com outras ferramentas de codificação com IA](#compatibilidade-com-outras-ferramentas-de-codificação-com-ia).
 
 O resto deste README explica cada peça em detalhes.
 
@@ -188,6 +200,11 @@ Instale-os pelo sistema de plugins do Claude Code na máquina nova, depois recon
 
 ## Uma nota sobre o plano de assinatura e o tier Fable 5.1
 
+A escada de roteamento do `CLAUDE.md` tem como teto um subagente `fable-medium`, que exige um plano Max — no Pro, disparar esse subagente simplesmente falha. O `/adopt` pergunta sobre isso e resolve para você.
+
+<details>
+<summary>Correção manual se você não estiver no Max</summary>
+
 A escada de roteamento de modelos em `CLAUDE.md` tem como topo um subagente `fable-medium` — um nível de escalada deliberadamente caro e de uso raro, para os problemas mais difíceis. O dono original está em um plano **Max**, onde esse modelo está disponível. Se você está no **Pro** (ou qualquer plano sem acesso ao Fable 5.1), disparar `fable-medium` simplesmente vai falhar.
 
 Antes de copiar o `CLAUDE.md` como está, confira em qual plano você está. Se você não tem o Fable 5.1:
@@ -197,9 +214,16 @@ Antes de copiar o `CLAUDE.md` como está, confira em qual plano você está. Se 
 
 O `/adopt` pergunta isso como parte da sua entrevista e faz essa edição por você; se você estiver copiando os arquivos na mão, faça isso você mesmo para que o Claude não fique tentando disparar um subagente que o seu plano não alcança.
 
+</details>
+
 ---
 
 ## Opcional: pré-compressão com IA local (Ollama)
+
+Um nível gratuito e com perdas de pré-compressão — um modelo local resume texto longo e de baixo risco antes de ele chegar ao contexto de um modelo pago. Não adiciona capacidade nenhuma, é puro corte de custo. Pode ser pulado; nada mais aqui depende dele.
+
+<details>
+<summary>Detalhes — você quer isso?</summary>
 
 A configuração original usa modelos locais do Ollama como um **nível de pré-compressão gratuito e com perdas** — passando texto longo e de baixo risco (logs, documentação verbosa) por um modelo local para condensá-lo *antes* de ele entrar no contexto de um modelo pago. Ele fica **abaixo do Haiku** na escada de custos e não é um nível de roteamento: sem acesso a ferramentas, sem contexto de repositório, apenas texto entra / texto sai. Ele economiza dinheiro; não adiciona capacidade. Nada mais neste repositório depende dele.
 
@@ -221,9 +245,16 @@ Pule esta seção inteira. Apague os parágrafos do Ollama da sua cópia do `CLA
 
 Isso é 100% opcional e dispensável. Existe puramente para reduzir custo de token em texto em volume.
 
+</details>
+
 ---
 
 ## Compatibilidade com outras ferramentas de codificação com IA
+
+Dois arquivos são distribuídos em vez de um: `CLAUDE.md` (exclusivo do Claude Code) e `AGENTS.md` (o subconjunto portátil — [agents.md](https://agents.md), também lido por Codex, Cursor, Gemini CLI, Copilot).
+
+<details>
+<summary>Como os dois interagem</summary>
 
 Este template foi construído especificamente para o **Claude Code**. Os mecanismos dos quais ele depende — um `CLAUDE.md` carregado automaticamente, a ferramenta `Skill`, hooks do `settings.json`, definições de subagente — são recursos do Claude Code, não um formato de arquivo portátil. Apontar o Codex CLI, o ChatGPT, o Antigravity, o Cursor ou qualquer outra ferramenta para este repositório não fará com que ela "capte" as skills ou regras automaticamente; nada aqui funciona de imediato fora do Claude Code.
 
@@ -233,6 +264,8 @@ O que *pode* ser adaptado manualmente:
 - Hooks (`settings.json`) e os arquivos de subagente (`agents/*.md`) são exclusivos do Claude Code — não há equivalente para portá-los.
 
 Se você usa Codex/ChatGPT/Antigravity no dia a dia, este repositório ainda é útil como *material de referência* (as regras de escrita, os ajustes de .docx, a lógica do hook de segurança do git) — só espere ter que copiar/colar as partes relevantes em vez de simplesmente soltar a pasta e ela funcionar.
+
+</details>
 
 ---
 
