@@ -13,21 +13,33 @@
 
 </div>
 
+Ein portables Abbild der Claude-Code-Einrichtung einer einzelnen Person — Anweisungen, Skills, Hooks und Wissens-Vault so verpackt, dass eine frische Claude-Code-Instanz dieselben Workflow-Gewohnheiten bootstrappen kann. Dies ist **eine Vorlage zum Anpassen, keine Konfiguration zum unveränderten Ausführen**.
+
+<details>
+<summary>Den vollständigen Pitch lesen</summary>
+
 Ein portables Abbild der Claude-Code-Einrichtung einer einzelnen Person — globale Anweisungen, Engineering-Regeln, **45 kuratierte Skills** (7 selbst verfasst — 3 komplett neu geschrieben, 4 selbst geschriebene Wrapper um Drittanbieter-Tools — 1 aus einem Upstream-Skill adaptiert, der Rest aus Upstream-Repos übernommen, jeweils mit vollständiger Herkunftsangabe pro Skill in `sources.json`), echte Memory-Beispiele, ein Skill-Herkunftsmanifest und ein projektübergreifendes Wissens-Vault — so verpackt, dass eine frische Claude-Code-Instanz (oder die Person, die sie einrichtet) dieselben Workflow-Gewohnheiten und Fähigkeiten auf einer neuen Maschine bootstrappen kann. Dies ist eine **Vorlage zum Anpassen, keine Konfiguration zum unveränderten Ausführen**: Persönliche Kennungen wurden entfernt und durch Platzhalter ersetzt, und mehrere Abschnitte ergeben nur Sinn, wenn man auch die dort beschriebenen Tools übernimmt.
+
+</details>
 
 ## Erste Schritte (Schnellstart)
 
-**Abkürzung:** Repo klonen, in Claude Code öffnen und `/adopt` ausführen — das interviewt dich (welche optionalen Bausteine du willst, Plugin-Liste, Zielpfade) und erledigt die Schritte 2–6 und 8–9 unten für dich, wobei der Fortschritt in einer fortsetzbaren Journal-Datei abgehakt wird. Schritt 7 (die Installation der Plugin-Ökosysteme selbst) liegt bewusst außerhalb des Umfangs von `/adopt` — den musst du noch selbst erledigen. Die manuellen Schritte unten sind das, was `/adopt` automatisiert, und sie stehen auch für alle bereit, die es lieber per Hand machen oder genau nachvollziehen wollen, was sich ändert, bevor sie es ausführen.
+> **Abkürzung:** Repo klonen, in Claude Code öffnen und `/adopt` ausführen — das interviewt dich und erledigt die Schritte 2, 3, 5 und 7 unten für dich. Schritt 6 (die Plugin-Ökosysteme selbst installieren) liegt bewusst außerhalb des Umfangs.
 
-1. **Repo klonen** an einen beliebigen praktischen Ort auf der Zielmaschine.
-2. **Jetzt den einen optionalen Baustein entscheiden** — mit Ja/Nein beantworten, da dies bestimmt, was du in Schritt 5 löschst: lokale KI-Vorverdichtung (Ollama). Details siehe Abschnitt „Optional: ___" weiter unten.
-3. **`global-config/CLAUDE.md`, `agents/*.md`, `hooks/block-dangerous-git.py`, `skills/*` und `tools/` kopieren** in dein eigenes `~/.claude/` (zusammenführen oder ersetzen — deine Entscheidung). Das ist es, was die Routing-Regeln, das Git-Sicherheitsgate, den Skill-Katalog und den Update-Checker tatsächlich funktionsfähig macht, nicht nur als Prosa lesbar. **Bevor du `CLAUDE.md` kopierst, schreibe den Abschnitt „Installed Plugins" so um, dass er nur das auflistet, was du wirklich installiert hast** — die Kopie des ursprünglichen Besitzers behauptet, bestimmte Plugins seien aktiviert; das unverändert zu übernehmen lässt dein Claude über die verfügbare Werkzeugausstattung lügen.
-4. **`global-config/settings.example.json` zusammenführen** mit deiner `~/.claude/settings.json` (nachdem du `<YOUR_HOME>` ersetzt hast; unter macOS/Linux außerdem den `py`-Launcher im Hook-Befehl auf `python3` ändern — dieser Eintrag ist wie ausgeliefert Windows-spezifisch).
-5. **Ollama löschen, falls du in Schritt 2 „nein" gesagt hast.** Schnelldurchgang: die Ollama-Absätze in deiner CLAUDE.md-Kopie + `notes/local-ollama-models.md` + `tools/ollama/`.
-6. **Die Platzhalter suchen und ersetzen** in allem, was du behalten hast — die vollständige Liste steht in Schritt 8 von „So übernimmst du das" weiter unten.
-7. **Die referenzierten Plugin-Ökosysteme installieren** (superpowers, ecc usw.) — siehe „Was du noch separat installieren musst" weiter unten.
-8. **Optional `notes/` kopieren** in deinen eigenen Second-Brain-Vault-Speicherort, und **`memory-examples/`** in den Claude-Code-Auto-Memory-Ordner des jeweiligen Projekts.
-9. **Eine Claude-Code-Session starten und prüfen**, ob die neue CLAUDE.md übernommen wurde — z. B. um einen Implementierungsplan bitten und schauen, ob `/plan-pro` aufgerufen wird, oder nach Modell-Routing fragen und sehen, ob die Kostenleiter zurückkommt.
+<p align="center"><img src="assets/quickstart-flow.svg" alt="Klonen, dann Configs kopieren, dann /adopt ausführen, dann verifizieren" width="100%"/></p>
+
+| # | Schritt | Wo |
+|---|---|---|
+| 1 | Repo klonen | an einem beliebigen praktischen Ort |
+| 2 | Entscheiden: lokale Ollama-Vorverdichtung gewünscht? | siehe [Optional: Lokale KI](#optional-lokale-ki-vorverdichtung-ollama) |
+| 3 | Configs nach `~/.claude/` kopieren | `CLAUDE.md`, `agents/*.md`, `hooks/*.py`, `skills/*`, `tools/` — **„Installed Plugins" zuerst umschreiben** |
+| 4 | Settings zusammenführen | `global-config/settings.example.json` → `~/.claude/settings.json` (`<YOUR_HOME>` ersetzen) |
+| 5 | Platzhalter suchen und ersetzen | vollständige Liste in [So übernimmst du das](#so-übernimmst-du-das), Schritt 8 |
+| 6 | Die Plugin-Ökosysteme installieren | siehe [Was du noch separat installieren musst](#was-du-noch-separat-installieren-musst) |
+| 7 | `notes/` + `memory-examples/` kopieren (optional) | dein eigener Vault / Auto-Memory-Ordner |
+| 8 | Prüfen | um einen Implementierungsplan bitten — springt `/plan-pro` an? |
+
+Mehrere KI-Coding-Tools im Einsatz (Codex, Cursor, Gemini CLI, ...)? Kopiere zusätzlich `global-config/AGENTS.md` in jedes Projekt-Root — siehe [Kompatibilität mit anderen KI-Coding-Tools](#kompatibilität-mit-anderen-ki-coding-tools).
 
 Der Rest dieser README erklärt jeden Baustein im Detail.
 
@@ -188,6 +200,11 @@ Installiere sie über das Plugin-System von Claude Code auf der neuen Maschine u
 
 ## Ein Hinweis zum Abo-Plan und zur Fable-5.1-Stufe
 
+Die Routing-Leiter aus der CLAUDE.md endet oben bei einem `fable-medium`-Subagenten, der einen Max-Plan braucht — auf Pro schlägt das Spawnen einfach fehl. `/adopt` fragt das ab und behebt es für dich.
+
+<details>
+<summary>Manuelle Korrektur, falls du keinen Max-Plan hast</summary>
+
 Die Modell-Routing-Leiter in `CLAUDE.md` endet oben bei einem `fable-medium`-Subagenten — einer bewusst teuren, selten genutzten Eskalationsstufe für die schwierigsten Probleme. Der ursprüngliche Besitzer hat einen **Max**-Plan, bei dem dieses Modell verfügbar ist. Wenn du **Pro** hast (oder irgendeinen Plan ohne Fable-5.1-Zugriff), schlägt das Spawnen von `fable-medium` einfach fehl.
 
 Bevor du `CLAUDE.md` unverändert kopierst, prüfe, welchen Plan du hast. Falls du kein Fable 5.1 hast:
@@ -197,9 +214,16 @@ Bevor du `CLAUDE.md` unverändert kopierst, prüfe, welchen Plan du hast. Falls 
 
 `/adopt` fragt das als Teil seines Interviews ab und nimmt diese Änderung für dich vor; wenn du die Dateien stattdessen per Hand kopierst, erledige das selbst, damit Claude nicht ständig versucht, einen Subagenten zu spawnen, den dein Plan nicht erreichen kann.
 
+</details>
+
 ---
 
 ## Optional: Lokale KI-Vorverdichtung (Ollama)
+
+Eine kostenlose, verlustbehaftete Vorverdichtungsstufe — ein lokales Modell verdichtet langen, unkritischen Text, bevor er in den Kontext eines kostenpflichtigen Modells gelangt. Sie fügt keine Fähigkeit hinzu, sondern spart nur Kosten. Überspringbar; nichts anderes hier hängt davon ab.
+
+<details>
+<summary>Details — willst du das?</summary>
 
 Die ursprüngliche Einrichtung nutzt lokale Ollama-Modelle als **kostenlose, verlustbehaftete Vorverdichtungsstufe** — langer, unkritischer Text (Logs, ausführliche Dokumentation) wird durch ein lokales Modell geleitet, um ihn zu verdichten, *bevor* er in den Kontext eines kostenpflichtigen Modells gelangt. Sie sitzt **unterhalb von Haiku** in der Kostenleiter und ist keine Routing-Stufe: kein Tool-Zugriff, kein Repo-Kontext, nur Text rein / Text raus. Sie spart Geld; sie fügt keine Fähigkeit hinzu. Nichts sonst in diesem Repo hängt davon ab.
 
@@ -221,9 +245,16 @@ Die ursprüngliche Einrichtung nutzt lokale Ollama-Modelle als **kostenlose, ver
 
 Das ist zu 100 % optional und überspringbar. Es existiert einzig, um Token-Kosten bei umfangreichem Text zu senken.
 
+</details>
+
 ---
 
 ## Kompatibilität mit anderen KI-Coding-Tools
+
+Zwei Dateien werden statt einer ausgeliefert: CLAUDE.md (nur Claude Code) und AGENTS.md (die portable Teilmenge — [agents.md](https://agents.md), auch von Codex, Cursor, Gemini CLI, Copilot gelesen).
+
+<details>
+<summary>Wie die beiden zusammenspielen</summary>
 
 Diese Vorlage ist speziell für **Claude Code** gebaut. Die Mechanismen, auf denen sie beruht — eine automatisch geladene `CLAUDE.md`, das `Skill`-Tool, `settings.json`-Hooks, Subagenten-Definitionen — sind Claude-Code-Features, kein portables Dateiformat. Codex CLI, ChatGPT, Antigravity, Cursor oder ein beliebiges anderes Tool auf dieses Repo anzusetzen, lässt es nicht automatisch die Skills oder Regeln „aufnehmen"; außerhalb von Claude Code funktioniert hier nichts von selbst.
 
@@ -233,6 +264,8 @@ Was *von Hand* angepasst werden kann:
 - Hooks (`settings.json`) und die Subagenten-Dateien (`agents/*.md`) sind reine Claude-Code-Funktionen — dafür gibt es keine Entsprechung zum Portieren.
 
 Wenn du täglich mit Codex/ChatGPT/Antigravity arbeitest, ist dieses Repo trotzdem als *Referenzmaterial* nützlich (die Schreibregeln, die .docx-Fixes, die Git-Sicherheits-Hook-Logik) — erwarte aber, die relevanten Teile kopieren und einfügen zu müssen, statt den Ordner hineinzuwerfen und es funktionieren zu lassen.
+
+</details>
 
 ---
 

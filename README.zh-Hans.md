@@ -13,21 +13,33 @@
 
 </div>
 
+这是某位开发者 Claude Code 配置的可移植快照——包含指令、skill、hook 和知识库,让全新的 Claude Code 实例也能在新机器上复刻同一套工作习惯。**这是一份用来参考改造、而非照搬即用的模板。**
+
+<details>
+<summary>阅读完整介绍</summary>
+
 这是一份来自某位开发者的 Claude Code 配置快照——包含全局指令、工程规范、**45 个精选 skill**(其中 7 个为原创:3 个从零写成,4 个是围绕第三方工具自写的封装;1 个由上游 skill 改编而来;其余均采纳自上游仓库,每个 skill 的来源都记录在 `sources.json` 中)、真实的 memory 示例、一份 skill 溯源清单,以及一个跨项目知识库——把这些打包在一起,是为了让一个全新的 Claude Code 实例(或负责搭建它的人)能在新机器上复刻同一套工作流习惯与能力。这是一份**用来参考改造、而非照搬即用的模板**:个人身份信息已被清除并替换为占位符,其中一些章节也只有在你同时采用了它们所描述的工具后才有意义。
+
+</details>
 
 ## 快速上手(Quickstart)
 
-**捷径:** 克隆仓库,在 Claude Code 中打开,运行 `/adopt`——它会通过对话询问你(想要哪些可选部分、插件列表、目标路径),并自动帮你完成下面第 2-6 步和第 8-9 步,过程中会在一个可恢复的日志文件里记录进度。第 7 步(安装插件生态本身)特意被排除在 `/adopt` 的范围之外——这一步仍需要你自己动手。下面的手动步骤正是 `/adopt` 自动化的内容,同时也留给那些想手动操作、或想在运行前先确认改动内容的人。
+> **捷径:** clone 仓库,在 Claude Code 中打开,然后运行 `/adopt`——它会通过对话询问你,并自动帮你完成下面第 2、3、5、7 步。第 6 步(安装插件生态本身)特意不包含在 `/adopt` 范围内——这一步仍需要你自己动手。
 
-1. **克隆仓库**到目标机器上任意方便的位置。
-2. **现在就决定那唯一的可选项**——回答是/否,这会决定你在第 5 步要删除什么:本地 AI(Ollama)预压缩。详见下方"可选:___"章节。
-3. **将 `global-config/CLAUDE.md`、`agents/*.md`、`hooks/block-dangerous-git.py`、`skills/*` 和 `tools/`** 复制到你自己的 `~/.claude/`(合并还是覆盖由你决定)。正是这些文件让路由规则、git 安全网关、skill 目录和更新检查器真正生效,而不只是停留在文字说明层面。**在复制 `CLAUDE.md` 之前,先重写其中"Installed Plugins"一节,使其只列出你实际安装的插件**——原作者的版本声明了特定插件已启用;原样照搬会让你的 Claude 对可用工具撒谎。
-4. **将 `global-config/settings.example.json` 合并**进你的 `~/.claude/settings.json`(先替换掉 `<YOUR_HOME>`;macOS/Linux 上还需把 hook 命令里的 `py` 启动器改成 `python3`,这一项是 Windows 专用的)。
-5. **如果第 2 步回答"否",删除 Ollama。** 快速做法:删除你 CLAUDE.md 副本里的 Ollama 段落、`notes/local-ollama-models.md`,以及 `tools/ollama/`。
-6. **对保留下来的所有内容做查找替换**,替换占位符——完整清单见下方"如何采用本仓库"第 8 步。
-7. **安装所引用的插件生态**(superpowers、ecc 等)——详见下方"你还需要单独安装的东西"。
-8. **可选择把 `notes/`** 复制进你自己的第二大脑知识库位置,并把 **`memory-examples/`** 复制进对应项目的 Claude Code auto-memory 文件夹。
-9. **启动一个 Claude Code 会话并验证**新的 CLAUDE.md 已被识别——例如让它写一份实现计划,看是否会调用 `/plan-pro`;或者问它模型路由策略,看它是否能说出那套成本阶梯。
+<p align="center"><img src="assets/quickstart-flow.svg" alt="克隆仓库,然后复制配置,然后运行 /adopt,然后验证" width="100%"/></p>
+
+| # | 步骤 | 位置 |
+|---|---|---|
+| 1 | 克隆仓库 | 目标机器上任意方便的位置 |
+| 2 | 决定:是否需要本地 Ollama 预压缩? | 详见 [可选:本地 AI](#可选本地-aiollama预压缩) |
+| 3 | 将配置复制进 `~/.claude/` | `CLAUDE.md`、`agents/*.md`、`hooks/*.py`、`skills/*`、`tools/` ——**先重写"Installed Plugins"一节** |
+| 4 | 合并 settings | `global-config/settings.example.json` → `~/.claude/settings.json`(替换 `<YOUR_HOME>`) |
+| 5 | 查找替换占位符 | 完整清单见 [如何采用本仓库](#如何采用本仓库) 第 8 步 |
+| 6 | 安装插件生态 | 详见 [你还需要单独安装的东西](#你还需要单独安装的东西) |
+| 7 | 复制 `notes/` + `memory-examples/`(可选) | 你自己的知识库 / auto-memory 文件夹 |
+| 8 | 验证 | 让它写一份实现计划——`/plan-pro` 是否会被调用? |
+
+同时使用多个 AI coding agent(Codex、Cursor、Gemini CLI 等)?也把 `global-config/AGENTS.md` 复制到每个项目根目录——详见 [与其他 AI 编程工具的兼容性](#与其他-ai-编程工具的兼容性)。
 
 本 README 的其余部分会详细解释每一部分内容。
 
@@ -188,6 +200,11 @@ claude-clone-template/
 
 ## 关于订阅套餐与 Fable 5.1 层级的说明
 
+`CLAUDE.md` 里的模型路由阶梯最顶层是 `fable-medium` 子代理,需要 **Max** 套餐才能用——如果是 **Pro** 套餐,调用它只会失败。`/adopt` 会在交互流程中询问这一点并替你修复。
+
+<details>
+<summary>如果你不是 Max 套餐,手动修复方法</summary>
+
 `CLAUDE.md` 里的模型路由阶梯最顶层是 `fable-medium` 子代理——这是一个刻意设置得很昂贵、极少使用的升级层级,专门留给最棘手的问题。原作者使用的是 **Max** 套餐,才能用上这个模型。如果你用的是 **Pro** 套餐(或任何没有 Fable 5.1 访问权限的套餐),调用 `fable-medium` 只会失败。
 
 在原样复制 `CLAUDE.md` 之前,先确认你自己的套餐等级。如果你没有 Fable 5.1:
@@ -197,9 +214,16 @@ claude-clone-template/
 
 `/adopt` 会在交互流程中主动询问这一点,并替你完成相应修改;如果你是手动逐个复制文件,请自己完成这一步,以免 Claude 一直尝试调用一个你的套餐根本用不了的子代理。
 
+</details>
+
 ---
 
 ## 可选:本地 AI(Ollama)预压缩
+
+一层免费、有损的预压缩——本地模型在长而低风险的文本进入付费模型上下文之前先消化压缩一遍。不增加任何能力,纯粹省钱。可以跳过,本仓库其余部分都不依赖它。
+
+<details>
+<summary>详情——你需要这个吗?</summary>
 
 原始配置把本地 Ollama 模型用作一层**免费、有损的预压缩层**——把冗长、低风险的文本(日志、啰嗦的文档)先通过本地模型消化压缩一遍,再送入付费模型的上下文中。它位于成本阶梯中**比 Haiku 更低**的位置,本身不算一个路由层级:没有工具访问权限,没有仓库上下文,纯粹是文本进、文本出。它能省钱,但不增加任何能力。本仓库中的其他内容都不依赖它。
 
@@ -221,9 +245,16 @@ claude-clone-template/
 
 这一部分完全可选,可以跳过。它存在的唯一目的就是替批量文本省一点 token 成本。
 
+</details>
+
 ---
 
 ## 与其他 AI 编程工具的兼容性
+
+这里提供两个文件,而不是一个:`CLAUDE.md`(仅限 Claude Code)和 `AGENTS.md`(可移植的子集——[agents.md](https://agents.md),Codex、Cursor、Gemini CLI、Copilot 也会读取)。
+
+<details>
+<summary>两个文件如何配合</summary>
 
 本模板是专门为 **Claude Code** 打造的。它所依赖的机制——自动加载的 `CLAUDE.md`、`Skill` 工具、`settings.json` 里的 hooks、子代理定义——都是 Claude Code 特有的功能,而不是某种通用文件格式。把 Codex CLI、ChatGPT、Antigravity、Cursor 或其他任何工具指向本仓库,并不会让它自动"识别"这些 skill 或规则;脱离 Claude Code,这里的东西不会开箱即用。
 
@@ -233,6 +264,8 @@ claude-clone-template/
 - Hooks(`settings.json`)和子代理文件(`agents/*.md`)是 Claude Code 专属的——没有对应的东西可以移植过去。
 
 如果你日常使用 Codex/ChatGPT/Antigravity,本仓库依然可以当作*参考资料*来用(写作规则、.docx 修复方法、git 安全 hook 的逻辑)——只是需要自己复制粘贴相关部分,而不能指望把整个文件夹丢进去就能用。
+
+</details>
 
 ---
 
