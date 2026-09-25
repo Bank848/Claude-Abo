@@ -53,9 +53,11 @@ claude-clone-template/
 ├── .claude/commands/adopt.md              # Run `/adopt` in this repo to interview + auto-apply the steps below
 ├── global-config/
 │   ├── CLAUDE.md                          # Global instruction file (~/.claude/CLAUDE.md equivalent)
+│   ├── AGENTS.md                          # Claude Code以外のエージェント(Codex、Cursor、Gemini CLIなど)向けの、CLAUDE.mdの持ち運び可能なサブセット
 │   ├── settings.example.json              # Sanitized ~/.claude/settings.json — hooks, plugins, model default
 │   ├── agents/                            # 3 pinned-model subagent definitions (opus, haiku-batch, fable-medium)
 │   ├── hooks/block-dangerous-git.py       # PreToolUse gate that asks before risky git commands
+│   ├── hooks/graphify-auto-update.py      # PostToolUse hook — 編集のたびにgraphifyのナレッジグラフを同期し続ける
 │   ├── rules/ecc-common/                  # 10 engineering-discipline rule files (ecc plugin ecosystem)
 │   ├── skills/                            # 45 curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
 │   ├── SKILLS_INDEX.md                    # Personal index of installed skills/plugins + when to use which
@@ -77,6 +79,7 @@ claude-clone-template/
 - **計画ワークフロー** — `/plan-pro`をデフォルトのプランナーとして使用します。
 - **セカンドブレイン・ボルトの慣習** — 「単一リポジトリに紐づいているか?」という一つのルールで、ボルトに置くべきかリポジトリのdocs/ADRに置くべきかを判断します。
 - **Gitセーフティフック** — 破壊的なgitコマンドの実行前に確認を挟むPreToolUseゲートです。
+- **graphify自動同期フック** — 編集のたびにナレッジグラフを最新の状態に保つPostToolUseフックで、編集自体をブロックすることはありません。
 - **シェルの落とし穴** — BashツールとPowerShellツールのヒアドキュメント構文の違いに関するルール(Windows特有の痛みから学んだもの)。
 - **コンテキストの自己監視** — Claudeがいつ`/compact`を自発的に提案すべきかの基準。
 - **AIらしさを消す文章ルール** — 下書きされた文章を人間が書いたように見せるためのタイ語・英語のフルルールセット(避けるべき語彙、構造パターン、レジスターの一致)。このファイルの中で最も分量が多く、最も汎用性の高い部分です。裏付けとなる詳細は`memory-examples/`にあります。
@@ -175,7 +178,7 @@ ecc(everything-claude-code)プラグインエコシステムからの一般的�
 ## 導入方法
 
 1. **`global-config/CLAUDE.md`をコピー**して、自分の`~/.claude/CLAUDE.md`にします。既存のものとマージするか、完全に置き換えるかは任意です。まず読んでから、自分に当てはまらないセクションは削除してください。**このファイルに手を加える前に、まず「Installed Plugins」セクションを書き直してください** — 現状は特定のプラグイン(superpowers、ecc、pordee、lazyweb、andrej-karpathy-skills)がインストールされ有効になっていると主張しており、Claudeにインストールについて言及しないよう指示しています。これは元のオーナーにとっては事実ですが、あなたにとってはそうではありません。実際のプラグイン一覧に置き換えるか、何かをインストールするまでは削除しておいてください。
-2. **`global-config/agents/*.md`をコピー**して`~/.claude/agents/`に、**`global-config/hooks/block-dangerous-git.py`をコピー**して`~/.claude/hooks/`に置きます。これらがあって初めて、CLAUDE.md内のモデルルーティングルールとgitセーフティゲートが単なる文章ではなく実際に機能します。
+2. **`global-config/agents/*.md`をコピー**して`~/.claude/agents/`に、**`global-config/hooks/*.py`をコピー**して`~/.claude/hooks/`に置きます(2つのフック両方です)。これらがあって初めて、CLAUDE.md内のモデルルーティングルール、gitセーフティゲート、graphify自動同期フックが単なる文章ではなく実際に機能します。
 3. **`global-config/skills/*`をコピー**して`~/.claude/skills/`に置きます。これが実際の価値の大部分を占めます — 45個の、単なる説明ではない、実際に動作するスキルフォルダです。
 4. **`global-config/settings.example.json`をマージ**して自分の`~/.claude/settings.json`にします(まず`<YOUR_HOME>`を実際のホームパスに置き換えてください)。すでにsettings.jsonがある場合は上書きせずマージし、`hooks.PreToolUse`のエントリーや、`enabledPlugins`から必要なものを取り込んでください。同梱のフックコマンドはWindowsの`py`ランチャーを使っています。macOS/Linuxではまず`python3`に変更してください。
 5. **`global-config/rules/ecc-common/`をコピー**して`~/.claude/rules/`に置くのは、eccプラグインを導入する場合のみです。それ以外はスキップしてください。
@@ -256,14 +259,18 @@ ecc(everything-claude-code)プラグインエコシステムからの一般的�
 <details>
 <summary>2つのファイルがどう連携するか</summary>
 
-このテンプレートは**Claude Code**専用に作られています。依存している仕組み — 自動読み込みされる`CLAUDE.md`、`Skill`ツール、`settings.json`のフック、サブエージェント定義 — はClaude Codeの機能であり、汎用的なファイル形式ではありません。Codex CLI、ChatGPT、Antigravity、Cursor、その他のツールをこのリポジトリに向けても、スキルやルールを自動的に「拾って」くれるわけではありません。Claude Code以外では、このリポジトリの中身は何もそのままでは動作しません。
+このテンプレートは**Claude Code**専用に作られていますが、Claude Code 2.1.277(2026年9月)以降は、Claude Code自体もプロジェクトに`CLAUDE.md`が無い場合のフォールバックとして[`AGENTS.md`](https://agents.md)を読み込むようになりました — これはCodex CLI、Cursor、Gemini CLI、GitHub Copilotがすでに読み込んでいるのと同じ規約です。このテンプレートが1つではなく2つのファイルを同梱しているのはそのためです。
 
-手作業で対応できるものもあります。
-- `global-config/CLAUDE.md`はプレーンテキストなので、使いたい部分を`AGENTS.md`(Codex CLIなど一部のツールが読み込むファイル)やカスタムシステムプロンプトにコピーできます。ただし、Claude Code固有の仕組み(spawn_task、Skillツール、サブエージェントルーティング)を参照している箇所は、他の環境では意味を持たないので、先に取り除いてください。
+- **`global-config/CLAUDE.md`** — フルセットアップです。コスト意識型のモデルルーティング、`/plan-pro`、スキルカタログ、フック、サブエージェントルーティングなど、Claude Codeの中でしか意味を持たないものすべてを含みます。
+- **`global-config/AGENTS.md`** — 持ち運び可能なサブセットです(コーディングスタイル、gitワークフロー、テスト、コードレビュー、セキュリティチェックリスト、共通パターン)。Claude Code専用の仕組みはすべて取り除かれています。任意のプロジェクトに置けば、AGENTS.mdに対応した任意のエージェント(Claude Codeを含む)が読み込みます。
+
+プロジェクトに**両方**のファイルがある場合、Claude Codeは`CLAUDE.md`を読み込み`AGENTS.md`は無視します — 2つは統合されないので、AGENTS.mdが存在するからといってClaude Code固有のルールが適用されると期待しないでください。他のツール(Codex、Cursorなど)は`AGENTS.md`しか読み込みません。これらのツールは`CLAUDE.md`、`Skill`ツール、`settings.json`のフック、サブエージェント定義という概念自体を持たないため、これらは何があってもClaude Code専用のままです。
+
+AGENTS.mdのサブセットより多くを手作業で移植したい場合、対応できるものもあります。
 - `global-config/skills/<name>/SKILL.md`にある各スキルは、単なるmarkdownの指示書です。他のツールのカスタムインストラクションに貼り付けることはできますが、自動トリガーは失われますし、同梱のスクリプトはそのツールが実行できるシェルを前提としています。
 - フック(`settings.json`)とサブエージェントファイル(`agents/*.md`)はClaude Code専用で、移植できる同等の仕組みは他にありません。
 
-日常的にCodex/ChatGPT/Antigravityを使っている場合でも、このリポジトリは*リファレンス資料*として有用です(文章のルール、.docxの修正方法、gitセーフティフックのロジックなど)。ただし、フォルダをそのまま置いて動くことは期待せず、必要な部分をコピー&ペーストするつもりでいてください。
+日常的にCodex/Cursor/Gemini CLIを使っている場合、`AGENTS.md`だけでエンジニアリング規律のルールがそのまま手に入ります。リポジトリの残り(スキル、フック、.docxの修正方法など)は、コピー&ペーストして使えるリファレンス資料として引き続き存在します。
 
 </details>
 

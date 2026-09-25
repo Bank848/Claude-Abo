@@ -53,9 +53,11 @@ claude-clone-template/
 ├── .claude/commands/adopt.md              # Run `/adopt` in this repo to interview + auto-apply the steps below
 ├── global-config/
 │   ├── CLAUDE.md                          # Global instruction file (~/.claude/CLAUDE.md equivalent)
+│   ├── AGENTS.md                          # Subconjunto portátil de CLAUDE.md para agentes que no son Claude Code (Codex, Cursor, Gemini CLI, ...)
 │   ├── settings.example.json              # Sanitized ~/.claude/settings.json — hooks, plugins, model default
 │   ├── agents/                            # 3 pinned-model subagent definitions (opus, haiku-batch, fable-medium)
 │   ├── hooks/block-dangerous-git.py       # PreToolUse gate that asks before risky git commands
+│   ├── hooks/graphify-auto-update.py      # Hook PostToolUse — mantiene sincronizado el grafo de conocimiento de graphify después de cada edición
 │   ├── rules/ecc-common/                  # 10 engineering-discipline rule files (ecc plugin ecosystem)
 │   ├── skills/                            # 45 curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
 │   ├── SKILLS_INDEX.md                    # Personal index of installed skills/plugins + when to use which
@@ -77,6 +79,7 @@ El corazón de la configuración. Codifica:
 - **Flujo de planificación**: `/plan-pro` como planificador predeterminado.
 - **Convención de la bóveda de segundo cerebro**: una sola regla ("¿está ligado a un solo repositorio?") que decide qué vive en la bóveda y qué en los docs/ADR de un repo.
 - **Hook de seguridad de git**: una barrera PreToolUse que pide confirmación antes de comandos git destructivos.
+- **Hook de sincronización automática de graphify**: un hook PostToolUse que mantiene actualizado el grafo de conocimiento después de cada edición, sin bloquear la edición en sí.
 - **Peculiaridades de shell**: reglas sobre la sintaxis de heredoc de la herramienta Bash frente a la herramienta PowerShell (un dolor de cabeza específico de Windows, aprendido a las malas).
 - **Automonitoreo de contexto**: cuándo debe Claude sugerir proactivamente `/compact`.
 - **Reglas anti-rasgos-de-IA en la escritura**: un conjunto completo de reglas en tailandés e inglés para lograr que el texto redactado se lea como escrito por un humano (vocabulario a evitar, patrones estructurales, ajuste de registro); la pieza más grande y de aplicación más amplia del archivo. El detalle de respaldo vive en `memory-examples/`.
@@ -175,7 +178,7 @@ Contenido de ejemplo de la bóveda de segundo cerebro en Obsidian del dueño: in
 ## Cómo adoptar esto
 
 1. **Copia `global-config/CLAUDE.md`** en tu propio `~/.claude/CLAUDE.md`. Fusiónalo con lo que ya tengas, o reemplázalo por completo: tú decides. Léelo primero; elimina las secciones que no te apliquen. **Reescribe la sección "Installed Plugins" antes de hacer cualquier otra cosa con este archivo**: actualmente afirma que ciertos plugins concretos (superpowers, ecc, pordee, lazyweb, andrej-karpathy-skills) están instalados y habilitados, y le dice a Claude que no mencione instalarlos. Eso es cierto para el dueño original, no para ti. Sustitúyela por tu propia lista real de plugins, o bórrala hasta que hayas instalado algo.
-2. **Copia `global-config/agents/*.md`** en `~/.claude/agents/` y **`global-config/hooks/block-dangerous-git.py`** en `~/.claude/hooks/`. Son estos archivos los que hacen que las reglas de enrutamiento de modelos y la barrera de seguridad de git de CLAUDE.md funcionen de verdad, en lugar de quedarse en simple prosa.
+2. **Copia `global-config/agents/*.md`** en `~/.claude/agents/` y **`global-config/hooks/*.py`** en `~/.claude/hooks/`. Son estos archivos los que hacen que las reglas de enrutamiento de modelos, la barrera de seguridad de git y el hook de sincronización automática de graphify de CLAUDE.md funcionen de verdad, en lugar de quedarse en simple prosa.
 3. **Copia `global-config/skills/*`** en `~/.claude/skills/`. Aquí está el grueso del valor real: 45 carpetas de skills funcionales, no meras descripciones de ellas.
 4. **Fusiona `global-config/settings.example.json`** en tu propio `~/.claude/settings.json` (reemplaza primero `<YOUR_HOME>` por tu ruta de inicio real). Fusiona, no sobrescribas, si ya tienes un settings.json: toma la entrada `hooks.PreToolUse` y lo que quieras de `enabledPlugins`. El comando del hook tal como se distribuye usa el lanzador `py` de Windows; en macOS/Linux, cámbialo primero a `python3`.
 5. **Copia `global-config/rules/ecc-common/`** en `~/.claude/rules/` **solo si** instalas el plugin ecc. En caso contrario, omite este paso.
@@ -256,14 +259,18 @@ Se distribuyen dos archivos en vez de uno: `CLAUDE.md` (exclusivo de Claude Code
 <details>
 <summary>Cómo interactúan los dos archivos</summary>
 
-Esta plantilla está construida específicamente para **Claude Code**. Los mecanismos de los que depende —un `CLAUDE.md` de carga automática, la herramienta `Skill`, los hooks de `settings.json`, las definiciones de subagentes— son funciones de Claude Code, no un formato de archivo portátil. Apuntar Codex CLI, ChatGPT, Antigravity, Cursor o cualquier otra herramienta a este repositorio no hará que "recoja" las skills o las reglas automáticamente; nada aquí funciona de fábrica fuera de Claude Code.
+Esta plantilla está construida específicamente para **Claude Code**, pero desde Claude Code 2.1.277 (septiembre de 2026), el propio Claude Code también lee [`AGENTS.md`](https://agents.md) como respaldo cuando un proyecto no tiene `CLAUDE.md` — la misma convención que ya leen Codex CLI, Cursor, Gemini CLI y GitHub Copilot. Por eso esta plantilla distribuye dos archivos en vez de uno:
 
-Lo que *sí* se puede adaptar a mano:
-- `global-config/CLAUDE.md` es texto plano: copia las partes que quieras en un `AGENTS.md` (que Codex CLI y algunas otras herramientas sí leen) o en un prompt de sistema personalizado. Elimina primero todo lo que haga referencia a mecanismos específicos de Claude Code (spawn_task, la herramienta Skill, el enrutamiento de subagentes); eso no significará nada en otro lugar.
+- **`global-config/CLAUDE.md`** — la configuración completa: enrutamiento de modelos sensible al costo, `/plan-pro`, el catálogo de skills, hooks, enrutamiento de subagentes, todo lo que solo tiene sentido dentro de Claude Code.
+- **`global-config/AGENTS.md`** — el subconjunto portátil (estilo de código, flujo de git, pruebas, revisión de código, checklist de seguridad, patrones comunes) con cada mecanismo exclusivo de Claude Code eliminado. Colócalo en cualquier proyecto y cualquier agente compatible con AGENTS.md lo recoge, Claude Code incluido.
+
+Si un proyecto tiene **ambos** archivos, Claude Code lee `CLAUDE.md` e ignora `AGENTS.md` — los dos no se combinan, así que no esperes que las reglas exclusivas de Claude Code se apliquen solo porque AGENTS.md también esté presente. Otras herramientas (Codex, Cursor, etc.) solo leen `AGENTS.md`; no tienen concepto de `CLAUDE.md`, la herramienta `Skill`, los hooks de `settings.json` ni las definiciones de subagentes, así que eso sigue siendo exclusivo de Claude Code pase lo que pase.
+
+Qué más *se puede* adaptar a mano si quieres más que el subconjunto de AGENTS.md:
 - Cada skill bajo `global-config/skills/<name>/SKILL.md` es solo un archivo de instrucciones en markdown. Puedes pegar una en las instrucciones personalizadas de otra herramienta, pero pierdes el disparo automático, y cualquier script incluido asume un shell que esa herramienta realmente pueda ejecutar.
 - Los hooks (`settings.json`) y los archivos de subagentes (`agents/*.md`) son exclusivos de Claude Code; no hay un equivalente al que portarlos.
 
-Si usas Codex/ChatGPT/Antigravity en tu día a día, este repositorio sigue siendo útil como *material de referencia* (las reglas de escritura, las correcciones de .docx, la lógica del hook de seguridad de git); simplemente espera copiar y pegar las partes relevantes en lugar de soltar la carpeta y que funcione sola.
+Si usas Codex/Cursor/Gemini CLI en tu día a día, `AGENTS.md` te da de entrada las reglas de disciplina de ingeniería; el resto del repositorio (skills, hooks, las correcciones de .docx) sigue ahí como material de referencia para copiar y pegar.
 
 </details>
 
