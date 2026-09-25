@@ -15,22 +15,33 @@
 
 # Claude Code Clone Template
 
-สแนปช็อตพกพาของ Claude Code setup ของคนคนหนึ่ง — global instructions, กฎการทำงาน, **สกิลคัดสรร 45 ตัว** (เขียนเอง 7 ตัว — เขียนจากศูนย์ 3 ตัว, wrapper ที่เขียนเองรอบเครื่องมือ third-party 4 ตัว — ดัดแปลงจาก upstream skill 1 ตัว ที่เหลือ adopt มาจาก upstream repo ทั้งหมด มี provenance รายสกิลอยู่ใน `sources.json`), ตัวอย่าง memory จริง, manifest แหล่งที่มาของสกิล, และ knowledge vault ข้ามโปรเจกต์ — แพ็กไว้ให้ Claude Code เครื่องใหม่ (หรือคนที่กำลังตั้งเครื่องใหม่) bootstrap นิสัยการทำงานและความสามารถชุดเดียวกันได้บนเครื่องอื่น นี่คือ **template ให้เอาไปปรับ ไม่ใช่ config ที่รันได้ทันที**: ข้อมูลระบุตัวตนถูกลบออกและแทนที่ด้วย placeholder แล้ว และหลายส่วนจะมีความหมายก็ต่อเมื่อคุณติดตั้งเครื่องมือที่มันอ้างถึงด้วย
+สแนปช็อตพกพาของ Claude Code setup ของคนคนหนึ่ง — instruction, สกิล, hook, และ knowledge vault แพ็กไว้ให้ Claude Code เครื่องใหม่ bootstrap นิสัยเดียวกันได้ **นี่คือ template ให้เอาไปปรับ ไม่ใช่ config ที่รันได้ทันที**
+
+<details>
+<summary>อ่านคำอธิบายเต็ม</summary>
+
+global instructions, กฎการทำงาน, **สกิลคัดสรร 45 ตัว** (เขียนเอง 7 ตัว — เขียนจากศูนย์ 3 ตัว, wrapper ที่เขียนเองรอบเครื่องมือ third-party 4 ตัว — ดัดแปลงจาก upstream skill 1 ตัว ที่เหลือ adopt มาจาก upstream repo ทั้งหมด มี provenance รายสกิลอยู่ใน `sources.json`), ตัวอย่าง memory จริง, manifest แหล่งที่มาของสกิล, และ knowledge vault ข้ามโปรเจกต์ — แพ็กไว้ให้ Claude Code เครื่องใหม่ (หรือคนที่กำลังตั้งเครื่องใหม่) bootstrap นิสัยการทำงานและความสามารถชุดเดียวกันได้บนเครื่องอื่น นี่คือ **template ให้เอาไปปรับ ไม่ใช่ config ที่รันได้ทันที**: ข้อมูลระบุตัวตนถูกลบออกและแทนที่ด้วย placeholder แล้ว และหลายส่วนจะมีความหมายก็ต่อเมื่อคุณติดตั้งเครื่องมือที่มันอ้างถึงด้วย
+
+</details>
 
 ## เริ่มต้นใช้งาน (quickstart)
 
-**ทางลัด:** clone repo นี้ เปิดใน Claude Code แล้วรัน `/adopt` — มันจะสัมภาษณ์คุณ (อยากได้ส่วนเสริมไหนบ้าง, list plugin, path ปลายทาง) แล้วทำขั้นตอน 2-6 และ 8-9 ด้านล่างให้เอง พร้อม tick progress ลงไฟล์ journal ที่ resume ได้ระหว่างทาง ขั้นตอน 7 (ติดตั้งตัว plugin ecosystem เอง) จงใจไม่รวมอยู่ใน `/adopt` — อันนั้นต้องทำเอง ขั้นตอนด้านล่างคือสิ่งที่ `/adopt` ทำอัตโนมัติให้ และมีไว้สำหรับคนที่อยากทำมือเองหรืออยากรีวิวก่อนว่าอะไรจะเปลี่ยนบ้างก่อนรันจริง
+> **ทางลัด:** clone repo นี้ เปิดใน Claude Code แล้วรัน `/adopt` — มันจะสัมภาษณ์คุณแล้วทำขั้นตอน 2, 3, 5, และ 7 ด้านล่างให้เอง พร้อม tick progress ลงไฟล์ journal ที่ resume ได้ ขั้นตอน 6 (ติดตั้งตัว plugin ecosystem เอง) จงใจไม่รวมอยู่ใน `/adopt` — อันนั้นต้องทำเอง
 
-1. **Clone repo** ไปที่ไหนก็ได้บนเครื่องปลายทาง
-2. **ตัดสินใจส่วนเสริมที่เป็นทางเลือกตอนนี้เลย** — ตอบใช่/ไม่ใช่ เพราะมันกำหนดว่าขั้นตอน 5 จะลบอะไรบ้าง: Local AI (Ollama) pre-compression ดูรายละเอียดที่หัวข้อ "Optional: ___" ด้านล่าง
-3. **Copy `global-config/CLAUDE.md`, `agents/*.md`, `hooks/*.py`, `skills/*`, และ `tools/`** ไปที่ `~/.claude/` ของตัวเอง (จะ merge หรือแทนที่ก็แล้วแต่) พวกนี้คือสิ่งที่ทำให้กฎ routing, git safety gate, graphify auto-sync, catalog สกิล, และตัวเช็ค update ทำงานได้จริง ไม่ใช่แค่ข้อความเฉยๆ **ก่อน copy `CLAUDE.md` ให้เขียนส่วน "Installed Plugins" ใหม่ให้เหลือแค่ที่คุณติดตั้งจริง** — ต้นฉบับอ้างว่ามี plugin เฉพาะเจ้าของเดิมติดตั้งอยู่ ถ้า copy ไปทั้งดุ้น Claude ของคุณจะโกหกเรื่อง tooling ที่มีจริง
-   - **ทำงานข้าม AI coding agent หลายตัว (Codex, Cursor, Gemini CLI ฯลฯ) ด้วย?** ให้ copy `global-config/AGENTS.md` ไปวางใน project ที่ต้องการ (ที่ root ของ project ไม่ใช่ `~/.claude/`) แทนหรือคู่กับ `CLAUDE.md` ระดับ project ก็ได้ ขั้นนี้ต้องทำมือ — `/adopt` เขียนไฟล์ลง `~/.claude/` อย่างเดียว เลยไม่ได้ถามหรือ copy ให้ ดูหัวข้อ "ใช้กับเครื่องมืออื่นได้ไหม" ด้านล่างว่าสองไฟล์ทำงานร่วมกันยังไง
-4. **Merge `global-config/settings.example.json`** เข้ากับ `~/.claude/settings.json` ของตัวเอง (แทนที่ `<YOUR_HOME>` ก่อน; บน macOS/Linux ให้เปลี่ยน launcher `py` ในคำสั่ง hook เป็น `python3` ด้วย เพราะตัวที่ให้มาเจาะจงสำหรับ Windows)
-5. **ลบ Ollama ถ้าตอบ "ไม่" ในขั้นตอน 2** วิธีเร็วสุด: ย่อหน้า Ollama ใน CLAUDE.md ที่ copy มา + `notes/local-ollama-models.md` + `tools/ollama/`
-6. **Find-and-replace placeholder** ทุกตัวในไฟล์ที่เก็บไว้ — ดูรายการเต็มที่ขั้นตอน 8 ของหัวข้อ "วิธี adopt" ด้านล่าง
-7. **ติดตั้ง plugin ecosystem ที่อ้างถึง** (superpowers, ecc ฯลฯ) — ดูหัวข้อ "สิ่งที่ต้องติดตั้งเพิ่มเอง" ด้านล่าง
-8. **จะ copy `notes/`** ไปไว้ใน second-brain vault ของตัวเองก็ได้ และ **`memory-examples/`** ไปไว้ในโฟลเดอร์ auto-memory ของ Claude Code สำหรับโปรเจกต์ที่เกี่ยวข้อง
-9. **เปิด session Claude Code แล้วตรวจสอบ** ว่ามันอ่าน CLAUDE.md ใหม่แล้วจริง เช่น ลองขอแผน implementation แล้วดูว่ามันเรียก `/plan-pro` ไหม หรือถามเรื่อง model routing แล้วดูว่ามัน cost ladder กลับมาไหม
+<p align="center"><img src="assets/quickstart-flow.svg" alt="Clone, แล้ว copy config, แล้วรัน /adopt, แล้ว verify" width="100%"/></p>
+
+| # | ขั้นตอน | ที่ไหน |
+|---|---|---|
+| 1 | Clone repo | ไปที่ไหนก็ได้บนเครื่องปลายทาง |
+| 2 | ตัดสินใจ: อยากได้ local Ollama pre-compression ไหม? | ดู [Optional: Local AI](#optional-local-ai-ollama-pre-compression) |
+| 3 | Copy config ไปที่ `~/.claude/` | `CLAUDE.md`, `agents/*.md`, `hooks/*.py`, `skills/*`, `tools/` — **เขียนส่วน "Installed Plugins" ใหม่ก่อน** |
+| 4 | Merge settings | `global-config/settings.example.json` → `~/.claude/settings.json` (แทนที่ `<YOUR_HOME>`) |
+| 5 | Find-and-replace placeholder | รายการเต็มที่ [วิธี adopt](#วิธี-adopt) ขั้นตอน 8 |
+| 6 | ติดตั้ง plugin ecosystem | ดู [สิ่งที่ต้องติดตั้งเพิ่มเอง](#สิ่งที่ต้องติดตั้งเพิ่มเอง) |
+| 7 | Copy `notes/` + `memory-examples/` (ทางเลือก) | vault / auto-memory folder ของตัวเอง |
+| 8 | Verify | ลองขอแผน implementation — `/plan-pro` เรียกไหม? |
+
+ทำงานข้าม AI coding agent หลายตัว (Codex, Cursor, Gemini CLI ฯลฯ)? copy `global-config/AGENTS.md` ไปวางใน project แต่ละตัวด้วย — ดู [ใช้กับเครื่องมืออื่นได้ไหม](#ใช้กับเครื่องมืออื่นได้ไหม-codex-cursor-gemini-cli-ฯลฯ)
 
 ส่วนที่เหลือของ README นี้อธิบายแต่ละส่วนแบบละเอียด
 
@@ -195,6 +206,11 @@ Repo นี้มีแค่ **การอ้างอิงถึงและ
 
 ## เรื่อง plan ที่ใช้กับ tier Fable 5.1
 
+บันได model routing ใน `CLAUDE.md` สุดท้ายมี subagent `fable-medium` เป็นด่านบนสุด ต้องใช้ plan **Max** — ถ้าใช้ **Pro** การ spawn จะ fail เฉยๆ `/adopt` จะถามเรื่องนี้และแก้ให้เอง
+
+<details>
+<summary>วิธีแก้เองถ้าไม่ได้ใช้ Max</summary>
+
 บันได model routing ใน `CLAUDE.md` สุดท้ายมี subagent `fable-medium` เป็นด่านบนสุด — เป็น tier แพงสุดที่ตั้งใจให้ใช้น้อยๆ เฉพาะงานยากจริงๆ เจ้าของ setup ต้นฉบับใช้ **Max** plan ซึ่งเรียก model นี้ได้ ถ้าคุณใช้ **Pro** (หรือ plan ไหนก็ตามที่ไม่มีสิทธิ์เข้า Fable 5.1) การ spawn `fable-medium` จะ fail เฉยๆ
 
 ก่อน copy `CLAUDE.md` ไปใช้ตรงๆ เช็คก่อนว่าตัวเองใช้ plan ไหน ถ้าไม่มี Fable 5.1:
@@ -204,9 +220,16 @@ Repo นี้มีแค่ **การอ้างอิงถึงและ
 
 `/adopt` จะถามเรื่องนี้เป็นส่วนหนึ่งของการสัมภาษณ์และแก้ให้อัตโนมัติ ถ้า copy ไฟล์เองด้วยมือให้ทำขั้นตอนนี้เองด้วย จะได้ไม่ต้องเจอ Claude พยายาม spawn subagent ที่ plan ตัวเองเรียกไม่ได้
 
+</details>
+
 ---
 
 ## Optional: Local AI (Ollama) pre-compression
+
+**tier pre-compression แบบ lossy ที่ฟรี** — local model ย่อยข้อความ low-stakes ยาวๆ ก่อนเข้า context ของ paid model ไม่เพิ่ม capability ช่วยแค่ประหยัดเงิน ข้ามได้เลย ไม่มีส่วนอื่นพึ่งพามัน
+
+<details>
+<summary>รายละเอียด — อยากได้ไหม</summary>
 
 Setup ต้นฉบับใช้ local Ollama model เป็น **tier pre-compression แบบ lossy ที่ฟรี** — pipe ข้อความยาว low-stakes (log, doc ยาว) ผ่าน local model ให้ย่อยก่อน *ก่อนที่* จะเข้า context ของ paid model มันอยู่ **ต่ำกว่า Haiku** ในบันได cost ไม่ใช่ routing tier: ไม่มี tool access, ไม่มี repo context, รับข้อความเข้า-ออกเท่านั้น มันช่วยประหยัดเงิน แต่ไม่เพิ่ม capability อะไร ไม่มีส่วนอื่นใน repo นี้ที่พึ่งพามัน
 
@@ -228,9 +251,16 @@ Setup ต้นฉบับใช้ local Ollama model เป็น **tier pre-
 
 ส่วนนี้ optional 100% ข้ามได้เลยถ้าไม่อยากได้ มีไว้แค่ช่วยลด token cost ของข้อความก้อนใหญ่
 
+</details>
+
 ---
 
 ## ใช้กับเครื่องมืออื่นได้ไหม (Codex, Cursor, Gemini CLI ฯลฯ)
+
+มีไฟล์แยกสองไฟล์: `CLAUDE.md` (เฉพาะ Claude Code) กับ `AGENTS.md` (ส่วนที่พกไปใช้ได้ทั่วไป — [agents.md](https://agents.md), Codex/Cursor/Gemini CLI/Copilot อ่านได้ด้วย)
+
+<details>
+<summary>สองไฟล์ทำงานร่วมกันยังไง</summary>
 
 template นี้สร้างมาสำหรับ **Claude Code โดยเฉพาะ** แต่ตั้งแต่ Claude Code 2.1.277 (ก.ย. 2026) ตัว Claude Code เองก็อ่าน [`AGENTS.md`](https://agents.md) เป็น fallback ด้วยแล้ว ตอน project ไม่มี `CLAUDE.md` มันจะไปอ่านไฟล์นี้แทน — format เดียวกับที่ Codex CLI, Cursor, Gemini CLI, GitHub Copilot อ่านอยู่แล้ว เพราะแบบนี้ template ถึงมีไฟล์แยกสองไฟล์:
 
@@ -244,6 +274,8 @@ template นี้สร้างมาสำหรับ **Claude Code โด�
 - Hook (`settings.json`) และไฟล์ subagent (`agents/*.md`) เป็นของเฉพาะ Claude Code — ไม่มีอะไรให้ port ไปที่อื่น
 
 ถ้าใช้ Codex/Cursor/Gemini CLI เป็นหลักอยู่แล้ว `AGENTS.md` เอากฎ engineering-discipline ไปใช้ได้ทันที ส่วนที่เหลือของ repo (skill, hook, การแก้ .docx) ยังอยู่เป็นเอกสารอ้างอิงให้ copy/paste ต่อ
+
+</details>
 
 ---
 

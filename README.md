@@ -13,22 +13,33 @@
 
 </div>
 
-A portable snapshot of one person's Claude Code setup — global instructions, engineering rules, **45 curated skills** (7 self-authored — 3 written from scratch, 4 self-written wrappers around third-party tools — 1 adapted from an upstream skill, the rest adopted from upstream repos, all with per-skill provenance in `sources.json`), real memory examples, a skill-provenance manifest, and a cross-project knowledge vault — packaged so a fresh Claude Code instance (or the person setting one up) can bootstrap the same workflow habits and capabilities on a new machine. This is a **template to adapt, not a config to run as-is**: personal identifiers have been scrubbed and replaced with placeholders, and several sections only make sense if you also adopt the tools they describe.
+A portable snapshot of one person's Claude Code setup — instructions, skills, hooks, and a knowledge vault, packaged so a fresh Claude Code instance can bootstrap the same habits on a new machine. **A template to adapt, not a config to run as-is.**
+
+<details>
+<summary>Read the full pitch</summary>
+
+Global instructions, engineering rules, **45 curated skills** (7 self-authored — 3 written from scratch, 4 self-written wrappers around third-party tools — 1 adapted from an upstream skill, the rest adopted from upstream repos, all with per-skill provenance in `sources.json`), real memory examples, a skill-provenance manifest, and a cross-project knowledge vault — packaged so a fresh Claude Code instance (or the person setting one up) can bootstrap the same workflow habits and capabilities on a new machine. This is a **template to adapt, not a config to run as-is**: personal identifiers have been scrubbed and replaced with placeholders, and several sections only make sense if you also adopt the tools they describe.
+
+</details>
 
 ## Getting started (quickstart)
 
-**Shortcut:** clone the repo, open it in Claude Code, and run `/adopt` — it interviews you (which optional pieces you want, plugin list, target paths) and does steps 2-6 and 8-9 below for you, checking off progress in a resumable journal file as it goes. Step 7 (installing the plugin ecosystems themselves) is deliberately out of `/adopt`'s scope — that one's still on you. The manual steps below are what `/adopt` automates, and are also there for anyone who'd rather do it by hand or review exactly what changes before running it.
+> **Shortcut:** clone the repo, open it in Claude Code, and run `/adopt` — it interviews you and does steps 2, 3, 5, and 7 below for you, checking off progress in a resumable journal file. Step 6 (installing the plugin ecosystems themselves) is deliberately out of scope for `/adopt` — that one's still on you.
 
-1. **Clone the repo** to anywhere convenient on the target machine.
-2. **Decide the one optional piece now** — answer yes/no, since it determines what you delete in step 5: Local AI (Ollama) pre-compression. See the "Optional: ___" section below for details.
-3. **Copy `global-config/CLAUDE.md`, `agents/*.md`, `hooks/*.py`, `skills/*`, and `tools/`** to your own `~/.claude/` (merge or replace — your call). These are what make the routing rules, git safety gate, graphify auto-sync, skill catalog, and update checker actually work, not just read as prose. **Before copying `CLAUDE.md`, rewrite its "Installed Plugins" section to list only what you actually have installed** — the original owner's copy claims specific plugins are enabled; carrying that over verbatim makes your Claude lie about available tooling.
-   - **Working across multiple AI coding agents (Codex, Cursor, Gemini CLI, ...) too?** Also copy `global-config/AGENTS.md` into the projects you want it in (project root, not `~/.claude/`) instead of, or alongside, a project-level `CLAUDE.md`. This is a manual step — `/adopt` only ever writes into `~/.claude/`, so it doesn't ask about or copy this for you. See "Compatibility with other AI coding tools" below for how the two interact.
-4. **Merge `global-config/settings.example.json`** into your `~/.claude/settings.json` (after replacing `<YOUR_HOME>`; on macOS/Linux also change the hook command's `py` launcher to `python3`, that entry is Windows-specific as shipped).
-5. **Delete Ollama if you said "no" in step 2.** Fast pass: the Ollama paragraphs in your CLAUDE.md copy + `notes/local-ollama-models.md` + `tools/ollama/`.
-6. **Find-and-replace the placeholders** in everything you kept — see step 8 of "How to adopt this" below for the full list.
-7. **Install the plugin ecosystems referenced** (superpowers, ecc, etc.) — see "What you'll still need to install separately" below.
-8. **Optionally copy `notes/`** into your own second-brain vault location, and **`memory-examples/`** into your Claude Code auto-memory folder for the relevant project.
-9. **Start a Claude Code session and verify** it picked up the new CLAUDE.md — e.g. ask for an implementation plan and check that `/plan-pro` gets invoked, or ask about model routing and see if the cost ladder comes back.
+<p align="center"><img src="assets/quickstart-flow.svg" alt="Clone, then copy configs, then run /adopt, then verify" width="100%"/></p>
+
+| # | Step | Where |
+|---|---|---|
+| 1 | Clone the repo | anywhere convenient |
+| 2 | Decide: want local Ollama pre-compression? | see [Optional: Local AI](#optional-local-ai-ollama-pre-compression) |
+| 3 | Copy configs into `~/.claude/` | `CLAUDE.md`, `agents/*.md`, `hooks/*.py`, `skills/*`, `tools/` — **rewrite "Installed Plugins" first** |
+| 4 | Merge settings | `global-config/settings.example.json` → `~/.claude/settings.json` (replace `<YOUR_HOME>`) |
+| 5 | Find-and-replace placeholders | full list in [How to adopt this](#how-to-adopt-this), step 8 |
+| 6 | Install the plugin ecosystems | see [What you'll still need to install](#what-youll-still-need-to-install-separately) |
+| 7 | Copy `notes/` + `memory-examples/` (optional) | your own vault / auto-memory folder |
+| 8 | Verify | ask for an implementation plan — does `/plan-pro` fire? |
+
+Multi-agent shop (Codex, Cursor, Gemini CLI, ...)? Also copy `global-config/AGENTS.md` into each project root — see [Compatibility with other AI coding tools](#compatibility-with-other-ai-coding-tools).
 
 The rest of this README explains each piece in detail.
 
@@ -193,6 +204,11 @@ Install them via Claude Code's plugin system on the new machine, then reconcile 
 
 ## A note on subscription plan and the Fable 5.1 tier
 
+`CLAUDE.md`'s routing ladder tops out at a `fable-medium` subagent, which needs a **Max** plan — on **Pro**, spawning it just fails. `/adopt` asks about this and fixes it for you.
+
+<details>
+<summary>Manual fix if you're not on Max</summary>
+
 The model-routing ladder in `CLAUDE.md` tops out at a `fable-medium` subagent — a deliberately expensive, rarely-used escalation tier for the hardest problems. The original owner is on a **Max** plan, where that model is available. If you're on **Pro** (or any plan without Fable 5.1 access), spawning `fable-medium` will just fail.
 
 Before copying `CLAUDE.md` as-is, check which plan you're on. If you don't have Fable 5.1:
@@ -202,9 +218,16 @@ Before copying `CLAUDE.md` as-is, check which plan you're on. If you don't have 
 
 `/adopt` asks this as part of its interview and does this edit for you; if you're copying files by hand instead, do it yourself so Claude doesn't keep trying to spawn a subagent your plan can't reach.
 
+</details>
+
 ---
 
 ## Optional: Local AI (Ollama) pre-compression
+
+A **free, lossy pre-compression tier** — a local model digests long low-stakes text before it hits a paid model's context. Zero capability added, pure cost-saver. Skippable; nothing else here depends on it.
+
+<details>
+<summary>Details — do you want this?</summary>
 
 The original setup uses local Ollama models as a **free, lossy pre-compression tier** — piping long low-stakes text (logs, verbose docs) through a local model to digest it *before* it enters a paid model's context. It sits **below Haiku** in the cost ladder and is not a routing tier: no tool access, no repo context, text in / text out only. It saves money; it adds no capability. Nothing else in this repo depends on it.
 
@@ -226,9 +249,16 @@ Skip this entire section. Delete the Ollama paragraphs from your copy of `CLAUDE
 
 This is 100% optional and skippable. It exists purely to shave token costs on bulk text.
 
+</details>
+
 ---
 
 ## Compatibility with other AI coding tools
+
+Two files ship instead of one: `CLAUDE.md` (Claude Code-only) and `AGENTS.md` (the portable subset — [agents.md](https://agents.md), also read by Codex, Cursor, Gemini CLI, Copilot).
+
+<details>
+<summary>How the two interact</summary>
 
 This template is built specifically for **Claude Code**, but as of Claude Code 2.1.277 (September 2026), Claude Code itself also reads [`AGENTS.md`](https://agents.md) as a fallback when a project has no `CLAUDE.md` — the same convention Codex CLI, Cursor, Gemini CLI, and GitHub Copilot already read. That's why this template ships two files instead of one:
 
@@ -242,6 +272,8 @@ What else *can* be adapted by hand if you want more than the AGENTS.md subset:
 - Hooks (`settings.json`) and the subagent files (`agents/*.md`) are Claude Code-only — there's no equivalent to port them to.
 
 If you use Codex/Cursor/Gemini CLI day to day, `AGENTS.md` gets you the engineering-discipline rules out of the box; the rest of the repo (skills, hooks, the .docx fixes) is still there as reference material to copy/paste from.
+
+</details>
 
 ---
 
