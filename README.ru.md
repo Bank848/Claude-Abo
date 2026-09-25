@@ -53,9 +53,11 @@ claude-clone-template/
 ├── .claude/commands/adopt.md              # Run `/adopt` in this repo to interview + auto-apply the steps below
 ├── global-config/
 │   ├── CLAUDE.md                          # Global instruction file (~/.claude/CLAUDE.md equivalent)
+│   ├── AGENTS.md                          # Portable subset of CLAUDE.md for non-Claude-Code agents (Codex, Cursor, Gemini CLI, ...)
 │   ├── settings.example.json              # Sanitized ~/.claude/settings.json — hooks, plugins, model default
 │   ├── agents/                            # 3 pinned-model subagent definitions (opus, haiku-batch, fable-medium)
 │   ├── hooks/block-dangerous-git.py       # PreToolUse gate that asks before risky git commands
+│   ├── hooks/graphify-auto-update.py      # PostToolUse hook — keeps the graphify knowledge graph in sync after edits
 │   ├── rules/ecc-common/                  # 10 engineering-discipline rule files (ecc plugin ecosystem)
 │   ├── skills/                            # 45 curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
 │   ├── SKILLS_INDEX.md                    # Personal index of installed skills/plugins + when to use which
@@ -77,6 +79,7 @@ claude-clone-template/
 - **Рабочий процесс планирования** — `/plan-pro` как планировщик по умолчанию.
 - **Соглашение о хранилище second-brain** — одно правило ("привязано ли это к конкретному репозиторию?"), решающее, что живёт в хранилище, а что — в docs/ADR репозитория.
 - **Защитный git-хук** — гейт PreToolUse, который спрашивает подтверждение перед деструктивными git-командами.
+- **Хук авто-синхронизации graphify** — хук PostToolUse, который держит граф знаний в актуальном состоянии после каждой правки, не блокируя саму правку.
 - **Особенности шеллов** — правила по хередокам для Bash tool против PowerShell tool (боль, специфичная для Windows, познанная на собственном опыте).
 - **Самомониторинг контекста** — когда Claude должен сам проактивно предлагать `/compact`.
 - **Правила против ИИ-штампов в тексте** — полный тайско-английский свод правил, чтобы черновой текст читался как написанный человеком (лексика, которой стоит избегать, структурные паттерны, соответствие регистру); самая крупная и наиболее переиспользуемая часть файла. Подробности лежат в `memory-examples/`.
@@ -175,7 +178,7 @@ claude-clone-template/
 ## Как это внедрить
 
 1. **Скопируйте `global-config/CLAUDE.md`** в свой собственный `~/.claude/CLAUDE.md`. Слейте с тем, что у вас уже есть, или полностью замените — решать вам. Сначала прочитайте файл; удалите разделы, которые к вам не относятся. **Перепишите раздел "Installed Plugins" прежде, чем делать что-либо ещё с этим файлом** — сейчас в нём утверждается, что установлены и включены конкретные плагины (superpowers, ecc, pordee, lazyweb, andrej-karpathy-skills), и Claude указывается не упоминать их установку. Это верно для исходного владельца, но не для вас. Замените этот раздел своим реальным списком плагинов или удалите его, пока вы что-нибудь не установите.
-2. **Скопируйте `global-config/agents/*.md`** в `~/.claude/agents/` и **`global-config/hooks/block-dangerous-git.py`** в `~/.claude/hooks/`. Именно они делают правила маршрутизации моделей и защитный git-гейт из CLAUDE.md реально работающими, а не просто текстом.
+2. **Скопируйте `global-config/agents/*.md`** в `~/.claude/agents/` и **`global-config/hooks/*.py`** в `~/.claude/hooks/`. Именно они делают правила маршрутизации моделей, защитный git-гейт и хук авто-синхронизации graphify из CLAUDE.md реально работающими, а не просто текстом.
 3. **Скопируйте `global-config/skills/*`** в `~/.claude/skills/`. Это основная часть реальной ценности — 45 рабочих папок с навыками, а не просто их описания.
 4. **Слейте `global-config/settings.example.json`** со своим `~/.claude/settings.json` (сначала замените `<YOUR_HOME>` на реальный путь к домашней папке). Сливайте, а не перезаписывайте, если у вас уже есть settings.json — возьмите запись `hooks.PreToolUse` и всё нужное из `enabledPlugins`. В поставляемом хуке используется Windows-лаунчер `py`; на macOS/Linux сначала замените его на `python3`.
 5. **Скопируйте `global-config/rules/ecc-common/`** в `~/.claude/rules/` **только если** вы устанавливаете плагин ecc. Иначе пропустите.
@@ -256,14 +259,18 @@ claude-clone-template/
 <details>
 <summary>Как эти два файла взаимодействуют</summary>
 
-Этот шаблон создан специально для **Claude Code**. Механизмы, на которые он опирается — автозагружаемый `CLAUDE.md`, инструмент `Skill`, хуки `settings.json`, определения субагентов — это функции Claude Code, а не переносимый формат файлов. Указать Codex CLI, ChatGPT, Antigravity, Cursor или любой другой инструмент на этот репозиторий не заставит их автоматически "подхватить" навыки или правила; ничто здесь не заработает "из коробки" вне Claude Code.
+Этот шаблон создан специально для **Claude Code**, но начиная с Claude Code 2.1.277 (сентябрь 2026) сам Claude Code тоже читает [`AGENTS.md`](https://agents.md) как запасной вариант, когда в проекте нет `CLAUDE.md` — тот же формат, который уже читают Codex CLI, Cursor, Gemini CLI и GitHub Copilot. Именно поэтому в шаблоне два файла вместо одного:
 
-Что *можно* адаптировать вручную:
-- `global-config/CLAUDE.md` — это обычный текст: скопируйте нужные части в `AGENTS.md` (который читают Codex CLI и ещё несколько инструментов) или в кастомный системный промпт. Сначала уберите всё, что ссылается на механизмы, специфичные для Claude Code (spawn_task, инструмент Skill, маршрутизация субагентов) — они нигде больше не будут иметь смысла.
+- **`global-config/CLAUDE.md`** — полная настройка: маршрутизация моделей с учётом стоимости, `/plan-pro`, каталог навыков, хуки, маршрутизация субагентов — всё, что имеет смысл только внутри Claude Code.
+- **`global-config/AGENTS.md`** — переносимое подмножество (стиль кода, git-процесс, тестирование, код-ревью, чек-лист безопасности, общие паттерны) со всеми механизмами, специфичными для Claude Code, вырезанными. Положите его в любой проект — и любой агент, понимающий AGENTS.md, подхватит его, включая сам Claude Code.
+
+Если в проекте есть **оба** файла, Claude Code читает `CLAUDE.md` и игнорирует `AGENTS.md` — они не сливаются друг с другом, так что не рассчитывайте, что специфичные для Claude Code правила применятся только потому, что AGENTS.md тоже лежит рядом. Другие инструменты (Codex, Cursor и т.д.) читают только `AGENTS.md` — они вообще не знают о `CLAUDE.md`, инструменте `Skill`, хуках `settings.json` или определениях субагентов, так что эти механизмы в любом случае остаются только для Claude Code.
+
+Что ещё *можно* адаптировать вручную, если хочется большего, чем даёт подмножество AGENTS.md:
 - Каждый навык в `global-config/skills/<name>/SKILL.md` — это просто markdown-файл с инструкциями. Его можно вставить в кастомные инструкции другого инструмента, но вы потеряете автоматический триггер, а любые прилагающиеся скрипты предполагают шелл, который этот инструмент реально может запускать.
 - Хуки (`settings.json`) и файлы субагентов (`agents/*.md`) — это только для Claude Code, эквивалента для их переноса не существует.
 
-Если вы ежедневно пользуетесь Codex/ChatGPT/Antigravity, этот репозиторий всё равно полезен как *справочный материал* (правила письма, фиксы для .docx, логика защитного git-хука) — просто рассчитывайте копировать/вставлять нужные части, а не подкладывать папку целиком и ожидать, что она заработает.
+Если вы ежедневно пользуетесь Codex/Cursor/Gemini CLI, `AGENTS.md` сразу даёт вам правила инженерной дисциплины из коробки; остальная часть репозитория (навыки, хуки, фиксы для .docx) при этом всё равно остаётся справочным материалом для копирования.
 
 </details>
 

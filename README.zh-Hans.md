@@ -53,9 +53,11 @@ claude-clone-template/
 ├── .claude/commands/adopt.md              # Run `/adopt` in this repo to interview + auto-apply the steps below
 ├── global-config/
 │   ├── CLAUDE.md                          # Global instruction file (~/.claude/CLAUDE.md equivalent)
+│   ├── AGENTS.md                                  # CLAUDE.md 的可移植子集,供非 Claude Code 的代理使用(Codex、Cursor、Gemini CLI 等)
 │   ├── settings.example.json              # Sanitized ~/.claude/settings.json — hooks, plugins, model default
 │   ├── agents/                            # 3 pinned-model subagent definitions (opus, haiku-batch, fable-medium)
 │   ├── hooks/block-dangerous-git.py       # PreToolUse gate that asks before risky git commands
+│   ├── hooks/graphify-auto-update.py              # PostToolUse hook——在每次编辑后保持 graphify 知识图谱同步
 │   ├── rules/ecc-common/                  # 10 engineering-discipline rule files (ecc plugin ecosystem)
 │   ├── skills/                            # 45 curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
 │   ├── SKILLS_INDEX.md                    # Personal index of installed skills/plugins + when to use which
@@ -77,6 +79,7 @@ claude-clone-template/
 - **规划工作流** ——`/plan-pro` 作为默认的计划撰写工具。
 - **第二大脑知识库的组织约定** ——一条规则("是否绑定到某个仓库?")就决定了内容应该放进知识库还是某个仓库的 docs/ADR。
 - **Git 安全 hook** ——一个在执行破坏性 git 命令前弹出确认的 PreToolUse 网关。
+- **graphify 自动同步 hook** ——一个 PostToolUse hook,在每次编辑之后自动让知识图谱保持最新,且不会阻塞编辑本身。
 - **Shell 使用陷阱** ——Bash 工具与 PowerShell 工具在 heredoc 语法上的差异规则(Windows 特有的坑,踩过才知道)。
 - **上下文自我监控** ——Claude 何时应该主动建议 `/compact`。
 - **反 AI 腔写作规则** ——一整套泰语+英语规则集,让草拟的文本读起来像人写的(要避免的词汇、结构模式、语域匹配);这是该文件里体量最大、最具普适性的一部分。背景细节保存在 `memory-examples/` 中。
@@ -175,7 +178,7 @@ claude-clone-template/
 ## 如何采用本仓库
 
 1. **复制 `global-config/CLAUDE.md`** 到你自己的 `~/.claude/CLAUDE.md`。可以与你现有的内容合并,也可以直接替换——由你决定。先通读一遍,删掉不适用于你的部分。**在做任何其他操作之前,先重写"Installed Plugins"一节**——它目前声明了特定插件(superpowers、ecc、pordee、lazyweb、andrej-karpathy-skills)已安装并启用,并且告诉 Claude 不要提及安装这些插件。这对原作者是事实,对你未必是。把它替换成你自己实际的插件列表,或者在你安装好东西之前先删掉这部分。
-2. **将 `global-config/agents/*.md`** 复制到 `~/.claude/agents/`,并把 **`global-config/hooks/block-dangerous-git.py`** 复制到 `~/.claude/hooks/`。正是这些文件让 CLAUDE.md 里的模型路由规则和 git 安全网关真正起作用,而不只是文字说明。
+2. **将 `global-config/agents/*.md`** 复制到 `~/.claude/agents/`,并把 **`global-config/hooks/*.py`**(两个 hook 都要)复制到 `~/.claude/hooks/`。正是这些文件让 CLAUDE.md 里的模型路由规则、git 安全网关,以及 graphify 自动同步 hook 真正起作用,而不只是文字说明。
 3. **将 `global-config/skills/*`** 复制到 `~/.claude/skills/`。这是本仓库实际价值的主体——45 个可直接使用的 skill 文件夹,而不只是对它们的描述。
 4. **将 `global-config/settings.example.json` 合并**进你自己的 `~/.claude/settings.json`(先把 `<YOUR_HOME>` 替换成你真实的家目录路径)。如果你已经有一份 settings.json,应该合并而不是覆盖——取 `hooks.PreToolUse` 条目以及 `enabledPlugins` 中你想要的部分。shipped 的 hook 命令用的是 Windows 的 `py` 启动器;在 macOS/Linux 上,先把它改成 `python3`。
 5. **将 `global-config/rules/ecc-common/` 复制**到 `~/.claude/rules/`,**仅当**你安装了 ecc 插件时才这么做,否则跳过。
@@ -256,14 +259,18 @@ claude-clone-template/
 <details>
 <summary>两个文件如何配合</summary>
 
-本模板是专门为 **Claude Code** 打造的。它所依赖的机制——自动加载的 `CLAUDE.md`、`Skill` 工具、`settings.json` 里的 hooks、子代理定义——都是 Claude Code 特有的功能,而不是某种通用文件格式。把 Codex CLI、ChatGPT、Antigravity、Cursor 或其他任何工具指向本仓库,并不会让它自动"识别"这些 skill 或规则;脱离 Claude Code,这里的东西不会开箱即用。
+本模板是专门为 **Claude Code** 打造的,但从 Claude Code 2.1.277(2026 年 9 月)起,Claude Code 自己在项目没有 `CLAUDE.md` 时,也会读取 [`AGENTS.md`](https://agents.md) 作为兜底——这正是 Codex CLI、Cursor、Gemini CLI、GitHub Copilot 早已在用的同一套约定。这就是为什么本模板准备了两个文件,而不是一个:
 
-*可以*手动改编的部分:
-- `global-config/CLAUDE.md` 是纯文本——把你想要的部分复制进 `AGENTS.md`(Codex CLI 等少数工具会读取这个文件)或自定义系统提示词中。先去掉任何引用 Claude Code 专属机制的内容(spawn_task、Skill 工具、子代理路由)——这些在别的工具里没有意义。
+- **`global-config/CLAUDE.md`** ——完整配置:成本感知的模型路由、`/plan-pro`、skill 目录、hooks、子代理路由,所有只在 Claude Code 里才有意义的东西。
+- **`global-config/AGENTS.md`** ——可移植的子集(编码风格、git 工作流、测试、代码审查、安全检查清单、常见模式),去掉了所有 Claude Code 专属机制。把它放进任何项目,任何支持 AGENTS.md 约定的代理都能读取,包括 Claude Code 自己。
+
+如果一个项目**同时**有这两个文件,Claude Code 会读取 `CLAUDE.md` 并忽略 `AGENTS.md`——两者不会合并,所以不要指望只因为项目里也放了 AGENTS.md,Claude Code 专属的规则就会生效。其他工具(Codex、Cursor 等)则始终只读取 `AGENTS.md`;它们不理解 `CLAUDE.md`、`Skill` 工具、`settings.json` 里的 hooks 或子代理定义这些概念,所以无论如何这些部分都只对 Claude Code 有效。
+
+如果你想要的不只是 AGENTS.md 这个子集,以下内容*可以*手动改编:
 - `global-config/skills/<name>/SKILL.md` 下的每个 skill 本质上就是一份 markdown 指令文件。你可以把某一个粘贴进另一个工具的自定义指令里,但会失去自动触发能力,而且任何附带的脚本都假定运行在某个特定 shell 环境下,不一定能在别的工具里跑起来。
 - Hooks(`settings.json`)和子代理文件(`agents/*.md`)是 Claude Code 专属的——没有对应的东西可以移植过去。
 
-如果你日常使用 Codex/ChatGPT/Antigravity,本仓库依然可以当作*参考资料*来用(写作规则、.docx 修复方法、git 安全 hook 的逻辑)——只是需要自己复制粘贴相关部分,而不能指望把整个文件夹丢进去就能用。
+如果你日常使用 Codex/Cursor/Gemini CLI,`AGENTS.md` 能让你直接用上那套工程纪律规则;仓库里其余部分(skill、hooks、.docx 修复方法)依然可以当作参考资料来复制粘贴。
 
 </details>
 

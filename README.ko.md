@@ -53,9 +53,11 @@ claude-clone-template/
 ├── .claude/commands/adopt.md              # Run `/adopt` in this repo to interview + auto-apply the steps below
 ├── global-config/
 │   ├── CLAUDE.md                          # Global instruction file (~/.claude/CLAUDE.md equivalent)
+│   ├── AGENTS.md                          # Portable subset of CLAUDE.md for non-Claude-Code agents (Codex, Cursor, Gemini CLI, ...)
 │   ├── settings.example.json              # Sanitized ~/.claude/settings.json — hooks, plugins, model default
 │   ├── agents/                            # 3 pinned-model subagent definitions (opus, haiku-batch, fable-medium)
 │   ├── hooks/block-dangerous-git.py       # PreToolUse gate that asks before risky git commands
+│   ├── hooks/graphify-auto-update.py      # PostToolUse hook — keeps the graphify knowledge graph in sync after edits
 │   ├── rules/ecc-common/                  # 10 engineering-discipline rule files (ecc plugin ecosystem)
 │   ├── skills/                            # 45 curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
 │   ├── SKILLS_INDEX.md                    # Personal index of installed skills/plugins + when to use which
@@ -77,6 +79,7 @@ claude-clone-template/
 - **계획 워크플로우** — 기본 플래너로 `/plan-pro`를 사용합니다.
 - **세컨드 브레인 볼트 규칙** — "특정 저장소 하나에 종속되어 있는가?"라는 단일 기준으로 무엇이 볼트에 들어가고 무엇이 저장소의 docs/ADR에 들어갈지 결정합니다.
 - **git 안전 훅** — 파괴적인 git 명령 전에 확인을 요구하는 PreToolUse 게이트입니다.
+- **graphify 자동 동기화 훅** — 편집이 있을 때마다 지식 그래프를 최신 상태로 유지하는 PostToolUse 훅으로, 편집 자체를 막지는 않습니다.
 - **셸 관련 주의사항** — Bash 도구와 PowerShell 도구의 here-document 문법 차이 규칙(Windows 특유의 골칫거리로, 직접 겪으며 배운 내용입니다).
 - **컨텍스트 자가 모니터링** — Claude가 언제 `/compact`를 먼저 제안해야 하는지에 대한 기준입니다.
 - **AI 티 안 나게 쓰는 규칙** — 초안을 사람이 쓴 것처럼 읽히게 만드는 태국어·영어 종합 규칙(피해야 할 어휘, 구조적 패턴, 어투 맞추기)으로, 이 파일에서 가장 크고 범용성 있는 부분입니다. 뒷받침하는 세부 내용은 `memory-examples/`에 있습니다.
@@ -175,7 +178,7 @@ ecc(everything-claude-code) 플러그인 생태계에서 가져온 일반적인 
 ## 이 저장소 도입하기
 
 1. **`global-config/CLAUDE.md`를 복사**해서 자신의 `~/.claude/CLAUDE.md`로 넣으세요. 기존 내용과 병합하거나 아예 대체해도 됩니다 — 판단은 각자의 몫입니다. 먼저 읽어보고 자신에게 맞지 않는 섹션은 지우세요. **다른 무엇보다 먼저 "Installed Plugins" 섹션을 다시 써야 합니다** — 현재는 특정 플러그인(superpowers, ecc, pordee, lazyweb, andrej-karpathy-skills)이 설치되고 활성화되어 있다고 단언하며, Claude에게 설치를 언급하지 말라고까지 지시합니다. 이는 원래 소유자에게만 해당하는 내용이지 여러분에게는 아닙니다. 실제로 설치한 플러그인 목록으로 바꾸거나, 뭔가 설치하기 전까지는 지워 두세요.
-2. **`global-config/agents/*.md`를 `~/.claude/agents/`로, `global-config/hooks/block-dangerous-git.py`를 `~/.claude/hooks/`로 복사**하세요. 이 파일들이 있어야 CLAUDE.md의 모델 라우팅 규칙과 git 안전장치가 단순한 텍스트가 아니라 실제로 동작합니다.
+2. **`global-config/agents/*.md`를 `~/.claude/agents/`로, `global-config/hooks/*.py`를 `~/.claude/hooks/`로 복사**하세요. 이 파일들이 있어야 CLAUDE.md의 모델 라우팅 규칙, git 안전장치, graphify 자동 동기화 훅이 단순한 텍스트가 아니라 실제로 동작합니다.
 3. **`global-config/skills/*`를 `~/.claude/skills/`로 복사**하세요. 이 부분이 실질적인 가치의 대부분을 차지합니다 — 45개의 실제로 동작하는 스킬 폴더이지, 단순히 설명만 있는 게 아닙니다.
 4. **`global-config/settings.example.json`을 자신의 `~/.claude/settings.json`에 병합**하세요(먼저 `<YOUR_HOME>`을 실제 홈 경로로 바꾸세요). 이미 settings.json이 있다면 덮어쓰지 말고 병합하세요 — `hooks.PreToolUse` 항목과 `enabledPlugins`에서 원하는 부분을 가져오면 됩니다. 배포된 훅 명령은 Windows의 `py` 런처를 사용합니다. macOS/Linux에서는 먼저 `python3`로 바꾸세요.
 5. ecc 플러그인을 설치할 **경우에만** **`global-config/rules/ecc-common/`을 `~/.claude/rules/`로 복사**하세요. 그렇지 않다면 건너뛰세요.
@@ -256,14 +259,18 @@ CLAUDE.md의 모델 라우팅 사다리는 `fable-medium` 서브에이전트에�
 <details>
 <summary>두 파일이 어떻게 상호작용하는지</summary>
 
-이 템플릿은 오직 **Claude Code**를 위해 만들어졌습니다. 여기서 의존하는 메커니즘들 — 자동으로 로드되는 `CLAUDE.md`, `Skill` 도구, `settings.json` 훅, 서브에이전트 정의 — 은 이식 가능한 파일 포맷이 아니라 Claude Code 고유의 기능입니다. Codex CLI, ChatGPT, Antigravity, Cursor 등 다른 도구를 이 저장소에 향하게 한다고 해서 스킬이나 규칙을 자동으로 "인식"하지는 않습니다. Claude Code 밖에서는 여기 있는 어떤 것도 바로 동작하지 않습니다.
+이 템플릿은 **Claude Code**를 위해 만들어졌지만, Claude Code 2.1.277(2026년 9월) 기준으로 Claude Code 자체도 프로젝트에 `CLAUDE.md`가 없을 때는 폴백으로 [`AGENTS.md`](https://agents.md)를 읽습니다 — Codex CLI, Cursor, Gemini CLI, GitHub Copilot이 이미 읽고 있던 것과 같은 관례입니다. 이 템플릿이 파일 하나 대신 두 개를 담고 있는 이유가 바로 이것입니다.
 
-수작업으로 적용할 수 있는 부분:
-- `global-config/CLAUDE.md`는 그냥 텍스트입니다 — 원하는 부분을 골라 `AGENTS.md`(Codex CLI 등 일부 도구가 읽는 파일)나 커스텀 시스템 프롬프트에 붙여 넣으세요. Claude Code 고유 메커니즘(spawn_task, Skill 도구, 서브에이전트 라우팅)을 언급하는 부분은 먼저 빼세요 — 다른 곳에서는 아무 의미가 없습니다.
+- **`global-config/CLAUDE.md`** — 전체 설정입니다: 비용을 고려한 모델 라우팅, `/plan-pro`, 스킬 카탈로그, 훅, 서브에이전트 라우팅 등 Claude Code 안에서만 의미를 갖는 모든 것을 담고 있습니다.
+- **`global-config/AGENTS.md`** — 이식 가능한 부분(코딩 스타일, git 워크플로우, 테스트, 코드 리뷰, 보안 체크리스트, 공통 패턴)만 남기고 Claude Code 전용 메커니즘은 전부 걷어냈습니다. 어떤 프로젝트에든 넣어 두면 AGENTS.md를 인식하는 에이전트라면 무엇이든(Claude Code 포함) 그대로 집어 씁니다.
+
+한 프로젝트에 **두 파일이 모두** 있으면 Claude Code는 `CLAUDE.md`를 읽고 `AGENTS.md`는 무시합니다 — 둘을 합쳐서 읽지는 않으므로, AGENTS.md가 같이 있다고 해서 Claude Code 전용 규칙이 적용될 거라 기대하면 안 됩니다. 다른 도구(Codex, Cursor 등)는 오직 `AGENTS.md`만 읽습니다 — `CLAUDE.md`, `Skill` 도구, `settings.json` 훅, 서브에이전트 정의라는 개념 자체가 없으므로, 이런 부분은 무엇을 하든 여전히 Claude Code 전용으로 남습니다.
+
+AGENTS.md가 담고 있는 것보다 더 많이 가져가고 싶다면 수작업으로 적용할 수 있는 부분:
 - `global-config/skills/<name>/SKILL.md` 아래의 각 스킬은 그냥 마크다운 지시문 파일입니다. 다른 도구의 커스텀 지시문에 붙여 넣을 수는 있지만, 자동 트리거링은 사라지고, 딸려 있는 스크립트는 그 도구가 실제로 실행할 수 있는 셸을 가정하고 있습니다.
 - 훅(`settings.json`)과 서브에이전트 파일(`agents/*.md`)은 Claude Code 전용입니다 — 이식할 대상이 따로 없습니다.
 
-Codex/ChatGPT/Antigravity를 평소에 쓴다면, 이 저장소는 여전히 *참고 자료*로 쓸모가 있습니다(글쓰기 규칙, .docx 수정, git 안전 훅 로직 등). 다만 폴더를 그대로 가져다 놓고 동작하기를 기대하기보다는 필요한 부분을 복사/붙여넣기 하는 방식이 될 것입니다.
+Codex/Cursor/Gemini CLI를 평소에 쓴다면, `AGENTS.md`만으로 엔지니어링 규율 규칙을 바로 가져다 쓸 수 있습니다. 저장소의 나머지 부분(스킬, 훅, .docx 수정 로직)은 여전히 복사/붙여넣기용 참고 자료로 남아 있습니다.
 
 </details>
 
