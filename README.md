@@ -1,6 +1,17 @@
-English | **[ภาษาไทย](README.th.md)**
+**English** | [ภาษาไทย](README.th.md) | [简体中文](README.zh-Hans.md) | [日本語](README.ja.md) | [Español](README.es.md) | [한국어](README.ko.md) | [Português (Brasil)](README.pt-BR.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Русский](README.ru.md)
 
-# Claude Code Clone Template
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Claude%20Code%20Clone%20Template&fontSize=38&fontColor=ffffff&fontAlignY=38&desc=A%20portable%20snapshot%20of%20one%20person's%20Claude%20Code%20setup&descAlignY=58&descSize=17&descColor=ffffff&animation=fadeIn" alt="Claude Code Clone Template banner" width="100%"/>
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Skills](https://img.shields.io/badge/skills-45%20curated-brightgreen)](#global-configskills)
+[![Languages](https://img.shields.io/badge/languages-10-orange)](#top)
+[![Template](https://img.shields.io/badge/type-adapt%2C%20not%20run%20as--is-lightgrey)](#caveat-this-is-one-persons-setup)
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=1200&color=6C63FF&center=true&vCenter=true&width=640&lines=45+curated+skills+with+full+provenance;Cost-aware+Sonnet+%2F+Opus+%2F+Haiku+model+routing;Git+safety+hooks+%2B+%2Fplan-pro+workflow;Cross-project+second-brain+vault" alt="rotating feature highlights"/>
+
+</div>
 
 A portable snapshot of one person's Claude Code setup — global instructions, engineering rules, **45 curated skills** (7 self-authored — 3 written from scratch, 4 self-written wrappers around third-party tools — 1 adapted from an upstream skill, the rest adopted from upstream repos, all with per-skill provenance in `sources.json`), real memory examples, a skill-provenance manifest, and a cross-project knowledge vault — packaged so a fresh Claude Code instance (or the person setting one up) can bootstrap the same workflow habits and capabilities on a new machine. This is a **template to adapt, not a config to run as-is**: personal identifiers have been scrubbed and replaced with placeholders, and several sections only make sense if you also adopt the tools they describe.
 
@@ -69,6 +80,78 @@ General engineering discipline from the ecc (everything-claude-code) plugin ecos
 
 ### `global-config/skills/`
 45 curated `SKILL.md` folders (plus supporting scripts/reference/data files where a skill has them) covering writing/marketing craft (copywriting, copy-editing, hallmark, marketing-council, pricing...), engineering process (debug-mantra, poka-yoke, second-brain, dependency-audit, secrets-audit...), design (design-system, ui-ux-pro-max, banner-design, mobbin-references...), and meta-skills for managing Claude Code itself (skillify, grilling, second-brain, graphify, plan-pro, shipping-a-branch...). `poka-yoke`, `plan-pro`, and `shipping-a-branch` are self-authored from scratch; `graphify`, `dembrandt`, `markitdown`, and `mobbin-references` are self-written wrapper skills whose SKILL.md is original but whose underlying tools are third-party (credited in `ATTRIBUTION.md` and version-tracked in `sources.json`); `deslop-defaults` is adapted (harvested from `ibelick/ui-skills` and rewritten stack-agnostic); the rest are adopted from upstream repos — see `sources.json` for per-skill provenance and `ATTRIBUTION.md` for upstream credits. These are genuinely reusable prompt-engineering artifacts, not just descriptions of skills — copy them into `~/.claude/skills/` and they work immediately.
+
+<details>
+<summary><b>See all 45 skills, grouped by category</b> (click to expand)</summary>
+
+**Engineering process & workflow (15)**
+
+| Skill | What it does |
+|---|---|
+| `debug-mantra` | Four-step debugging discipline (reproduce → trace → falsify → cross-reference) recited before proposing any fix. |
+| `poka-yoke` *(self-authored)* | Mistake-proofing review — makes a bad state impossible/obvious at the source instead of catching it after the fact. |
+| `post-mortem` | Writes the canonical root-cause writeup after a bug is fixed and validated. |
+| `scrutinize` | Outsider-perspective review of a plan/PR/diff — checks intent first, then traces the real code path. |
+| `shipping-a-branch` *(self-authored)* | Drives commit → push → PR → review → merge end to end, confirming each risky step separately. |
+| `plan-pro` *(self-authored)* | Implementation-plan writer with a spawned multi-agent review loop and an HTML before/after output. |
+| `dependency-audit` | Checks project dependencies for known CVEs and supply-chain risks. |
+| `secrets-audit` | Scans source, git history, and infra for leaked credentials and weak secrets-management posture. |
+| `prompt-injection` | Audits apps/agents for prompt-injection and LLM permission-boundary vulnerabilities. |
+| `decide` | Structured decision workflow (37signals-style question set) that also archives the rationale. |
+| `unstuck` | Lateral-thinking technique bank for cracking a roadblock instead of reporting "not possible". |
+| `teach` | Teaches the user a new concept/skill within the current workspace. |
+| `wait-what` | Flags a message that didn't land and re-pitches it. |
+| `skillify` | Creates, adapts, or updates a Claude Code skill (from chat, video, dump, or an external repo). |
+| `wizard` | Generates an interactive bash wizard for steps only a human can perform (credentials, dashboards, migrations). |
+
+**Design & UI (11)**
+
+| Skill | What it does |
+|---|---|
+| `banner-design` | Designs social/ad/web/print banners across many art-direction styles. |
+| `design` | Broad design skill — logos, CIP mockups, slides, banners, icons, social photos. |
+| `design-system` | Three-layer design-token architecture (primitive → semantic → component) plus slide generation. |
+| `deslop-defaults` *(adapted)* | Structural defaults that stop AI-generated UI from looking averaged-out (z-index, accent restraint, states). |
+| `hallmark` | Anti-AI-slop design skill for greenfield pages, redesigns, and design extraction from URLs/screenshots. |
+| `ui-styling` | Builds accessible UI with shadcn/ui, Tailwind, and dark-mode-aware theming. |
+| `ui-ux-pro-max` | Searchable UI/UX database — styles, palettes, font pairings, UX guidelines, motion presets, chart types. |
+| `mobbin-references` | Pulls real-app reference screenshots (onboarding, paywalls, empty states...) before a UI is designed. |
+| `dembrandt` *(wrapper)* | Extracts a live website's actual design tokens (colors, type, spacing) via DOM/CSS inspection. |
+| `image` | Generates/edits/optimizes marketing images (heroes, social graphics, mockups, OG images). |
+| `slides` | Builds strategic HTML presentations with Chart.js and design-token theming. |
+
+**Marketing, content & brand (13)**
+
+| Skill | What it does |
+|---|---|
+| `brand` | Brand voice, visual identity, messaging frameworks, and consistency checks. |
+| `community-marketing` | Community-led growth strategy (Discord/Slack/forum, ambassador programs, advocacy). |
+| `content-strategy` | Decides what content to create — topic clusters, editorial calendars, content pillars. |
+| `copy-editing` | Edits/tightens/refreshes existing marketing copy. |
+| `copywriting` | Writes new marketing copy for landing/pricing/feature/about pages. |
+| `launch` | Plans a product launch, feature announcement, or go-to-market checklist. |
+| `management-talk` | Rewrites engineer-to-engineer writing for leadership, shaped to the target channel (Slack/email/standup). |
+| `marketing-council` | Simulated advisory board of named marketers debating a positioning question. |
+| `marketing-ideas` | Growth/marketing idea generator for SaaS and software products. |
+| `marketing-psychology` | Applies behavioral-science principles (anchoring, social proof, framing) to marketing decisions. |
+| `pricing` | Pricing/packaging strategy and pricing-page audits. |
+| `product-marketing` | Builds the reusable product/audience/positioning context doc other marketing skills reference. |
+| `social` | Social content creation, scheduling, repurposing, and social listening across platforms. |
+
+**Research & knowledge management (6)**
+
+| Skill | What it does |
+|---|---|
+| `deep-research` | Multi-source, multi-pass research brief with citations, contradictions, and gaps. |
+| `graphify` *(wrapper, self-authored)* | Turns any input (code/docs/papers/images) into a clustered knowledge graph with an audit report. |
+| `grilling` | Interviews the user relentlessly to stress-test a plan before building it. |
+| `second-brain` | Capture/compile/query/lint/connect workflow for a personal Obsidian-style knowledge vault. |
+| `watch-video` | Extracts transcript/visual/multimodal content from any yt-dlp-supported video source. |
+| `markitdown` *(wrapper)* | Converts PDFs/slides/sheets/audio/HTML/etc. into clean Markdown for LLM/RAG use. |
+
+Full provenance (source repo, adoption date, self-authored vs. adopted vs. adapted) for every entry is in `global-config/tools/skill-update-check/sources.json`; upstream credits are in `ATTRIBUTION.md`.
+
+</details>
 
 ### `global-config/memory-examples/`
 7 real entries from the owner's Claude Code auto-memory system (not project-specific facts — portable "how I work" habits): a naming-convention disambiguation for cross-session messaging, the local-Ollama-as-pre-compression pattern, a rule about what "update the skill notebook" actually means operationally, a shell-quoting gotcha (`\b` silently becoming a backspace byte), a feedback entry on how aggressively to trim context bloat, and the full backing detail (vocab tables + before/after examples) for the anti-AI-tell writing rules in CLAUDE.md, in both Thai and English. These exist to show the *shape* of a good memory entry (rule + why + how-to-apply) as much as their specific content — see `global-config/rules/ecc-common/` for how memory fits into the broader workflow, and CLAUDE.md's "จำ/บัญญัติ" section for the local-vs-global memory distinction this owner uses.
