@@ -1,4 +1,17 @@
-**[English](README.md)** | ภาษาไทย
+[English](README.md) | **ภาษาไทย** | [简体中文](README.zh-Hans.md) | [日本語](README.ja.md) | [Español](README.es.md) | [한국어](README.ko.md) | [Português (Brasil)](README.pt-BR.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Русский](README.ru.md)
+
+<div align="center">
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Claude%20Code%20Clone%20Template&fontSize=38&fontColor=ffffff&fontAlignY=38&desc=สแนปช็อตพกพาของ%20Claude%20Code%20setup%20ของคนคนหนึ่ง&descAlignY=58&descSize=17&descColor=ffffff&animation=fadeIn" alt="แบนเนอร์ Claude Code Clone Template" width="100%"/>
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Skills](https://img.shields.io/badge/skills-45%20curated-brightgreen)](#global-configskills)
+[![Languages](https://img.shields.io/badge/languages-10-orange)](#top)
+[![Template](https://img.shields.io/badge/type-adapt%2C%20not%20run%20as--is-lightgrey)](#ข้อควรรู้-นี่คือ-setup-ของคนคนเดียว)
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=1200&color=6C63FF&center=true&vCenter=true&width=640&lines=สกิลคัดสรร+45+ตัว+พร้อม+provenance+ครบ;จัดสรรโมเดล+Sonnet+%2F+Opus+%2F+Haiku+ตามต้นทุน;Git+safety+hooks+%2B+เวิร์กโฟลว์+%2Fplan-pro;Knowledge+vault+ข้ามโปรเจกต์" alt="สรุปฟีเจอร์เด่นแบบหมุนวน"/>
+
+</div>
 
 # Claude Code Clone Template
 
@@ -64,6 +77,78 @@ claude-clone-template/
 
 ### `global-config/skills/`
 โฟลเดอร์ `SKILL.md` คัดสรร 45 ตัว (พร้อมไฟล์ script/reference/data ประกอบถ้าสกิลนั้นมี) ครอบคลุมงานเขียน/การตลาด (copywriting, copy-editing, hallmark, marketing-council, pricing...), กระบวนการวิศวกรรม (debug-mantra, poka-yoke, second-brain, dependency-audit, secrets-audit...), งานออกแบบ (design-system, ui-ux-pro-max, banner-design, mobbin-references...), และ meta-skill สำหรับบริหารจัดการ Claude Code เอง (skillify, grilling, second-brain, graphify, plan-pro, shipping-a-branch...) `poka-yoke`, `plan-pro`, และ `shipping-a-branch` เขียนขึ้นเองจากศูนย์; `graphify`, `dembrandt`, `markitdown`, และ `mobbin-references` เป็น wrapper skill ที่เขียน SKILL.md เอง แต่เครื่องมือข้างในเป็นของ third-party (เครดิตใน `ATTRIBUTION.md` และ track เวอร์ชันใน `sources.json`); `deslop-defaults` ดัดแปลงมา (เก็บเกี่ยวจาก `ibelick/ui-skills` แล้วเขียนใหม่ให้ไม่ผูกกับ stack ใด stack หนึ่ง); ที่เหลือ adopt มาจาก upstream repo — ดู `sources.json` สำหรับ provenance รายสกิล และ `ATTRIBUTION.md` สำหรับเครดิต upstream พวกนี้เป็นงาน prompt-engineering ที่เอาไปใช้ต่อได้จริง ไม่ใช่แค่คำอธิบายสกิล — copy ไปที่ `~/.claude/skills/` แล้วใช้งานได้ทันที
+
+<details>
+<summary><b>ดูสกิลทั้ง 45 ตัว แบ่งตามหมวด</b> (คลิกเพื่อขยาย)</summary>
+
+**กระบวนการวิศวกรรม & workflow (15 ตัว)**
+
+| สกิล | ทำอะไร |
+|---|---|
+| `debug-mantra` | ท่องมนตร์ 4 ขั้นก่อนดีบัก (reproduce → ไล่ fail path → falsify hypothesis → cross-reference) ก่อนเสนอ fix |
+| `poka-yoke` *(เขียนเอง)* | รีวิวแบบกันพลาด — ทำให้ state ผิดเป็นไปไม่ได้/เห็นชัดตั้งแต่ต้นทาง แทนที่จะจับได้ทีหลัง |
+| `post-mortem` | เขียน root-cause writeup มาตรฐาน หลังบั๊กถูกแก้และ validate แล้ว |
+| `scrutinize` | รีวิวมุมคนนอกของ plan/PR/diff — เช็ค intent ก่อน แล้วค่อยไล่ code path จริง |
+| `shipping-a-branch` *(เขียนเอง)* | ขับ flow commit → push → PR → review → merge ครบ confirm ทีละขั้นที่เสี่ยง |
+| `plan-pro` *(เขียนเอง)* | เขียน implementation plan พร้อม review loop แบบ multi-agent และ output HTML before/after |
+| `dependency-audit` | เช็ค dependency ของโปรเจกต์หา CVE ที่รู้จักและความเสี่ยง supply-chain |
+| `secrets-audit` | สแกน source, git history, infra หา credential รั่วและจุดอ่อนเรื่อง secrets-management |
+| `prompt-injection` | ตรวจ app/agent หาช่องโหว่ prompt-injection และขอบเขต permission ของ LLM |
+| `decide` | workflow ตัดสินใจแบบมีโครง (ชุดคำถามสไตล์ 37signals) พร้อม archive เหตุผลไว้ |
+| `unstuck` | คลัง lateral-thinking technique ไว้แงะทางตัน แทนที่จะสรุปว่า "ทำไม่ได้" |
+| `teach` | สอนแนวคิด/สกิลใหม่ให้ user ภายใน workspace ปัจจุบัน |
+| `wait-what` | จับข้อความที่สื่อไม่ถึง แล้วลอง pitch ใหม่ |
+| `skillify` | สร้าง/ดัดแปลง/อัปเดต skill ของ Claude Code (จากแชท วิดีโอ dump หรือ repo ภายนอก) |
+| `wizard` | generate bash wizard แบบ interactive สำหรับขั้นตอนที่ต้องให้คนทำเอง (credential, dashboard, migration) |
+
+**ออกแบบ & UI (11 ตัว)**
+
+| สกิล | ทำอะไร |
+|---|---|
+| `banner-design` | ออกแบบ banner โซเชียล/โฆษณา/เว็บ/สิ่งพิมพ์ หลาย art direction |
+| `design` | สกิลออกแบบครอบคลุม — โลโก้, CIP mockup, slide, banner, icon, social photo |
+| `design-system` | สถาปัตยกรรม design token 3 ชั้น (primitive → semantic → component) พร้อม generate slide |
+| `deslop-defaults` *(ดัดแปลง)* | ค่า default เชิงโครงสร้างกัน UI ที่ AI generate ดูจืดๆ ไม่เสร็จ (z-index, accent, state) |
+| `hallmark` | สกิลออกแบบ anti-AI-slop สำหรับหน้าใหม่, redesign, และดึง design จาก URL/screenshot |
+| `ui-styling` | สร้าง UI ที่ accessible ด้วย shadcn/ui, Tailwind, และธีมรองรับ dark mode |
+| `ui-ux-pro-max` | ฐานข้อมูล UI/UX ค้นหาได้ — style, palette, font pairing, UX guideline, motion preset, chart type |
+| `mobbin-references` | ดึง screenshot อ้างอิงจากแอปจริง (onboarding, paywall, empty state...) ก่อนออกแบบ UI |
+| `dembrandt` *(wrapper)* | ดึง design token จริงของเว็บไซต์ที่มีอยู่แล้ว (สี, typography, spacing) ผ่าน DOM/CSS |
+| `image` | generate/แก้/optimize รูปภาพการตลาด (hero, social graphic, mockup, OG image) |
+| `slides` | สร้าง HTML presentation เชิงกลยุทธ์ด้วย Chart.js และ design-token theming |
+
+**การตลาด, เนื้อหา & แบรนด์ (13 ตัว)**
+
+| สกิล | ทำอะไร |
+|---|---|
+| `brand` | brand voice, visual identity, messaging framework, และเช็ค consistency |
+| `community-marketing` | กลยุทธ์ community-led growth (Discord/Slack/forum, ambassador program, advocacy) |
+| `content-strategy` | ตัดสินใจว่าจะสร้างเนื้อหาอะไร — topic cluster, editorial calendar, content pillar |
+| `copy-editing` | แก้/กระชับ/รีเฟรช copy การตลาดที่มีอยู่แล้ว |
+| `copywriting` | เขียน copy การตลาดใหม่สำหรับหน้า landing/pricing/feature/about |
+| `launch` | วางแผน product launch, ประกาศฟีเจอร์, หรือ checklist go-to-market |
+| `management-talk` | เขียนงานสไตล์ engineer-to-engineer ใหม่ให้ leadership อ่าน ปรับตามช่องทาง (Slack/email/standup) |
+| `marketing-council` | คณะที่ปรึกษาจำลองจากนักการตลาดชื่อดัง มาดีเบตคำถามเรื่อง positioning |
+| `marketing-ideas` | ตัวช่วยระดมไอเดียการตลาด/growth สำหรับผลิตภัณฑ์ SaaS/ซอฟต์แวร์ |
+| `marketing-psychology` | ใช้หลัก behavioral science (anchoring, social proof, framing) กับการตัดสินใจการตลาด |
+| `pricing` | กลยุทธ์ pricing/packaging และ audit หน้า pricing |
+| `product-marketing` | สร้างเอกสาร context เรื่องผลิตภัณฑ์/audience/positioning ที่สกิลการตลาดอื่นอ้างอิงต่อ |
+| `social` | สร้าง/จัดตาราง/repurpose เนื้อหาโซเชียล และ social listening ข้ามแพลตฟอร์ม |
+
+**วิจัย & จัดการความรู้ (6 ตัว)**
+
+| สกิล | ทำอะไร |
+|---|---|
+| `deep-research` | ทำ research brief หลายแหล่ง หลายรอบ พร้อม citation, ข้อขัดแย้ง, และช่องโหว่ที่ยังไม่ได้ตอบ |
+| `graphify` *(wrapper, เขียนเอง)* | แปลง input ใดๆ (โค้ด/เอกสาร/paper/รูป) เป็น knowledge graph แบบจัดกลุ่มพร้อม audit report |
+| `grilling` | สัมภาษณ์ user แบบไม่ยั้งเพื่อ stress-test plan ก่อนลงมือสร้างจริง |
+| `second-brain` | workflow capture/compile/query/lint/connect สำหรับ knowledge vault สไตล์ Obsidian |
+| `watch-video` | ดึง transcript/visual/multimodal จากวิดีโอที่ yt-dlp รองรับ |
+| `markitdown` *(wrapper)* | แปลง PDF/slide/sheet/audio/HTML ฯลฯ เป็น Markdown สะอาดสำหรับ LLM/RAG |
+
+Provenance เต็มของแต่ละสกิล (source repo, วันที่ adopt, เขียนเอง/adopt/ดัดแปลง) อยู่ใน `global-config/tools/skill-update-check/sources.json`; เครดิต upstream อยู่ใน `ATTRIBUTION.md`
+
+</details>
 
 ### `global-config/memory-examples/`
 entry จริง 7 ตัวจากระบบ auto-memory ของ Claude Code (ไม่ใช่ fact เฉพาะโปรเจกต์ แต่เป็นนิสัย "วิธีทำงาน" ที่เอาไปใช้ที่ไหนก็ได้): การแยกความหมายชื่อ cross-session messaging, pattern local-Ollama-เป็น-pre-compression, กฎว่า "update สมุดสกิล" หมายความว่าอะไรจริงๆ ในทางปฏิบัติ, จุดพลาดเรื่อง shell-quoting (`\b` กลายเป็น backspace byte แบบเงียบๆ), entry feedback เรื่องควร trim context bloat แรงแค่ไหน, และรายละเอียดหลังบ้านเต็มรูปแบบ (ตารางคำศัพท์ + ตัวอย่าง before-after) สำหรับกฎเขียนไม่ให้ดู AI ใน CLAUDE.md ทั้งภาษาไทยและอังกฤษ พวกนี้มีไว้โชว์ *รูปแบบ* ของ memory entry ที่ดี (กฎ + เหตุผล + วิธีใช้) พอๆ กับเนื้อหาเฉพาะของมันเอง — ดู `global-config/rules/ecc-common/` ว่า memory เข้ากับ workflow ใหญ่ยังไง และหัวข้อ "จำ/บัญญัติ" ใน CLAUDE.md สำหรับการแยก local กับ global memory ที่เจ้าของใช้
