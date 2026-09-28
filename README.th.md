@@ -76,7 +76,7 @@ claude-clone-template/
 ### `global-config/CLAUDE.md`
 หัวใจของ setup นี้ มันเข้ารหัส:
 
-- **Cost-aware model routing** — main loop เป็นหัวหน้างาน เลือกได้ระหว่าง Opus 5.5 (งานที่ต้องตัดสินใจเยอะ) หรือ Sonnet 5 (session routine ที่อยากประหยัด) คอยส่งงานให้ subagent Haiku/Sonnet/Opus/Fable ตามความยากของงาน พร้อมกฎว่าใครอ่านไฟล์ดิบ ใครอ่านแค่ข้อสรุป
+- **Cost-aware model routing** — main loop เป็นหัวหน้างาน เลือกได้ระหว่าง Opus 5.5 (งานที่ต้องตัดสินใจเยอะ) หรือ Sonnet 5.5 (session routine ที่อยากประหยัด) คอยส่งงานให้ subagent Haiku/Sonnet/Opus/Fable ตามความยากของงาน พร้อมกฎว่าใครอ่านไฟล์ดิบ ใครอ่านแค่ข้อสรุป
 - **Offload งานหนักออกไป session แยก** — แทนที่จะปล่อยให้ session ปัจจุบันบวม (และเสียเงิน) เพิ่ม
 - **Workflow การวางแผน** — `/plan-pro` เป็น planner ค่าเริ่มต้น
 - **ข้อตกลง second-brain vault** — กฎเดียว ("ผูกกับ repo เดียวไหม") ตัดสินว่าอะไรอยู่ใน vault กับอะไรอยู่ใน docs/ADR ของ repo
