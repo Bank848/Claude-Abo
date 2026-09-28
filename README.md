@@ -74,7 +74,7 @@ claude-clone-template/
 ### `global-config/CLAUDE.md`
 The heart of the setup. It encodes:
 
-- **Cost-aware model routing** — main loop on your choice of Opus 5.5 (judgment-heavy work) or Sonnet 5 (cheaper routine sessions) as orchestrator, delegating to Haiku/Sonnet/Opus/Fable subagents by task difficulty, with hard rules about who reads raw files vs. who reads conclusions.
+- **Cost-aware model routing** — main loop on your choice of Opus 5.5 (judgment-heavy work) or Sonnet 5.5 (cheaper routine sessions) as orchestrator, delegating to Haiku/Sonnet/Opus/Fable subagents by task difficulty, with hard rules about who reads raw files vs. who reads conclusions.
 - **Heavy-execution offloading** — spawning big jobs into separate sessions instead of bloating (and billing) the current one.
 - **Planning workflow** — `/plan-pro` as the default planner.
 - **Second-brain vault convention** — a single rule ("is it tied to one repo?") deciding what lives in the vault vs. in a repo's docs/ADRs.
