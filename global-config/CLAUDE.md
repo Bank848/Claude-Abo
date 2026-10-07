@@ -2,12 +2,12 @@
 - **graphify** (`~/.claude/skills/graphify/SKILL.md`) - any input to knowledge graph. Trigger: `/graphify`
 When the user types `/graphify`, invoke the Skill tool with `skill: "graphify"` before doing anything else.
 
-# Cost-aware model routing — Opus 5.5 / Sonnet 5.5 / Haiku 4.5 (global, updated 2026-09-29: Sonnet 5 → Sonnet 5.5; 2026-09-23: Opus 5 → Opus 5.5)
+# Cost-aware model routing — Opus 5.5 / Sonnet 5.5 / Haiku 5.5 (global, updated 2026-10-08: Haiku 4.5 → Haiku 5.5; 2026-09-29: Sonnet 5 → Sonnet 5.5; 2026-09-23: Opus 5 → Opus 5.5)
 ให้เลือกโมเดลตามความยากจริงของงาน เพื่อไม่ให้งานง่ายไปกินค่าโมเดลแพง
 
 **หมายเหตุ:** `fable-medium` (Fable 5.1 ที่ **medium reasoning** พอ ไม่ต้อง max) เปิด spawn ได้ตามปกติสำหรับงานเดิมพันสูงสุดจริงๆ เท่านั้น (ดูหมายเหตุ Opus 5.5 ด้านล่าง — บาร์การเรียกสูงขึ้นมากแล้ว) — ถ้าโดนแบนจะรู้เองตอน spawn fail ไม่ต้องเช็ควันที่ล่วงหน้า
 
-**ราคา (ต่อ 1M tokens, input/output):** Opus 5.5 `$4/$20` (cache read `$0.20`) · Sonnet 5.5 `$2/$10` (cache read `$0.20` เท่า Opus 5.5; ราคาโปรเปิดตัวกลายเป็นราคาถาวร แผนขึ้นเป็น `$3/$15` วันที่ 1 ก.ย. 2026 ถูกยกเลิก — ที่มา https://platform.claude.com/docs/en/about-claude/pricing เช็ค 2026-09-23) · Haiku 4.5 `$1/$5` (ถูกสุด) · Fable 5.1 `$10/$50` (แพงสุด). การประหยัด = "ดึงงานออกจากโมเดลแพง" ไม่ใช่ "เอาโมเดลแพงมาช่วย"
+**ราคา (ต่อ 1M tokens, input/output):** Opus 5.5 `$4/$20` (cache read `$0.20`) · Sonnet 5.5 `$2/$10` (cache read `$0.20` เท่า Opus 5.5; ราคาโปรเปิดตัวกลายเป็นราคาถาวร แผนขึ้นเป็น `$3/$15` วันที่ 1 ก.ย. 2026 ถูกยกเลิก — ที่มา https://platform.claude.com/docs/en/about-claude/pricing เช็ค 2026-09-23) · Haiku 4.5 `$1/$5` (ถูกสุด) · Fable 5.1 `$10/$50` (แพงสุด). การประหยัด = "ดึงงานออกจากโมเดลแพง" ไม่ใช่ "เอาโมเดลแพงมาช่วย" · Haiku 5.5 `$0.10/$0.50` (prompt ≤100k tokens; เกิน 100k เป็น `$0.50/$2.50`; cache read `$0.01`/`$0.05`) ถูกกว่า Haiku 4.5 ราว 10 เท่าบนกระดาษ แต่ tokenizer ใหม่นับ token เพิ่มราว 30% สำหรับข้อความเดิม ประหยัดจริงราว 7 เท่า (Anthropic ประเมินต้นทุนเฉลี่ยลดราว 75%) · มี effort level (default `medium`), context 1M, ไม่รองรับ Priority Tier · ที่มา https://platform.claude.com/docs/en/models/haiku-5-5/overview (เช็ก 2026-10-08)
 
 **Opus 5.5 (เปิดตัว 2026-09-22) แรงระดับ/แซง Fable 5.1 ในหลายเบนช์มาร์กสาธารณะแล้ว แต่ถูกกว่า Opus 5 เดิมราว 20-60% แล้วแต่หมวด** → เพดาน escalation ปกติเลื่อนขึ้นมาที่ Opus 5.5 (แทนที่ Opus 5 เดิมทุกจุด) **fable-medium เหลือไว้เป็น last-resort จริงๆ เท่านั้น ไม่ใช่ default ถัดจาก Opus เหมือนเดิม** — ช่องว่างคุณภาพระหว่างสองตัวนี้แคบลงมาก การขึ้น Fable ควรเกิดน้อยลงกว่าเดิมชัดเจน (ตัวเลขนี้เป็นข้อมูลวันเปิดตัวจาก Anthropic เอง ยังไม่ผ่านการใช้งานจริงนาน)
 
@@ -27,7 +27,7 @@ When the user types `/graphify`, invoke the Skill tool with `skill: "graphify"` 
 **หัวหน้าทำเอง:** วางแผน, ตัดสินใจ, อ่าน *ข้อสรุป* จากลูกน้อง, ตรวจงาน, เขียนส่วนยาก/แก้ตอนลูกน้องไม่ไหว. **กฎเหล็ก:** อ่าน conclusion ไม่ใช่ file-dump — ให้ลูกน้องย่อยมา ไม่งั้น context บวม=แพง
 
 **ลูกน้อง = `Agent` subagent (foreground เป็นหลัก):** สั่ง→รอ→ตรวจ→ไม่ไหวหัวหน้าทำเอง. เปิด `run_in_background` เฉพาะตอนยิงหลายตัว **ขนานกัน** (เช่นรีวิว 3 มุมพร้อมกัน). บันไดเลือก agentType:
-- งานกลไก/batch (rename, format, find-replace, scaffold) → **`haiku-batch`** (Haiku 4.5)
+- งานกลไก/batch (rename, format, find-replace, scaffold) → **`haiku-batch`** (Haiku 5.5, pin `claude-haiku-5-5`; ห้ามส่งงาน security/CTF เพราะ cyber classifier อาจ refuse)
 - อ่านไฟล์เยอะแล้วคืน map/ข้อสรุป → **`Explore`** (อ่าน excerpt ไม่ dump)
 - งานมาตรฐาน/ร่างแรก (coding, review รายภาษา) → แบบ B ทำใน main เอง. แบบ A: งานเล็กทำใน main, งานก้อนใหญ่ที่ design ตัดสินแล้ว/ยิงขนาน → spawn **`sonnet-worker`** (Sonnet 5.5) — `general-purpose` สืบโมเดลของ main ถ้าอยากได้ Sonnet ต้องใช้ `sonnet-worker`
 - งานยาก/เดิมพันสูง (algorithm, debug ลึก, architecture) → แบบ A ทำใน main เอง (spawn `opus` เฉพาะอยากแยก context/ยิงขนาน). แบบ B spawn **`opus`** subagent (claude-opus-5-5) หรือ `/model` สลับ Opus ชั่วคราว
@@ -39,7 +39,7 @@ When the user types `/graphify`, invoke the Skill tool with `skill: "graphify"` 
 3. งานเล็ก/ตอบสั้น/แก้ inline เร็วๆ → ทำใน main เลย ไม่ต้อง spawn (spawn มี overhead)
 4. `spawn_task` (chip) = **คนละเรื่อง** — เปิด session ใหม่ บิลแยก หัวหน้าคุมสด/ตรวจไม่ได้ → ใช้เฉพาะโยนงานหนักทิ้งไปบิลที่อื่น ไม่ใช่ "ลูกน้อง" ในโมเดลนี้
 
-Agent ที่ pin โมเดลไว้แล้ว: `~/.claude/agents/haiku-batch.md` (Haiku 4.5), `~/.claude/agents/sonnet-worker.md` (Sonnet 5.5), `~/.claude/agents/opus.md` (claude-opus-5-5), `~/.claude/agents/fable-medium.md` (claude-fable-5-1 @ medium reasoning — last-resort เหนือ Opus 5.5 เท่านั้น เพราะแพงสุด; ใช้ medium effort พอ ไม่ต้อง max)
+Agent ที่ pin โมเดลไว้แล้ว: `~/.claude/agents/haiku-batch.md` (Haiku 5.5), `~/.claude/agents/sonnet-worker.md` (Sonnet 5.5), `~/.claude/agents/opus.md` (claude-opus-5-5), `~/.claude/agents/fable-medium.md` (claude-fable-5-1 @ medium reasoning — last-resort เหนือ Opus 5.5 เท่านั้น เพราะแพงสุด; ใช้ medium effort พอ ไม่ต้อง max)
 
 **Local Ollama (free, ad hoc — ไม่ใช่ routing tier, ต่ำกว่า Haiku):** มี `qwen2.5:7b-instruct` บนเครื่อง (no tools, no repo context) เรียกผ่าน Bash: `Get-Content <file> | ollama run qwen2.5:7b-instruct "<instruction>"` (pipe ไฟล์ อย่ายัด prompt ยาวใน argument). ใช้เฉพาะ lossy pre-compression ของ text ก้อนใหญ่ low-stakes (log/doc ยาว) ก่อนเข้า context โมเดลเสียเงิน — **ห้ามใช้ output เป็น source of truth**: ถ้า decision ขึ้นกับเนื้อหา ให้โมเดลหลักอ่านต้นฉบับเอง.
 
