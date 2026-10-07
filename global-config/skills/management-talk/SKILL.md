@@ -17,7 +17,7 @@ Use this any time engineering content needs to flow up the org, sideways into pr
 - "send a slack update / standup note / email" *about a piece of engineering work*
 - "executive summary" / "exec summary" / "leadership update" / "status update"
 - "talking points for [meeting]" *based on an engineering update*
-- "write to .md / markdown file" / "save as md" / "พิมพ์เป็น md" *for an engineering update*
+- "write to .md / markdown file" / "save as md" / "พิมพ์เป็น md" (type it as md) *for an engineering update*
 
 If the channel is unclear after the trigger, ask one short question — *"JIRA, Slack, standup, email, or markdown file?"* — and stop.
 

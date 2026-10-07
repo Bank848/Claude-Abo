@@ -1,6 +1,6 @@
 ---
 name: all-skills
-description: รวมศูนย์ skill ทั้งหมดที่ลงไว้ — แต่ละตัวคืออะไร ใช้ยังไง ใช้ตอนไหน เพิ่ม/ลบเมื่อมีการลงสกิลใหม่
+description: Central index of every installed skill — what each one is, how to use it, and when; update when adding or removing a skill
 metadata: 
   node_type: memory
   type: reference
@@ -16,173 +16,173 @@ metadata:
 - Plugin skills: `~/.claude/plugins/cache/<marketplace>/<plugin>/<version>/skills/`
 - External cloned repos: `~/.claude/external-skills/`
 
-**วิธีหยิบใช้:** Claude auto-trigger ตาม description ของแต่ละสกิลอยู่แล้ว แต่เรียกชื่อตรง ๆ ได้ด้วย เช่น `/scrutinize` หรือบอก "ใช้ debug-mantra"
+**How to pick one:** Claude auto-triggers skills from each skill's description, but you can also call one by name, e.g. `/scrutinize` or say "use debug-mantra"
 
-> **โครงไฟล์นี้:** บนสุด = ⭐ Daily drivers (ของที่หยิบจริงทุกวัน อ่านแค่นี้พอ) · ล่าง = 📚 Library ทั้งหมดแบ่งตามหมวด (200+ ตัว เปิดเฉพาะตอนต้องใช้) · ปิดท้าย = cheatsheet "ตอนไหนใช้อะไร"
+> **File layout:** top = ⭐ Daily drivers (what actually gets picked up every day; reading just this is enough) · below = 📚 full Library grouped by category (200+ skills, open only when needed) · end = "which one when" cheatsheet
 
 ---
 
-## ⭐ Daily drivers — ของที่หยิบจริง จัดตามงานที่ทำ
+## ⭐ Daily drivers — what actually gets picked up, grouped by task
 
-> 10-13 ตัวนี้คือที่ใช้ซ้ำๆ ตามงานจริง (UI / วางแผน / รีวิว / ship). ถ้าจำไม่ได้ว่ามีอะไร — อ่านแค่บล็อกนี้
+> These 10-13 are the ones used repeatedly in real work (UI / planning / review / ship). If you can't remember what exists, read just this block
 
-| งานที่ทำบ่อย | หยิบตัวนี้ |
+| Frequent task | Pick this |
 |---|---|
-| 🔄 **แปลงไฟล์ → Markdown / feed RAG** | `markitdown` |
-| 🧠 **วางแผน feature** | `superpowers:brainstorming` → `/plan-pro` (ข้าม spec.md แยกถ้างานเล็ก-กลาง) · อยากให้ AI ซักแผนสดก่อนลงมือ → `/grilling` |
-| 🔍 **รีวิว/ตรวจงาน มุมคนนอก** | `/scrutinize` (plan/PR/diff) |
-| 🐞 **ดีบั๊ก** | `/debug-mantra` (ท่อง 4 ขั้น) + `superpowers:systematic-debugging` |
-| 🎨 **ออกแบบ/ปรับ UI** | `ui-ux-pro-max` → `ui-styling` · build เต็มหน้า/audit anti-slop: `hallmark` · polish เล็ก: `make-interfaces-feel-better` + `deslop-defaults` |
-| ✅ **ก่อนเคลมว่าเสร็จ** | `superpowers:verification-before-completion` |
-| 🛠️ **สร้าง/แก้ skill** | `superpowers:writing-skills` หรือ `anthropic-skills:skill-creator` |
-| 🔬 **verify claim ของ review ก่อนแก้** | workflow `adversarial-verify` (`~/.claude/workflows/` — **not included in this template**, write your own or skip) — CONFIRMED ต้องมี quote file:line · feed เข้า receiving-code-review |
+| 🔄 **Convert files → Markdown / feed RAG** | `markitdown` |
+| 🧠 **Plan a feature** | `superpowers:brainstorming` → `/plan-pro` (skip the separate spec.md for small-to-medium work) · want the AI to grill the plan live before starting → `/grilling` |
+| 🔍 **Outsider-perspective review/check** | `/scrutinize` (plan/PR/diff) |
+| 🐞 **Debug** | `/debug-mantra` (recite the 4 steps) + `superpowers:systematic-debugging` |
+| 🎨 **Design/adjust UI** | `ui-ux-pro-max` → `ui-styling` · full-page build/anti-slop audit: `hallmark` · small polish: `make-interfaces-feel-better` + `deslop-defaults` |
+| ✅ **Before claiming done** | `superpowers:verification-before-completion` |
+| 🛠️ **Create/edit a skill** | `superpowers:writing-skills` or `anthropic-skills:skill-creator` |
+| 🔬 **Verify a review's claims before fixing** | workflow `adversarial-verify` (`~/.claude/workflows/` — **not included in this template**, write your own or skip) — CONFIRMED needs a quoted file:line · feeds into receiving-code-review |
 | 🕸️ **input → knowledge graph** | `/graphify` |
-| 📚 **ติว/เรียนเรื่องใหม่ (stateful หลาย session)** | `/teach` |
-| ⚙️ **แก้ settings/hook/permission** | `update-config` |
-| 🪤 **กันพลาดตอนออกแบบ** | `/poka-yoke` |
-| 🚀 **commit→push→PR→review→merge ครบ flow** | `shipping-a-branch` (`/ship`) — ทุก action เสี่ยง (push/PR/merge/delete branch) confirm แยกทีละครั้ง ไม่เหมาสั่งครั้งเดียวยาว |
+| 📚 **Tutor / learn something new (stateful across sessions)** | `/teach` |
+| ⚙️ **Edit settings/hook/permission** | `update-config` |
+| 🪤 **Mistake-proofing at design time** | `/poka-yoke` |
+| 🚀 **Full commit→push→PR→review→merge flow** | `shipping-a-branch` (`/ship`) — every risky action (push/PR/merge/delete branch) is confirmed separately, one at a time; never one long blanket command |
 
-**Cost routing (ทุกงาน):** main = Opus 5.5 หรือ Sonnet 5.5 (เลือกเอง) · งานกลไก→`haiku-batch` · อ่านไฟล์เยอะ→`Explore` · งานมาตรฐานก้อนใหญ่ (main=Opus)→`sonnet-worker` · ยากจริง (main=Sonnet)→spawn `opus` · เดิมพันสูงสุดที่ Opus ยังส่าย→spawn `fable-medium`. (กติกาเต็มใน `~/.claude/CLAUDE.md`)
+**Cost routing (every task):** main = Opus 5.5 or Sonnet 5.5 (your choice) · mechanical work→`haiku-batch` · reading many files→`Explore` · big chunks of standard work (main=Opus)→`sonnet-worker` · genuinely hard (main=Sonnet)→spawn `opus` · highest stakes where Opus still wavers→spawn `fable-medium`. (Full rules in `~/.claude/CLAUDE.md`)
 
 ---
 
-## 📚 Library — ทั้งหมดตามหมวด (เปิดเฉพาะตอนต้องใช้)
+## 📚 Library — everything by category (open only when needed)
 
 ## Built-in (Claude Code core)
 
-| Skill | ทำอะไร / ใช้ตอน |
+| Skill | What it does / when to use |
 |---|---|
-| `update-config` | แก้ `settings.json` (hooks, permissions, env) — ตั้ง hook อัตโนมัติ / เพิ่ม allowlist |
-| `keybindings-help` | แก้ keyboard shortcut, rebind keys, chord bindings |
-| `verify` | รันแอปจริงเพื่อเช็คว่าแก้ใช้งานได้ — verify PR / fix |
-| `code-review` | review diff หา bug (low/medium/high effort) — ก่อน push/PR |
-| `fewer-permission-prompts` | สแกน transcript เพิ่ม allowlist — ลด prompt ถาม permission |
-| `loop` | รัน prompt ซ้ำตาม interval — poll status, recurring task |
-| `schedule` | สร้าง cron-based remote agent — scheduled task |
-| `claude-api` | งาน Anthropic SDK + prompt caching + migration |
-| `run` | launch แอปโปรเจกต์เพื่อดูผล — ขอ screenshot/run app |
+| `update-config` | Edit `settings.json` (hooks, permissions, env) — set up automatic hooks / add an allowlist |
+| `keybindings-help` | Edit keyboard shortcuts, rebind keys, chord bindings |
+| `verify` | Run the real app to check a fix works — verify a PR / fix |
+| `code-review` | Review a diff for bugs (low/medium/high effort) — before push/PR |
+| `fewer-permission-prompts` | Scan transcripts to add an allowlist — fewer permission prompts |
+| `loop` | Re-run a prompt on an interval — poll status, recurring task |
+| `schedule` | Create a cron-based remote agent — scheduled task |
+| `claude-api` | Anthropic SDK work + prompt caching + migration |
+| `run` | Launch the project app to see results — request a screenshot / run the app |
 | `review` | review GitHub PR |
-| `security-review` | security audit — ก่อน merge ของ security-sensitive |
-| `init` | init project — setup ใหม่ |
+| `security-review` | Security audit — before merging anything security-sensitive |
+| `init` | Init a project — fresh setup |
 
 ---
 
 ## Custom global skills
 
-| Skill | ทำอะไร / ใช้ตอน |
+| Skill | What it does / when to use |
 |---|---|
 | `graphify` | any input → knowledge graph + HTML/JSON + audit report — `/graphify`. Engine = pip `graphifyy` (source: [safishamsi/graphify](https://github.com/safishamsi/graphify) — confirmed via `pip show graphifyy` Home-page, 2026-08-08; unrelated to `Graphify-Labs/graphify` seen on trendshift.io, different repo) |
-| `poka-yoke` | กันพลาดตั้งแต่ออกแบบ (mistake-proofing): ทำให้ bad state เกิดไม่ได้/เห็นชัด แทนจับผิดทีหลัง. ชั้น1 prevent > ชั้น2 detect + checklist กันมือบอน/กันโกง/dev-guardrail. ใช้ตอนออกแบบ-รีวิว feature/มินิเกม/UI/anticheat/build หรือจะเขียน "อย่าลืม X" — `/poka-yoke` |
-| `plan-pro` | ต่อยอด `superpowers:writing-plans`: (1) spawn 1-2 reviewer agent หา gap+critical แล้ว fix+รายงาน (2) plan เป็น **HTML** section บน = side-by-side before/after diagram (Mermaid) สำหรับคนอ่าน, ล่าง = plan ปกติ (3) parallelization analysis → parallel execute + ปิดท้าย `/code-review`+`/simplify` ขนาน — `/plan-pro` |
-| `markitdown` | แปลงไฟล์ (PDF/PPTX/DOCX/XLSX/image/audio/HTML/CSV/JSON/EPUB/ZIP/YouTube) → Markdown ด้วย Microsoft MarkItDown. ใช้ตอนต้องการ convert doc เป็น .md, prep ไฟล์ feed RAG/LLM, batch แปลงทั้งโฟลเดอร์, transcribe audio. CLI `markitdown` (ลงแล้วใน Python313). ใช้คู่กับ Claude อ่าน PDF ตรงๆ: งาน semantic/รูปเยอะ → Claude, งาน convert/batch/index → MarkItDown |
-| `deslop-defaults` | กฎ "deslop" แบบ stack-agnostic กัน AI UI ดูเฉลี่ย/ไม่เสร็จ: z-index scale, accent เดียวต่อ view, ไม่ปน primitive system, pattern มาตรฐาน destructive/loading/error/empty, visual restraint. **companion ของ `make-interfaces-feel-better`** (อันนั้น = optical craft, อันนี้ = structural restraint). harvested จาก ibelick/ui-skills baseline-ui. ใช้ตอน quick check/แก้เล็ก — งาน build เต็มหน้า/audit ใช้ `hallmark` แทน (ดูล่าง) |
-| `hallmark` | **Anti-AI-slop design system เต็มรูปแบบ** (Together AI, source: [Nutlope/hallmark](https://github.com/Nutlope/hallmark), ลง 2026-08-09 จาก trendshift.io candidate evaluation — ดู `projects/claude-skills-trendshift-2026-08/CANDIDATE-EVALUATION.md`). 57 numbered slop-test gates + macrostructure diversity engine (21 themes, กันซ้ำ theme ข้าม session ผ่าน `.hallmark/log.json`) + mobile-responsiveness hard floor (320/375/414/768px) + 4 verb: default(build)/`audit`(read-only score, ไม่แก้โค้ด)/`redesign`/`study`(ดึง DNA จาก screenshot/URL). จับได้มากกว่า `deslop-defaults`: fake metrics/testimonial, re-drawn fake browser chrome, italic header (AI tell), token discipline, 8-state component checklist. **ใช้เป็นตัวหลักตอน build หน้าใหม่เต็มหน้า/audit UI ที่มีอยู่** — `deslop-defaults` เก็บไว้เป็น quick-check เบา ๆ คนละ scope กัน ไม่ทับซ้ำ. เทียบแล้วไม่ลง `Leonxlnx/taste-skill` (74k★ เหมือนชื่อจะแข่ง แต่เนื้อจริงเป็น style generator เฉพาะทาง 2 ตัว — brutalist theme + brand-kit image — ไม่ใช่ deslop checklist) |
-| `grilling` | **ซักแผนแบบ relentless ก่อนลงมือ** (Matt Pocock, source: [mattpocock/skills](https://github.com/mattpocock/skills) — เพิ่ง track ใน `sources.json` 2026-08-08, ก่อนหน้านี้ไม่มี baseline). ยิงคำถามทีละข้อ เดินไล่ทุกกิ่งของ design-tree แก้ dependency ทีละจุด แต่ละข้อแนะคำตอบให้ด้วย — ถ้าตอบได้จาก codebase มันไปอ่านเองแทนถาม. **auto-trigger** ได้ (พูด "grill"/stress-test) หรือ `/grilling`. **สำหรับงานเกม/แปล/งานทั่วไป → ใช้ตัวนี้ (engine เปล่า)** ไม่เขียนไฟล์อะไรลง repo. เติมช่อง "ให้ AI ซักเราสดๆ" ที่ brainstorm/plan-pro/scrutinize ไม่มี |
-| `teach` | ครูส่วนตัวแบบ **stateful หลาย session** (Matt Pocock, source: [mattpocock/skills](https://github.com/mattpocock/skills) — เพิ่ง track ใน `sources.json` 2026-08-08, ก่อนหน้านี้ไม่มี baseline). ใช้ current dir เป็น teaching workspace: `MISSION.md` (ทำไมอยากเรียน) + `./lessons/*.html` (บทเรียนสวยๆ ทีละเรื่องเล็ก) + `./learning-records/*.md` (จำว่าเรียนอะไรไปแล้ว→คำนวณ zone of proximal development) + `RESOURCES.md` + glossary. เน้น storage strength (retrieval/spacing/interleaving) ไม่ใช่ illusory fluency. `disable-model-invocation` → เรียก `/teach <หัวข้อ>` เอง. **ใหม่ — ไม่ทับของเดิม** |
-| `wait-what` | **stop-and-re-pitch prompt** (Matt Pocock, source: [mattpocock/skills](https://github.com/mattpocock/skills), ลง 2026-08-09). แค่ template คำเดียว — บอกให้ user re-explain สิ่งที่เพิ่งพูดแบบสั้น ใช้ ASD-STE100 Simplified Technical English + ubiquitous language จาก `CONTEXT.md`. `disable-model-invocation` → ไม่ auto-trigger, เรียกเองเมื่ออยากให้ AI (หรือตัวเอง) หยุดแล้วอธิบายใหม่ให้ชัดก่อนไปต่อ |
-| `wizard` | **สร้าง interactive bash wizard** สำหรับ manual procedure ที่ agent ทำเองไม่ได้ (Matt Pocock, source: [mattpocock/skills](https://github.com/mattpocock/skills), ลง 2026-08-09). ใช้ตอน provision infra / ตั้งค่า credential-CI secret / เดิน third-party dashboard ที่ไม่คุ้น / migration ครั้งเดียว. มี `template.sh` เป็น library สำเร็จรูป (stage progress, `open_url` cross-platform รวม WSL, `ask`/`ask_secret`, `write_env` idempotent, `set_secret`/`set_var` ผ่าน `gh`, closing summary) — งานของ skill คือ scope ขั้นตอน + author stage เท่านั้น ห้ามแก้ library ส่วนบน `STAGES` marker เอง. **ไม่ใช้กับ step ที่ agent ทำเองได้อยู่แล้ว** |
-| `shipping-a-branch` | **end-to-end git ship flow** (วางแผนโดย fable-medium, ลง 2026-08-02). commit → confirm push → reuse-or-create PR (เช็ค `gh pr list --head` กันซ้ำ) → เลือก review mode (human/self/both) → loop แก้ feedback → confirm merge (method) → ask cleanup branch. ทุก checkpoint เสี่ยง (push/PR/merge/delete) **confirm แยกทุกครั้ง** ไม่ใช้ "ตกลงตอนแรก" มาครอบคลุมทีหลัง (ตาม instruction-priority ของ system). ใช้แทน `ecc:pr`/`ecc:review-pr` เมื่อต้องการ flow เต็ม ไม่ใช่แค่ phase เดียว. ใช้ทุก project (repo-agnostic ผ่าน `git`/`gh` ล้วน ไม่ hardcode ชื่อ branch/repo) — เรียกด้วย `/ship` หรือพูด "ship this"/"commit and open a PR" |
+| `poka-yoke` | Mistake-proofing at design time: make the bad state impossible/obvious instead of catching it afterwards. Tier 1 prevent > tier 2 detect + checklists for slips/anti-cheat/dev-guardrail. Use when designing or reviewing a feature/minigame/UI/anticheat/build, or when about to write "don't forget X" — `/poka-yoke` |
+| `plan-pro` | Builds on `superpowers:writing-plans`: (1) spawn 1-2 reviewer agents to find gaps + critical issues, then fix and report (2) the plan is an **HTML** page: top section = side-by-side before/after diagram (Mermaid) for human readers, bottom = the normal plan (3) parallelization analysis → parallel execute + finish with `/code-review` + `/simplify` in parallel — `/plan-pro` |
+| `markitdown` | Convert files (PDF/PPTX/DOCX/XLSX/image/audio/HTML/CSV/JSON/EPUB/ZIP/YouTube) → Markdown with Microsoft MarkItDown. Use when converting a doc to .md, prepping files to feed RAG/LLM, batch-converting a whole folder, transcribing audio. CLI `markitdown` (installed in Python313). Pairs with Claude reading PDFs directly: semantic/image-heavy work → Claude, convert/batch/index work → MarkItDown |
+| `deslop-defaults` | Stack-agnostic "deslop" rules against AI UI that looks average/unfinished: z-index scale, one accent per view, no mixing primitive systems, standard destructive/loading/error/empty patterns, visual restraint. **Companion of `make-interfaces-feel-better`** (that one = optical craft, this one = structural restraint). Harvested from ibelick/ui-skills baseline-ui. Use for quick checks/small fixes — for full-page builds/audits use `hallmark` instead (see below) |
+| `hallmark` | **Full anti-AI-slop design system** (Together AI, source: [Nutlope/hallmark](https://github.com/Nutlope/hallmark), installed 2026-08-09 from a trendshift.io candidate evaluation — see `projects/claude-skills-trendshift-2026-08/CANDIDATE-EVALUATION.md`). 57 numbered slop-test gates + macrostructure diversity engine (21 themes, avoids repeating a theme across sessions via `.hallmark/log.json`) + mobile-responsiveness hard floor (320/375/414/768px) + 4 verbs: default(build)/`audit`(read-only score, doesn't edit code)/`redesign`/`study`(pull the DNA from a screenshot/URL). Catches more than `deslop-defaults`: fake metrics/testimonials, re-drawn fake browser chrome, italic headers (an AI tell), token discipline, 8-state component checklist. **Use as the primary tool when building a new full page / auditing existing UI** — `deslop-defaults` stays as a light quick-check, different scope, no overlap. Compared and decided against `Leonxlnx/taste-skill` (74k★, the name looks competitive, but the content is really two specialized style generators — a brutalist theme + a brand-kit image — not a deslop checklist) |
+| `grilling` | **Relentlessly grill the plan before starting** (Matt Pocock, source: [mattpocock/skills](https://github.com/mattpocock/skills) — only started being tracked in `sources.json` on 2026-08-08, no baseline before that). Fires questions one at a time, walks every branch of the design tree resolving dependencies one by one, suggests an answer for each — if it can be answered from the codebase it reads the code instead of asking. **Auto-triggers** (say "grill"/stress-test) or `/grilling`. **For games/translation/general work → use this one (the bare engine)**; it writes no files to the repo. Fills the "have the AI grill us live" gap that brainstorm/plan-pro/scrutinize don't cover |
+| `teach` | Personal tutor, **stateful across sessions** (Matt Pocock, source: [mattpocock/skills](https://github.com/mattpocock/skills) — only started being tracked in `sources.json` on 2026-08-08, no baseline before that). Uses the current dir as a teaching workspace: `MISSION.md` (why you want to learn) + `./lessons/*.html` (nicely made lessons, one small topic at a time) + `./learning-records/*.md` (remembers what was already learned → computes the zone of proximal development) + `RESOURCES.md` + glossary. Emphasizes storage strength (retrieval/spacing/interleaving), not illusory fluency. `disable-model-invocation` → invoke `/teach <topic>` yourself. **New — doesn't overlap existing ones** |
+| `wait-what` | **Stop-and-re-pitch prompt** (Matt Pocock, source: [mattpocock/skills](https://github.com/mattpocock/skills), installed 2026-08-09). Just a one-line template — tells the user to briefly re-explain what was just said, using ASD-STE100 Simplified Technical English + the ubiquitous language from `CONTEXT.md`. `disable-model-invocation` → no auto-trigger; invoke it yourself when you want the AI (or yourself) to stop and re-explain clearly before continuing |
+| `wizard` | **Builds an interactive bash wizard** for manual procedures the agent can't do itself (Matt Pocock, source: [mattpocock/skills](https://github.com/mattpocock/skills), installed 2026-08-09). Use when provisioning infra / setting up credentials-CI secrets / walking an unfamiliar third-party dashboard / one-off migrations. Ships `template.sh` as a ready-made library (stage progress, cross-platform `open_url` including WSL, `ask`/`ask_secret`, idempotent `write_env`, `set_secret`/`set_var` via `gh`, closing summary) — the skill's job is only to scope the steps + author the stages; never edit the library part above the `STAGES` marker yourself. **Not for steps the agent can already do itself** |
+| `shipping-a-branch` | **End-to-end git ship flow** (planned by fable-medium, installed 2026-08-02). commit → confirm push → reuse-or-create PR (checks `gh pr list --head` to avoid duplicates) → choose review mode (human/self/both) → loop fixing feedback → confirm merge (method) → ask about branch cleanup. Every risky checkpoint (push/PR/merge/delete) is **confirmed separately each time**; an earlier "okay" is never used to cover a later one (per the system's instruction-priority). Use instead of `ecc:pr`/`ecc:review-pr` when you want the full flow, not just one phase. Works in every project (repo-agnostic via plain `git`/`gh`, no hardcoded branch/repo names) — invoke with `/ship` or say "ship this"/"commit and open a PR" |
 
 ---
 
 ## superpowers (obra/superpowers) — process discipline
 
-| Skill | ทำอะไร / ใช้ตอน |
+| Skill | What it does / when to use |
 |---|---|
-| `brainstorming` | สำรวจ intent + requirement + design — **ก่อนงาน creative ใด ๆ** |
-| `writing-plans` | เขียน plan สำหรับ multi-step task — มี spec ยังไม่แตะโค้ด |
-| `executing-plans` | execute plan ที่เขียน มี checkpoint |
-| `subagent-driven-development` | execute plan ด้วย subagent — งาน independent |
-| `dispatching-parallel-agents` | spawn agent ขนาน 2+ ตัว |
-| `test-driven-development` | TDD เคร่งครัด (RED→GREEN→IMPROVE) |
-| `systematic-debugging` | debug แบบมีระบบ — **เจอ bug/test fail** |
-| `verification-before-completion` | ต้องรัน verify ก่อนเคลม "เสร็จ" |
-| `requesting-code-review` | verify ว่างานเสร็จตาม requirement |
-| `receiving-code-review` | รับ feedback อย่างมีวิจารณญาณ |
-| `finishing-a-development-branch` | จบ branch (merge/PR/cleanup) |
-| `using-git-worktrees` | จัดการ git worktree — งานหลาย branch พร้อมกัน |
-| `writing-skills` | สร้าง/แก้ skill |
-| `using-superpowers` | meta: วิธีใช้ superpowers |
+| `brainstorming` | Explore intent + requirements + design — **before any creative work** |
+| `writing-plans` | Write a plan for a multi-step task — has a spec, no code touched yet |
+| `executing-plans` | Execute a written plan, with checkpoints |
+| `subagent-driven-development` | Execute a plan with subagents — independent tasks |
+| `dispatching-parallel-agents` | Spawn 2+ agents in parallel |
+| `test-driven-development` | Strict TDD (RED→GREEN→IMPROVE) |
+| `systematic-debugging` | Systematic debugging — **on a bug/failing test** |
+| `verification-before-completion` | Must run verification before claiming "done" |
+| `requesting-code-review` | Verify the work was finished per the requirements |
+| `receiving-code-review` | Receive feedback critically |
+| `finishing-a-development-branch` | Finish a branch (merge/PR/cleanup) |
+| `using-git-worktrees` | Manage git worktrees — several branches at once |
+| `writing-skills` | Create/edit a skill |
+| `using-superpowers` | Meta: how to use superpowers |
 
 ---
 
-## Custom global skills — engineering discipline *(เดิม plugin 9arm-skills; ถอดปลั๊กอินแล้ว ตอนนี้เป็น personal skill เรียกด้วยชื่อเปล่า)*
+## Custom global skills — engineering discipline *(formerly the 9arm-skills plugin; plugin removed, now personal skills invoked by bare name)*
 
-| Skill | ทำอะไร / ใช้ตอน |
+| Skill | What it does / when to use |
 |---|---|
-| `debug-mantra` | บังคับท่อง 4 ขั้น: reproduce → trace → falsify → cross-ref ก่อนเสนอ fix |
-| `post-mortem` | เขียน RCA สำหรับ engineer (root cause, mechanism, fix, validation, slip-through) |
-| `scrutinize` | review มุมคนนอก + trace code จริง ไม่ใช่แค่ diff |
-| `management-talk` | แปล tech → VP/PM/director ตาม channel (JIRA/Slack/email/standup) |
+| `debug-mantra` | Forces reciting the 4 steps: reproduce → trace → falsify → cross-ref before proposing a fix |
+| `post-mortem` | Write an RCA for engineers (root cause, mechanism, fix, validation, slip-through) |
+| `scrutinize` | Outsider-perspective review + trace the real code, not just the diff |
+| `management-talk` | Translate tech → VP/PM/director by channel (JIRA/Slack/email/standup) |
 
 ---
 
-## Custom global skills — design intelligence *(เดิม plugin ui-ux-pro-max/ckm; ถอดปลั๊กอินแล้ว ตอนนี้เป็น personal skill เรียกด้วยชื่อเปล่า)*
+## Custom global skills — design intelligence *(formerly the ui-ux-pro-max/ckm plugin; plugin removed, now personal skills invoked by bare name)*
 
-| Skill | ทำอะไร / ใช้ตอน |
+| Skill | What it does / when to use |
 |---|---|
 | `ui-ux-pro-max` | DB 50+ styles, 161 palettes, 57 font pairs, 99 UX, 25 charts, 10 stacks |
 | `design` | logo + CIP + mockup + slides + banner + icon + social photo |
-| `design-system` | design tokens 3 ชั้น + CSS vars — รวม **Minimum Semantic Set (6 slots)**: bg/ink/accent/surface/line/muted, ห้าม hardcode hex ใน component (เพิ่ม 2026-08-03) |
-| `ui-styling` | shadcn/ui + Tailwind + canvas — implement UI จริง |
+| `design-system` | 3-layer design tokens + CSS vars — includes the **Minimum Semantic Set (6 slots)**: bg/ink/accent/surface/line/muted, no hardcoded hex in components (added 2026-08-03) |
+| `ui-styling` | shadcn/ui + Tailwind + canvas — implement real UI |
 | `banner-design` | banner social/ad/web/print 22 styles |
 | `brand` | brand voice + messaging + asset mgmt |
 | `slides` | HTML presentation + Chart.js + design tokens |
-| `mobbin-references` | **ใหม่ (2026-08-03).** ใช้ Mobbin MCP (`https://api.mobbin.com/mcp`, paid) ดึง screenshot แอปจริง 600k+ หน้าเป็น layout reference ก่อนออกแบบ UI — ถ้าไม่ connect fallback ไป `lazyweb-design-research` เอง ไม่บล็อก ไม่เตือนซ้ำ |
-| `dembrandt` | **ใหม่ (2026-08-08, วางแผนโดย fable-medium).** ดึง design token จริงของเว็บที่ระบุ (สี/ฟอนต์/spacing/component) จาก DOM/CSS ผ่าน `npx dembrandt <url> --design-md --save-output` (ไม่ต้องลง, Node 18+). ใช้ตอน audit/benchmark/migrate เว็บเดิม — **ไม่ใช่** clone เว็บตรง ๆ และไม่ครบ 100% ถ้าเว็บเป็น Canvas หนัก/login wall/anti-bot/render ซับซ้อน. คนละบทบาทกับ `mobbin-references`/`lazyweb-design-research` (นั่น=inspiration หลายแอป, นี่=token จากเว็บเดียวที่ระบุ). Known Failure Modes มี cross-ref ไปยัง [D4Vinci/Scrapling](https://github.com/D4Vinci/Scrapling) (เพิ่ม 2026-08-08) เป็น fallback สำหรับเว็บ Canvas-heavy/anti-bot — ไม่ได้ลงเป็น skill แยก |
-| *(reference source, ไม่ใช่ skill)* [`VoltAgent/awesome-design-md`](https://github.com/VoltAgent/awesome-design-md) | **ใหม่ (2026-08-09).** คลัง `DESIGN.md` สำเร็จรูป 73 แบรนด์ดัง (Stripe, Linear, Notion, Vercel, Apple, Figma, Supabase ฯลฯ) — ไฟล์ text ล้วน ไม่มีโค้ดรัน ไม่มีความเสี่ยง. ใช้ตอนอยากให้ UI ที่สร้างมี "กลิ่น" ตรงกับแบรนด์ที่มีอยู่แล้วจริง ๆ (ไม่ใช่แค่ inspiration แบบ `mobbin-references`/`lazyweb-design-research`) — ดึงไฟล์เดี่ยวได้จาก `https://raw.githubusercontent.com/VoltAgent/awesome-design-md/main/design-md/<slug>/DESIGN.md` (ดู slug list ในลิงก์ repo) แล้ว drop ลง project root ให้ agent อ่านตรง ๆ ก่อนสั่งสร้าง UI ไม่ต้อง clone ทั้ง repo (คลังอัปเดตเรื่อย ๆ, fetch สดกันข้อมูลเก่า) |
+| `mobbin-references` | **New (2026-08-03).** Uses the Mobbin MCP (`https://api.mobbin.com/mcp`, paid) to pull screenshots of 600k+ real app pages as layout references before designing UI — if not connected, falls back to `lazyweb-design-research` by itself, doesn't block, doesn't warn repeatedly |
+| `dembrandt` | **New (2026-08-08, planned by fable-medium).** Pulls the real design tokens of a given website (colors/fonts/spacing/components) from the DOM/CSS via `npx dembrandt <url> --design-md --save-output` (no install, Node 18+). Use when auditing/benchmarking/migrating an existing site — **not** a direct site clone, and not 100% complete if the site is Canvas-heavy/login-walled/anti-bot/complexly rendered. Different role from `mobbin-references`/`lazyweb-design-research` (those = inspiration from many apps, this = tokens from the one given site). Known Failure Modes cross-references [D4Vinci/Scrapling](https://github.com/D4Vinci/Scrapling) (added 2026-08-08) as a fallback for Canvas-heavy/anti-bot sites — not installed as a separate skill |
+| *(reference source, not a skill)* [`VoltAgent/awesome-design-md`](https://github.com/VoltAgent/awesome-design-md) | **New (2026-08-09).** A library of ready-made `DESIGN.md` files for 73 well-known brands (Stripe, Linear, Notion, Vercel, Apple, Figma, Supabase, etc.) — plain text files, no executable code, no risk. Use when you want generated UI to have the real "feel" of an existing brand (not just inspiration like `mobbin-references`/`lazyweb-design-research`) — fetch a single file from `https://raw.githubusercontent.com/VoltAgent/awesome-design-md/main/design-md/<slug>/DESIGN.md` (see the slug list in the repo link), drop it in the project root for the agent to read directly before asking it to build UI; no need to clone the whole repo (the library updates often, so fetch live to avoid stale data) |
 
 ---
 
 ## pordee (kerlos/pordee) — Thai compression
 
-| Skill | ทำอะไร / ใช้ตอน |
+| Skill | What it does / when to use |
 |---|---|
-| `pordee:pordee` | โหมดสั้นไทย+อังกฤษ ลด token 60-75% — `/pordee` |
-| `pordee:pordee-stats` | สถิติ token ของ session — `/pordee-stats` |
+| `pordee:pordee` | Short Thai+English mode, cuts tokens 60-75% — `/pordee` |
+| `pordee:pordee-stats` | Token stats for the session — `/pordee-stats` |
 
 ---
 
 ## lazyweb (aboul3ata/lazyweb-skill) — design research
 
-| Skill | ทำอะไร / ใช้ตอน |
+| Skill | What it does / when to use |
 |---|---|
-| `lazyweb-design-research` | research design + ดาวน์โหลด screenshot reference |
-| `lazyweb-quick-references` | หา app screenshot/UI reference เร็ว ๆ |
-| `lazyweb-design-improve` | screenshot งานเรา + หาเทียบ → ไอเดียปรับ |
-| `lazyweb-design-brainstorm` | brainstorm cross-domain (ออกนอก category) |
+| `lazyweb-design-research` | Design research + download reference screenshots |
+| `lazyweb-quick-references` | Quickly find app screenshots/UI references |
+| `lazyweb-design-improve` | Screenshot our work + find comparisons → ideas for improvement |
+| `lazyweb-design-brainstorm` | Cross-domain brainstorm (outside the category) |
 | `lazyweb-add-inspo-source` | connect Mobbin/Savee/Dribbble/Behance |
-| `lazyweb-remove-inspo-source` | ถอด source ที่ connect |
+| `lazyweb-remove-inspo-source` | Remove a connected source |
 
 ---
 
 ## andrej-karpathy-skills
 
-| Skill | ทำอะไร / ใช้ตอน |
+| Skill | What it does / when to use |
 |---|---|
-| `karpathy-guidelines` | guideline ลด LLM coding mistakes (surgical, surface assumptions) |
+| `karpathy-guidelines` | guidelines to reduce LLM coding mistakes (surgical, surface assumptions) |
 
 ---
 
 ## anthropic-skills (official) — productivity
 
-| Skill | ทำอะไร / ใช้ตอน |
+| Skill | What it does / when to use |
 |---|---|
 | `internal-comms` | status report, leadership update, FAQ, incident report |
 | `brand-guidelines` | apply Anthropic brand color/typography |
 | `consolidate-memory` | reflective pass over memory files (merge/prune) |
-| `doc-coauthoring` | structured workflow เขียน doc/spec/proposal |
+| `doc-coauthoring` | Structured workflow for writing a doc/spec/proposal |
 | `algorithmic-art` | p5.js generative art |
 | `canvas-design` | visual art .png/.pdf |
-| `docx` | Word — สร้าง/อ่าน/แก้ |
+| `docx` | Word — create/read/edit |
 | `pdf` | PDF — read/merge/split/OCR/form |
-| `xlsx` | Excel — สร้าง/แก้/clean data |
+| `xlsx` | Excel — create/edit/clean data |
 | `pptx` | PowerPoint deck |
-| `slack-gif-creator` | animated GIF สำหรับ Slack |
-| `mcp-builder` | สร้าง MCP server (FastMCP / TS SDK) |
+| `slack-gif-creator` | animated GIF for Slack |
+| `mcp-builder` | Build an MCP server (FastMCP / TS SDK) |
 | `web-artifacts-builder` | claude.ai HTML artifact (React+Tailwind+shadcn) |
 | `theme-factory` | apply theme (10 presets) artifact |
-| `skill-creator` | สร้าง/แก้ skill + eval + benchmark |
+| `skill-creator` | Create/edit a skill + eval + benchmark |
 | `setup-cowork` | guided Cowork setup |
 
 ---
@@ -191,7 +191,7 @@ metadata:
 
 ### Agentic / agent systems
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `agent-architecture-audit` | Full-stack diagnostic for agent + LLM apps. Audits 12-layer stack for wrapper regression, memory pollution, tool failures, repair loops, rendering corruption |
 | `agent-eval` | Head-to-head comparison of coding agents (Claude Code, Aider, Codex) — pass rate, cost, time, consistency |
@@ -221,7 +221,7 @@ metadata:
 
 ### LLM cost / model routing / context
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `cost-aware-llm-pipeline` | Cost optimization — model routing by complexity, budget tracking, retry, prompt caching |
 | `cost-tracking` | Track Claude Code token usage / spending / budgets from local DB |
@@ -231,7 +231,7 @@ metadata:
 
 ### Coding standards / patterns (cross-cutting)
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `coding-standards` | Baseline cross-project conventions (naming, readability, immutability, code-quality) |
 | `error-handling` | Robust error handling — TypeScript/Python/Go; typed errors, boundaries, retries, circuit breakers |
@@ -243,28 +243,28 @@ metadata:
 
 ### Languages — Python
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `python-patterns` | Pythonic idioms, PEP 8, type hints |
 | `python-testing` | pytest, TDD, fixtures, mocking, coverage |
 
 ### Languages — Go
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `golang-patterns` | Idiomatic Go conventions |
 | `golang-testing` | Table-driven, subtest, benchmark, fuzz, coverage |
 
 ### Languages — Rust
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `rust-patterns` | Ownership, error handling, traits, concurrency |
 | `rust-testing` | Unit, integration, async, property-based, mocking, coverage |
 
 ### Languages — Java / Kotlin
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `java-coding-standards` | Spring Boot + Quarkus conventions (immutability, Optional, streams, CDI, reactive) |
 | `springboot-patterns` | Spring Boot — REST, layered services, data access, caching, async |
@@ -286,7 +286,7 @@ metadata:
 
 ### Languages — Swift / Apple
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `swiftui-patterns` | SwiftUI — @Observable state, view composition, nav, performance |
 | `swift-concurrency-6-2` | Swift 6.2 Approachable Concurrency — single-threaded default, @concurrent, isolated conformances |
@@ -298,7 +298,7 @@ metadata:
 
 ### Languages — C / C++ / C# / F# / .NET / Perl
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `cpp-coding-standards` | C++ Core Guidelines — modern, safe, idiomatic |
 | `cpp-testing` | GoogleTest/CTest, sanitizers, coverage |
@@ -311,7 +311,7 @@ metadata:
 
 ### Web — frontend frameworks
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `frontend-patterns` | React, Next.js, state mgmt, perf, UI |
 | `frontend-design-direction` | Set ECC-specific frontend design direction for production UI |
@@ -328,7 +328,7 @@ metadata:
 
 ### Web — backend frameworks
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `backend-patterns` | Backend arch — API, DB optimization, server-side (Node/Express/Next API) |
 | `nestjs-patterns` | NestJS — modules, controllers, providers, DTO, guards, interceptors |
@@ -347,7 +347,7 @@ metadata:
 
 ### Web — runtime / build / deploy
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `bun-runtime` | Bun as runtime/PM/bundler/test — when vs Node, Vercel support |
 | `flox-environments` | Reproducible cross-platform dev environments via Flox (Nix-based) |
@@ -358,14 +358,14 @@ metadata:
 
 ### Mobile — Flutter / Dart
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `dart-flutter-patterns` | Null safety, immutable state, async, widget arch, BLoC/Riverpod/Provider, GoRouter, Dio, Freezed |
 | `flutter-dart-code-review` | Code review checklist — widget, state mgmt, Dart idioms, perf, a11y, security |
 
 ### Databases
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `postgres-patterns` | Query opt, schema design, indexing, security (Supabase best practices) |
 | `mysql-patterns` | MySQL/MariaDB schema, query, indexing, transactions, replication |
@@ -375,7 +375,7 @@ metadata:
 
 ### AI / ML / RecSys
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `mle-workflow` | Production ML — data contracts, reproducible training, eval, deploy, monitor, rollback |
 | `pytorch-patterns` | PyTorch — training pipelines, model arch, data loading |
@@ -388,7 +388,7 @@ metadata:
 
 ### Testing / QA / verification
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `tdd-workflow` | Test-driven dev, 80%+ coverage (unit + integration + E2E) |
 | `e2e-testing` | Playwright — POM, config, CI/CD, artifacts, flaky strategies |
@@ -408,7 +408,7 @@ metadata:
 
 ### Network / homelab / infra
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `cisco-ios-patterns` | Cisco IOS/IOS-XE — show commands, config hierarchy, ACL, change-window verify |
 | `netmiko-ssh-automation` | Python Netmiko — read-only collection, batch SSH, TextFSM, guarded changes |
@@ -423,7 +423,7 @@ metadata:
 
 ### Healthcare
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `healthcare-cdss-patterns` | CDSS — drug interactions, dose validation, NEWS2/qSOFA, alert severity |
 | `healthcare-emr-patterns` | EMR/EHR — clinical safety, encounters, prescriptions, a11y-first UI |
@@ -433,7 +433,7 @@ metadata:
 
 ### Scientific
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `scientific-thinking-literature-review` | Lit review — search planning, screening, synthesis, citations |
 | `scientific-thinking-scholar-evaluation` | Evaluate papers/proposals/reviews/methods/evidence |
@@ -443,16 +443,16 @@ metadata:
 
 ### DeFi / blockchain
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `defi-amm-security` | Solidity AMM audit — reentrancy, CEI, donation, oracle, slippage, integer math |
 | `evm-token-decimals` | Prevent decimal mismatch across EVM chains |
 | `nodejs-keccak256` | Prevent Node sha3-256 vs Ethereum Keccak-256 mixup (selectors/signatures/storage) |
-| `agent-payment-x402` | (ดูด้านบน Agentic) |
+| `agent-payment-x402` | (see Agentic above) |
 
 ### Business / ops / sales / marketing
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `customer-billing-ops` | Stripe — subscriptions, refunds, churn triage, billing portal |
 | `customs-trade-compliance` | (TH/CH desc) Customs docs, HS classification, Incoterms, FTA, penalty mitigation |
@@ -480,7 +480,7 @@ metadata:
 
 ### Productivity / ops surfaces
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `email-ops` | Mailbox triage, draft, send verify, sent-mail follow-up |
 | `messages-ops` | Live messaging — read texts/DMs, recover OTP, inspect thread |
@@ -496,7 +496,7 @@ metadata:
 
 ### Media / content tools
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `fal-ai-media` | fal.ai — text-to-image (Nano Banana), video (Seedance/Kling/Veo 3), TTS, video-to-audio |
 | `manim-video` | Manim explainers for technical concepts, diagrams, walkthroughs |
@@ -508,7 +508,7 @@ metadata:
 
 ### Search / research / docs
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `search-first` | Search existing tools/libs/patterns before writing custom (researcher agent) |
 | `documentation-lookup` | Up-to-date library docs via Context7 MCP (not training data) |
@@ -519,7 +519,7 @@ metadata:
 
 ### ECC self-management / meta
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `configure-ecc` | Interactive installer for ECC — select + install skills/rules |
 | `ecc-guide` | Guide ECC's agents/skills/commands/hooks from live repo |
@@ -536,7 +536,7 @@ metadata:
 
 ### Product / planning
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `product-capability` | PRD → implementation-ready capability plan (constraints, invariants, interfaces) |
 | `product-lens` | Validate "why" before building, product diagnostics, pressure-test direction |
@@ -545,56 +545,56 @@ metadata:
 
 ### Design (ECC)
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `design-system` (ecc) | Generate/audit design systems, visual consistency, review styling PRs |
 | `make-interfaces-feel-better` | Polish details — spacing, type, borders, shadows, motion, hit areas |
 
 ### Decision / collaboration
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `council` | Convene 4-voice council for ambiguous decisions, tradeoffs, go/no-go |
 | `plankton-code-quality` | Write-time enforcement — auto-format + lint + Claude fixes on edit |
 
 ### Other
 
-| Skill | ใช้ตอน |
+| Skill | Use when |
 |---|---|
 | `jira-integration` | Jira ticket retrieval/analysis/update via MCP or REST |
 | `regex-vs-llm-structured-text` | Decision framework — regex vs LLM for structured text parsing |
 
 ---
 
-## Quick "ตอนไหนใช้อะไร" cheatsheet
+## Quick "which one when" cheatsheet
 
-| สถานการณ์ | Skill หลัก + เสริม |
+| Situation | Main skill + extras |
 |---|---|
-| เริ่มงานใหม่ creative | `superpowers:brainstorming` |
-| มี requirement → plan | `superpowers:writing-plans` หรือ `ecc:plan` |
-| Plan แล้ว → execute | `superpowers:executing-plans` หรือ `ecc:prp-implement` |
-| Feature ใหม่ (TDD) | `superpowers:test-driven-development` + `ecc:<lang>-test` |
-| เจอบั๊ก | `superpowers:systematic-debugging` + `debug-mantra` |
-| Fix แล้ว ปิด ticket | `post-mortem` (→ `management-talk` ถ้าส่งบน) |
+| Starting new creative work | `superpowers:brainstorming` |
+| Have requirements → plan | `superpowers:writing-plans` or `ecc:plan` |
+| Plan done → execute | `superpowers:executing-plans` or `ecc:prp-implement` |
+| New feature (TDD) | `superpowers:test-driven-development` + `ecc:<lang>-test` |
+| Hit a bug | `superpowers:systematic-debugging` + `debug-mantra` |
+| Fixed it, closing the ticket | `post-mortem` (→ `management-talk` if escalating upward) |
 | Review PR/plan | `scrutinize` + `ecc:code-review` |
-| ก่อน commit | `superpowers:verification-before-completion` + `ecc:checkpoint` |
-| Build fail | `ecc:build-fix` หรือ `ecc:<lang>-build` |
-| Design UI ใหม่ | `ui-ux-pro-max` → `ui-styling` |
-| Build หน้าใหม่เต็มหน้า / audit AI-slop | `hallmark` (57 gate anti-slop system, มี `audit` mode read-only) |
-| Polish/deslop UI (ทำได้แต่ไม่สวย) | `make-interfaces-feel-better` (optical craft) + `deslop-defaults` (structural restraint) |
+| Before commit | `superpowers:verification-before-completion` + `ecc:checkpoint` |
+| Build fails | `ecc:build-fix` or `ecc:<lang>-build` |
+| Design new UI | `ui-ux-pro-max` → `ui-styling` |
+| Build a new full page / audit AI-slop | `hallmark` (57-gate anti-slop system, has a read-only `audit` mode) |
+| Polish/deslop UI (works but not pretty) | `make-interfaces-feel-better` (optical craft) + `deslop-defaults` (structural restraint) |
 | Research design | `lazyweb:lazyweb-design-research` |
-| สร้าง slide | `slides` หรือ `anthropic-skills:pptx` |
-| งาน doc/spec | `anthropic-skills:doc-coauthoring` |
-| แปลงไฟล์ (PDF/office/audio) → Markdown / feed RAG / batch | `markitdown` |
-| ลด token | `pordee:pordee` |
-| สร้าง skill ใหม่ | `superpowers:writing-skills` หรือ `anthropic-skills:skill-creator` |
+| Create slides | `slides` or `anthropic-skills:pptx` |
+| Doc/spec work | `anthropic-skills:doc-coauthoring` |
+| Convert files (PDF/office/audio) → Markdown / feed RAG / batch | `markitdown` |
+| Reduce tokens | `pordee:pordee` |
+| Create a new skill | `superpowers:writing-skills` or `anthropic-skills:skill-creator` |
 | Audit context bloat | `ecc:context-budget` + `ecc:strategic-compact` |
 | Production audit | `ecc:production-audit` + `ecc:canary-watch` |
-| UI bug หลัง refactor | `ecc:click-path-audit` |
+| UI bug after a refactor | `ecc:click-path-audit` |
 
 ---
 
-## ECC Commands (slash) — ใช้ตรง
+## ECC Commands (slash) — use directly
 
 `/plan`, `/plan-prd`, `/feature-dev`, `/code-review`, `/review-pr`, `/checkpoint`, `/build-fix`, `/quality-gate`, `/pr`, `/prp-plan`, `/prp-implement`, `/prp-prd`, `/prp-pr`, `/prp-commit`, `/test-coverage`, `/refactor-clean`, `/hookify`, `/hookify-list`, `/hookify-configure`, `/hookify-help`, `/learn`, `/learn-eval`, `/instinct-import`, `/instinct-export`, `/instinct-status`, `/promote`, `/prune`, `/projects`, `/save-session`, `/resume-session`, `/sessions`, `/loop-start`, `/loop-status`, `/multi-plan`, `/multi-execute`, `/multi-frontend`, `/multi-backend`, `/multi-workflow`, `/gan-build`, `/gan-design`, `/santa-loop`, `/cost-report`, `/model-route`, `/harness-audit`, `/agent-architecture-audit`, `/security-scan`, `/security-review`, `/update-codemaps`, `/update-docs`, `/project-init`, `/configure-ecc`, `/ecc-guide`, `/jira`, `/skill-create`, `/skill-health`, `/skill-comply`, `/skill-scout`, `/skill-stocktake`
 
@@ -602,64 +602,64 @@ Per-language build/review/test commands: `/cpp-build`, `/cpp-review`, `/cpp-test
 
 ---
 
-## เครื่องมืออ้างอิง (ไม่ใช่ skill)
+## Reference tools (not skills)
 
-| ใช้ตอน | เครื่องมือ |
+| Use when | Tool |
 |--------|-----------|
-| เช็คว่าสกิล/ปลั๊กอินมีอัปเดตใหม่ไหม (รายสัปดาห์ อัตโนมัติ, deterministic 0-token, รายงานอย่างเดียว ไม่อัปเดตเอง) | `~/.claude/tools/skill-update-check/check.ps1` (manifest: `sources.json`, รายงาน: `~/.claude/skill-update-report.md`) |
+| Checking whether skills/plugins have new updates (weekly, automatic, deterministic 0-token, reports only, never updates by itself) | `~/.claude/tools/skill-update-check/check.ps1` (manifest: `sources.json`, report: `~/.claude/skill-update-report.md`) |
 
-- เช็ค git plugins (ecc/superpowers) ด้วย `git fetch`+`rev-list`, pip (graphifyy/markitdown/ifixai) ด้วย `pip list --outdated`, personal skills ด้วย `git ls-remote` เทียบ baseline ใน `sources.json`.
-- รัน Task Scheduler ทุกวันอาทิตย์ 10:00 (`schtasks /Query /TN ClaudeSkillUpdateCheck`). รันมือ: `powershell -NoProfile -ExecutionPolicy Bypass -File ~/.claude/tools/skill-update-check/check.ps1`
-- **review-before-apply:** อ่านรายงานแล้วอัปเดตเองทีละตัว → หลังอัปแล้วรัน `check.ps1 -Ack` เพื่อรีเซ็ต baseline.
-- **⚠️ ข้อจำกัดที่รู้แล้ว (2026-08-08):** `claude plugin update` ไม่ได้ทำ `git pull` ในโฟลเดอร์เดิม — มันแตก version dir ใหม่ (เช่น `ecc/2.2.0`) ที่ไม่มี `.git` เลย (extract จาก release archive) แล้วทิ้ง dir เวอร์ชันเก่าที่ยังมี `.git` ค้างไว้. `check.ps1` สแกนหา `.git` เจอแต่ dir เก่า เลยรายงาน ecc/superpowers ว่า "ตามหลังหลายร้อย commit" ตลอดไป **ทั้งที่จริงอัปเดตแล้ว** (เช็คจริงด้วย `claude plugin list`). แก้ถาวร: ลบ dir เวอร์ชันเก่าทิ้ง (เช่น `~/.claude/plugins/cache/ecc/ecc/2.0.0-rc.1`, `.../superpowers/superpowers/5.1.0`) — ยังไม่ได้ลบ (session นี้ถูก permission classifier บล็อกไว้ตอนลอง `rm -rf`), รอผู้ใช้ลบเองหรืออนุญาตครั้งหน้า. ไม่กระทบ `-Ack`/`sources.json` เพราะ `git_plugins` ไม่มี baseline ให้พัง.
+- Checks git plugins (ecc/superpowers) with `git fetch`+`rev-list`, pip (graphifyy/markitdown/ifixai) with `pip list --outdated`, personal skills with `git ls-remote` against the baseline in `sources.json`.
+- Runs via Task Scheduler every Sunday 10:00 (`schtasks /Query /TN ClaudeSkillUpdateCheck`). Manual run: `powershell -NoProfile -ExecutionPolicy Bypass -File ~/.claude/tools/skill-update-check/check.ps1`
+- **review-before-apply:** read the report and update each item yourself → after updating, run `check.ps1 -Ack` to reset the baseline.
+- **⚠️ Known limitation (2026-08-08):** `claude plugin update` does not `git pull` in the existing folder — it creates a new version dir (e.g. `ecc/2.2.0`) with no `.git` at all (extracted from a release archive) and leaves the old version dir, which still has `.git`, behind. `check.ps1` only finds `.git` in the old dir, so it reports ecc/superpowers as "hundreds of commits behind" forever **even though they are actually updated** (verify with `claude plugin list`). Permanent fix: delete the old version dirs (e.g. `~/.claude/plugins/cache/ecc/ecc/2.0.0-rc.1`, `.../superpowers/superpowers/5.1.0`) — not yet deleted (this session was blocked by the permission classifier when trying `rm -rf`), waiting for the user to delete them or allow it next time. Does not affect `-Ack`/`sources.json` because `git_plugins` has no baseline to break.
 
 ---
 
-## Standalone CLI tools/agents ที่ลงไว้ (ไม่ใช่ Claude Code skill — โปรแกรมแยกในเครื่อง, 2026-08-09)
+## Standalone CLI tools/agents installed (not Claude Code skills — separate programs on the machine, 2026-08-09)
 
-| Tool | ทำอะไร / ใช้ตอน | ติดตั้งยังไง |
+| Tool | What it does / when to use | How it was installed |
 |---|---|---|
-| [`witr`](https://github.com/pranshuparmar/witr) | "Why is this running?" — trace process/port/container/file กลับไปหา chain ที่สั่งมัน (`witr nginx`, `witr --port 5432`, `witr --tree`) ใช้ตอน debug ว่าทำไม process นี้ยังรันอยู่ | binary release verify SHA256 แล้วจริง วางไว้ที่ `~/bin/witr.exe` (อยู่ใน PATH แล้ว) — เรียก `witr` ได้ทุกที่ |
-| [`ifixai-ai/iFixAi`](https://github.com/ifixai-ai/iFixAi) | audit/ให้คะแนน AI agent หรือ LLM endpoint ตาม provider+judge+suite ที่เลือก (`ifixai setup` → `ifixai run`) — ใช้ตอนอยากให้ตรวจ output ของ agent ตัวอื่นแบบมีมาตรฐาน | `pip install "ifixai[anthropic]"` — **ทดสอบแล้ว 2026-08-09**: `ifixai run --provider mock --strategic` รันได้จริง แต่แม้ mock ก็ยังต้องมี key จริงให้ judge model — ไม่มี `ANTHROPIC_API_KEY` (มีแค่ `ANTHROPIC_BASE_URL`) เลยรันเต็มไม่ได้ ยังไม่ใช่ของพัง แค่ขาด key |
-| [`earendil-works/pi`](https://github.com/earendil-works/pi) | agent-building toolkit (unified multi-provider LLM API + agent runtime + TUI + coding CLI) | `npm` package `@earendil-works/pi-coding-agent` — **ทดสอบแล้ว 2026-08-09: ใช้งานได้จริง** shim เดิมหายไป (จาก npm operation ที่เคยถูกขัดจังหวะ) ติดตั้งใหม่ pin ไว้ที่ v0.74.2 (`@latest`/0.84.1 ต้องการ Node ≥22.19.0 แต่เครื่องมี v22.12.0) — `pi --version`, `pi --help`, `pi -p "..."` ทำงานถูกต้องหมด (error file-not-found ถูกต้อง, ตรวจ missing API key แล้วบอก `/login` ถูกต้อง) เหลือแค่ต้องมี provider key หรือ OAuth login ถึงจะใช้งานจริงได้ |
+| [`witr`](https://github.com/pranshuparmar/witr) | "Why is this running?" — traces a process/port/container/file back to the chain that started it (`witr nginx`, `witr --port 5432`, `witr --tree`). Use when debugging why a process is still running | Release binary, SHA256 verified, placed at `~/bin/witr.exe` (already on PATH) — call `witr` from anywhere |
+| [`ifixai-ai/iFixAi`](https://github.com/ifixai-ai/iFixAi) | Audit/score an AI agent or LLM endpoint by chosen provider+judge+suite (`ifixai setup` → `ifixai run`) — use when you want another agent's output checked against a standard | `pip install "ifixai[anthropic]"` — **tested 2026-08-09**: `ifixai run --provider mock --strategic` runs, but even mock still needs a real key for the judge model — there is no `ANTHROPIC_API_KEY` (only `ANTHROPIC_BASE_URL`), so a full run isn't possible. Not broken, just missing a key |
+| [`earendil-works/pi`](https://github.com/earendil-works/pi) | Agent-building toolkit (unified multi-provider LLM API + agent runtime + TUI + coding CLI) | `npm` package `@earendil-works/pi-coding-agent` — **tested 2026-08-09: works.** The old shim had disappeared (from an interrupted npm operation); reinstalled pinned at v0.74.2 (`@latest`/0.84.1 needs Node ≥22.19.0 but the machine has v22.12.0) — `pi --version`, `pi --help`, `pi -p "..."` all behave correctly (correct file-not-found error, correctly detects a missing API key and points to `/login`). Only a provider key or OAuth login is still needed for real use |
 
-**ถอนการติดตั้ง หลังทดสอบแล้วใช้ไม่ได้จริง (2026-08-09):**
-- **`anomalyco/opencode`** (`opencode-ai`) — ลองติดตั้งซ้ำ 3+ รอบ, postinstall โหลด platform binary ไม่สำเร็จ (`EIDLETIMEOUT` ทุกครั้ง กับ registry.npmjs.org) `opencode --version` ใช้ไม่ได้ → uninstall แล้ว
-- **`magnitudedev/magnitude`** (`@magnitudedev/cli`) — ยืนยันพังจริงบน Windows: alpha version 0.0.1-alpha.37 ไม่มี Windows CLI binary ให้เลย (`release has 0 matching cli artifacts`) → uninstall แล้ว
+**Uninstalled after testing showed they don't actually work (2026-08-09):**
+- **`anomalyco/opencode`** (`opencode-ai`) — reinstalled 3+ times, the postinstall failed to fetch the platform binary (`EIDLETIMEOUT` every time against registry.npmjs.org). `opencode --version` unusable → uninstalled
+- **`magnitudedev/magnitude`** (`@magnitudedev/cli`) — confirmed broken on Windows: alpha version 0.0.1-alpha.37 ships no Windows CLI binary (`release has 0 matching cli artifacts`) → uninstalled
 
-**ปฏิเสธไม่ติดตั้งแม้ผู้ใช้ขอตรงๆ (2026-08-09):**
-- **`ultraworkers/claw-code`** — ตรวจ engagement stats เจอสัญญาณ star-farming ชัด: 195,013★ แต่ fork ถึง 109,249 (56%, ปกติ 5-15%), watcher แค่ 1,952 คน (~1%), repo อายุ 4 เดือน + framing "ไม่มี human ควบคุมเลย" = supply-chain risk ตรงๆ
-- **`PrimeIntellect-ai/prime-agent`** — ไม่มี npm/pip package มีแต่ `curl \| sh` installer ที่ติดตั้ง Node/npm ระบบให้อัตโนมัติได้ถ้าไม่มี ซับซ้อนเกินจะ audit ได้มั่นใจ — ขัดกฎ "ห้ามรันไฟล์จากแหล่งยังไม่ผ่านตรวจสอบ" แม้ผู้ใช้จะอนุญาตก็ตาม
+**Declined to install even though the user asked directly (2026-08-09):**
+- **`ultraworkers/claw-code`** — engagement stats show clear star-farming signals: 195,013★ but 109,249 forks (56%, normally 5-15%), only 1,952 watchers (~1%), repo is 4 months old + framing of "no human control at all" = a direct supply-chain risk
+- **`PrimeIntellect-ai/prime-agent`** — no npm/pip package, only a `curl \| sh` installer that can install system Node/npm automatically if missing; too complex to audit with confidence — violates the rule "never run files from unvetted sources" even though the user allowed it
 
-ที่มาเต็ม + งานวิจัยทั้งหมด (73 repo จาก trendshift.io): `<YOUR_VAULT_PATH>\projects\claude-skills-trendshift-2026-08\FULL-LEDGER.md`
+Full provenance + all the research (73 repos from trendshift.io): `<YOUR_VAULT_PATH>\projects\claude-skills-trendshift-2026-08\FULL-LEDGER.md`
 
 ---
 
 ## makerskills / cybersecurity-skills / marketingskills — adopted 2026-08-09
 
-จาก 3 repo ของ Corey Haines / briiirussell ที่ผู้ใช้ขอเพิ่ม (คัด subset เท่านั้น ไม่ใช่ทั้งชุด — ดู `sources.json` personal_skills สำหรับ commit baseline ของแต่ละตัว):
+From 3 repos by Corey Haines / briiirussell that the user asked to add (a subset only, not the whole sets — see `sources.json` personal_skills for each one's baseline commit):
 
-- **makerskills** (`coreyhaines31/makerskills`, คัดเอง 6/19): `second-brain`, `decide`, `unstuck`, `skillify`, `deep-research`, `watch-video` — เลือกเพราะตรงกับ workflow `<YOUR_VAULT_PATH>` vault + นิสัยคัดสกิลของผู้ใช้เอง
-- **cybersecurity-skills** (`briiirussell/cybersecurity-skills`, ผ่าน fable-medium review 3/29): `prompt-injection`, `secrets-audit`, `dependency-audit` — ข้าม `threat-modeling` (borderline, ไม่ได้ลง) และอีก 25 ตัวที่สมมติว่ามีทีม/compliance obligation ที่ผู้ใช้ไม่มี
-- **marketingskills** (`coreyhaines31/marketingskills`, ผ่าน fable-medium review 12/46): `product-marketing`, `launch`, `copywriting`, `copy-editing`, `social`, `community-marketing`, `content-strategy`, `image`, `marketing-ideas`, `marketing-psychology`, `pricing`, `marketing-council` — คัดสำหรับ indie game dev ที่ยังไม่มี live SaaS/ad budget (ข้าม 34 ตัวที่สมมติ funnel/paid-ads/B2B sales infra)
-
----
-
-## Identification notes (ไม่ใช่ skill, ระบุตัวตนเทียบ trendshift.io 2026-08-08)
-
-- **`NousResearch/hermes-agent`** (227k★) — น่าจะเป็นตัว `hermes.exe` CLI ที่ `jarvis_hermes_unified.py`
-  (ใน `C:\Users\<YOUR_USERNAME>\Downloads\EP.6 - Hermes Integrations\`) เรียกใช้งาน. Reference เท่านั้น ไม่ได้ลง.
-- **`openclaw/openclaw`** (385k★) — ตรงกับ "OpenClaw" infra ที่พูดถึงในเอกสารคอร์สเดียวกัน. Reference เท่านั้น ไม่ได้ลง.
-- **`affaan-m/ECC`** vs `affaan-m/everything-claude-code`** — **repo เดียวกัน**, GitHub เปลี่ยนชื่อ (`gh repo view`
-  ทั้งสองชื่อ resolve ไปที่ owner ID/URL/description เดียวกัน). `sources.json`'s `git_plugins.ecc` ยังชี้
-  `everything-claude-code.git` (ใช้ได้ผ่าน redirect) — ไม่จำเป็นต้องแก้ แต่ชื่อปัจจุบันคือ `ECC`.
+- **makerskills** (`coreyhaines31/makerskills`, hand-picked 6/19): `second-brain`, `decide`, `unstuck`, `skillify`, `deep-research`, `watch-video` — chosen because they fit the `<YOUR_VAULT_PATH>` vault workflow + the user's own skill-curation habits
+- **cybersecurity-skills** (`briiirussell/cybersecurity-skills`, via fable-medium review 3/29): `prompt-injection`, `secrets-audit`, `dependency-audit` — skipped `threat-modeling` (borderline, not installed) and 25 others that assume a team/compliance obligations the user doesn't have
+- **marketingskills** (`coreyhaines31/marketingskills`, via fable-medium review 12/46): `product-marketing`, `launch`, `copywriting`, `copy-editing`, `social`, `community-marketing`, `content-strategy`, `image`, `marketing-ideas`, `marketing-psychology`, `pricing`, `marketing-council` — picked for an indie game dev with no live SaaS/ad budget yet (skipped 34 that assume funnel/paid-ads/B2B sales infra)
 
 ---
 
-## วิธีลงสกิลเพิ่ม
+## Identification notes (not skills, identified against trendshift.io 2026-08-08)
 
-1. **Plugin marketplace** (มี marketplace.json): `/plugin marketplace add <owner/repo>` + `/plugin install <plugin>@<marketplace>`
-2. **Single-plugin repo** (มี plugin.json): clone ไป `~/.claude/external-skills/<name>/` แล้ว copy folder skill ไป `~/.claude/skills/`
-3. **Standalone SKILL.md**: วาง `~/.claude/skills/<name>/SKILL.md` ตรง ๆ
+- **`NousResearch/hermes-agent`** (227k★) — probably the `hermes.exe` CLI that `jarvis_hermes_unified.py`
+  (in `C:\Users\<YOUR_USERNAME>\Downloads\EP.6 - Hermes Integrations\`) calls. Reference only, not installed.
+- **`openclaw/openclaw`** (385k★) — matches the "OpenClaw" infra mentioned in the same course material. Reference only, not installed.
+- **`affaan-m/ECC`** vs `affaan-m/everything-claude-code`** — **the same repo**, GitHub renamed it (`gh repo view`
+  resolves both names to the same owner ID/URL/description). `sources.json`'s `git_plugins.ecc` still points to
+  `everything-claude-code.git` (works via redirect) — no need to change it, but the current name is `ECC`.
 
-**หลังลง:** Claude Code โหลด skill อัตโนมัติ ไม่ต้อง restart — แล้วเพิ่ม entry ในไฟล์นี้
+---
+
+## How to install more skills
+
+1. **Plugin marketplace** (has marketplace.json): `/plugin marketplace add <owner/repo>` + `/plugin install <plugin>@<marketplace>`
+2. **Single-plugin repo** (has plugin.json): clone to `~/.claude/external-skills/<name>/` then copy the skill folder to `~/.claude/skills/`
+3. **Standalone SKILL.md**: place it directly at `~/.claude/skills/<name>/SKILL.md`
+
+**After installing:** Claude Code loads the skill automatically, no restart needed — then add an entry to this file

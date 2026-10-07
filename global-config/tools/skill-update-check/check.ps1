@@ -81,25 +81,25 @@ if (Test-Path $PluginCache) {
         $cur = (Invoke-Git @('-C', $repo, 'rev-parse', '--short', 'HEAD')).Out
         $fetch = Invoke-Git @('-C', $repo, 'fetch', '-q')
         if (-not $fetch.Ok) {
-            $rows.Add("| $name | plugin (git) | $cur | เช็คไม่ได้ (offline/ผิดพลาด) | $(Clean-Cell $fetch.Out) | - |")
+            $rows.Add("| $name | plugin (git) | $cur | cannot check (offline/error) | $(Clean-Cell $fetch.Out) | - |")
             continue
         }
         $countRes = Invoke-Git @('-C', $repo, 'rev-list', '--count', 'HEAD..@{u}')
         if (-not $countRes.Ok) {
-            $rows.Add("| $name | plugin (git) | $cur | เช็คไม่ได้ (ไม่มี upstream?) | $(Clean-Cell $countRes.Out) | - |")
+            $rows.Add("| $name | plugin (git) | $cur | cannot check (no upstream?) | $(Clean-Cell $countRes.Out) | - |")
             continue
         }
         $count = ($countRes.Out).Trim()
         if ($count -eq '0') {
-            $rows.Add("| $name | plugin (git) | $cur | ไม่มี (ล่าสุดแล้ว) | - | - |")
+            $rows.Add("| $name | plugin (git) | $cur | none (up to date) | - | - |")
         } else {
             $log = (Invoke-Git @('-C', $repo, 'log', '--oneline', '-5', 'HEAD..@{u}')).Out
-            $cmd = "claude plugin update  หรือ  git -C `"$repo`" pull"
-            $rows.Add("| $name | plugin (git) | $cur | ใช่ — $count commit | $(Clean-Cell $log) | $(Clean-Cell $cmd) |")
+            $cmd = "claude plugin update  or  git -C `"$repo`" pull"
+            $rows.Add("| $name | plugin (git) | $cur | yes - $count commit(s) | $(Clean-Cell $log) | $(Clean-Cell $cmd) |")
         }
     }
 } else {
-    $notes.Add("ไม่พบโฟลเดอร์ plugin cache ที่ $PluginCache")
+    $notes.Add("Plugin cache folder not found at $PluginCache")
 }
 
 # =====================================================================
@@ -119,7 +119,7 @@ try {
     $pipOk = $true
 } catch {
     $pipOk = $false
-    $notes.Add("เรียก pip ไม่สำเร็จ: $($_.Exception.Message)")
+    $notes.Add("pip call failed: $($_.Exception.Message)")
 }
 
 foreach ($pkg in $manifest.pip_packages) {
@@ -127,19 +127,19 @@ foreach ($pkg in $manifest.pip_packages) {
     $key  = $dist.ToLower()
     $skillName = $pkg.skill
     if (-not $pipOk) {
-        $rows.Add("| $skillName | pip: $dist | ? | เช็คไม่ได้ (pip ใช้ไม่ได้) | - | - |")
+        $rows.Add("| $skillName | pip: $dist | ? | cannot check (pip unavailable) | - | - |")
         continue
     }
     if (-not $pipInstalled.ContainsKey($key)) {
-        $rows.Add("| $skillName | pip: $dist | ไม่ได้ติดตั้ง | - | - | pip install $dist |")
+        $rows.Add("| $skillName | pip: $dist | not installed | - | - | pip install $dist |")
         continue
     }
     $curV = $pipInstalled[$key]
     if ($pipOutdated.ContainsKey($key)) {
         $latest = $pipOutdated[$key].latest_version
-        $rows.Add("| $skillName | pip: $dist | $curV | ใช่ — มี $latest | อัปเดต $curV → $latest | pip install -U $dist |")
+        $rows.Add("| $skillName | pip: $dist | $curV | yes - $latest available | update $curV → $latest | pip install -U $dist |")
     } else {
-        $rows.Add("| $skillName | pip: $dist | $curV | ไม่มี (ล่าสุดแล้ว) | - | - |")
+        $rows.Add("| $skillName | pip: $dist | $curV | none (up to date) | - | - |")
     }
 }
 
@@ -153,17 +153,17 @@ foreach ($sk in $manifest.personal_skills) {
     $seen = $sk.last_seen_commit
 
     if ($url -eq 'self-authored') {
-        $rows.Add("| $name | self-authored | - | ข้าม (ไม่มี upstream) | - | - |")
+        $rows.Add("| $name | self-authored | - | skipped (no upstream) | - | - |")
         continue
     }
     if ([string]::IsNullOrWhiteSpace($url) -or $url -eq 'unknown') {
-        $rows.Add("| $name | unknown (เติม URL ใน sources.json) | - | ยังเช็คไม่ได้ | $(Clean-Cell $sk.note) | - |")
+        $rows.Add("| $name | unknown (fill in URL in sources.json) | - | cannot check yet | $(Clean-Cell $sk.note) | - |")
         continue
     }
 
     $lsr = Invoke-Git @('ls-remote', $url, 'HEAD')
     if (-not $lsr.Ok -or [string]::IsNullOrWhiteSpace($lsr.Out)) {
-        $rows.Add("| $name | $url | $(if($seen){$seen.Substring(0,[Math]::Min(7,$seen.Length))}else{'(ไม่มี baseline)'}) | เช็คไม่ได้ (offline/repo ผิด) | $(Clean-Cell $lsr.Out) | - |")
+        $rows.Add("| $name | $url | $(if($seen){$seen.Substring(0,[Math]::Min(7,$seen.Length))}else{'(no baseline)'}) | cannot check (offline/wrong repo) | $(Clean-Cell $lsr.Out) | - |")
         continue
     }
     $remoteHead = ($lsr.Out -split '\s+')[0]
@@ -172,58 +172,58 @@ foreach ($sk in $manifest.personal_skills) {
     if ($Ack) {
         $sk.last_seen_commit = $remoteHead
         $ackUpdated = $true
-        $rows.Add("| $name | $url | $remoteShort | -Ack: บันทึก baseline แล้ว | subpath: $(Clean-Cell $sk.subpath_in_repo) | - |")
+        $rows.Add("| $name | $url | $remoteShort | -Ack: baseline recorded | subpath: $(Clean-Cell $sk.subpath_in_repo) | - |")
         continue
     }
 
-    $cmd = "git pull ใน source repo แล้วก๊อป subpath ทับ ~/.claude/skills/$name (subpath: $($sk.subpath_in_repo)); จากนั้นรัน check.ps1 -Ack"
+    $cmd = "git pull in the source repo, then copy the subpath over ~/.claude/skills/$name (subpath: $($sk.subpath_in_repo)); then run check.ps1 -Ack"
     if ([string]::IsNullOrWhiteSpace($seen)) {
-        $rows.Add("| $name | $url | remote=$remoteShort | ยังไม่ตั้ง baseline (รัน -Ack เพื่อบันทึก) | $(Clean-Cell $sk.note) | $(Clean-Cell $cmd) |")
+        $rows.Add("| $name | $url | remote=$remoteShort | no baseline set (run -Ack to record) | $(Clean-Cell $sk.note) | $(Clean-Cell $cmd) |")
     } elseif ($seen -ne $remoteHead) {
         $seenShort = $seen.Substring(0, [Math]::Min(7, $seen.Length))
-        $rows.Add("| $name | $url | baseline=$seenShort | ใช่ — remote=$remoteShort (repo เปลี่ยน*) | $(Clean-Cell $sk.note) | $(Clean-Cell $cmd) |")
+        $rows.Add("| $name | $url | baseline=$seenShort | yes - remote=$remoteShort (repo changed*) | $(Clean-Cell $sk.note) | $(Clean-Cell $cmd) |")
     } else {
-        $rows.Add("| $name | $url | $remoteShort | ไม่มี (ตรง baseline) | - | - |")
+        $rows.Add("| $name | $url | $remoteShort | none (matches baseline) | - | - |")
     }
 }
 
 # --- Persist baseline on -Ack ---------------------------------------
 if ($Ack -and $ackUpdated) {
     $manifest | ConvertTo-Json -Depth 8 | Set-Content -Path $SourcesPath -Encoding UTF8
-    $notes.Add("บันทึก baseline ใหม่ลง sources.json เรียบร้อย (โหมด -Ack)")
+    $notes.Add("New baseline written to sources.json (-Ack mode)")
 }
 
 # =====================================================================
 # WRITE REPORT
 # =====================================================================
 $out = New-Object System.Collections.Generic.List[string]
-$out.Add("# รายงานการเช็คอัปเดตสกิล/ปลั๊กอิน (Claude)")
+$out.Add("# Skill/plugin update check report (Claude)")
 $out.Add("")
-$out.Add("**เวลาเช็คล่าสุด:** $stamp")
-$mode = if ($Ack) { 'บันทึก baseline (-Ack)' } else { 'เช็คอย่างเดียว (read-only)' }
-$out.Add("**โหมด:** $mode")
+$out.Add("**Last checked:** $stamp")
+$mode = if ($Ack) { 'record baseline (-Ack)' } else { 'check only (read-only)' }
+$out.Add("**Mode:** $mode")
 $out.Add("")
-$out.Add("> การเช็คนี้ deterministic ล้วน (git/pip) ไม่เรียก LLM = ไม่กิน token.")
-$out.Add("> **REVIEW-BEFORE-APPLY:** สคริปต์นี้แค่รายงาน ไม่อัปเดตอัตโนมัติ — อ่านแล้วตัดสินใจอัปเดตเองทีละตัว.")
+$out.Add("> This check is fully deterministic (git/pip), no LLM calls = no tokens spent.")
+$out.Add("> **REVIEW-BEFORE-APPLY:** this script only reports and never updates automatically. Read it, then update each item yourself.")
 $out.Add("")
-$out.Add("| สกิล | แหล่ง | เวอร์ชัน/commit ปัจจุบัน | upstream มีใหม่? | สรุป commit ล่าสุด | คำสั่งอัปเดตที่แนะนำ |")
+$out.Add("| Skill | Source | Current version/commit | New upstream? | Latest commit summary | Suggested update command |")
 $out.Add("|------|-------|--------------------------|------------------|--------------------|----------------------|")
 foreach ($r in $rows) { $out.Add($r) }
 $out.Add("")
-$out.Add("\* หมายเหตุ: personal skills เช็คด้วย ``git ls-remote HEAD`` ของทั้ง repo ไม่ใช่เฉพาะ subpath — ถ้า repo ต้นทางมีคอมมิตที่อื่นก็จะขึ้นว่า 'repo เปลี่ยน' แม้ subpath ของสกิลจะไม่เปลี่ยน (over-report โดยตั้งใจ ปลอดภัยเพราะ review ก่อน).")
+$out.Add("\* Note: personal skills are checked with ``git ls-remote HEAD`` of the whole repo, not just the subpath. If the upstream repo has commits elsewhere it will show 'repo changed' even when the skill's subpath is unchanged (deliberate over-reporting, safe because you review first).")
 if ($notes.Count -gt 0) {
     $out.Add("")
-    $out.Add("## หมายเหตุระบบ")
+    $out.Add("## System notes")
     foreach ($n in $notes) { $out.Add("- $n") }
 }
 $out.Add("")
-$out.Add("## วิธีอัปเดต (ทำเอง ทีละตัว)")
-$out.Add("- **plugin (git):** ``claude plugin update`` หรือ ``git -C <cache path> pull``")
+$out.Add("## How to update (manually, one at a time)")
+$out.Add("- **plugin (git):** ``claude plugin update`` or ``git -C <cache path> pull``")
 $out.Add("- **pip:** ``pip install -U <dist_name>``")
-$out.Add("- **personal skill:** อัปเดต source repo แล้วก๊อป subpath ทับ ``~/.claude/skills/<name>`` จากนั้นรัน ``check.ps1 -Ack`` เพื่อรีเซ็ต baseline")
+$out.Add("- **personal skill:** update the source repo, copy the subpath over ``~/.claude/skills/<name>``, then run ``check.ps1 -Ack`` to reset the baseline")
 $out.Add("")
 
 $out | Set-Content -Path $ReportPath -Encoding UTF8
 
-Write-Host "เขียนรายงานแล้ว: $ReportPath"
-Write-Host "จำนวนรายการที่เช็ค: $($rows.Count)"
+Write-Host "Report written: $ReportPath"
+Write-Host "Items checked: $($rows.Count)"

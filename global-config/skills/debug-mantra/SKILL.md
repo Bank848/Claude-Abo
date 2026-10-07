@@ -7,7 +7,7 @@ description: Four-mantra debugging discipline — reproduce, trace the fail path
 
 Four-step discipline for any debug session. Recite verbatim, then apply in order.
 
-> **ขอบเขต vs `superpowers:systematic-debugging`:** debug-mantra เป็น **ตัวนำ default** สำหรับการ debug ทั่วไป (เบา, ท่อง 4 ขั้น, เริ่มได้ทันที). ใช้ `systematic-debugging` แทนเฉพาะบั๊กที่ยาว/ลึก/ข้ามหลาย session ที่ต้องการ phased workflow เต็มรูป — อย่าเปิดทั้งสองพร้อมกันในเซสชันเดียว เลือกอันเดียวตามความซับซ้อน
+> **Scope vs `superpowers:systematic-debugging`:** debug-mantra is the **default lead-in** for general debugging (lightweight, recite the 4 steps, start immediately). Use `systematic-debugging` instead only for long/deep/multi-session bugs that need the full phased workflow. Do not open both in one session; pick one based on complexity.
 
 ## Recite this — verbatim, as the first thing in your first response
 
@@ -75,4 +75,4 @@ Maintain a running **ledger** of every experiment in this session. Each entry: w
   - Do not declare a hypothesis correct until #4 confirms it against every prior breadcrumb.
 - If you catch yourself proposing a fix without a reliable repro, stop and return to step 1.
 - The mantra is a constraint **you** carry through the session — not advice to deliver back to the user.
-- ก่อนเสนอ fix: รัน poka-yoke กฎทองกับ root cause — "ทำไม bad state นี้ถึง representable ตั้งแต่แรก?" ถ้า fix ที่กำลังจะเขียนเป็นแค่ patch/validator ชั้น 2 ทั้งที่ redesign ชั้น 1 ทำได้ ให้เสนอทั้งสองพร้อม trade-off
+- Before proposing a fix: run the poka-yoke golden rule on the root cause: "Why is this bad state representable in the first place?" If the fix you are about to write is only a tier-2 patch/validator when a tier-1 redesign is possible, propose both with the trade-off.

@@ -3,76 +3,76 @@ name: poka-yoke
 description: Mistake-proofing by design — make the bad state impossible or self-evident at the source instead of detecting-and-punishing it later. Use BEFORE/DURING any design or review of features, game mechanics, minigames, UI flows, anti-cheat, input handling, build pipelines, or data models — and whenever you catch yourself about to write a "remember to / don't forget" note (that itch means a guardrail is missing). Trigger on /poka-yoke and proactively when designing, reviewing, auditing, hardening, or "how do we stop users/devs from doing X".
 ---
 
-# Poka-Yoke — กันพลาดตั้งแต่ออกแบบ
+# Poka-Yoke — mistake-proofing at design time
 
-> **อย่าตามจับความผิดทีหลัง — ออกแบบให้ความผิด "เกิดไม่ได้" หรือ "เห็นชัดทันที" ตั้งแต่ต้นทาง**
+> **Don't chase mistakes after the fact. Design so the mistake "can't happen" or is "obvious immediately" at the source.**
 
-Shigeo Shingo / Toyota. หัวใจ: เลื่อน effort จาก *detection* (จับ + ลงโทษ) ไป *prevention* (ทำให้ทำผิดไม่ได้). ใช้ได้กับโค้ด, UX, กันโกง, build, ไปจนถึงนิสัยการทำงานของ dev เอง.
+Shigeo Shingo / Toyota. Core idea: shift effort from *detection* (catch + punish) to *prevention* (make the mistake impossible). Applies to code, UX, anti-cheat, builds, and even the devs' own working habits.
 
-## บันได 2 ชั้น — รู้ก่อนว่ากำลังจะทำชั้นไหน
+## Two-tier ladder — know which tier you are about to build
 
-| ชั้น | ชื่อ | ความหมาย | ตัวอย่าง |
+| Tier | Name | Meaning | Examples |
 |---|---|---|---|
-| **1 (เป้า)** | **Prevention / Shutout** | ทำผิด **ไม่ได้เลย** เชิงโครงสร้าง | USB เสียบกลับด้านไม่เข้า · ค่าเงินเก็บเป็น append-only ledger (แก้ตัวเลขกลางอากาศแล้วไม่ตรงเอง) · enum แทน string ดิบ · ปุ่มไม่ทับ hotspot |
-| **2** | **Detection / Attention** | ทำผิดได้ แต่ร้องเตือน/บล็อกทันที + กู้ได้ | validation + error · รถไม่ติดถ้าไม่เหยียบเบรก · lint gate · assertion |
+| **1 (target)** | **Prevention / Shutout** | The mistake is **structurally impossible** | A USB plug that won't go in backwards · money stored as an append-only ledger (a number edited mid-air no longer matches) · enum instead of a raw string · buttons that don't overlap a hotspot |
+| **2** | **Detection / Attention** | The mistake can happen, but it warns/blocks immediately and is recoverable | validation + error · a car that won't start unless the brake is pressed · lint gate · assertion |
 
-**กฎทอง:** ถ้ากำลังจะเพิ่ม validator/detector/จับผิดชั้น 2 — **หยุดถามก่อน:** "ทำไม bad state นี้ถึง *เก็บได้/แสดงได้* ตั้งแต่แรก?" ถ้าตอบได้ว่าจะทำให้มัน **unrepresentable** → ทำชั้น 1 แทน ถูกกว่าระยะยาว (ไม่มี false-positive, ไม่ whack-a-mole, ไม่ต้องเขียน self-heal มากัน detector ของตัวเอง).
+**Golden rule:** if you are about to add a tier-2 validator/detector — **stop and ask first:** "Why can this bad state be *stored/shown* in the first place?" If you can make it **unrepresentable**, do tier 1 instead; it is cheaper in the long run (no false positives, no whack-a-mole, no self-heal code to protect your own detector).
 
-## 3 วิธีคลาสสิก (จับ UI/flow/input ได้ตรง)
+## 3 classic methods (a direct fit for UI/flow/input)
 
-| วิธี | หลัก | ถามตัวเอง |
+| Method | Principle | Ask yourself |
 |---|---|---|
-| **Contact** | รูปทรง/ตำแหน่ง/type บังคับ ทำผิดไม่เข้า | hotspot ทับกันไหม? element ที่ปนกันได้แยก type/shape ยัง? |
-| **Fixed-value** | นับครบ/ครั้งเดียวค่อยผ่าน | ต้องครบ N ค่อยไปต่อ? จ่ายรางวัล/ทำ side-effect "ครั้งเดียว" (idempotent guard) ยัง? |
-| **Motion-step** | บังคับลำดับ + ทางออกเดียวที่ commit เสมอ | ออกจาก flow นี้มีกี่ทาง? ทุกทาง commit/cleanup ครบไหม? มี "ประตูข้าง" ที่ลืมปิดไหม? |
+| **Contact** | Shape/position/type forces it so a wrong fit is impossible | Do hotspots overlap? Are elements that can be mixed up separated by type/shape? |
+| **Fixed-value** | Pass only when the count is complete / once | Must N be reached before moving on? Is the reward/side-effect "once only" (idempotent guard)? |
+| **Motion-step** | Enforce an order, with a single exit that always commits | How many ways out of this flow? Does every one commit/clean up fully? Is there a forgotten "side door"? |
 
-## Decision flow — เจอปัญหา/ช่องโหว่/พลาดซ้ำ
+## Decision flow — when you hit a problem/hole/repeat mistake
 
 ```
-เจอ bug / ช่องโกง / dev พลาดซ้ำ / กำลังจะเขียน "อย่าลืม X"
+found a bug / cheat hole / dev repeats a mistake / about to write "don't forget X"
         │
         ▼
-1. "ทำไม bad state นี้ถึงเกิด/เก็บได้ตั้งแต่แรก?"
+1. "Why can this bad state occur/be stored in the first place?"
         │
-        ├─ ทำให้มัน representable ไม่ได้ → ✅ ชั้น 1 (redesign data/type/layout/flow) ← เลือกก่อนเสมอ
+        ├─ can be made unrepresentable → ✅ tier 1 (redesign data/type/layout/flow) ← always choose first
         │
-        └─ เลี่ยงไม่ได้จริง (client-side, ปัจจัยภายนอก ฯลฯ)
+        └─ truly unavoidable (client-side, external factors, etc.)
                  │
                  ▼
-        2. detect ให้ "เห็นชัดทันที + กู้ได้ ไม่ลงโทษเกินจริง"
-           (self-heal ก่อน brick · ไม่ false-positive · ไม่ latch ค้าง)
+        2. detect it so it is "obvious immediately + recoverable, no excessive punishment"
+           (self-heal before brick · no false positives · no stuck latch)
 ```
 
-## Checklist 3 ด้าน
+## Checklist, 3 areas
 
-**กันมือบอน (UI / interaction / flow):**
-- [ ] ไม่มี hotspot/zone ซ้อนกัน (element ที่กลืน event กันต้องแยกพื้นที่ ไม่ใช่เขียน logic แยกแยะ)
-- [ ] ปุ่มที่กดไม่ได้ตอนนี้ = disable/ซ่อน ไม่ใช่กดได้แล้วเด้ง error
-- [ ] กดรัว/double-click ไม่ทำให้ได้ผลซ้ำหรือข้ามสเต็ป
-- [ ] **ทางออกมีทางเดียว + commit เสมอ** — ปิด "ประตูข้าง" ทุกบาน (เมนูระบบ, back, shortcut ที่ bypass flow)
-- [ ] ออกกลางคันแล้ว state ไม่เพี้ยน (default ปลอดภัย)
+**Guard against slips (UI / interaction / flow):**
+- [ ] No overlapping hotspots/zones (elements that swallow each other's events get separate areas; don't write disambiguation logic)
+- [ ] A button that can't be pressed right now is disabled/hidden, not pressable-then-error
+- [ ] Mashing/double-click doesn't repeat the effect or skip a step
+- [ ] **Exactly one exit, and it always commits** — close every "side door" (system menu, back, shortcuts that bypass the flow)
+- [ ] Leaving midway doesn't corrupt state (safe default)
 
-**กันโกง / integrity:**
-- [ ] ค่าสำคัญ **derive ได้** ไม่ใช่ค่าดิบที่แก้แล้วจบ (ledger > balance int · progress > bool ดิบ)
-- [ ] **durability สมมาตร** — "ของที่ได้" กับ "ราคาที่จ่าย" ต้องคงทน/หายพร้อมกัน (อย่าให้ฝั่งหนึ่งถาวร อีกฝั่ง revert ได้ → ฟาร์มได้)
-- [ ] side-effect ที่จ่ายเงิน/ให้รางวัล = idempotent (จ่ายครั้งเดียว guard)
-- [ ] ถ้าต้อง detect: **self-heal ก่อน brick**, เซ็นเฉพาะ surface ที่จำเป็น (อย่าเซ็น transient → false-positive)
+**Guard against cheating / integrity:**
+- [ ] Important values are **derivable**, not a raw value that ends the matter once edited (ledger > balance int · progress > raw bool)
+- [ ] **Symmetric durability** — what you gain and the price you pay must persist/vanish together (don't make one side permanent and the other revertible, or it can be farmed)
+- [ ] Side effects that pay money/give rewards are idempotent (pay-once guard)
+- [ ] If you must detect: **self-heal before brick**, sign only the surfaces that need it (don't sign transient state, or you get false positives)
 
-**กันตัวเอง (dev guardrail):**
-- [ ] **ทุก "ต้องจำเอา / เขียน note ว่าอย่าลืม" = จุดที่ควรเป็น guardrail** — ย้ายความรู้ในหัวไป build/hook/test ที่บังคับเอง
-- [ ] build/CI **fail** ถ้าเงื่อนไขไม่ครบ (ไฟล์ไม่ match, ค่าซ้ำ, ขาด config) ไม่ใช่พึ่งความจำ
-- [ ] artifact ที่ stale แล้วพัง = gitignore / generate สด ห้ามค้างใน tree
-- [ ] checklist ที่ **derive จาก code** (script สแกน) ไม่ใช่ list ที่ต้องอัปเดตมือ
+**Guard against yourself (dev guardrail):**
+- [ ] **Every "must remember / write a note not to forget" marks where a guardrail should exist** — move the knowledge from your head into a build/hook/test that enforces it
+- [ ] Build/CI **fails** when conditions aren't met (files don't match, duplicate values, missing config) instead of relying on memory
+- [ ] Artifacts that go stale and break things are gitignored / generated fresh, never left in the tree
+- [ ] Checklists are **derived from code** (a scanning script), not lists maintained by hand
 
-## วิธีใช้ใน session
-1. ตอนออกแบบ/รีวิว: เดินผ่าน decision flow + checklist ด้านที่ตรงงาน
-2. ทุกครั้งที่จะเพิ่ม detector/validator ชั้น 2 → recite กฎทอง ("ทำไม bad state เก็บได้ตั้งแต่แรก?") ก่อน
-3. ทุกครั้งที่จะเขียน memory/comment ว่า "อย่าลืม X" → ถามว่า X ทำเป็น guardrail (ชั้น 1/build) ได้ไหม
-4. รายงาน finding แบบจัดชั้น (1 vs 2) + ระบุ fix ที่ยกระดับขึ้นชั้น 1 ได้ พร้อม trade-off
+## How to use in a session
+1. When designing/reviewing: walk through the decision flow + the checklist area that matches the work
+2. Every time you are about to add a tier-2 detector/validator, recite the golden rule ("why can the bad state be stored in the first place?") first
+3. Every time you are about to write a memory/comment saying "don't forget X", ask whether X can become a guardrail (tier 1/build)
+4. Report findings by tier (1 vs 2) and name the fix that lifts it to tier 1, with the trade-off
 
-## หมายเหตุ
-- เป็น skill **flexible** — ปรับหลักให้เข้า context ได้ ไม่ใช่ rigid checklist บังคับทุกข้อ
-- เคสเฉพาะโปรเจกต์ (เช่น scorecard ของเกมที่ทำอยู่) เก็บแยกใน memory/doc ของ project นั้น แล้ว skill นี้เป็นกรอบกลาง
+## Notes
+- This is a **flexible** skill: adapt the principles to the context; it is not a rigid checklist where every item is mandatory
+- Project-specific cases (e.g. the scorecard of the game being built) go in that project's own memory/docs; this skill is the shared frame
 
-## Related — ตัวอย่างจริงของหลักการนี้ในสกิลอื่น
-- `shipping-a-branch` = **Motion-step** ใช้จริง: บังคับลำดับ push→PR→review→merge ทุกสเต็ปเสี่ยงปิด "ประตูข้าง" ไว้ (ห้าม force-push แทนการ fix reject, ห้าม approve PR ตัวเอง) — ทุกทางออกต้อง confirm ก่อนเสมอ ไม่มีทาง bypass เงียบๆ
+## Related — real examples of this principle in other skills
+- `shipping-a-branch` = **Motion-step** in practice: enforces the order push→PR→review→merge and closes the risky "side doors" (no force-push instead of fixing a rejection, no approving your own PR). Every exit must confirm first; there is no silent bypass

@@ -3,62 +3,62 @@
 When the user types `/graphify`, invoke the Skill tool with `skill: "graphify"` before doing anything else.
 
 # Cost-aware model routing — Opus 5.5 / Sonnet 5.5 / Haiku 5.5 (global, updated 2026-10-08: Haiku 4.5 → Haiku 5.5; 2026-09-29: Sonnet 5 → Sonnet 5.5; 2026-09-23: Opus 5 → Opus 5.5)
-ให้เลือกโมเดลตามความยากจริงของงาน เพื่อไม่ให้งานง่ายไปกินค่าโมเดลแพง
+Pick the model based on how hard the task actually is, so easy work doesn't burn an expensive model.
 
-**หมายเหตุ:** `fable-medium` (Fable 5.1 ที่ **medium reasoning** พอ ไม่ต้อง max) เปิด spawn ได้ตามปกติสำหรับงานเดิมพันสูงสุดจริงๆ เท่านั้น (ดูหมายเหตุ Opus 5.5 ด้านล่าง — บาร์การเรียกสูงขึ้นมากแล้ว) — ถ้าโดนแบนจะรู้เองตอน spawn fail ไม่ต้องเช็ควันที่ล่วงหน้า
+**Note:** `fable-medium` (Fable 5.1 at **medium reasoning**, no need for max) can be spawned normally, but only for genuinely highest-stakes work (see the Opus 5.5 note below — the bar for calling it is much higher now). If it's banned you'll find out when the spawn fails, no need to check dates in advance.
 
-**ราคา (ต่อ 1M tokens, input/output):** Opus 5.5 `$4/$20` (cache read `$0.20`) · Sonnet 5.5 `$2/$10` (cache read `$0.20` เท่า Opus 5.5; ราคาโปรเปิดตัวกลายเป็นราคาถาวร แผนขึ้นเป็น `$3/$15` วันที่ 1 ก.ย. 2026 ถูกยกเลิก — ที่มา https://platform.claude.com/docs/en/about-claude/pricing เช็ค 2026-09-23) · Haiku 4.5 `$1/$5` (ถูกสุด) · Fable 5.1 `$10/$50` (แพงสุด). การประหยัด = "ดึงงานออกจากโมเดลแพง" ไม่ใช่ "เอาโมเดลแพงมาช่วย" · Haiku 5.5 `$0.10/$0.50` (prompt ≤100k tokens; เกิน 100k เป็น `$0.50/$2.50`; cache read `$0.01`/`$0.05`) ถูกกว่า Haiku 4.5 ราว 10 เท่าบนกระดาษ แต่ tokenizer ใหม่นับ token เพิ่มราว 30% สำหรับข้อความเดิม ประหยัดจริงราว 7 เท่า (Anthropic ประเมินต้นทุนเฉลี่ยลดราว 75%) · มี effort level (default `medium`), context 1M, ไม่รองรับ Priority Tier · ที่มา https://platform.claude.com/docs/en/models/haiku-5-5/overview (เช็ก 2026-10-08)
+**Pricing (per 1M tokens, input/output):** Opus 5.5 `$4/$20` (cache read `$0.20`) · Sonnet 5.5 `$2/$10` (cache read `$0.20`, same as Opus 5.5; the launch promo price became permanent, the planned bump to `$3/$15` on 1 Sep 2026 was cancelled — source https://platform.claude.com/docs/en/about-claude/pricing, checked 2026-09-23) · Haiku 4.5 `$1/$5` (cheapest) · Fable 5.1 `$10/$50` (most expensive). Saving money means "pulling work off the expensive model," not "bringing in the expensive model to help" · Haiku 5.5 `$0.10/$0.50` (prompt ≤100k tokens; above 100k it's `$0.50/$2.50`; cache read `$0.01`/`$0.05`) is about 10x cheaper than Haiku 4.5 on paper, but the new tokenizer counts about 30% more tokens for the same text, so the real saving is about 7x (Anthropic estimates average cost down about 75%) · has effort levels (default `medium`), 1M context, no Priority Tier support · source https://platform.claude.com/docs/en/models/haiku-5-5/overview (checked 2026-10-08)
 
-**Opus 5.5 (เปิดตัว 2026-09-22) แรงระดับ/แซง Fable 5.1 ในหลายเบนช์มาร์กสาธารณะแล้ว แต่ถูกกว่า Opus 5 เดิมราว 20-60% แล้วแต่หมวด** → เพดาน escalation ปกติเลื่อนขึ้นมาที่ Opus 5.5 (แทนที่ Opus 5 เดิมทุกจุด) **fable-medium เหลือไว้เป็น last-resort จริงๆ เท่านั้น ไม่ใช่ default ถัดจาก Opus เหมือนเดิม** — ช่องว่างคุณภาพระหว่างสองตัวนี้แคบลงมาก การขึ้น Fable ควรเกิดน้อยลงกว่าเดิมชัดเจน (ตัวเลขนี้เป็นข้อมูลวันเปิดตัวจาก Anthropic เอง ยังไม่ผ่านการใช้งานจริงนาน)
+**Opus 5.5 (released 2026-09-22) matches or beats Fable 5.1 on many public benchmarks, yet costs about 20-60% less than the old Opus 5 depending on category** → the normal escalation ceiling moves up to Opus 5.5 (replacing the old Opus 5 everywhere). **fable-medium is now a true last resort only, not the default step after Opus as before** — the quality gap between the two has narrowed a lot, so escalating to Fable should happen clearly less often (these figures are launch-day data from Anthropic itself, not yet proven in long real-world use)
 
-**ข้อจำกัดจริง:** main loop เปลี่ยนโมเดลเองกลางเซสชันไม่ได้ (เปลี่ยนได้แค่ `/model` แล้วพัง cache). การ "สลับโมเดลไปมา" ทำผ่าน **subagent ที่ล็อกคนละโมเดล** — main อยู่ตัวเดียว แล้วโยนงานไปคนละ agent
+**Real limitation:** the main loop can't switch models by itself mid-session (only `/model`, which breaks the cache). "Switching models back and forth" is done through **subagents pinned to different models** — main stays on one model and hands work to different agents.
 
-**หัวหน้างาน (main loop) — เลือกเองได้ 2 แบบ** ตั้งผ่าน `"model"` ใน `~/.claude/settings.json` (หรือ model picker ตอนเปิด session):
+**The lead (main loop) — two options to choose from**, set via `"model"` in `~/.claude/settings.json` (or the model picker when opening a session):
 
-| | **แบบ A: Opus 5.5 main** (`"claude-opus-5-5"`) | **แบบ B: Sonnet 5.5 main** (`"sonnet"`) |
+| | **Option A: Opus 5.5 main** (`"claude-opus-5-5"`) | **Option B: Sonnet 5.5 main** (`"sonnet"`) |
 |---|---|---|
-| เหมาะกับ | งานที่ต้องตัดสินใจเยอะ: วางแผน, debug, architecture, CTF, config ระบบ | session ยาว routine judgment ต่ำ: แปล batch, ร่างเอกสารยาว, แก้ตามสั่ง |
-| ค่าใช้จ่ายต่อเทิร์น | ~1.4x ของแบบ B (ไม่ใช่ 2x เพราะ cache read ราคาเท่ากัน `$0.20` และเป็นก้อนใหญ่สุดของ main loop) | ถูกสุด |
-| งานยาก | ทำเองใน main | spawn `opus` subagent หรือ `/model` สลับชั่วคราว |
-| งานมาตรฐานก้อนใหญ่ | spawn `sonnet-worker` (ถูกกว่าครึ่ง) | ทำเองใน main |
+| Best for | Decision-heavy work: planning, debugging, architecture, CTF, system config | Long routine sessions with low judgment: batch translation, long document drafts, following instructions |
+| Cost per turn | ~1.4x of Option B (not 2x, because cache read costs the same `$0.20` and is the largest chunk of main-loop cost) | Cheapest |
+| Hard work | Do it yourself in main | Spawn an `opus` subagent or temporarily switch with `/model` |
+| Large standard work | Spawn `sonnet-worker` (half the price) | Do it yourself in main |
 
-เทียบค่าใช้จ่ายต่อ**งานที่เสร็จ** ไม่ใช่ต่อเทิร์น: ถ้า Sonnet main ต้องแก้ซ้ำ 1 รอบ หรือ spawn `opus` 1 ครั้ง (ค่าตั้งต้น ~100k token ≈ $0.40-0.50) ส่วนที่ประหยัดได้ก็หมดแล้ว. ทั้งสองแบบประหยัดได้ **เฉพาะตอนหัวหน้าไม่ลงมือทำงานหยาบเอง** — กับดักคืออ่าน 20 ไฟล์เอง/แก้ทีละบรรทัดเอง = งานที่ Haiku ทำได้
+Compare cost per **finished task**, not per turn: if Sonnet main has to redo work once, or you spawn `opus` once (fixed cost ~100k tokens ≈ $0.40-0.50), the savings are gone. Both options only save money **when the lead doesn't do the grunt work itself** — the trap is reading 20 files yourself or editing line by line yourself, which is work Haiku can do.
 
-**หัวหน้าทำเอง:** วางแผน, ตัดสินใจ, อ่าน *ข้อสรุป* จากลูกน้อง, ตรวจงาน, เขียนส่วนยาก/แก้ตอนลูกน้องไม่ไหว. **กฎเหล็ก:** อ่าน conclusion ไม่ใช่ file-dump — ให้ลูกน้องย่อยมา ไม่งั้น context บวม=แพง
+**What the lead does itself:** planning, decisions, reading the *conclusions* from subordinates, checking work, writing the hard parts / taking over when a subordinate can't cope. **Iron rule:** read conclusions, not file dumps — have the subordinate summarize, otherwise context bloats and costs more.
 
-**ลูกน้อง = `Agent` subagent (foreground เป็นหลัก):** สั่ง→รอ→ตรวจ→ไม่ไหวหัวหน้าทำเอง. เปิด `run_in_background` เฉพาะตอนยิงหลายตัว **ขนานกัน** (เช่นรีวิว 3 มุมพร้อมกัน). บันไดเลือก agentType:
-- งานกลไก/batch (rename, format, find-replace, scaffold) → **`haiku-batch`** (Haiku 5.5, pin `claude-haiku-5-5`; ห้ามส่งงาน security/CTF เพราะ cyber classifier อาจ refuse)
-- อ่านไฟล์เยอะแล้วคืน map/ข้อสรุป → **`Explore`** (อ่าน excerpt ไม่ dump)
-- งานมาตรฐาน/ร่างแรก (coding, review รายภาษา) → แบบ B ทำใน main เอง. แบบ A: งานเล็กทำใน main, งานก้อนใหญ่ที่ design ตัดสินแล้ว/ยิงขนาน → spawn **`sonnet-worker`** (Sonnet 5.5) — `general-purpose` สืบโมเดลของ main ถ้าอยากได้ Sonnet ต้องใช้ `sonnet-worker`
-- งานยาก/เดิมพันสูง (algorithm, debug ลึก, architecture) → แบบ A ทำใน main เอง (spawn `opus` เฉพาะอยากแยก context/ยิงขนาน). แบบ B spawn **`opus`** subagent (claude-opus-5-5) หรือ `/model` สลับ Opus ชั่วคราว
-- **สุดบันได = `fable-medium` (Fable 5.1 @ medium effort, แพงสุด) — gate ก่อนเรียก, บาร์สูงขึ้นมากตั้งแต่ Opus 5.5:** เรียกเฉพาะเมื่อ **Opus 5.5 ด่านก่อนหน้าตอบผิด/สั่นคลอนแล้ว** (ไม่ใช่ข้าม Opus มาเรียกตรง) กับงาน architecture-เดิมพันสูงสุด / algorithm-concurrency หิน / debug หลายเงื่อนไข / correctness proof ที่ Opus 5.5 เองยังพลาด — ควรเรียกน้อยกว่าตอนใช้ Opus 5 เดิมมาก เพราะช่องว่างคุณภาพแคบลง. ใช้ **medium reasoning พอ** — ไม่ต้อง max เพื่อคุมค่าใช้จ่าย. **ข้าม** ถ้า: บั๊กชัดอ่านโค้ดก็เจอ, งาน format/rename, หรือ Opus 5.5 ยังไม่ได้ลอง. **บรีฟ <400 คำ**: เป้าหมาย+ข้อจำกัด+พาธไฟล์+ลองอะไรไปแล้ว+เกณฑ์รับ+คำถามที่อยากให้ตอบ (อย่ายกทั้งแชต). Fable คืน**แผน/diff เป็นข้อความ** แล้ว orchestrator ลงมือเอง (advisor-only). ติดตรงไหนใช้ SendMessage คุยต่อ agent เดิม อย่า spawn ใหม่วนไปมา
+**Subordinates = `Agent` subagents (mostly foreground):** order → wait → check → if it can't cope, the lead does it. Use `run_in_background` only when firing several agents **in parallel** (e.g. reviewing from 3 angles at once). Ladder for picking the agentType:
+- Mechanical/batch work (rename, format, find-replace, scaffold) → **`haiku-batch`** (Haiku 5.5, pinned to `claude-haiku-5-5`; don't send security/CTF work since the cyber classifier may refuse)
+- Reading lots of files and returning a map/conclusion → **`Explore`** (reads excerpts, no dumps)
+- Standard work / first drafts (coding, per-language review) → Option B: do it in main. Option A: small work in main; large chunks where the design is already decided / parallel runs → spawn **`sonnet-worker`** (Sonnet 5.5) — `general-purpose` inherits main's model, so use `sonnet-worker` if you want Sonnet
+- Hard/high-stakes work (algorithms, deep debugging, architecture) → Option A: do it in main (spawn `opus` only to separate context/run in parallel). Option B: spawn an **`opus`** subagent (claude-opus-5-5) or temporarily switch to Opus with `/model`
+- **Top of the ladder = `fable-medium` (Fable 5.1 @ medium effort, most expensive) — gate before calling, much higher bar since Opus 5.5:** call it only when **the previous Opus 5.5 step answered wrong / shakily** (don't skip Opus and call it directly), and only for highest-stakes architecture / brutal algorithm-concurrency work / multi-condition debugging / correctness proofs that Opus 5.5 itself still gets wrong — it should be called far less than back when Opus 5 was the ceiling, because the quality gap has narrowed. Use **medium reasoning, no need for max** to keep cost down. **Skip it** if: the bug is obvious from reading the code, the task is format/rename, or Opus 5.5 hasn't been tried yet. **Brief under 400 words**: goal + constraints + file paths + what's been tried + acceptance criteria + the questions you want answered (don't paste the whole chat). Fable returns **a plan/diff as text** and the orchestrator does the work itself (advisor-only). If stuck, use SendMessage to keep talking to the same agent, don't spawn new ones in a loop.
 
-**กติกาบังคับ:**
-1. **ก่อน spawn ประกาศก่อน:** `🧠 spawn <agentType> → <งาน> (เพราะ <เหตุผล>)` ผู้ใช้ค้านได้ก่อนเสียเงิน
-2. subagent ต้องได้ **context สดเฉพาะโจทย์** (ไม่ลากทั้งแชต) + สั่งให้ **คืนแค่ข้อสรุป**
-3. งานเล็ก/ตอบสั้น/แก้ inline เร็วๆ → ทำใน main เลย ไม่ต้อง spawn (spawn มี overhead)
-4. `spawn_task` (chip) = **คนละเรื่อง** — เปิด session ใหม่ บิลแยก หัวหน้าคุมสด/ตรวจไม่ได้ → ใช้เฉพาะโยนงานหนักทิ้งไปบิลที่อื่น ไม่ใช่ "ลูกน้อง" ในโมเดลนี้
+**Mandatory rules:**
+1. **Announce before spawning:** `🧠 spawn <agentType> → <task> (because <reason>)` so the user can object before money is spent
+2. The subagent must get **fresh context scoped to the task** (not the whole chat) + be told to **return only a conclusion**
+3. Small work / short answers / quick inline fixes → do it in main, no need to spawn (spawning has overhead)
+4. `spawn_task` (chip) is **a different thing** — it opens a new session, billed separately, and the lead can't supervise/inspect it live → use it only to offload heavy work to a different bill, it is not a "subordinate" in this model
 
-Agent ที่ pin โมเดลไว้แล้ว: `~/.claude/agents/haiku-batch.md` (Haiku 5.5), `~/.claude/agents/sonnet-worker.md` (Sonnet 5.5), `~/.claude/agents/opus.md` (claude-opus-5-5), `~/.claude/agents/fable-medium.md` (claude-fable-5-1 @ medium reasoning — last-resort เหนือ Opus 5.5 เท่านั้น เพราะแพงสุด; ใช้ medium effort พอ ไม่ต้อง max)
+Agents with a pinned model: `~/.claude/agents/haiku-batch.md` (Haiku 5.5), `~/.claude/agents/sonnet-worker.md` (Sonnet 5.5), `~/.claude/agents/opus.md` (claude-opus-5-5), `~/.claude/agents/fable-medium.md` (claude-fable-5-1 @ medium reasoning — last resort above Opus 5.5 only because it's the most expensive; medium effort is enough, no need for max)
 
-**Local Ollama (free, ad hoc — ไม่ใช่ routing tier, ต่ำกว่า Haiku):** มี `qwen2.5:7b-instruct` บนเครื่อง (no tools, no repo context) เรียกผ่าน Bash: `Get-Content <file> | ollama run qwen2.5:7b-instruct "<instruction>"` (pipe ไฟล์ อย่ายัด prompt ยาวใน argument). ใช้เฉพาะ lossy pre-compression ของ text ก้อนใหญ่ low-stakes (log/doc ยาว) ก่อนเข้า context โมเดลเสียเงิน — **ห้ามใช้ output เป็น source of truth**: ถ้า decision ขึ้นกับเนื้อหา ให้โมเดลหลักอ่านต้นฉบับเอง.
+**Local Ollama (free, ad hoc — not a routing tier, below Haiku):** `qwen2.5:7b-instruct` is available on the machine (no tools, no repo context), called via Bash: `Get-Content <file> | ollama run qwen2.5:7b-instruct "<instruction>"` (pipe the file, don't stuff a long prompt into the argument). Use it only for lossy pre-compression of large low-stakes text (long logs/docs) before it enters a paid model's context — **never treat its output as a source of truth**: if a decision depends on the content, have the main model read the original itself.
 
 # Offload heavy execution to a spawned session (global, cost-saving)
-- เมื่อมีงาน **execute ที่หนัก/ยาว** (รันแผน implementation, refactor หลายไฟล์, batch งานใหญ่) **และ** ปล่อยเป็น session แยกได้ (มี `spawn_task` / chip → worktree+branch แยก) → ให้ **สร้าง spawn_task chip เป็น default ทันที โดยไม่ต้องถามก่อน** โดยเฉพาะเมื่อ session ปัจจุบัน cost สูงแล้ว
-- เหตุผล: งานไป **บิลในเซสชันใหม่** ไม่ใช่เซสชันแพงปัจจุบัน + worktree แยกไม่กวนงานปัจจุบัน
-- prompt ในชิป **ต้อง self-contained** (session ใหม่ไม่มีความจำแชต): ชี้ไฟล์แผน/พาธ + commit hash + ลำดับงาน + จุดสำคัญให้ครบ. ถ้าแผน/ไฟล์ยัง untracked ให้ **commit ก่อน** ปล่อยชิป (worktree ใหม่มองไม่เห็น untracked)
-- ข้อจำกัดบอกตามจริง: ชิป **ยังต้องให้ user กด 1 ที** ถึงเปิด session ใหม่ — Claude เปิดเองอัตโนมัติไม่ได้ (ข้อจำกัด harness). แต่ "ไม่ต้องขออนุญาตก่อน *สร้าง* ชิป" ตามที่ user สั่ง
-- งานเล็ก/ตอบสั้น/แก้ inline เร็ว ๆ → ทำในเซสชันนี้ตามปกติ ไม่ต้องปล่อยชิป
+- When there is **heavy/long execution work** (running an implementation plan, multi-file refactor, large batch) **and** it can be split into its own session (via `spawn_task` / a chip → separate worktree+branch) → **create a spawn_task chip as the default immediately, without asking first**, especially when the current session's cost is already high
+- Reason: the work is **billed in the new session**, not the current expensive one, and the separate worktree doesn't disturb current work
+- The prompt in the chip **must be self-contained** (the new session has no chat memory): point to the plan file/path + commit hash + task sequence + key points in full. If the plan/files are still untracked, **commit first** before releasing the chip (a fresh worktree can't see untracked files)
+- State the limitation honestly: the chip **still needs the user to click once** to open the new session — Claude can't open it automatically (a harness limitation). But "no need to ask permission before *creating* the chip" stands, as the user instructed
+- Small work / short answers / quick inline fixes → do it in this session as usual, no chip
 
-## เมื่อ spawn_task ลูกเสร็จ — ต้อง act จริง ห้ามรับทราบเงียบ ๆ (บัญญัติ 2026-08-10)
-harness auto-notify session แม่เองอยู่แล้วเมื่อ `spawn_task` chip ที่ปล่อยไปทำงานเสร็จ (ไม่ต้องสั่ง child ให้ `send_message` กลับเพิ่ม — กลไกนี้ทำงานถูกอยู่แล้ว, child ก็ไม่รู้ session id ของแม่ด้วยซ้ำ)
+## When a spawn_task child finishes — act on it, never just silently acknowledge (codified 2026-08-10)
+The harness already auto-notifies the parent session when a `spawn_task` chip's work finishes (no need to tell the child to `send_message` back — that mechanism already works correctly, and the child doesn't even know the parent's session id)
 
-**ปัญหาจริงที่เจอ:** notification มาถึงแม่แล้ว แต่แม่แค่ "รับทราบ" ในใจ ไม่ได้ทำอะไรต่อ — user ต้องมาถามเองว่าลูกเสร็จหรือยัง
+**Real problem seen:** the notification reached the parent, but the parent just "acknowledged" it internally and did nothing further — the user had to ask whether the child was done.
 
-**กฎ:** พอ task-notification ของ spawn_task เข้ามาในเทิร์นไหน **ต้อง surface ให้ user เห็นเป็น action จริงในเทิร์นนั้นทันที** ไม่ใช่แค่รับรู้เฉย ๆ แล้วรอ user ถาม:
-1. อ่านผลลัพธ์จริงของ session ลูก (เช่นผ่าน `mcp__ccd_session_mgmt__get_session`/`list_events` หรือ session summary ที่แนบมากับ notification)
-2. สรุปสั้น ๆ ให้ user: ลูกทำอะไรเสร็จ, ผลเป็นยังไง, พังตรงไหนไหม
-3. ถ้ามีอะไรต้องตัดสินใจต่อ (เช่น review diff, merge branch, commit ที่ค้างอยู่ใน worktree ของ session ลูก) ให้เสนอ/ถามทันที — อย่าปล่อยให้ค้างเงียบ ๆ
+**Rule:** whenever a spawn_task task-notification arrives in a turn, **surface it to the user as a real action in that same turn immediately**, not just acknowledge it and wait for the user to ask:
+1. Read the child session's actual result (e.g. via `mcp__ccd_session_mgmt__get_session`/`list_events`, or the session summary attached to the notification)
+2. Give the user a short summary: what the child finished, how it turned out, whether anything broke
+3. If anything remains to be decided (e.g. reviewing the diff, merging the branch, a commit left pending in the child's worktree), propose/ask right away — don't leave it hanging silently
 
 ## Don't poll a background wakeup tool in a tight loop while waiting for the same spawn_task
 If your harness has a "schedule a wakeup" tool (self-pacing polling instead of a fixed cron), don't call it repeatedly back-to-back just to check whether a `spawn_task` chip finished — each wakeup re-injects a fresh chunk of system context even when nothing changed, which burns tokens for zero new information. Set the longest delay the tool allows, then actually wait quietly for the real completion notification instead of polling. After 2-3 wakeups in a row with nothing new, stop calling the tool at all and just wait. If the delay parameter doesn't seem to be honored (wakes up immediately regardless of what you set), that's a harness bug — switch to polling the underlying status directly (e.g. a CI API) instead of the wakeup tool.
@@ -69,54 +69,54 @@ When you spawn a subagent to review code/a diff (e.g. self-review before merge),
 ## Self-verify loop during development, not just at the end
 For work that has an automatic way to check itself (a test suite, a dev server + screenshot, a lint/typecheck script), run that check immediately after finishing each independently-verifiable unit of work, then iterate up to 2-3 rounds before moving to the next unit — don't let unverified work pile up and only check everything at the very end. Stop and report to the user if it's still failing after 2-3 rounds. Exceptions: a change too small to plausibly break anything, or a check that costs more to set up than the work itself.
 
-# scrutinize — ทุกครั้งที่ user สั่งให้ "รีวิว/หา gap" ต้องเรียกสกิลนี้จริง
-`scrutinize` (`global-config/skills/scrutinize/`) = outsider-perspective review ของ plan/PR/diff/design doc — ตั้งคำถามก่อนว่ามีทางง่ายกว่าไหม แล้วไล่โค้ดจริงยืนยันว่า claim ตรงกับโค้ดจริง ไม่ใช่แค่อ่าน diff เฉยๆ
-- **Trigger**: user สั่งด้วยคำทำนอง "ไปรีวิว/หา gap/ตรวจดูหน่อย/audit/sanity-check/second opinion" → เรียกสกิลนี้จริง ห้าม freelance เขียน review เอง
-- เลือกความหนักตามเดิมพัน: architecture/design เดิมพันสูง → spawn subagent แยกพร้อมประกาศ. bounded/diff เล็ก → ทำเอง (main model)
-- คนละอย่างกับ self-review ตอนจบ implementation plan (เช่นของ `plan-pro`) ที่มี review loop ของตัวเองอยู่แล้ว — ไม่ต้องเรียก scrutinize ซ้ำหลังจากนั้นเป็น default
+# scrutinize — whenever the user asks to "review/find gaps," this skill must actually be called
+`scrutinize` (`global-config/skills/scrutinize/`) = an outsider-perspective review of a plan/PR/diff/design doc — first asks whether there's a simpler way, then traces the actual code to verify the claims match the real code, rather than just reading the diff
+- **Trigger**: the user asks with phrasing like "go review / find gaps / take a look / audit / sanity-check / second opinion" → actually call this skill, never freelance a review yourself
+- Pick the weight based on the stakes: high-stakes architecture/design → spawn a separate subagent with an announcement. Bounded scope / small diff → do it yourself (main model)
+- Different from the self-review at the end of an implementation plan (e.g. `plan-pro`) which has its own review loop — don't call scrutinize again after that by default
 
 # Planning: use /plan-pro by default (global)
-- เมื่อต้องเขียน implementation plan (หลัง brainstorm/spec approve) ให้ใช้ **`/plan-pro`** เป็น planner หลัก — ไม่ใช่ `superpowers:writing-plans` ธรรมดา
-- เหตุผล: plan-pro ต่อยอด writing-plans ด้วย spawned review loop + HTML before/after diagrams + parallel execution → แผนรีวิว/อัพเดทตัวเองได้
-- ใช้กับทุก project (global). brainstorming ที่ปกติจบที่ writing-plans ให้สลับมาเรียก /plan-pro แทน
-- **ประหยัด token — ข้าม spec.md แยก:** ถ้า brainstorm จน design ได้รับ approve แล้วในแชต และเป็น feature เล็ก–กลาง (แผนเดียว) ให้ **ข้ามการเขียนไฟล์ spec `.md` แยก** แล้วไป `/plan-pro` เลย — plan-pro = artifact หลักไฟล์เดียว (ดูด design ที่ approve มาใส่หัวแผนเอง). เก็บ spec แยกเฉพาะงานใหญ่ multi-session / หลายแผนที่ต้องมี design durable จริง ๆ. (brainstorming skill ปกติบังคับเขียน spec ก่อน — override ตรงนี้เพื่อลด token ซ้ำซ้อนกับ plan-pro)
+- When writing an implementation plan (after brainstorm/spec approval), use **`/plan-pro`** as the primary planner — not plain `superpowers:writing-plans`
+- Reason: plan-pro extends writing-plans with a spawned review loop + HTML before/after diagrams + parallel execution → plans can be reviewed and updated themselves
+- Applies to every project (global). Where `brainstorming` would normally end at writing-plans, switch to calling /plan-pro instead
+- **Save tokens — skip a separate spec.md:** if brainstorming has reached design approval in chat and it's a small-to-medium feature (a single plan), **skip writing a separate spec `.md` file** and go straight to `/plan-pro` — plan-pro is the single main artifact (it absorbs the approved design into the plan header itself). Keep a separate spec only for large multi-session work / multiple plans that genuinely need a durable design. (The brainstorming skill normally requires writing a spec first — override that here to cut tokens that duplicate plan-pro.)
 
 # Persist glossary after grilling/brainstorm (global)
-- จบ session `grilling` / `brainstorming` (หรือทุกครั้งที่คุยจนตกลงนิยามศัพท์/ข้อตกลงร่วมกัน) → ถ้ามี **ศัพท์เฉพาะหรือข้อตกลงที่ขัดกับความเข้าใจทั่วไป** (คำเดียวความหมายต่างจากที่คนนอกวงจะเดา เช่น "platform", "quest", "layer") ให้ **เซฟลง memory เป็น type `reference` (glossary) ทันที** โดยไม่ต้องรอให้ user สั่ง
-- เหตุผล: ปิด gap "ศัพท์ลอยอยู่ในแชตแล้วเซสชันหน้าลืม" — ได้ glossary ถาวร + ภาษากลาง/ubiquitous language โดยใช้ระบบ memory ที่มีอยู่ ไม่สร้างไฟล์ context คู่ขนาน
-- **ศัพท์ผูกกับ project เดียว** → memory (type reference) ของ project นั้นเป็นแหล่งความจริงเดียว — ห้ามแตก CONTEXT.md แยกซ้ำ. **ศัพท์ข้าม project จริงๆ** (ใช้ร่วมหลาย repo) → เก็บที่ `<YOUR_VAULT_PATH>\notes\` แทน (ดูหัวข้อ "Second brain vault" ด้านล่าง), memory ของ project ที่อ้างถึงศัพท์นั้นแค่ link กลับมา ไม่ copy เนื้อหา. 1 ศัพท์มีเจ้าของที่เดียวเท่านั้น
-- 1 ศัพท์/ไฟล์ + เพิ่มบรรทัด pointer ใน MEMORY.md (กรณี project-specific) ตามปกติ
-- ก่อนเซฟเช็คก่อนว่ามี glossary entry เดิมครอบคลุมอยู่แล้วไหม (ทั้งใน memory และใน `<YOUR_VAULT_PATH>\notes\`) → ถ้ามีให้ update ไฟล์เดิม ไม่สร้างซ้ำ
+- At the end of a `grilling` / `brainstorming` session (or any time a conversation settles on shared terminology/agreements) → if there is **specific terminology or an agreement that conflicts with common understanding** (one word whose meaning differs from what an outsider would guess, e.g. "platform", "quest", "layer"), **save it to memory as type `reference` (glossary) immediately**, without waiting for the user to ask
+- Reason: closes the gap of "terms floating in chat and forgotten next session" — gives a permanent glossary + a shared language/ubiquitous language using the existing memory system, without creating a parallel context file
+- **A term tied to a single project** → that project's memory (type reference) is the single source of truth — don't spin off a separate CONTEXT.md. **A genuinely cross-project term** (shared across several repos) → store it in `<YOUR_VAULT_PATH>\notes\` instead (see the "Second brain vault" section below), and the memory of any project referencing that term just links back, without copying the content. Each term has exactly one owner location.
+- 1 term per file + add a pointer line in MEMORY.md (for the project-specific case) as usual
+- Before saving, check whether an existing glossary entry already covers it (in both memory and `<YOUR_VAULT_PATH>\notes\`) → if so, update the existing file, don't create a duplicate
 
-# คำสั่งจำ: "จำ" = local, "บัญญัติ" = global (ตกลงกัน 2026-08-09)
-- **"จำ" / "จดจำ"** (default, ไม่ต้องพูดอะไรเพิ่ม) → เซฟลง **auto-memory ของ project ปัจจุบันเท่านั้น** (`~/.claude/projects/<project>/memory/`) ตาม type ที่เหมาะสม (user/feedback/project/reference) — พฤติกรรมเดิมที่ใช้อยู่แล้ว ไม่เปลี่ยน
-- **"บัญญัติ"** → หมายถึงกฎ/พฤติกรรมที่ต้องใช้ **ทุกโปรเจกต์ ทุก session** → เขียนตรงลง `~/.claude/CLAUDE.md` นี้เลย (เพิ่ม section ใหม่หรือแก้ section เดิมที่เกี่ยวข้อง) ไม่ใช่แค่ auto-memory เพราะ auto-memory ผูกกับ project ปัจจุบันเสมอ ข้ามไปโปรเจกต์อื่นจะมองไม่เห็น
-- เหตุผลที่แยก: auto-memory system ที่มีอยู่ผูกกับ project โดยโครงสร้าง (path มีชื่อ project อยู่ในตัว) — ไม่มีทาง "จำข้ามทุกโปรเจกต์" ผ่าน auto-memory ได้ ต้องเขียน CLAUDE.md ตรงๆ เท่านั้นถึงจะข้ามโปรเจกต์จริง
-- ถ้าไม่แน่ใจว่า user หมายถึง local หรือ global (เช่นพูดคำว่า "จำ" แต่เนื้อหาฟังดูเป็นกฎข้ามโปรเจกต์ชัดๆ) → ถามให้ชัดก่อนเซฟ อย่าเดา
+# Memory commands: "remember" (จำ) = local, "codify" (บัญญัติ) = global (agreed 2026-08-09)
+- **"remember" / "jot down"** ("จำ" / "จดจำ", the default, nothing extra to say) → save to the **current project's auto-memory only** (`~/.claude/projects/<project>/memory/`) under the appropriate type (user/feedback/project/reference) — the existing behavior already in use, unchanged
+- **"codify"** ("บัญญัติ") → a rule/behavior that must apply to **every project, every session** → write it directly into this `~/.claude/CLAUDE.md` (add a new section or edit the relevant existing one), not just auto-memory, because auto-memory is always tied to the current project and is invisible from other projects
+- Why the split: the existing auto-memory system is tied to a project by structure (the path contains the project name) — there's no way to "remember across all projects" through auto-memory; only writing CLAUDE.md directly truly crosses projects.
+- If unsure whether the user means local or global (e.g. they say "remember" but the content clearly sounds like a cross-project rule) → ask for clarification before saving, don't guess
 
 # Second brain vault — <YOUR_VAULT_PATH> (global)
-Obsidian vault ส่วนตัว เก็บเฉพาะสิ่งที่ **ไม่ผูกกับ repo ใด repo หนึ่งเลย** — ความรู้ข้าม project (game-dev patterns, Python idioms ทั่วไป ฯลฯ), web clippings, และ scratch thinking ก่อนตกผลึกเป็น decision จริง
+A personal Obsidian vault that holds only things **not tied to any one repo** — cross-project knowledge (game-dev patterns, general Python idioms, etc.), web clippings, and scratch thinking before it crystallizes into a real decision.
 
-**เส้นแบ่งเดียว (ใช้ตัดสินทันที):** "ผูกกับ repo ใด repo หนึ่งไหม?"
-- ผูก repo → อยู่ในระบบของ repo นั้นเสมอ: decision → `docs/adr/`, session → `docs/log/`, ทำไม → docs ของ repo, fact ที่อยากจำข้าม session → memory ของ project นั้น
-- ไม่ผูก repo ไหนเลย → `<YOUR_VAULT_PATH>\`
+**The single dividing line (use it to decide on the spot):** "Is it tied to any specific repo?"
+- Tied to a repo → always lives in that repo's own system: decision → `docs/adr/`, session → `docs/log/`, why → the repo's docs, a fact to remember across sessions → that project's memory
+- Not tied to any repo → `<YOUR_VAULT_PATH>\`
 
-**โครง:** `inbox/` (ทุกอย่างลงตรงนี้ก่อน) · `notes/` (คัดจาก inbox แล้ว, ถาวร) · `clippings/` (web clip) · `projects/<name>/` (scratch คิดเรื่อง project นั้นๆ **ก่อน** ตกผลึก)
+**Structure:** `inbox/` (everything lands here first) · `notes/` (curated from inbox, permanent) · `clippings/` (web clips) · `projects/<name>/` (scratch thinking about that project **before** it crystallizes)
 
-**กฎบังคับ:**
-1. **Promote-to-ADR**: ถ้า scratch ใน `projects/<name>/` กลายเป็น decision จริงที่กระทบโค้ด → ต้อง promote เป็น ADR/log ของ repo นั้นทันที แล้วเหลือแค่ pointer ใน vault ห้ามปล่อยค้างเป็น scratch (ไม่งั้น decision หลุด git หาไม่เจอ session หน้า)
-2. ห้ามลงเรื่องที่อ้าง path/ไฟล์/decision ของ repo ใด repo หนึ่งลง vault — ต้องอยู่ใน repo นั้น
-3. vault **ไม่มี** auto-lint/`just check`/auto-link — manual ล้วน อย่าคาดว่ามีระบบตรวจอัตโนมัติ
-4. Integration: เขียน `.md` ตรงๆ ลง vault folder ผ่าน Read/Write/Edit ปกติ ไม่ต้องพึ่ง MCP server — มี skill `obsidian-markdown`/`obsidian-bases`/`json-canvas`/`obsidian-cli`/`defuddle` ติดตั้งไว้ที่ `<YOUR_VAULT_PATH>\.claude\skills\` แล้ว (จาก kepano/obsidian-skills) ใช้ตอนแก้ไฟล์ `.md`/`.base`/`.canvas` ในนี้
+**Mandatory rules:**
+1. **Promote-to-ADR**: if scratch in `projects/<name>/` becomes a real decision that affects code → promote it to that repo's ADR/log immediately, leaving only a pointer in the vault; never leave it dangling as scratch (otherwise the decision falls out of git and can't be found next session)
+2. Never put anything in the vault that references a specific repo's paths/files/decisions — it must live in that repo
+3. The vault has **no** auto-lint/`just check`/auto-link — it's entirely manual, don't expect any automatic checking
+4. Integration: write `.md` directly into the vault folder with the normal Read/Write/Edit tools, no MCP server needed — the skills `obsidian-markdown`/`obsidian-bases`/`json-canvas`/`obsidian-cli`/`defuddle` are installed at `<YOUR_VAULT_PATH>\.claude\skills\` (from kepano/obsidian-skills), use them when editing `.md`/`.base`/`.canvas` files in there
 
-# Git safety hook — global PreToolUse gate on destructive git (บัญญัติ 2026-08-09)
-ตั้งแต่ 2026-06-27 มี **global PreToolUse(Bash) hook** ใน `~/.claude/settings.json` ที่ดักคำสั่ง git เสี่ยงก่อนรัน ใน**ทุก session ทุก project**. อัปเดต 2026-07-02: เปลี่ยนจาก hard-block (exit 2) → **ถาม user ก่อน** ผ่าน PreToolUse `ask` decision (JSON `hookSpecificOutput.permissionDecision:"ask"` บน stdout, exit 0). ผู้ใช้กด Allow → คำสั่งรัน, Deny → บอก Claude ว่าไม่.
+# Git safety hook — global PreToolUse gate on destructive git (codified 2026-08-09)
+Since 2026-06-27 there has been a **global PreToolUse(Bash) hook** in `~/.claude/settings.json` that intercepts risky git commands before they run, in **every session of every project**. Updated 2026-07-02: changed from hard-block (exit 2) → **asking the user first** via the PreToolUse `ask` decision (JSON `hookSpecificOutput.permissionDecision:"ask"` on stdout, exit 0). The user clicks Allow → the command runs; Deny → Claude is told no.
 
-คำสั่งที่ gate: `git push` (ทุกแบบ; `--force`/`--force-with-lease` ติดป้ายชัด), `git reset --hard`, `git clean -f*`, `git branch -D`, `git checkout .`, `git restore .`.
+Commands gated: `git push` (every form; `--force`/`--force-with-lease` are clearly labeled), `git reset --hard`, `git clean -f*`, `git branch -D`, `git checkout .`, `git restore .`.
 
-- Hook script: `~/.claude/hooks/block-dangerous-git.py` (Python stdlib, เรียกผ่าน `py` launcher — **ไม่ใช่** jq/bash เพราะเครื่องนี้**ไม่มี jq**). parse JSON จริง + fallback raw-scan กัน silent-bypass.
-- ดัดแปลงจาก git-guardrails hook ของ utarn/engineer-skills แต่ rewrite เป็น Python stdlib (ต้นฉบับเป็น .sh jq-based ใช้ไม่ได้บนเครื่องที่ไม่มี jq)
-- โหลดตอน session start เท่านั้น — แก้ `settings.json` แล้วต้อง restart session ถึง active (แก้เฉพาะ .py ไม่ต้อง restart เพราะ hook อ่านไฟล์สดตอนรัน)
+- Hook script: `~/.claude/hooks/block-dangerous-git.py` (Python stdlib, invoked via the `py` launcher — **not** jq/bash because this machine **has no jq**). Parses real JSON + a raw-scan fallback to prevent silent bypass.
+- Adapted from the git-guardrails hook of utarn/engineer-skills but rewritten in Python stdlib (the original is a jq-based .sh that doesn't work on a machine without jq)
+- Loaded only at session start — after editing `settings.json` you must restart the session for it to take effect (editing only the .py needs no restart because the hook reads the file fresh on each run)
 
 # graphify auto-sync hook — keep the knowledge graph fresh without blocking edits
 `~/.claude/hooks/graphify-auto-update.py` (PostToolUse, matcher `Write|Edit`) launches `graphify update .` detached in the background after every file edit, in any project that already has a `graphify-out/graph.json`. graphify has no built-in file-watcher, so without this the graph silently goes stale between full rebuilds. It's a no-op (returns immediately, no subprocess spawned) in any project without an existing graph — safe to leave wired globally even in projects that don't use graphify at all.
@@ -132,38 +132,38 @@ Claude Code's Auto Mode runs an extra safety classifier on top of your own permi
 - **Never use this to skip an action the user hasn't actually approved yet** — you still need to ask/wait for confirmation in chat first, per the normal "Explicit permission required"/"Prohibited" rules above. This only fixes "approved in chat, but Auto Mode won't ask again and silently blocks instead" — it isn't a general bypass.
 - **The `[Self-Modification]` case (editing your own security/permission config — `.claude/settings.json`, `~/.claude/**`, `CLAUDE.md`, `.mcp.json`) has a more permanent fix**: add a `permissions.ask` rule for those exact paths in `settings.json` (see `global-config/settings.example.json` in this template). A path-matching `ask` rule forces a real permission prompt ahead of the classifier, so you get asked instead of silently blocked — tested and confirmed working, no more need to toggle Manual mode for this specific case. A command routed through a tool call that can't be pattern-matched to one of these exact paths (e.g. an indirect edit where the target file isn't visible to the permission matcher) may still hit the classifier first — fall back to the Manual-mode toggle above for those.
 
-# Bash tool vs PowerShell tool — never mix heredoc syntax (บัญญัติ 2026-08-09)
-เครื่องนี้มีสองเชลล์คนละ syntax: **Bash tool = POSIX sh**, **PowerShell tool = `@'...'@` here-string**. ห้ามใช้ PowerShell here-string `@'...'@` ใน Bash tool — Bash จะตีความ `@` แบบ literal แล้วรั่วเข้าไปใน output จริง (เคยเกิด: `git commit` subject กลายเป็น `@` + ข้อความจริง ต้อง --amend แก้).
+# Bash tool vs PowerShell tool — never mix heredoc syntax (codified 2026-08-09)
+This machine has two shells with different syntax: **Bash tool = POSIX sh**, **PowerShell tool = `@'...'@` here-string**. Never use a PowerShell here-string `@'...'@` in the Bash tool — Bash treats `@` literally and it leaks into the real output (this happened: a `git commit` subject became `@` + the actual text, and had to be fixed with --amend).
 
-**วิธีทำ multi-line string ให้ถูกเชลล์:**
-- Bash tool → ใช้ heredoc จริง `command <<'EOF' ... EOF` หรือเขียนลงไฟล์แล้ว pass `-F file` / `--file`
-- PowerShell tool → ใช้ `@'...'@` ได้ตามปกติ (ห้ามสลับข้าม)
-- git commit message ที่มี multi-line/ภาษาไทย → ปลอดภัยสุดคือ `git commit -F <file>` หลังเขียนข้อความด้วย Write tool ก่อน
+**How to build a multi-line string for the right shell:**
+- Bash tool → use a real heredoc `command <<'EOF' ... EOF` or write to a file and pass `-F file` / `--file`
+- PowerShell tool → `@'...'@` works as normal (never cross over)
+- Multi-line / Thai-language git commit messages → safest is `git commit -F <file>` after writing the message with the Write tool first
 
-# "จดลงสมุดสกิล" = update sources.json (บัญญัติ 2026-08-09)
-เมื่อ user พูดว่า **"จดลงสมุดสกิล"** หมายถึง**เฉพาะเจาะจง**: update `~/.claude/tools/skill-update-check/sources.json` — ไม่ใช่แค่ `~/.claude/SKILLS_INDEX.md` หรือ project ledger ไฟล์ใดๆ (เช่น `FULL-LEDGER.md`). อัปเดตแค่ index/ledger ที่มนุษย์อ่านแล้วข้าม sources.json ไม่นับว่า "จดลงสมุดสกิล" user จะแก้ให้ทำใหม่.
+# "log it in the skill notebook" ("จดลงสมุดสกิล") = update sources.json (codified 2026-08-09)
+When the user says **"log it in the skill notebook"** ("จดลงสมุดสกิล"), it means **specifically**: update `~/.claude/tools/skill-update-check/sources.json` — not just `~/.claude/SKILLS_INDEX.md` or some project ledger file (e.g. `FULL-LEDGER.md`). Updating only the human-readable index/ledger and skipping sources.json does not count as "logging it in the skill notebook"; the user will have you redo it.
 
-**ทำไม:** `sources.json` เป็น manifest ที่ `check.ps1` (ตัวเช็ค update รายสัปดาห์) อ่าน ถ้า skill/tool ที่เพิ่ง adopt ไม่ถูกบันทึกที่นี่ มันจะหลุดออกนอกระบบ tracking ตลอดไป — คือปัญหาที่ระบบนี้มีไว้ป้องกันพอดี SKILLS_INDEX.md/ledger คือให้คนอ่าน sources.json คือ source of truth ที่ automation อ่านจริง
+**Why:** `sources.json` is the manifest that `check.ps1` (the weekly update checker) reads. If a newly adopted skill/tool isn't recorded here, it falls out of tracking forever — exactly the problem this system exists to prevent. SKILLS_INDEX.md/ledgers are for humans to read; sources.json is the source of truth that automation actually reads.
 
-**วิธีใช้:**
-- ทุกครั้งที่ skill/pip package/tool ใหม่ถูก adopt แล้วกำลังจะ "เขียนสรุป" ให้เพิ่ม/อัปเดต entry ใน `sources.json` เป็นส่วนหนึ่งของงานนั้นเสมอ ไม่ใช่ทางเลือก
-- Manifest มี categories: `personal_skills` (skill folder ใต้ `~/.claude/skills/` มี tracked subpath + baseline commit), `pip_packages` (dist name + source repo), `npm_packages`, `binary_tools` (สำหรับ standalone CLI tool ที่ไม่ใช่ Claude Code skill เช่น witr, opencode, magnitude, pi, ifixai) — เลือก category ให้ถูก อย่ายัดทุกอย่างเข้า personal_skills
-- ต้อง honest ใน note field ว่า check.ps1 เช็คอัตโนมัติจริงไหม — `npm_packages`/`binary_tools` ยังไม่มี automated check.ps1 logic (มีแค่ git/pip ที่ automated) ต้องเขียนว่า "update manually" ไม่ใช่บอกเป็นนัยว่า auto-track
-- ถ้ามี category ใหม่จริงๆที่ไม่เข้า personal_skills/pip_packages เพิ่ม top-level array ใหม่ได้เลย (บรรทัดฐาน: npm_packages, binary_tools)
+**How to apply:**
+- Every time a new skill/pip package/tool is adopted and you're about to "write the summary," add/update the entry in `sources.json` as part of that same job — not optional
+- The manifest has categories: `personal_skills` (skill folders under `~/.claude/skills/` with a tracked subpath + baseline commit), `pip_packages` (dist name + source repo), `npm_packages`, `binary_tools` (for standalone CLI tools that aren't Claude Code skills, e.g. witr, opencode, magnitude, pi, ifixai) — pick the right category, don't shove everything into personal_skills
+- Be honest in the note field about whether check.ps1 actually checks it automatically — `npm_packages`/`binary_tools` have no automated check.ps1 logic yet (only git/pip are automated), so write "update manually", don't imply it's auto-tracked
+- If there's a genuinely new category that doesn't fit personal_skills/pip_packages, you may add a new top-level array (precedent: npm_packages, binary_tools)
 
-# Cross-session "send message" vs spawn_task vs SendMessage (บัญญัติ 2026-08-09)
-User เรียก `mcp__ccd_session_mgmt__send_message` สั้นๆว่า **"send message"** — แยกให้ชัดจาก 2 tool ที่ชื่อคล้ายกัน:
-- **`mcp__ccd_session_mgmt__send_message`** ("send message") — ส่งข้อความไปยัง **CCD session อื่นที่มีอยู่แล้ว** (หาได้ผ่าน `mcp__ccd_session_mgmt__list_sessions`) ข้อความไปโผล่เป็น user turn ใน session ปลายทาง มีป้าย "From {ชื่อ session นี้}" ไม่สร้างอะไรใหม่ ใช้ตอน handoff context/relay finding ข้าม session. **ใช้ไม่ได้ใน unattended session** (scheduled-task runs, remote-dispatched)
-- **`spawn_task`** (chip) — สร้าง **session ใหม่ทั้งหมด** สำหรับงานนอกสโคปที่เจอระหว่างทาง ต้องให้ user กด chip ถึงเปิดจริง prompt ต้อง self-contained บิลแยกจากปัจจุบัน
-- **`SendMessage`** (top-level tool, ไม่มี `mcp__` prefix) — ส่งข้อความหา **subagent/teammate ที่ spawn ใน session เดียวกัน** (เช่นผ่าน Agent tool) ไม่ใช่ CCD session แยก
+# Cross-session "send message" vs spawn_task vs SendMessage (codified 2026-08-09)
+The user calls `mcp__ccd_session_mgmt__send_message` simply **"send message"** — keep it distinct from the 2 similarly named tools:
+- **`mcp__ccd_session_mgmt__send_message`** ("send message") — sends a message to **another CCD session that already exists** (found via `mcp__ccd_session_mgmt__list_sessions`); the message shows up as a user turn in the target session with a "From {this session's name}" label, and creates nothing new. Use it for handing off context / relaying a finding across sessions. **Doesn't work in an unattended session** (scheduled-task runs, remote-dispatched)
+- **`spawn_task`** (chip) — creates a **brand new session** for out-of-scope work found along the way; the user must click the chip to actually open it; the prompt must be self-contained; billed separately from the current one
+- **`SendMessage`** (top-level tool, no `mcp__` prefix) — sends a message to a **subagent/teammate spawned in the same session** (e.g. via the Agent tool), not a separate CCD session
 
-หมายเหตุ: นี่คือ harness-level เทียบเท่า cross-session messaging ของ Claude Code CLI (v2.1.224+, macOS/Linux หรือ WSL2 เท่านั้น) — แต่ tool ตัวนี้ทำงานบน Windows ได้โดยไม่ต้อง WSL2
+Note: this is the harness-level equivalent of Claude Code CLI's cross-session messaging (v2.1.224+, macOS/Linux or WSL2 only) — but this tool works on Windows without needing WSL2
 
 # Skills Index (global reference)
-ดัชนีรวมศูนย์ skill ทุกตัวที่ user ลงไว้ (built-in / superpowers / ecc / ui-ux-pro-max / pordee / lazyweb / karpathy / anthropic-skills) พร้อม "ตอนไหนใช้อะไร" cheatsheet:
+A central index of every skill the user has installed (built-in / superpowers / ecc / ui-ux-pro-max / pordee / lazyweb / karpathy / anthropic-skills) with a "which to use when" cheatsheet:
 - File: `~/.claude/SKILLS_INDEX.md`
-- ใช้ตอน: ก่อนเริ่มงานใด ๆ ให้เปิดอ่านเช็คว่ามี skill ที่ตรงงานไหม (ประหยัด token + ได้ workflow ที่ user vetted แล้ว)
-- เมื่อมีการลง/ถอด skill ใหม่ ให้ update ไฟล์นี้ด้วย
+- Use when: before starting any work, open and read it to check whether a skill matches the task (saves tokens + gets a workflow the user has already vetted)
+- When a new skill is installed/removed, update this file too
 
 
 # Installed Plugins (enabled in ~/.claude/settings.json)
@@ -173,7 +173,7 @@ User เรียก `mcp__ccd_session_mgmt__send_message` สั้นๆว่
 These plugins are installed and ENABLED — their skills/commands/agents/MCP tools are available. Do NOT tell the user they need to install them.
 
 - **superpowers** v6.2.0 (obra/superpowers) — 14 skills: brainstorming, writing-plans, executing-plans, test-driven-development, systematic-debugging, requesting-code-review, receiving-code-review, subagent-driven-development, dispatching-parallel-agents, verification-before-completion, using-git-worktrees, finishing-a-development-branch, writing-skills, using-superpowers. Trigger via `/plan`, `/brainstorm`, etc. (updated 2026-08-08 from v5.1.0, 240 commits)
-- **ecc** v2.2.0 (affaan-m/ECC — repo renamed from `everything-claude-code`, same repo) — 67 agents, 284 skills, 94 commands. Agents include: planner, architect, tdd-guide, code-reviewer, security-reviewer, build-error-resolver, refactor-cleaner, doc-updater, e2e-runner, code-explorer, code-architect, plus language reviewers (typescript, python, go, rust, java, kotlin, swift, csharp, fsharp, cpp, django, fastapi, flutter, dart). Commands: /feature-dev, /code-review, /build-fix, /checkpoint, /evolve, /hookify, etc. MCP servers (prefixed `plugin_ecc_`): context7, github, memory, playwright, sequential-thinking. (updated 2026-08-08 from v2.0.0-rc.1, 533 commits; note: `claude plugin update` ships new versions as non-git release-archive extracts, not `git pull` — the weekly `check.ps1` checker only understands `.git`-backed caches, so it will keep reporting this plugin as "behind" until the stale `2.0.0-rc.1` cache dir is manually removed — see SKILLS_INDEX.md "เครื่องมืออ้างอิง" section)
+- **ecc** v2.2.0 (affaan-m/ECC — repo renamed from `everything-claude-code`, same repo) — 67 agents, 284 skills, 94 commands. Agents include: planner, architect, tdd-guide, code-reviewer, security-reviewer, build-error-resolver, refactor-cleaner, doc-updater, e2e-runner, code-explorer, code-architect, plus language reviewers (typescript, python, go, rust, java, kotlin, swift, csharp, fsharp, cpp, django, fastapi, flutter, dart). Commands: /feature-dev, /code-review, /build-fix, /checkpoint, /evolve, /hookify, etc. MCP servers (prefixed `plugin_ecc_`): context7, github, memory, playwright, sequential-thinking. (updated 2026-08-08 from v2.0.0-rc.1, 533 commits; note: `claude plugin update` ships new versions as non-git release-archive extracts, not `git pull` — the weekly `check.ps1` checker only understands `.git`-backed caches, so it will keep reporting this plugin as "behind" until the stale `2.0.0-rc.1` cache dir is manually removed — see SKILLS_INDEX.md "reference tools" section)
 - **pordee** (kerlos/pordee), **lazyweb** (aboul3ata/lazyweb-skill), **andrej-karpathy-skills** (forrestchang/andrej-karpathy-skills) — also enabled.
 
 Install paths: `~/.claude/plugins/cache/<marketplace>/<plugin>/<version>/`. Enabled-state manifest: `~/.claude/settings.json` -> `enabledPlugins`.
@@ -181,26 +181,26 @@ Install paths: `~/.claude/plugins/cache/<marketplace>/<plugin>/<version>/`. Enab
 Note: ECC ships a GateGuard hook (`pre:edit-write:gateguard-fact-force`) that demands a "fact-forcing" preamble before edits to certain files. To disable for setup/repair: set `ECC_GATEGUARD=off` or add the hook name to `ECC_DISABLED_HOOKS`.
 
 
-# Auto-compact awareness — เตือน/ขอ compact เองเมื่อเปลือง token (บัญญัติ 2026-08-09)
-Claude ต้อง **เฝ้าดูขนาด context ของตัวเองตลอดเวลา** และเป็นฝ่ายเสนอ compact เอง ไม่ใช่รอ user สังเกตว่าแชตยาวแล้ว
+# Auto-compact awareness — warn/ask for a compact yourself when burning tokens (codified 2026-08-09)
+Claude must **keep watching its own context size at all times** and be the one to propose a compact, rather than waiting for the user to notice the chat is long
 
-**ข้อจำกัดที่ต้องพูดตรง ๆ (ห้ามแกล้งทำเหมือนทำได้):**
-- Claude **รัน `/compact` เองไม่ได้** — เป็น CLI slash command ที่ user ต้องพิมพ์เอง (ไม่ใช่ tool)
-- **hook ก็ trigger compact ไม่ได้** — PreToolUse/PostToolUse hook ทำได้แค่ block/ask/inject text ไม่มี hook event ไหนสั่ง compact ได้ (`SessionStart` matcher `compact` คือ hook ที่ *ทำงานหลัง* compact จบ ไม่ใช่ตัวสั่ง)
-- ที่ทำได้จริงคือ **auto-compact ในตัว harness** (ทำงานเองตอนใกล้เต็ม context) + **Claude เตือน user ให้กด compact ก่อนถึงจุดนั้น**
+**Limitations to state plainly (never pretend otherwise):**
+- Claude **can't run `/compact` itself** — it's a CLI slash command the user must type (not a tool)
+- **A hook can't trigger a compact either** — PreToolUse/PostToolUse hooks can only block/ask/inject text; no hook event can order a compact (the `SessionStart` matcher `compact` is a hook that *runs after* a compact finishes, not one that orders it)
+- What's actually possible is the harness's built-in **auto-compact** (runs by itself when the context is nearly full) + **Claude warning the user to press compact before reaching that point**
 
-**ทริกเกอร์ให้เสนอ compact (เช็คทุกครั้งก่อนเริ่มงานก้อนใหม่):**
-1. **เพดานเด็ดขาด: context แตะ ~200k token → เตือนทันที, แตะ ~300k → เตือนแรงและยืนยันว่าควร compact ก่อนทำอะไรต่อ** (ตัวเลขนี้ user กำหนดเอง มาก่อนเกณฑ์ % เสมอ — ถึงเลขนี้ต้องเตือนแม้ window จะยังไม่ใกล้เต็ม). ถ้ารู้ % ด้วยก็ใช้ ~60% ของ window เป็นตัวเสริม → บอก user 1 บรรทัดว่า "context ~Xk แล้ว แนะนำ `/compact` ก่อนเริ่มงานถัดไป"
-2. เพิ่งอ่านไฟล์ก้อนใหญ่/log ยาว/tool output มหาศาลไปหลายรอบ แล้วงานนั้น **จบแล้ว** → เสนอ compact ทันที (เนื้อดิบไม่ต้องอยู่ต่อ)
-3. กำลังจะเริ่ม **งานใหม่ที่ไม่เกี่ยวกับงานเดิม** ในแชตเดิม → เสนอ compact ก่อนเริ่ม (เปลี่ยนหัวข้อ = จุดตัดที่ compact เสียหายน้อยสุด)
-4. งาน execute หนัก/ยาวที่กำลังจะเริ่ม → ตามบัญญัติ "Offload heavy execution" ให้ปล่อย `spawn_task` chip แทนการทำต่อในแชตที่บวมแล้ว
+**Triggers to propose a compact (check every time before starting a new chunk of work):**
+1. **Hard ceiling: context reaches ~200k tokens → warn immediately; reaches ~300k → warn strongly and confirm a compact is needed before doing anything else** (these numbers are the user's own and take priority over any % threshold — when the number is reached you must warn even if the window isn't close to full). If you also know the %, use ~60% of the window as a supplement → tell the user in one line: "context is ~Xk now, recommend `/compact` before starting the next task"
+2. Just finished reading a large file / long log / huge tool output several times and that task is now **done** → propose a compact immediately (the raw content doesn't need to stay)
+3. About to start a **new task unrelated to the previous one** in the same chat → propose a compact first (a topic change is the cut point where compacting loses the least)
+4. About to start heavy/long execution work → per the "Offload heavy execution" rule, release a `spawn_task` chip instead of continuing in an already-bloated chat
 
-**เสนอยังไง:** สั้น 1–2 บรรทัด + บอกว่าจะ compact แล้วทำอะไรต่อ อย่าถามซ้ำถ้า user เพิ่งปฏิเสธไปในเทิร์นก่อน ๆ (ถามซ้ำ = น่ารำคาญ + เปลือง token เอง)
+**How to propose it:** short, 1-2 lines + say what you'll do after compacting; don't ask again if the user just declined in a recent turn (asking again is annoying and burns tokens itself)
 
-**ป้องกันดีกว่าแก้ — ลด token ก่อนถึงจุดต้อง compact:**
-- อย่า dump ไฟล์ทั้งไฟล์เข้า context ถ้าต้องการแค่ข้อสรุป → ใช้ `Explore`/subagent ย่อยมา (ตามบัญญัติ cost-aware routing)
-- อย่าอ่านไฟล์เดิมซ้ำเพื่อ "เช็คว่าแก้ติดไหม" — Edit/Write มัน error เองถ้าพลาด
-- log/doc ยาว low-stakes → pre-compress ด้วย ollama ก่อนเข้า context
+**Prevention beats cure — cut tokens before reaching the point of needing a compact:**
+- Don't dump whole files into context if you only need the conclusion → have `Explore`/a subagent summarize (per the cost-aware routing rule)
+- Don't re-read the same file to "check whether the fix landed" — Edit/Write errors out by itself if it failed
+- Long low-stakes logs/docs → pre-compress with ollama before they enter context
 
 # MCP/Plugin context bloat audit
 If the user complains their context feels bloated, the biggest culprit is often not project-level settings but **marketplace plugins/connectors enabled at the account level** (in whatever settings surface your harness exposes for that, separate from the project's own config) — turned on ages ago and forgotten. Before recommending anything get disabled, check evidence of actual recent usage (search session history/transcripts if that's available) rather than guessing from a plugin's name or category — an unused-sounding name isn't proof it's unused, and a command that lists installed plugins/servers often only shows a subset. Priority order: disable unused account-level plugins first (biggest win, lowest risk) before touching project-level instruction files (CLAUDE.md/AGENTS.md/rules) — trimming those risks losing context the user actually wanted; suggest it but don't push.
