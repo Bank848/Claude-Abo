@@ -2,7 +2,7 @@
 
 ## Model Selection Strategy
 
-**Haiku 4.5** (90% of Sonnet capability, 3x cost savings):
+**Haiku 5.5** (fastest/cheapest tier, $0.10/$0.50 per 1M; strong for extraction, summarising, routing; weaker at agentic coding):
 - Lightweight agents with frequent invocation
 - Pair programming and code generation
 - Worker agents in multi-agent systems
