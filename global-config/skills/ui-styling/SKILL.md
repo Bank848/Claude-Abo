@@ -236,7 +236,7 @@ python scripts/tailwind_config_gen.py --colors brand:blue --fonts display:Inter
 8. **TypeScript**: Use full type safety for better DX
 9. **Visual Hierarchy**: Let composition guide attention, use spacing and color intentionally
 10. **Expert Craftsmanship**: Every detail matters - treat UI as a craft
-11. **Poka-yoke**: ก่อน ship interaction ใดๆ รัน poka-yoke UI checklist: ปุ่มที่กดไม่ได้ = disabled/ซ่อน ไม่ใช่กดแล้วเด้ง error, ไม่มี hotspot ซ้อน, double-click ไม่ให้ผลซ้ำ, ทุกทางออกจาก flow commit เสมอ. ถ้ากำลังจะเขียน error state — ถามก่อนว่าทำให้ user เข้า state นั้นไม่ได้เลยดีกว่าไหม
+11. **Poka-yoke**: before shipping any interaction, run the poka-yoke UI checklist: a button that can't be pressed = disabled/hidden, not pressable-then-error; no overlapping hotspots; double-click doesn't repeat the effect; every exit from a flow always commits. If you are about to write an error state, first ask whether it is better to make that state unreachable for the user
 
 ## Reference Navigation
 

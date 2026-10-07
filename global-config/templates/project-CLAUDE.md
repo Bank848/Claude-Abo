@@ -1,46 +1,46 @@
 <!--
-  TEMPLATE — คัดลอกไปเป็น CLAUDE.md ที่ root ของโปรเจกต์ แล้วเติมช่อง <...>
-  ที่มา: พอร์ตจาก CLAUDE.md ของ repo some-other-project/link (ตัวจริง ~40 บรรทัด)
-  ไฟล์นี้ = "router" ชี้ทางเท่านั้น ไม่ใช่คลังเนื้อหา
-  อย่าซ้ำกับ global CLAUDE.md (cost-routing / planning workflow / TDD มีระดับ global แล้ว) —
-  ที่นี่เอาเฉพาะเรื่องเฉพาะโปรเจกต์นี้
+  TEMPLATE — copy to CLAUDE.md at the project root, then fill in the <...> slots
+  Source: ported from CLAUDE.md of the some-other-project/link repo (the original is ~40 lines)
+  This file = a "router" that only points the way, not a content store
+  Don't duplicate the global CLAUDE.md (cost-routing / planning workflow / TDD already exist at global level) —
+  keep only things specific to this project
 
-  ── ตัวอย่างเติมช่องตาม stack (ดู PRESET เต็มใน docs/conventions.md) ──
+  ── examples of filling the slots by stack (full PRESET in docs/conventions.md) ──
   Python web:  gate = `just check` (ruff·pyright·import-linter·pytest·alembic)
-               tooling = <uv pin py3.12> · schema = alembic command เดียว
-  (stack อื่นที่มี custom authoring tool/MCP เป็นของตัวเอง — เขียน preset เพิ่มเองตามแนวนี้:
-   gate command, negative-proof pattern, กติกาแก้ไฟล์ผ่าน tool เฉพาะแทน Edit/Write ตรง)
+               tooling = <uv pin py3.12> · schema = a single alembic command
+  (other stacks with their own custom authoring tool/MCP — write an extra preset following this pattern:
+   gate command, negative-proof pattern, rules for editing files through the dedicated tool instead of direct Edit/Write)
 -->
 
-# <PROJECT> — <หนึ่งบรรทัดว่าโปรเจกต์นี้คืออะไร>
+# <PROJECT> — <one line on what this project is>
 
-> ไฟล์นี้ **≤45 บรรทัด** — ความรู้ใหม่ไป ADR/log/conventions, ที่นี่เพิ่มได้แค่ pointer
-> (บวมเมื่อไหร่ = เริ่มซ้ำกับ docs = drift)
+> This file is **≤45 lines** — new knowledge goes to ADR/log/conventions; only pointers may be added here
+> (when it bloats = it starts duplicating docs = drift)
 
-## เริ่มทุก session — อ่านก่อน
-- `docs/log/` **ไฟล์ล่าสุด** — ค้างอะไร ระวังอะไร (log ที่ถูกอ่าน = log ที่จะถูกเขียนต่อ)
-- `docs/adr/README.md` — ก่อนแตะเรื่องไหน อ่าน ADR ใบที่เกี่ยว (ทุกใบมี "ทำไม")
-- `docs/conventions.md` — กติกาโค้ด/ออกแบบ + นิยาม gate
+## Start of every session — read first
+- `docs/log/` **latest file** — what is outstanding, what to watch out for (a log that gets read is a log that gets written)
+- `docs/adr/README.md` — before touching any area, read the relevant ADRs (each has a "why")
+- `docs/conventions.md` — code/design rules + the gate definition
 
-## หลักเดียวที่ครอบทุกอย่าง
-> **code = อะไร · docs = ทำไม · test = ต้องเป็น — ห้ามให้สองอันบอกเรื่องเดียวกัน**
+## The one principle that covers everything
+> **code = what · docs = why · test = must be — never let two of them say the same thing**
 
-## DoD — ต้องเขียวก่อน commit
+## DoD — must be green before commit
 - `<gate command>` = `<format · lint · type strict · layers · test>`
-- **กฎที่ไม่มี test = คำขอร้อง** · ด่านต้องเคยเห็นแดงบน bad fixture (ดู conventions)
+- **A rule without a test is a request** · the gate must have been seen red on a bad fixture (see conventions)
 
-## ก่อนปิดงานทุกครั้ง
-- เขียน `docs/log/<วันนี้>.md`: **ทำไมตอนนี้ / ตัดสินใจ / ⚠️ระวัง / ยังไม่ทำ**
-- ก่อนเขียน "ยังไม่ทำ" ถามเสียงดัง: **"หมกอะไรไว้ไหม?"** (surface หนี้ ห้าม over-claim)
+## Before closing out any work
+- Write `docs/log/<today>.md`: **why now / decisions / ⚠️watch-out / not done**
+- Before writing "not done", ask yourself out loud: **"Am I hiding anything?"** (surface debt, no over-claiming)
 
-## กติกาที่ห้ามลืม (เติมจากบั๊กจริงของโปรเจกต์นี้ — ให้แต่ละข้อผูก test)
-1. <กฎ #1 ที่มาจากบั๊กจริง → test ตัวไหนบังคับ>
-2. <กฎ #2 ...>
+## Rules never to forget (fill from this project's real bugs — tie each to a test)
+1. <rule #1 that came from a real bug → which test enforces it>
+2. <rule #2 ...>
 3. <...>
 
-## หลัง review / audit
-- ก่อนแก้ตาม finding: verify claim ด้วย workflow **adversarial-verify** (CONFIRMED = มี quote บรรทัดจริงเท่านั้น) → แก้ blocker ก่อน ที่เหลือลง register (ท้าย log) · CONFIRMED ที่เป็นบั๊กซ้ำได้ → เพิ่ม bad fixture (ดู conventions)
+## After review / audit
+- Before fixing per a finding: verify the claim with the **adversarial-verify** workflow (CONFIRMED = has a real quoted line only) → fix blockers first, log the rest in the register (end of log) · a CONFIRMED reproducible bug → add a bad fixture (see conventions)
 
-## เครื่องมือ / ข้อห้ามเฉพาะโปรเจกต์
-- `<tooling: package manager, runtime pin, ฯลฯ>`
-- `<ข้อห้ามเฉพาะ เช่น: git=ของจริง VPS=สำเนา ห้ามแก้บน server>`
+## Project-specific tools / prohibitions
+- `<tooling: package manager, runtime pin, etc.>`
+- `<specific prohibitions, e.g.: git = the real thing, VPS = a copy, never edit on the server>`

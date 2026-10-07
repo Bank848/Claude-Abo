@@ -1,70 +1,70 @@
 ---
 name: claude-code-frequently-used-skills
-description: สรุปสกิล Claude Code ที่ใช้บ่อยจริงในงานประจำวัน แยกตามหมวด พร้อมวิธีเรียกและใช้ตอนไหน
+description: Summary of the Claude Code skills actually used often in day-to-day work, grouped by category, with how to invoke each and when to use it
 metadata:
   type: reference
 ---
 
-# สกิลที่ใช้บ่อย (Claude Code)
+# Frequently used skills (Claude Code)
 
-สรุปจาก `~/.claude/SKILLS_INDEX.md` (ดัชนีเต็ม 200+ ตัว) — ที่นี่เก็บเฉพาะ 11 ตัวที่หยิบใช้จริงตามงานที่ทำประจำ (วางแผน feature, review, UI, ship). อัปเดตทุกครั้งที่ pattern การใช้งานเปลี่ยน
+Summarized from `~/.claude/SKILLS_INDEX.md` (full index, 200+ skills). This file keeps only the 11 skills picked up in routine work (feature planning, review, UI, ship). Update whenever the usage pattern changes
 
 ---
 
-## 🧠 วางแผน / Design ฟีเจอร์
+## 🧠 Feature planning / design
 
-| Skill | ใช้ทำอะไร | ใช้ยังไง |
+| Skill | What it does | How to use |
 |---|---|---|
-| `superpowers:brainstorming` | สำรวจ intent + requirement + design ก่อนเริ่มงาน creative ใด ๆ — บังคับใช้ก่อนแตะโค้ด | อัตโนมัติเมื่อเริ่มงานใหม่ที่ยังไม่ตกผลึก |
-| `/plan-pro` | เขียน implementation plan ต่อยอด `writing-plans`: spawn agent รีวิวหา gap ก่อนส่ง, output เป็น HTML มี before/after diagram (Mermaid) ให้อ่านง่าย, มี parallelization analysis | ใช้แทน `writing-plans` เปล่าเสมอ — ถ้า design approve แล้วในแชตและงานเล็ก-กลาง ข้ามการเขียน spec.md แยกได้เลย |
-| `/grilling` | ให้ AI "ซัก" แผนแบบ relentless ก่อนลงมือ ไล่ทุกกิ่งของ design-tree ทีละคำถาม แนะคำตอบให้ด้วย | พูด "grill"/"stress-test" หรือ `/grilling` — ใช้กับงานเกม/แปล/งานทั่วไป (ไม่เขียนไฟล์ลง repo) |
+| `superpowers:brainstorming` | Explore intent + requirements + design before any creative work; mandatory before touching code | Automatic when starting new work that isn't settled yet |
+| `/plan-pro` | Writes an implementation plan, building on `writing-plans`: spawns a review agent to hunt for gaps before handing off, outputs HTML with before/after diagrams (Mermaid) for easy reading, includes a parallelization analysis | Always use instead of bare `writing-plans`; if the design is already approved in chat and the work is small-to-medium, skip the separate spec.md |
+| `/grilling` | Has the AI relentlessly "grill" the plan before work starts, walking every branch of the design tree one question at a time and suggesting answers | Say "grill"/"stress-test" or `/grilling`; works for games/translation/general work (writes no files to the repo) |
 
 ---
 
 ## 🔍 Review / Debug
 
-| Skill | ใช้ทำอะไร | ใช้ยังไง |
+| Skill | What it does | How to use |
 |---|---|---|
-| `/scrutinize` | รีวิวมุมคนนอก — เช็คก่อนว่ามีทางที่เรียบกว่าไหม แล้วไล่โค้ดจริง (ไม่ใช่แค่ diff) | ใช้ตรวจ plan/PR/diff ก่อนส่งจริง |
-| `/debug-mantra` + `superpowers:systematic-debugging` | บังคับท่อง 4 ขั้นก่อนเสนอ fix: reproduce → trace fail path → falsify hypothesis → cross-reference | trigger อัตโนมัติเมื่อเจอบั๊ก/error/stack trace |
-| `adversarial-verify` (workflow, **not included in this template**) | verify claim ของ code review ก่อนแก้จริง — ต้อง CONFIRMED พร้อม quote file:line ถึงจะเชื่อ | feed ต่อจาก `receiving-code-review` |
-| `superpowers:verification-before-completion` | บังคับรัน verify จริงก่อนเคลมว่า "เสร็จ" | ใช้ก่อนตอบว่าทำเสร็จทุกครั้ง |
+| `/scrutinize` | Outsider-perspective review: first checks whether a simpler way exists, then traces the actual code (not just the diff) | Use to check a plan/PR/diff before sending it for real |
+| `/debug-mantra` + `superpowers:systematic-debugging` | Forces reciting the 4 steps before proposing a fix: reproduce → trace fail path → falsify hypothesis → cross-reference | Triggers automatically on a bug/error/stack trace |
+| `adversarial-verify` (workflow, **not included in this template**) | Verify a code review's claims before actually fixing; a claim is trusted only if CONFIRMED with a quoted file:line | Feeds on from `receiving-code-review` |
+| `superpowers:verification-before-completion` | Forces running real verification before claiming "done" | Use every time before saying the work is finished |
 
 ---
 
 ## 🎨 UI / Design
 
-| Skill | ใช้ทำอะไร | ใช้ยังไง |
+| Skill | What it does | How to use |
 |---|---|---|
-| `ui-ux-pro-max` → `ui-styling` | ออกแบบ UI ใหม่: DB 50+ styles, 161 palettes, 57 font pairs, 99 UX guideline → implement จริงด้วย shadcn/Tailwind | เรียกตามลำดับ design ก่อน แล้วค่อย implement |
-| `make-interfaces-feel-better` + `deslop-defaults` | polish UI ที่ "ทำได้แต่ไม่สวย" — อันแรก optical craft (spacing/type/shadow), อันหลัง structural restraint (z-index, accent เดียว, ห้าม AI-slop look) | ใช้คู่กันตอน review/gen UI |
+| `ui-ux-pro-max` → `ui-styling` | Design new UI: DB of 50+ styles, 161 palettes, 57 font pairs, 99 UX guidelines → implement for real with shadcn/Tailwind | Call in order: design first, then implement |
+| `make-interfaces-feel-better` + `deslop-defaults` | Polish UI that is "functional but not pretty": the first is optical craft (spacing/type/shadow), the second is structural restraint (z-index, a single accent, no AI-slop look) | Use together when reviewing/generating UI |
 
 ---
 
 ## 🚀 Git / Ship
 
-| Skill | ใช้ทำอะไร | ใช้ยังไง |
+| Skill | What it does | How to use |
 |---|---|---|
-| `shipping-a-branch` (`/ship`) | flow เต็ม commit → push → PR → review → merge — ทุก action เสี่ยง (push/PR/merge/delete branch) confirm แยกทีละครั้ง | ใช้แทนสั่ง "commit and open a PR" ตรง ๆ ได้เลย |
+| `shipping-a-branch` (`/ship`) | Full flow commit → push → PR → review → merge; every risky action (push/PR/merge/delete branch) is confirmed separately, one at a time | Use instead of directly saying "commit and open a PR" |
 
 ---
 
-## 🛠️ Meta / เครื่องมือส่วนตัว
+## 🛠️ Meta / personal tooling
 
-| Skill | ใช้ทำอะไร | ใช้ยังไง |
+| Skill | What it does | How to use |
 |---|---|---|
-| `update-config` | แก้ `settings.json` — hooks, permissions, env vars | ใช้เมื่อจะตั้ง automation หรือ allowlist |
-| `/graphify` | แปลง input อะไรก็ได้ → knowledge graph (HTML/JSON + audit) | `/graphify` |
+| `update-config` | Edit `settings.json`: hooks, permissions, env vars | Use when setting up automation or an allowlist |
+| `/graphify` | Turn any input → knowledge graph (HTML/JSON + audit) | `/graphify` |
 
 ---
 
-## 💰 Cost routing (ใช้ทุกงาน — ไม่ใช่ skill แต่เป็นกติกา)
+## 💰 Cost routing (applies to every task; not a skill but a rule)
 
-main loop = Opus 5.5 หรือ Sonnet 5.5 เลือกเอง (orchestrator, วางแผน/ตัดสินใจ/ตรวจงาน) → งานกลไก spawn `haiku-batch` → อ่านไฟล์เยอะ spawn `Explore` → งานมาตรฐานก้อนใหญ่ (main=Opus) spawn `sonnet-worker` → งานยากจริง (main=Sonnet) spawn `opus` → งานเดิมพันสูงสุดที่ opus แล้วยังส่าย spawn `fable-medium` (medium effort). กติกาเต็มอยู่ `~/.claude/CLAUDE.md`
+The main loop is Opus 5.5 or Sonnet 5.5 (your choice) and acts as orchestrator (plans, decides, checks work) → mechanical work spawns `haiku-batch` → reading many files spawns `Explore` → big chunks of standard work (main=Opus) spawn `sonnet-worker` → genuinely hard work (main=Sonnet) spawns `opus` → the highest-stakes work where opus still wavers spawns `fable-medium` (medium effort). Full rules live in `~/.claude/CLAUDE.md`
 
 ---
 
-## ดูเพิ่ม
+## See also
 
-- ดัชนีเต็ม 200+ skill: `~/.claude/SKILLS_INDEX.md`
-- กฎ agent orchestration/git/testing: `~/.claude/rules/ecc/common/*.md`
+- Full index of 200+ skills: `~/.claude/SKILLS_INDEX.md`
+- Agent orchestration/git/testing rules: `~/.claude/rules/ecc/common/*.md`
