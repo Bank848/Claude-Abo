@@ -167,7 +167,7 @@ Full provenance (source repo, adoption date, self-authored vs. adopted vs. adapt
 
 ### Bonus skills (21 added in the October 2026 patch)
 
-Added after the first release. Nothing above changed. Several are written for one specific workflow (Thai documents, a second-brain vault), with SKILL.md text partly in Thai. Read each one and adapt it before relying on it.
+Added after the first release. Nothing above changed. Several are written for one specific workflow (Thai documents), with SKILL.md text partly in Thai. Read each one and adapt it before relying on it.
 
 | Skill | What it is for |
 |---|---|
@@ -175,7 +175,7 @@ Added after the first release. Nothing above changed. Several are written for on
 | `project-bootstrap` | One-shot scaffold for a repo: thin CLAUDE.md router, `docs/log/`, `docs/adr/`, conventions. |
 | `domain-modeling` / `grill-with-docs` | Pin down domain terms and record ADRs while a plan is being stress-tested. |
 | `ponytail` | Write the least code that is still correct: climb a ladder (YAGNI, stdlib, native, existing dependency) before adding anything. |
-| `git-guardrails-claude-code` | Gate dangerous git commands (push, force operations, clean, branch deletion) behind a confirmation hook. |
+| `git-guardrails-claude-code` | Gate dangerous git commands (push, force operations, clean, branch deletion) with a blocking hook. |
 | `github-pr-review-draft` / `pruning-branches` | Pending-review PR workflow and periodic branch cleanup. |
 | `memory-lint` | Read-only health check of a project's memory files. |
 | `prompt-master` | Writes and tunes prompts for other AI tools. |

@@ -86,7 +86,7 @@ metadata:
 
 ## Bonus skills (October 2026 patch)
 
-Added after the first release; see the README for caveats (several are written for the author workflow).
+Added after the first release; see the README for caveats (several are written for the author's workflow).
 
 | Skill | What it does / when to use |
 |---|---|

@@ -371,7 +371,7 @@
       "source_repo_url": "unknown",
       "subpath_in_repo": "",
       "last_seen_commit": "",
-      "note": "Vendor-managed instructions for the BrowserOS browser integration; name field is browseros-neo. No upstream URL recorded; checker reports it as unknown."
+      "note": "Vendor-managed instructions for the BrowserOS browser integration; folder is browserclaw. No upstream URL recorded; checker reports it as unknown."
     },
     {
       "name": "close-out-log",
@@ -504,7 +504,7 @@
       "source_repo_url": "https://github.com/utarn/engineer-skills",
       "subpath_in_repo": "skills/misc/git-guardrails-claude-code",
       "last_seen_commit": "unknown",
-      "note": "utarn/engineer-skills (MIT). Original hook was jq/bash; a Python version is used in the author setup. Run check.ps1 -Ack once to set your own baseline. Added in the October 2026 patch."
+      "note": "utarn/engineer-skills (MIT). Original hook was jq/bash; a Python version is used in the author setup. Run check.ps1 -Ack once to set your own baseline. Added in the October 2026 patch. The same skill also exists in mattpocock/skills (MIT) under skills/misc/git-guardrails-claude-code."
     },
     {
       "name": "prompt-master",

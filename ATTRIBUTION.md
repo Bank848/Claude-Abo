@@ -13,7 +13,7 @@ Of the original 45, seven skills are self-authored: `poka-yoke`, `plan-pro`, and
 | [`mrgoonie/claudekit-skills`](https://github.com/mrgoonie/claudekit-skills) | **no license file upstream** — all rights reserved by default; redistributed here on assumed permissive intent, contact upstream before reuse elsewhere | `ui-styling` |
 | [`coreyhaines31/makerskills`](https://github.com/coreyhaines31/makerskills) | MIT | `second-brain`, `decide`, `unstuck`, `skillify`, `deep-research`, `watch-video` |
 | [`coreyhaines31/marketingskills`](https://github.com/coreyhaines31/marketingskills) | MIT | `product-marketing`, `launch`, `copywriting`, `copy-editing`, `social`, `community-marketing`, `content-strategy`, `image`, `marketing-ideas`, `marketing-psychology`, `pricing`, `marketing-council` |
-| [`mattpocock/skills`](https://github.com/mattpocock/skills) | MIT (per upstream) | `grilling`, `teach`, `wait-what`, `wizard`, `domain-modeling`, `grill-with-docs` |
+| [`mattpocock/skills`](https://github.com/mattpocock/skills) | MIT (per upstream) | `grilling`, `teach`, `wait-what`, `wizard`, `domain-modeling`, `grill-with-docs` (`git-guardrails-claude-code` also exists here) |
 | [`briiirussell/cybersecurity-skills`](https://github.com/briiirussell/cybersecurity-skills) | MIT | `prompt-injection`, `secrets-audit`, `dependency-audit` |
 | [`DietrichGebert/ponytail`](https://github.com/DietrichGebert/ponytail) | MIT | `ponytail` (adapted) |
 | [`Nutlope/hallmark`](https://github.com/Nutlope/hallmark) | MIT (per upstream) | `hallmark` |
