@@ -368,10 +368,10 @@
     },
     {
       "name": "browserclaw",
-      "source_repo_url": "self-authored",
+      "source_repo_url": "unknown",
       "subpath_in_repo": "",
       "last_seen_commit": "",
-      "note": "Operating discipline for driving a signed-in agent browser (snapshot, act, verify loop). No upstream; checker skips it. Added in the October 2026 patch."
+      "note": "Vendor-managed instructions for the BrowserOS browser integration; name field is browseros-neo. No upstream URL recorded; checker reports it as unknown."
     },
     {
       "name": "close-out-log",
@@ -438,10 +438,10 @@
     },
     {
       "name": "i-have-adhd",
-      "source_repo_url": "self-authored",
+      "source_repo_url": "unknown",
       "subpath_in_repo": "",
       "last_seen_commit": "",
-      "note": "ADHD-friendly output style. Frontmatter says MIT but there is no upstream source URL in the skill folder, so it is treated as self-authored. No upstream; checker skips it. Added in the October 2026 patch."
+      "note": "Frontmatter declares MIT and Hermes metadata; upstream source not recorded. Checker reports it as unknown."
     },
     {
       "name": "memory-lint",

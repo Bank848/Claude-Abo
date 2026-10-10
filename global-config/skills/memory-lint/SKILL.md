@@ -22,8 +22,8 @@ Adapts the **lint workflow** from Karpathy's LLM Wiki to govern the auto-memory 
 3. Verify with `ls ~/.claude/projects/*/memory` if the slug is unclear.
 
 ## Tier model (resident vs retrievable): understand this before checking
-A project that has gone through the memory-tier-system migration has a **2-tier** `memory/`:
-- **`MEMORY.md`** (resident, auto-loaded every session, budget **≤4KB**): holds **category-level pointers** only (e.g. "40+ CTF rooms → `memory/INDEX.md` rooms section"), no longer per-file pointers.
+A project that has been migrated to the two-tier layout has a **2-tier** `memory/`:
+- **`MEMORY.md`** (resident, auto-loaded every session, budget **≤4KB**): holds **category-level pointers** only (e.g. "all project notes → `memory/INDEX.md` notes section"), no longer per-file pointers.
 - **`memory/INDEX.md`** (retrievable, not auto-loaded, no size limit): holds **a pointer for every file** the way MEMORY.md used to.
 
 A project that has not migrated has only the old-style `MEMORY.md` (per-file pointers directly, no INDEX.md). Both are valid. Check against what that project actually uses, and do not complain about a missing INDEX.md if the project does not yet meet the migration criteria (see check 8).
@@ -33,7 +33,7 @@ A project that has not migrated has only the old-style `MEMORY.md` (per-file poi
 ## What to check (read every file in memory/ first)
 1. **Stale / superseded**: an entry saying "FIXED/DONE/committed" while a newer entry overrides the same topic; or one that cites a file/flag/commit that should be verified as still existing (if you can touch the current code, check).
 2. **Contradiction**: two entries saying opposite things (e.g. one says a detector is on, another says it is off).
-3. **Orphan (amended per memory-tier-system §4)**: a file in `memory/` with no pointer line **in either `MEMORY.md` or `memory/INDEX.md` (if it exists)** is a real orphan and must be flagged. A file with no pointer in `MEMORY.md` but one in `INDEX.md` is **not an orphan**. It is the normal retrievable state by the new design (per-file pointers moved to INDEX.md and no longer live in MEMORY.md).
+3. **Orphan (two-tier memory)**: a file in `memory/` with no pointer line **in either `MEMORY.md` or `memory/INDEX.md` (if it exists)** is a real orphan and must be flagged. A file with no pointer in `MEMORY.md` but one in `INDEX.md` is **not an orphan**. It is the normal retrievable state by the new design (per-file pointers moved to INDEX.md and no longer live in MEMORY.md).
 4. **Broken links**: a `[[slug]]` pointing at a `name:` that no file matches (a dangling link as a TODO is acceptable, but list it).
 5. **Broken frontmatter**: missing `name`/`description`/`metadata.type`, or `type` is not user|feedback|project|reference.
 6. **Should be in the repo, not memory**: an entry recording something the repo already records (code structure / git history / CLAUDE.md). The rules forbid storing it.

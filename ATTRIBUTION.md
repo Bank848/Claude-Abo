@@ -35,7 +35,7 @@ The SKILL.md prose for these is self-authored, but each one drives a third-party
 
 ## Self-authored bonus skills
 
-The other 19 skills in the October 2026 patch are self-authored: `browserclaw`, `close-out-log`, `codeburn-cost-check`, `docx-human-sounding-report`, `docx-python-docx-justify`, `docx-th-sarabun-sizing`, `domain-modeling`, `english-writing-anti-ai-tell`, `github-pr-review-draft`, `grill-with-docs`, `i-have-adhd`, `memory-lint`, `ponytail`, `project-bootstrap`, `pruning-branches`, `supabase-rls-safety-check`, `thai-docx`, `thai-no-quote-emphasis`, `thai-writing-anti-ai-tell`. `codeburn-cost-check` wraps the third-party `codeburn` CLI.
+The other 17 skills in the October 2026 patch are self-authored: `close-out-log`, `codeburn-cost-check`, `docx-human-sounding-report`, `docx-python-docx-justify`, `docx-th-sarabun-sizing`, `domain-modeling`, `english-writing-anti-ai-tell`, `github-pr-review-draft`, `grill-with-docs`, `memory-lint`, `ponytail`, `project-bootstrap`, `pruning-branches`, `supabase-rls-safety-check`, `thai-docx`, `thai-no-quote-emphasis`, `thai-writing-anti-ai-tell`. `codeburn-cost-check` wraps the third-party `codeburn` CLI. `browserclaw` and `i-have-adhd` are vendor/upstream-derived, source not recorded (they are listed in `sources.json` with an unknown source URL).
 
 ## A note on completeness
 

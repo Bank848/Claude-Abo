@@ -15,9 +15,9 @@ Ported from the pattern of repos that genuinely "don't forget" (the same pattern
 
 ## Steps
 1. **Survey the repo before filling in blanks**: stack (Python/Node/game engine etc.), existing gate commands (`justfile`, `package.json` scripts, `Makefile`), and whether git is present.
-2. **Copy `~/.claude/templates/project-CLAUDE.md`** → `<repo>/CLAUDE.md` and fill the `<...>` slots for the real stack (see the PRESETs inside the template: PRESET A for Python web, PRESET B for the game engine preset). It must be **at most 45 lines**, and do not dump conventions content in again.
+2. **Copy `global-config/templates/project-CLAUDE.md`** from this repo → `<repo>/CLAUDE.md` and fill the `<...>` slots for the real stack (see the PRESETs inside the template: PRESET A for Python web, PRESET B for the game engine preset). It must be **at most 45 lines**, and do not dump conventions content in again.
    - While scaffolding, plant tier-1 guardrails (poka-yoke) from day one: generated artifacts → gitignore immediately, config that breaks when missing → make the build/hook fail loudly, and anything you would write as a "don't forget" note in the template → turn it into a hook/check instead if possible.
-3. **Copy `~/.claude/templates/conventions.md`** → `<repo>/docs/conventions.md` (or whatever filename the repo already uses, e.g. `docs/03-Conventions.md`) and fill in the gate command + negative fixture for the real stack.
+3. **Copy `global-config/templates/conventions.md`** from this repo → `<repo>/docs/conventions.md` (or whatever filename the repo already uses, e.g. `docs/03-Conventions.md`) and fill in the gate command + negative fixture for the real stack.
 4. **Create `docs/log/` + the first entry** via the `close-out-log` skill. Write the repo's current state (why now / existing decisions / watch out / not done) to seed the "read the log before starting a session" loop.
 5. **Create a short `.claude/docs/README.md`** explaining the convention: one topic per file, named `TOPIC_CONTRACT.md` (a standing agreement) or `TOPIC_HANDOFF_YYYY-MM-DD.md` (a daily hand-off).
 6. **Write a single memory pointer** (type `project`, through the normal memory system) saying this repo is bootstrapped and where the docs are. It is the discovery path for other sessions.

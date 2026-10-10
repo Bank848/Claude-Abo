@@ -167,7 +167,7 @@ Full provenance (source repo, adoption date, self-authored vs. adopted vs. adapt
 
 ### Bonus skills (22 added in the October 2026 patch)
 
-Added after the first release, copied from the author's current setup. Nothing above changed. They are **not yet listed** in `SKILLS_INDEX.md` or `sources.json`, and several are written for the author's own workflow (Thai documents, Ren'Py, a second-brain vault), with SKILL.md text partly in Thai. Read each one and adapt it before relying on it.
+Added after the first release, copied from the author's current setup. Nothing above changed. Several are written for the author's own workflow (Thai documents, a second-brain vault), with SKILL.md text partly in Thai. Read each one and adapt it before relying on it.
 
 | Skill | What it is for |
 |---|---|

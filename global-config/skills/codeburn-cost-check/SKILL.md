@@ -1,6 +1,6 @@
 ---
 name: codeburn-cost-check
-description: Use when the user asks how much they've spent on AI coding tools (Claude Code, Cursor, Codex, etc.), wants a token/cost breakdown by model/project/task, or asks to check today's/this month's AI spend. Also use proactively before recommending expensive-model escalation (an expensive model) if recent spend is unknown.
+description: Use when the user asks how much they've spent on AI coding tools (Claude Code, Cursor, Codex, etc.), wants a token/cost breakdown by model/project/task, or asks to check today's/this month's AI spend. Also use proactively before recommending an expensive model for a task if recent spend is unknown.
 ---
 
 # codeburn cost check
