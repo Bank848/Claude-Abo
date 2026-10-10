@@ -13,6 +13,8 @@
 
 </div>
 
+<p align="center"><img src="assets/claude-abo-teaser.webp" alt="Animated preview: 66 skills, model routing by difficulty, a hook that asks before git push --force" width="720"/></p>
+
 **Jump to:** [Quickstart](#getting-started-quickstart) · [What's in here](#whats-in-here) · [Bonus skills](#bonus-skills-21-added-in-the-october-2026-patch) · [Licenses and credits](#license-and-credits)
 
 A portable snapshot of one person's Claude Code setup — instructions, skills, hooks, and a knowledge vault, packaged so a fresh Claude Code instance can bootstrap the same habits on a new machine. **A template to adapt, not a config to run as-is.**
