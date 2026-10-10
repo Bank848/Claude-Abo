@@ -1,6 +1,6 @@
 ---
 name: thai-docx
-description: ใช้ทุกครั้งที่ต้องสร้างหรือแก้ไฟล์ Word (.docx) ที่มีภาษาไทย เพื่อแก้ปัญหาการแสดงผลภาษาไทยใน Microsoft Word — ฟอนต์เพี้ยน วรรณยุกต์/สระลอยหรือซ้อนผิด ตัวอักษรเล็กผิดขนาด ตัวหนา/เอียงไม่ติด และการตัดคำ/เว้นวรรค/จัดชิดขอบเพี้ยน รวมถึงการ "แยกฟอนต์ตามภาษา" (อังกฤษใช้ฟอนต์ละติน ไทยใช้ฟอนต์ไทย ในรันเดียวกัน) ครอบคลุมการตั้งค่า "อักษรเชิงซ้อน" (complex script: w:cs, w:szCs, w:bCs, w:lang bidi) ที่ python-docx ไม่ได้ตั้งให้โดยอัตโนมัติ เรียกใช้เมื่อผู้ใช้บอกว่า "ทำ Word ภาษาไทยแล้วฟอนต์เพี้ยน", "ตัวหนังสือไทยเล็ก", "วรรณยุกต์ลอย", "ตัดคำผิด", "TH Sarabun New ไม่ขึ้น", "อยากแยกฟอนต์อังกฤษกับไทย", หรือทุกครั้งที่สร้าง .docx ภาษาไทยจาก python-docx ใช้ร่วมกับ prom-legal-docs และ pls-* ทุกตัวที่ส่งออกเอกสารกฎหมายไทยเป็น Word. Use this whenever generating or editing Thai-language Word documents to fix Thai font, tone-mark/vowel positioning, font-size, bold, line-breaking, and per-language font separation (Latin vs Thai).
+description: ใช้ทุกครั้งที่ต้องสร้างหรือแก้ไฟล์ Word (.docx) ที่มีภาษาไทย เพื่อแก้ปัญหาการแสดงผลภาษาไทยใน Microsoft Word — ฟอนต์เพี้ยน วรรณยุกต์/สระลอยหรือซ้อนผิด ตัวอักษรเล็กผิดขนาด ตัวหนา/เอียงไม่ติด และการตัดคำ/เว้นวรรค/จัดชิดขอบเพี้ยน รวมถึงการ "แยกฟอนต์ตามภาษา" (อังกฤษใช้ฟอนต์ละติน ไทยใช้ฟอนต์ไทย ในรันเดียวกัน) ครอบคลุมการตั้งค่า "อักษรเชิงซ้อน" (complex script: w:cs, w:szCs, w:bCs, w:lang bidi) ที่ python-docx ไม่ได้ตั้งให้โดยอัตโนมัติ เรียกใช้เมื่อผู้ใช้บอกว่า "ทำ Word ภาษาไทยแล้วฟอนต์เพี้ยน", "ตัวหนังสือไทยเล็ก", "วรรณยุกต์ลอย", "ตัดคำผิด", "TH Sarabun New ไม่ขึ้น", "อยากแยกฟอนต์อังกฤษกับไทย", หรือทุกครั้งที่สร้าง .docx ภาษาไทยจาก python-docx ใช้ร่วมกับ skill อื่นที่ส่งออกเอกสารไทย ทุกตัวที่ส่งออกเอกสารกฎหมายไทยเป็น Word. Use this whenever generating or editing Thai-language Word documents to fix Thai font, tone-mark/vowel positioning, font-size, bold, line-breaking, and per-language font separation (Latin vs Thai).
 ---
 
 # thai-docx — ทำไฟล์ Word ภาษาไทยให้แสดงผลถูกต้อง + แยกฟอนต์ตามภาษา
@@ -9,8 +9,7 @@ Skill นี้แก้ปัญหา "ภาษาไทยใน Word เพ
 โดยตั้งค่าฝั่ง **อักษรเชิงซ้อน (complex script)** ให้ครบ ซึ่ง python-docx ไม่ได้ตั้งให้เอง
 และรองรับการ **แยกฟอนต์ตามภาษา** — อังกฤษใช้ฟอนต์ละติน ไทยใช้ฟอนต์ไทย ในรันเดียวกัน
 
-ใช้คู่กับ skill ที่ส่งออกเอกสารกฎหมายไทย (`prom-legal-docs`, `pls-lawfirm:*`,
-`pls-corporate-law:*`, `pls-financial-law:*`) — **ทุกครั้งที่จะ `doc.save()` ไฟล์ที่มี
+ใช้คู่กับ skill อื่นที่ส่งออกเอกสารภาษาไทย — **ทุกครั้งที่จะ `doc.save()` ไฟล์ที่มี
 ภาษาไทย ให้เรียก `enforce_thai(doc)` ก่อน**
 
 > 🔴 **ค่า default ต้องเป็นฟอนต์เดียว (TH Sarabun New) ทั้งเอกสารเสมอ**
@@ -18,10 +17,7 @@ Skill นี้แก้ปัญหา "ภาษาไทยใน Word เพ
 > ขอ "แยกฟอนต์อังกฤษ-ไทย" ชัดเจน — เรียก `enforce_thai(doc)` หรือ `new_thai_document(...)`
 > เฉย ๆ โดยไม่ส่ง `latin_font` ก็พอ (ฟังก์ชันจะใช้ `font` เป็นฟอนต์ละตินให้เองอัตโนมัติ)
 > ตัวอย่างในไฟล์นี้หลายจุดโชว์ `latin_font="Times New Roman"` เพราะกำลังสาธิต "ฟีเจอร์
-> แยกฟอนต์" — **อย่าก็อปแพทเทิร์นนั้นไปใช้เป็น default เอง** ถ้า user ไม่ได้ขอ (เคย
-> พลาดมาแล้ว: ทำรายงานที่ user ไม่ได้ขอแยกฟอนต์ แต่ก็อปตัวอย่างนี้ไปใส่ latin_font=
-> Times New Roman เอง ทำให้ข้อความอังกฤษกลายเป็น Times New Roman ทั้งที่ user ต้องการ
-> TH Sarabun New ล้วน ต้องมาแก้ทีหลัง)
+> แยกฟอนต์" — **อย่าก็อปแพทเทิร์นนั้นไปใช้เป็น default เอง** ถ้า user ไม่ได้ขอ
 
 ไฟล์ในสกิล:
 - `scripts/thai_docx.py` — helper หลัก (enforce_thai + builder API)
@@ -45,7 +41,7 @@ Word เลือกฟอนต์ **ทีละตัวอักษร** จ
 | — | `w:lang/@w:bidi="th-TH"` | **ตัดคำ/เว้นวรรค/จัดชิดขอบเพี้ยน** |
 
 > ปัญหานี้มัก**ไม่โผล่ใน LibreOffice หรือ preview** เพราะมันเดาภาษาไทยจาก Unicode ให้เอง
-> แต่จะโผล่ชัดใน **Microsoft Word** (โปรแกรมที่ลูกความใช้จริง) อย่าตัดสินจาก preview —
+> แต่จะโผล่ชัดใน **Microsoft Word** (โปรแกรมที่ผู้รับเอกสารใช้จริง) อย่าตัดสินจาก preview —
 > ให้รัน `verify_thai_docx.py` แทน
 
 เพราะ Word แยกฟอนต์ "ต่อตัวอักษร" อยู่แล้ว เราจึง**แยกฟอนต์ภาษาได้โดยไม่ต้องตัดข้อความ
@@ -152,15 +148,15 @@ doc.save("/mnt/user-data/outputs/contract.docx")
 ตัวเลือก `align`: `"left" | "center" | "right" | "justify" | "thai"`
 (`"thai"` = จัดชิดขอบแบบไทย/thaiDistribute เว้นช่องไฟสม่ำเสมอตามแบบเอกสารราชการ)
 
-### แก้ไฟล์เดิมที่ลูกความส่งมา
+### แก้ไฟล์เดิมที่ได้รับมา
 
 ```python
 from docx import Document
 from thai_docx import enforce_thai
-doc = Document("/mnt/user-data/uploads/client_draft.docx")
+doc = Document("/mnt/user-data/uploads/draft.docx")
 # ... แก้เนื้อหา ...
-enforce_thai(doc, set_latin=False)   # ไม่ไปเปลี่ยนฟอนต์อังกฤษที่ลูกความตั้งใจใช้ แก้แค่ฝั่งไทย
-doc.save("/mnt/user-data/outputs/client_draft_revised.docx")
+enforce_thai(doc, set_latin=False)   # ไม่ไปเปลี่ยนฟอนต์อังกฤษที่ผู้ใช้ตั้งใจใช้ แก้แค่ฝั่งไทย
+doc.save("/mnt/user-data/outputs/draft_revised.docx")
 ```
 
 ---
@@ -305,17 +301,15 @@ script รายงานเป็นราย run ว่าตรงไหน�
 
 เวลาใช้ **Claude in Word** (add-in) พิมพ์ไทยมักไม่เพี้ยน เพราะข้อความแทรกผ่าน object
 model ของ Word เอง Word จะใส่ฟอนต์ฝั่งเชิงซ้อนและ detect ไทยให้อัตโนมัติ — แต่เส้นทาง
-add-in มีปัญหาคนละเรื่องคือ thaiDistribute ไม่ติดกับย่อหน้าที่พิมพ์ใหม่ → ใช้ skill
-`thai-distribute-word-addin` แทน
+add-in มีปัญหาคนละเรื่องคือ thaiDistribute ไม่ติดกับย่อหน้าที่พิมพ์ใหม่
 
 | เส้นทาง | ปัญหาที่เจอ | skill ที่ใช้ |
 |---|---|---|
 | python-docx สร้าง .docx | ฟอนต์ไทย/ขนาด/หนา/ตัดคำเพี้ยน + แยกฟอนต์ | **thai-docx** (นี่) |
-| Claude in Word (Office.js) | thaiDistribute ไม่ติดย่อหน้าใหม่ | thai-distribute-word-addin |
 
 ---
 
-## ค่ามาตรฐานของสำนักงาน (PLS)
+## ค่า default
 
 - ฟอนต์: **TH Sarabun New** ขนาด **16pt** (เนื้อความ)
 - กระดาษ A4 ขอบ 2.54 ซม. ทุกด้าน
@@ -347,7 +341,7 @@ add-in มีปัญหาคนละเรื่องคือ thaiDistribu
 3. ถ้าข้อความก๊อปมาจาก PDF → ล้างด้วย `clean_pdf_thai()` / `from_pdf=True` ก่อน (กันช่องว่างปลอม) ✔
 4. ถ้าใช้ thaiDistribute กับข้อความไทยยาว → ใส่จุดตัดคำ `break_thai=True` / `break_thai_in_doc()` (กันอักษรห่างใน Word) ✔
 5. รัน `verify_thai_docx.py` ได้ exit 0 (ไม่มีคำเตือนช่องว่างปลอม) ✔
-6. ฟอนต์/ขนาดตรงมาตรฐานสำนักงาน (TH Sarabun New 16pt) ✔
+6. ฟอนต์/ขนาดตรงค่า default (TH Sarabun New 16pt) ✔
 7. ถ้ามีลำดับหัวข้อ (ข้อ 1 / 1.1 / 1.1.1) → ใช้ `add_thai_heading(level=...)` ให้ indent
    ขั้นละ 1.25 ซม. ตรงสเกล ไม่ใช่พิมพ์ `\t` เอง ✔
 8. ถ้าจะส่งคนนอก พิจารณาแปลง PDF ✔

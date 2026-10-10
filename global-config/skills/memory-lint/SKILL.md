@@ -8,7 +8,7 @@ metadata:
 
 # /memory-lint: health check for the memory system (global)
 
-Adapts the **lint workflow** from Karpathy's LLM Wiki to govern the auto-memory system in use (`~/.claude/projects/<slug>/memory/`). Purpose: a memory that has accumulated dozens of files often has outdated or overlapping entries (for example anticheat work that was fixed and fixed again across several rounds). This helps catch them before they lead you astray.
+Adapts the **lint workflow** from Karpathy's LLM Wiki to govern the auto-memory system in use (`~/.claude/projects/<slug>/memory/`). Purpose: a memory that has accumulated dozens of files often has outdated or overlapping entries (for example a bug workaround that was recorded, fixed, and re-recorded across several rounds). This helps catch them before they lead you astray.
 
 ## Scope: does not collide with other skills
 - **memory-lint** = audits only the *personal memory store* (`memory/*.md` + `MEMORY.md`) against the rules in `~/.claude/CLAUDE.md` (memory section).
@@ -18,7 +18,7 @@ Adapts the **lint workflow** from Karpathy's LLM Wiki to govern the auto-memory 
 ## Find the current project's memory dir
 1. Use the path the session gave in its memory context, if there is one.
 2. Otherwise derive it from cwd: change `:` `\` `_` → `-`, then look for `~/.claude/projects/<slug>/memory/`.
-   For example `D:\Fork\My_Project_Dev` → `D--Fork-My-Project-Dev`
+   For example `C:\work\my_project` → `C--work-my-project`
 3. Verify with `ls ~/.claude/projects/*/memory` if the slug is unclear.
 
 ## Tier model (resident vs retrievable): understand this before checking
@@ -39,7 +39,7 @@ A project that has not migrated has only the old-style `MEMORY.md` (per-file poi
 6. **Should be in the repo, not memory**: an entry recording something the repo already records (code structure / git history / CLAUDE.md). The rules forbid storing it.
 7. **MEMORY.md / INDEX.md drift**: a pointer in `MEMORY.md` or `memory/INDEX.md` whose target file has been deleted.
 8. **Tier report (new)**: measure the size of `MEMORY.md` against the ≤4KB budget (`wc -c`):
-   - If over budget → name **demote candidates** line by line, with reasons citing the B∨C criteria from `~/.claude/CLAUDE.md` (trigger invisible ∨ costly if missed). An entry that fails B∨C is the one to propose demoting (squeeze to a category-level pointer in MEMORY.md + move the details to INDEX.md / the original sub-file).
+   - If over budget → name **demote candidates** line by line, with reasons citing your own resident-memory criteria (trigger invisible ∨ costly if missed). An entry that fails B∨C is the one to propose demoting (squeeze to a category-level pointer in MEMORY.md + move the details to INDEX.md / the original sub-file).
    - Use `search_session_transcripts` to check the **real usage** of the topic/entry historically. The default threshold is **5 sessions** (an entry actually used in fewer than 1 of the last 5 sessions that also fails B∨C is a stronger demote candidate). Note: as tested, this tool searches back at least roughly 1 week across multiple projects/sessions. If a search returns an unusually empty result (you expected hits and found none), judge from the B/C criteria alone and tag the report **"no usage data"**. Do not guess.
    - Output as a table: `<file/entry>`, size (bytes), usage (how many of the last 5 sessions, or "no usage data"), passes B/C criteria?, verdict (resident/demote candidate).
    - **Always read-only**: propose candidates and wait for user confirmation before actually moving anything, like every other check.

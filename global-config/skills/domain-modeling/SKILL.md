@@ -63,7 +63,6 @@ When a term is resolved, update `CONTEXT.md` right there. Don't batch these up �
 
 `CONTEXT.md` should be totally devoid of implementation details. Do not treat `CONTEXT.md` as a spec, a scratch pad, or a repository for implementation decisions. It is a glossary and nothing else.
 
-ตอน pin ศัพท์ลง type/ADR ให้เช็ค poka-yoke ชั้น 1 ด้วย: ถ้าศัพท์มีค่าที่เป็นไปได้จำกัด → enum/union ไม่ใช่ string ดิบ; ถ้ามี invariant ("X ต้องมาคู่ Y เสมอ") → โครงสร้าง type ต้องบังคับเอง ไม่ใช่ comment เตือน.
 
 ### Offer ADRs sparingly
 

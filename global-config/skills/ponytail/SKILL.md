@@ -18,13 +18,13 @@ The core: **"the best code is code you did not have to write"**, but "works corr
 - Turn off: the user says "enough / normal mode" or starts a new task.
 - **It can also trigger proactively** under narrow conditions, see "Proactive trigger" below. Unlike opt-in, it does not wait for the user to ask, but it still ends by itself per point / per task and never lingers as a mode.
 
-## Proactive trigger (codified 2026-08-31; it used to be purely opt-in and was almost never invoked in practice)
+## Proactive trigger
 Climb the ladder **without waiting for the user to type `/ponytail`** at 2 moments. Both must **announce "Using ponytail to ..." as with any other skill call** (per the harness's using-superpowers rule, there is no silent exception for ponytail):
 
 **(1) Direct ad-hoc code write**: all of these must hold:
 1. The work is truly small/isolated (changing or adding code in one spot, one function; not a large multi-file feature) and **did not go through** brainstorming/writing-plans/plan-pro first (see point 2).
 2. About to **write something new** (a new helper/abstraction/dependency), not just edit existing code.
-3. Not work that falls into the no-minimize zones (the "🚫 Never cut" section below: validation, error handling, security/anticheat, accessibility, non-trivial tests, requirements the user asked for directly), and not a kind of work the "⚠️ Guarding against blur" section warns never to use this mode on (hard algorithms, deep debugging, anticheat).
+3. Not work that falls into the no-minimize zones (the "🚫 Never cut" section below: validation, error handling, security/integrity checks, accessibility, non-trivial tests, requirements the user asked for directly), and not a kind of work the "⚠️ Guarding against blur" section warns never to use this mode on (hard algorithms, deep debugging, security-sensitive).
 4. The user did not directly ask for thoroughness/robustness in that turn.
 
 **(2) While planning (plan-pro / writing-plans)**: when drafting each task that writes new code (a new helper/abstraction/dependency) in the plan, climb the ladder before writing that task into the plan, even if the plan as a whole is large / multi-file (the trigger criteria can still be met point by point, not for the whole plan). Purpose: stop over-engineered tasks from slipping into the plan from the start, instead of waiting to catch them at the end. The same no-minimize zones apply (point 3 above): a task that is the algorithm / security / architecture core of the plan does not meet this criterion.
@@ -45,7 +45,7 @@ Principle: **delete > add**. If the problem can be solved by deleting code, that
 The ladder applies to "unnecessary code" only. These are not excess, so never be "lazy" about them:
 - **input validation / boundary checks**
 - **error handling** (never swallow errors silently to make code shorter)
-- **security / anticheat / save-integrity**: anticheat work (manifests, HMAC, defense-in-depth) is **OFF-LIMITS**, the complete opposite of ponytail. Never use this mode to reduce anticheat layers or thoroughness.
+- **security / integrity checks**: signing, validation and defense-in-depth work is **OFF-LIMITS**, the complete opposite of ponytail. Never use this mode to reduce security layers or thoroughness.
 - **accessibility**
 - **anything the user asked for directly** (a stated requirement = never cut it yourself, ask first)
 - **tests/self-checks for non-trivial logic**
@@ -56,7 +56,7 @@ If you want to reduce a requirement → **propose it and ask first**. Never cut 
 - "Short" is not "correct". Never trade correctness/completeness for line count.
 - Never answer sloppily or explain so little that the user cannot follow. Code-first is fine, but say "what was cut and why" briefly.
 - Never "challenge requirements" in an extremist way (a symptom of ultra mode). If you suspect a requirement is more than needed, ask, do not delete.
-- If the work is a hard algorithm / deep debugging / anticheat → **do not use this mode**, it pulls toward shallow thinking.
+- If the work is a hard algorithm / deep debugging / security-sensitive code → **do not use this mode**, it pulls toward shallow thinking.
 
 ## Mark deliberate shortcuts
 If you take a shortcut and accept a trade-off, comment `# ponytail: <why + limitation>` so it can be tracked down and explained later.

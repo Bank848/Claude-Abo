@@ -27,7 +27,7 @@ from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
-# ค่ามาตรฐานสำนักงาน PLS
+# default values
 DEFAULT_THAI_FONT = "TH Sarabun New"
 DEFAULT_SIZE_PT = 16
 THAI_LANG = "th-TH"
@@ -117,7 +117,7 @@ def _apply_fonts(rpr, thai_font, latin_font, set_latin, skip_latin_fonts=None):
       - w:cs            = thai_font  (เสมอ — นี่คือหัวใจของการแก้ไทยเพี้ยน)
       - w:ascii/w:hAnsi = latin_font (เมื่อ set_latin=True)
         ถ้า latin_font เป็น None -> ใช้ thai_font เป็นฟอนต์ละตินด้วย (look เดียวกัน)
-      - set_latin=False -> ไม่แตะ ascii/hAnsi (เก็บฟอนต์อังกฤษเดิมของลูกความไว้)
+      - set_latin=False -> ไม่แตะ ascii/hAnsi (เก็บฟอนต์อังกฤษเดิมของผู้ใช้ไว้)
       - skip_latin_fonts : set[str] | None
         ถ้า w:ascii ปัจจุบันของ run ตรงกับฟอนต์ในเซตนี้ (เช่น "Consolas" ของ
         โค้ดบล็อก/ตาราง terminal output ที่ตั้งไว้ก่อนหน้าด้วย style_thai_run)
@@ -348,7 +348,7 @@ def enforce_thai(doc, font=DEFAULT_THAI_FONT, latin_font=None,
         อังกฤษ 14 ไทย 16 ก็ latin_size=14, default_size=16)
     set_latin : bool
         True = ตั้งฟอนต์ฝั่งละตินด้วย; False = แตะเฉพาะฝั่งไทย เก็บฟอนต์อังกฤษเดิมไว้
-        (เหมาะกับการแก้ไฟล์ที่ลูกความตั้งฟอนต์อังกฤษมาแล้ว)
+        (เหมาะกับการแก้ไฟล์ที่ผู้ใช้ตั้งฟอนต์อังกฤษมาแล้ว)
     force_size : bool
         True = เขียนทับขนาดทุก run เป็น default_size/latin_size (ระวังหัวข้อจะเท่าเนื้อ)
         False = ไม่แตะ run ที่ inherit ขนาดจาก style (หัวข้อไม่หด) — แนะนำ

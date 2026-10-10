@@ -3,7 +3,7 @@ name: english-writing-anti-ai-tell
 description: Use when drafting English-language text for the user (chat, email, essays, reports) to avoid GPT-ism vocabulary, em dashes, rule-of-three lists, copula avoidance, opener/closer formulas, and other AI-writing tells. Also use when the user asks to "humanize" existing AI-written English text/file.
 ---
 
-## English writing anti-AI-tell rules (codified 2026-08-12, expanded 2026-08-13 from fable-medium research)
+## English writing anti-AI-tell rules 
 When helping draft English text (chat, email, DM, essay, report, post), avoid these patterns that are signatures of AI-generated English. Full details, the vocab table, and before/after examples live in the reference file `english-anti-ai-tell-reference.md` in your memory folder:
 - **Em dash (original rule):** never use an em dash to join sentences, especially the "X — because Y" pattern. Use a comma, start a new sentence with a period, or a connector like "and"/"so" instead.
 - **GPT-ism vocabulary:** never use "delve", "tapestry", "boasts", "underscore(s)", "landscape" (figurative), "realm", "crucial/pivotal/vital" as a default intensifier, "intricate", "multifaceted", "leverage" (verb), "seamless(ly)", "robust", "foster", "navigate (challenges)", "embark", "elevate", "unlock", "game-changer", "in today's fast-paced world". Many more second-tier words are in the reference file. If unsure, use a simple verb or word instead ("use" not "utilize", "help" not "facilitate").
@@ -19,7 +19,7 @@ When helping draft English text (chat, email, DM, essay, report, post), avoid th
 - **Register first, always**: decide chat / professional email / essay / creative before writing, then match it (the breakdown by register is in the reference file). Defaulting to a polished-neutral-formal tone every time is the biggest meta-tell.
 - **English-specific extras (not in the Thai rule)**: semicolon overuse in casual contexts, title case headers in emails/documents that should be plain sentences, evenly sized paragraphs throughout, the colon-subtitle habit ("X: Why Y Matters"), hedging stacks that pile several hedges into one sentence ("arguably", "generally speaking", "to some extent"), both-sidesism in opinion pieces that should take a position, and answer-shaped chat replies that restate the question before answering ("Great question! There are several factors...").
 - **Priority order when checking a draft**: (1) GPT-ism vocab + em dash, (2) promotional inflation + copula avoidance, (3) "not just X but Y" + rule-of-three, (4) opener/closer formula + vague attribution, (5) contractions + register match, (6) sentence/paragraph rhythm, (7) formatting overkill
-- Reason: expands the original em dash rule, which only caught things at the punctuation level. This set comes from fable-medium research (2026-08-13) and covers vocabulary plus the structural/rhetorical GPT-isms that are densely documented in English.
+- Reason: expands the original em dash rule, which only caught things at the punctuation level. This set covers vocabulary plus the structural/rhetorical GPT-isms that are densely documented in English.
 - Applies to every project, every time English text is drafted.
 
 ## Draft-critique-revise workflow (codified 2026-09-04, adapted from blader/humanizer)

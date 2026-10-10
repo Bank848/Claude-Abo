@@ -9,7 +9,7 @@ description: Use when the user asks to clean up, prune, tidy, or audit git branc
 
 Periodic repo housekeeping: sync the default branch with remote, survey every local branch, classify each, then let the user pick what to delete. Distinct from `shipping-a-branch` (which handles one feature's ship flow) — this is "clean up the whole repo's branch clutter."
 
-**Core principle:** `git branch --merged`/`--no-merged` lies whenever a PR was squash-merged (GitHub squash creates a new commit hash, so the original commits are never literal ancestors of main). **PR state via `gh`, not git ancestry, is the source of truth for "is this actually merged."** A real incident already happened from trusting ancestry alone — two genuinely-merged (squash) branches were flagged "unmerged" and nearly triggered a false "missing work" alarm.
+**Core principle:** `git branch --merged`/`--no-merged` lies whenever a PR was squash-merged (GitHub squash creates a new commit hash, so the original commits are never literal ancestors of main). **PR state via `gh`, not git ancestry, is the source of truth for "is this actually merged."**
 
 ## Workflow
 
