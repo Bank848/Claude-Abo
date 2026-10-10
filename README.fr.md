@@ -13,6 +13,8 @@
 
 </div>
 
+**Aller à :** [Démarrage rapide](#démarrage-rapide-quickstart) · [Contenu du dépôt](#contenu-du-dépôt) · [Licences et crédits](#licence-et-crédits)
+
 Un instantané portable de la configuration Claude Code d'une personne — instructions, skills, hooks, coffre de connaissances — packagé pour qu'une instance Claude Code toute neuve puisse reproduire les mêmes habitudes de travail. Ceci est **un template à adapter, pas une config à lancer telle quelle**.
 
 <details>
@@ -21,6 +23,14 @@ Un instantané portable de la configuration Claude Code d'une personne — instr
 Un instantané portable de la configuration Claude Code d'une personne — instructions globales, règles d'ingénierie, **66 skills sélectionnées** (20 conçues en interne — 15 écrites de zéro, 5 wrappers maison autour d'outils tiers — 2 adaptées d'une skill amont, le reste repris de dépôts amont, chacune avec sa provenance détaillée dans `sources.json`), des exemples de mémoire réels, un manifeste de provenance des skills, et un coffre de connaissances transversal aux projets — le tout packagé pour qu'une instance Claude Code toute neuve (ou la personne qui la configure) puisse reproduire les mêmes habitudes de travail et capacités sur une nouvelle machine. Ceci est un **template à adapter, pas une config à lancer telle quelle** : les identifiants personnels ont été retirés et remplacés par des placeholders, et plusieurs sections n'ont de sens que si vous adoptez aussi les outils qu'elles décrivent.
 
 </details>
+
+## À qui s'adresse ce dépôt
+
+| Bon choix | Pas adapté |
+|---|---|
+| Vous utilisez déjà Claude Code tous les jours et voulez des habitudes toutes prêtes : routage de modèles selon le coût, hooks de sécurité git, une boucle de revue de plan | Vous voulez une config en un clic. Rien ici ne fonctionne tel quel ; tout est fait pour être lu et adapté |
+| Vous aimez lire les configurations des autres et ne copier que ce qui vous convient | Il vous faut partout des réglages par défaut sans Windows ni thaï. La configuration de l'auteur tourne sous Windows en thaï-anglais, et certaines sections le montrent |
+| Vous utilisez plus d'un outil de code IA et voulez un `AGENTS.md` portable | Vous voulez un produit maintenu, avec des versions et du support. Ceci est un instantané personnel |
 
 ## Démarrage rapide (quickstart)
 
@@ -276,6 +286,13 @@ Ce qui *peut* en plus être adapté à la main si vous voulez plus que le sous-e
 Si vous utilisez Codex/Cursor/Gemini CLI au quotidien, `AGENTS.md` vous donne d'emblée les règles de discipline d'ingénierie ; le reste du dépôt (skills, hooks, les corrections .docx) reste disponible comme matériel de référence à copier/coller.
 
 </details>
+
+## Licence et crédits
+
+- Le contenu propre à ce dépôt est sous licence MIT : voir [LICENSE](LICENSE).
+- La plupart des skills viennent du travail public d'autres personnes. Crédits et provenance de chaque skill : [ATTRIBUTION.md](ATTRIBUTION.md) et `global-config/tools/skill-update-check/sources.json`.
+- Les textes de licence et les mentions de copyright des projets amont sont réunis dans [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md). Deux dépôts amont n'ont pas de fichier de licence ; ils y figurent avec une note de retrait.
+- Un crédit manque, ou vous voulez qu'un skill soit retiré ? Ouvrez une issue et ce sera corrigé.
 
 ---
 

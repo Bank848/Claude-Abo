@@ -13,6 +13,8 @@
 
 </div>
 
+**Ir para:** [Guia rápido](#começando-guia-rápido) · [O que tem aqui](#o-que-tem-aqui) · [Licenças e créditos](#licença-e-créditos)
+
 Um retrato portátil da configuração de Claude Code de uma pessoa — instruções, skills, hooks e um cofre de conhecimento, empacotados para que uma instância nova do Claude Code consiga reproduzir os mesmos hábitos em uma máquina nova. **Um template para adaptar, não uma configuração para rodar como está.**
 
 <details>
@@ -21,6 +23,14 @@ Um retrato portátil da configuração de Claude Code de uma pessoa — instruç
 Um retrato portátil da configuração de Claude Code de uma pessoa: instruções globais, regras de engenharia, **66 skills selecionadas** (20 de autoria própria — 15 escritas do zero, 5 wrappers próprios em torno de ferramentas de terceiros — 2 adaptadas de uma skill upstream, e o restante adotado de repositórios upstream, todas com proveniência individual registrada em `sources.json`), exemplos reais de memória, um manifesto de proveniência de skills e um cofre de conhecimento entre projetos, empacotados para que uma instância nova do Claude Code (ou a pessoa que está configurando uma) possa reproduzir os mesmos hábitos de fluxo de trabalho e capacidades em uma máquina nova. Este é um **template para adaptar, não uma configuração para rodar como está**: identificadores pessoais foram removidos e substituídos por placeholders, e várias seções só fazem sentido se você também adotar as ferramentas que elas descrevem.
 
 </details>
+
+## Para quem é isto
+
+| Combina bem | Não combina |
+|---|---|
+| Você já usa o Claude Code todo dia e quer hábitos prontos: roteamento de modelos por custo, hooks de segurança do git, um ciclo de revisão de planos | Você quer uma configuração de um clique. Nada aqui roda do jeito que está; tudo foi feito para ser lido e adaptado |
+| Você gosta de ler a configuração dos outros e copiar só as partes que servem para você | Você precisa de padrões sem Windows e sem tailandês em todo lugar. A configuração do autor é Windows e tailandês-inglês, e algumas seções mostram isso |
+| Você usa mais de uma ferramenta de codificação com IA e quer um `AGENTS.md` portátil | Você quer um produto mantido, com versões e suporte. Isto é um retrato pessoal |
 
 ## Começando (guia rápido)
 
@@ -276,6 +286,13 @@ O que mais *pode* ser adaptado manualmente, se você quiser mais do que o subcon
 Se você usa Codex/Cursor/Gemini CLI no dia a dia, o `AGENTS.md` já te dá as regras de disciplina de engenharia de cara; o resto do repositório (skills, hooks, os ajustes de .docx) continua ali como material de referência para copiar/colar.
 
 </details>
+
+## Licença e créditos
+
+- O conteúdo próprio deste repositório está sob licença MIT: veja [LICENSE](LICENSE).
+- A maioria dos skills vem do trabalho público de outras pessoas. Créditos e procedência de cada skill: [ATTRIBUTION.md](ATTRIBUTION.md) e `global-config/tools/skill-update-check/sources.json`.
+- Os textos de licença e as linhas de copyright dos projetos originais estão reunidos em [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md). Dois repositórios originais não têm arquivo de licença; eles aparecem lá com uma nota de remoção.
+- Percebeu um crédito faltando ou quer que um skill seja removido? Abra uma issue e será corrigido.
 
 ---
 

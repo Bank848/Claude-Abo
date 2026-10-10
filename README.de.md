@@ -13,6 +13,8 @@
 
 </div>
 
+**Springe zu:** [Schnellstart](#erste-schritte-schnellstart) · [Was hier drinsteckt](#was-hier-drinsteckt) · [Lizenzen und Quellenangaben](#lizenz-und-quellenangaben)
+
 Ein portables Abbild der Claude-Code-Einrichtung einer einzelnen Person — Anweisungen, Skills, Hooks und Wissens-Vault so verpackt, dass eine frische Claude-Code-Instanz dieselben Workflow-Gewohnheiten bootstrappen kann. Dies ist **eine Vorlage zum Anpassen, keine Konfiguration zum unveränderten Ausführen**.
 
 <details>
@@ -21,6 +23,14 @@ Ein portables Abbild der Claude-Code-Einrichtung einer einzelnen Person — Anwe
 Ein portables Abbild der Claude-Code-Einrichtung einer einzelnen Person — globale Anweisungen, Engineering-Regeln, **66 kuratierte Skills** (20 selbst verfasst — 15 komplett neu geschrieben, 5 selbst geschriebene Wrapper um Drittanbieter-Tools — 2 aus Upstream-Skills adaptiert, der Rest aus Upstream-Repos übernommen, jeweils mit vollständiger Herkunftsangabe pro Skill in `sources.json`), echte Memory-Beispiele, ein Skill-Herkunftsmanifest und ein projektübergreifendes Wissens-Vault — so verpackt, dass eine frische Claude-Code-Instanz (oder die Person, die sie einrichtet) dieselben Workflow-Gewohnheiten und Fähigkeiten auf einer neuen Maschine bootstrappen kann. Dies ist eine **Vorlage zum Anpassen, keine Konfiguration zum unveränderten Ausführen**: Persönliche Kennungen wurden entfernt und durch Platzhalter ersetzt, und mehrere Abschnitte ergeben nur Sinn, wenn man auch die dort beschriebenen Tools übernimmt.
 
 </details>
+
+## Für wen ist das?
+
+| Passt gut | Passt nicht |
+|---|---|
+| Du nutzt Claude Code täglich und willst fertige Gewohnheiten: Modell-Routing nach Kosten, Git-Sicherheits-Hooks, eine Plan-Review-Schleife | Du willst eine Ein-Klick-Konfiguration. Nichts hier läuft unverändert; alles ist zum Lesen und Anpassen gedacht |
+| Du liest gern die Setups anderer und übernimmst nur, was zu dir passt | Du brauchst überall Standardwerte ohne Windows und ohne Thai. Das Setup des Autors läuft unter Windows mit Thai und Englisch, und manche Abschnitte zeigen das |
+| Du nutzt mehr als ein KI-Coding-Tool und willst eine portable `AGENTS.md` | Du willst ein gepflegtes Produkt mit Releases und Support. Dies ist ein persönlicher Schnappschuss |
 
 ## Erste Schritte (Schnellstart)
 
@@ -276,6 +286,13 @@ Was darüber hinaus *von Hand* angepasst werden kann, wenn du mehr willst als di
 Wenn du täglich mit Codex/Cursor/Gemini CLI arbeitest, bekommst du mit `AGENTS.md` die Engineering-Disziplin-Regeln direkt einsatzbereit; der Rest des Repos (Skills, Hooks, die .docx-Fixes) steht dir weiterhin als Referenzmaterial zum Kopieren zur Verfügung.
 
 </details>
+
+## Lizenz und Quellenangaben
+
+- Der eigene Inhalt dieses Repositorys steht unter der MIT-Lizenz: siehe [LICENSE](LICENSE).
+- Die meisten Skills stammen aus der öffentlichen Arbeit anderer. Quellenangaben und Herkunft je Skill: [ATTRIBUTION.md](ATTRIBUTION.md) und `global-config/tools/skill-update-check/sources.json`.
+- Die Lizenztexte und Copyright-Zeilen der Upstream-Projekte sind in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) gesammelt. Zwei Upstream-Repositories haben keine Lizenzdatei; sie sind dort mit einem Takedown-Hinweis aufgeführt.
+- Fehlt eine Quellenangabe, oder soll ein Skill entfernt werden? Eröffne ein Issue, dann wird es behoben.
 
 ---
 
