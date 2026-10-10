@@ -18,7 +18,7 @@ A portable snapshot of one person's Claude Code setup — instructions, skills, 
 <details>
 <summary>Read the full pitch</summary>
 
-Global instructions, engineering rules, **67 curated skills** (26 self-authored — 22 written from scratch (3 in the original 45 plus 19 bonus skills), 4 self-written wrappers around third-party tools — 1 adapted from an upstream skill, the rest adopted from upstream repos, all with per-skill provenance in `sources.json`), real memory examples, a skill-provenance manifest, and a cross-project knowledge vault — packaged so a fresh Claude Code instance (or the person setting one up) can bootstrap the same workflow habits and capabilities on a new machine. This is a **template to adapt, not a config to run as-is**: personal identifiers have been scrubbed and replaced with placeholders, and several sections only make sense if you also adopt the tools they describe.
+Global instructions, engineering rules, **67 curated skills** (21 self-authored — 17 written from scratch (3 in the original 45 plus 14 bonus skills), 4 self-written wrappers around third-party tools — 2 adapted from upstream skills, the rest adopted from upstream repos, all with per-skill provenance in `sources.json`), real memory examples, a skill-provenance manifest, and a cross-project knowledge vault — packaged so a fresh Claude Code instance (or the person setting one up) can bootstrap the same workflow habits and capabilities on a new machine. This is a **template to adapt, not a config to run as-is**: personal identifiers have been scrubbed and replaced with placeholders, and several sections only make sense if you also adopt the tools they describe.
 
 </details>
 

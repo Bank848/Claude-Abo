@@ -1,21 +1,21 @@
 ---
 name: git-guardrails-claude-code
-description: Set up Claude Code hooks to gate dangerous git commands (push, reset --hard, clean, branch -D, etc.) behind a user confirmation before they execute. Use when user wants to prevent destructive git operations, add git safety hooks, or gate git push/reset in Claude Code.
+description: Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, branch -D, etc.) before they execute. Use when user wants to prevent destructive git operations, add git safety hooks, or gate git push/reset in Claude Code.
 ---
 
 # Setup Git Guardrails
 
-Sets up a PreToolUse hook that intercepts risky git commands and asks the user for permission before Claude executes them.
+Sets up a PreToolUse hook that intercepts risky git commands and blocks them before Claude executes them (the bundled script needs `jq` installed).
 
-## What Gets Gated (ask before run)
+## What Gets Blocked
 
-- `git push` (all variants; `--force` / `--force-with-lease` flagged explicitly)
+- `git push` (all variants, including `--force`)
 - `git reset --hard`
 - `git clean -f` / `git clean -fd`
 - `git branch -D`
 - `git checkout .` / `git restore .`
 
-When one of these matches, Claude Code prompts the user with Allow/Deny (via a PreToolUse `ask` decision). Approve → the command runs; deny → Claude is told no. This replaces the older hard-block (exit 2) behavior so the user stays in control per-invocation.
+When one of these matches, the script prints a BLOCKED message to stderr and exits with code 2, so the command does not run and Claude is told the user prevented it. If you want a per-invocation Allow/Deny prompt instead, change the script to emit a PreToolUse `ask` decision.
 
 ## Steps
 
@@ -92,4 +92,4 @@ Run a quick test:
 echo '{"tool_input":{"command":"git push origin main"}}' | <path-to-script>
 ```
 
-Should exit 0 and print a JSON `hookSpecificOutput` with `"permissionDecision": "ask"` to stdout (which triggers the Allow/Deny prompt).
+Should exit with code 2 and print a `BLOCKED: ...` message to stderr.

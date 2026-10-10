@@ -96,13 +96,13 @@ Added after the first release; see the README for caveats (several are written f
 | `docx-human-sounding-report` | Structural checklist for human-sounding .docx reports. |
 | `docx-python-docx-justify` | python-docx rule: do not justify formula and code blocks with manual line breaks. |
 | `docx-th-sarabun-sizing` | TH Sarabun New sizing scale plus the base-style rule. |
-| `domain-modeling` | Domain-modeling and ADR discipline. |
+| `domain-modeling` | Domain-modeling and ADR discipline (from mattpocock/skills). |
 | `english-writing-anti-ai-tell` | English anti-AI-tell writing checklist. |
 | `github-pr-review-draft` | Pending-review (draft) PR review workflow via the GitHub API. |
-| `grill-with-docs` | Thin wrapper combining grilling and domain-modeling. |
+| `grill-with-docs` | Thin wrapper combining grilling and domain-modeling (from mattpocock/skills). |
 | `i-have-adhd` | ADHD-friendly output style. Frontmatter says MIT but there is no upstream source URL in the skill folder, so it is treated as self-authored. |
 | `memory-lint` | Read-only health check of a project memory folder. |
-| `ponytail` | Write the least code that is still correct (YAGNI, stdlib, native, existing dependency ladder). |
+| `ponytail` | Write the least code that is still correct (YAGNI, stdlib, native, existing dependency ladder); adapted from DietrichGebert/ponytail. |
 | `project-bootstrap` | One-shot scaffold for docs-driven continuity (CLAUDE.md router, docs/log, docs/adr, conventions). |
 | `pruning-branches` | Periodic git branch housekeeping. |
 | `supabase-rls-safety-check` | Proactive Supabase RLS and anon-key audit rule. |

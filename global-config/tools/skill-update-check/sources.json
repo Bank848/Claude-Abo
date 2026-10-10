@@ -410,10 +410,10 @@
     },
     {
       "name": "domain-modeling",
-      "source_repo_url": "self-authored",
-      "subpath_in_repo": "",
-      "last_seen_commit": "",
-      "note": "Domain-modeling and ADR discipline. No upstream; checker skips it. Added in the October 2026 patch."
+      "source_repo_url": "https://github.com/mattpocock/skills",
+      "subpath_in_repo": "skills/engineering/domain-modeling",
+      "last_seen_commit": "unknown",
+      "note": "mattpocock/skills (MIT). Run check.ps1 -Ack to set your baseline."
     },
     {
       "name": "english-writing-anti-ai-tell",
@@ -431,10 +431,10 @@
     },
     {
       "name": "grill-with-docs",
-      "source_repo_url": "self-authored",
-      "subpath_in_repo": "",
-      "last_seen_commit": "",
-      "note": "Thin wrapper combining grilling and domain-modeling. No upstream; checker skips it. Added in the October 2026 patch."
+      "source_repo_url": "https://github.com/mattpocock/skills",
+      "subpath_in_repo": "skills/engineering/grill-with-docs",
+      "last_seen_commit": "unknown",
+      "note": "mattpocock/skills (MIT). Run check.ps1 -Ack to set your baseline."
     },
     {
       "name": "i-have-adhd",
@@ -452,10 +452,10 @@
     },
     {
       "name": "ponytail",
-      "source_repo_url": "self-authored",
+      "source_repo_url": "https://github.com/DietrichGebert/ponytail",
       "subpath_in_repo": "",
       "last_seen_commit": "",
-      "note": "Write the least code that is still correct (YAGNI, stdlib, native, existing dependency ladder). No upstream; checker skips it. Added in the October 2026 patch."
+      "note": "Adapted from DietrichGebert/ponytail (MIT)"
     },
     {
       "name": "project-bootstrap",
