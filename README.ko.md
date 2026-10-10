@@ -5,11 +5,11 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Claude%20Code%20Clone%20Template&fontSize=38&fontColor=ffffff&fontAlignY=38&desc=A%20portable%20snapshot%20of%20one%20person's%20Claude%20Code%20setup&descAlignY=58&descSize=17&descColor=ffffff&animation=fadeIn" alt="Claude Code Clone Template banner" width="100%"/>
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-67%20curated-brightgreen)](#global-configskills)
+[![Skills](https://img.shields.io/badge/skills-66%20curated-brightgreen)](#global-configskills)
 [![Languages](https://img.shields.io/badge/languages-10-orange)](#top)
 [![Template](https://img.shields.io/badge/type-adapt%2C%20not%20run%20as--is-lightgrey)](#caveat-this-is-one-persons-setup)
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=1200&color=6C63FF&center=true&vCenter=true&width=640&lines=67+curated+skills+with+full+provenance;Cost-aware+Sonnet+%2F+Opus+%2F+Haiku+model+routing;Git+safety+hooks+%2B+%2Fplan-pro+workflow;Cross-project+second-brain+vault" alt="rotating feature highlights"/>
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=1200&color=6C63FF&center=true&vCenter=true&width=640&lines=66+curated+skills+with+full+provenance;Cost-aware+Sonnet+%2F+Opus+%2F+Haiku+model+routing;Git+safety+hooks+%2B+%2Fplan-pro+workflow;Cross-project+second-brain+vault" alt="rotating feature highlights"/>
 
 </div>
 
@@ -18,7 +18,7 @@
 <details>
 <summary>전체 설명 읽기</summary>
 
-한 사람이 사용하는 Claude Code 설정을 그대로 옮겨 담은 스냅샷입니다. 전역 지시문, 엔지니어링 규칙, **엄선된 스킬 67개**(직접 작성한 21개 중 16개는 처음부터 새로 쓴 것, 5개는 서드파티 도구를 감싼 자체 래퍼, 나머지 2개는 업스트림 스킬을 각색한 것이며, 그 외는 업스트림 저장소에서 가져온 것으로 `sources.json`에 스킬별 출처가 전부 남아 있습니다), 실제 메모리 예시, 스킬 출처 매니페스트, 그리고 프로젝트를 넘나드는 지식 볼트까지 담겨 있습니다. 새로 시작하는 Claude Code 인스턴스(혹은 그것을 세팅하는 사람)가 동일한 작업 습관과 역량을 새 기기에서 그대로 부트스트랩할 수 있도록 묶어 놓았습니다. 이 저장소는 **그대로 실행하는 설정이 아니라 각자에 맞게 손봐서 쓰는 템플릿**입니다. 개인 식별 정보는 지우고 플레이스홀더로 바꿔 두었고, 일부 섹션은 그 안에서 언급하는 도구를 함께 도입해야만 의미가 있습니다.
+한 사람이 사용하는 Claude Code 설정을 그대로 옮겨 담은 스냅샷입니다. 전역 지시문, 엔지니어링 규칙, **엄선된 스킬 66개**(직접 작성한 20개 중 15개는 처음부터 새로 쓴 것, 5개는 서드파티 도구를 감싼 자체 래퍼, 나머지 2개는 업스트림 스킬을 각색한 것이며, 그 외는 업스트림 저장소에서 가져온 것으로 `sources.json`에 스킬별 출처가 전부 남아 있습니다), 실제 메모리 예시, 스킬 출처 매니페스트, 그리고 프로젝트를 넘나드는 지식 볼트까지 담겨 있습니다. 새로 시작하는 Claude Code 인스턴스(혹은 그것을 세팅하는 사람)가 동일한 작업 습관과 역량을 새 기기에서 그대로 부트스트랩할 수 있도록 묶어 놓았습니다. 이 저장소는 **그대로 실행하는 설정이 아니라 각자에 맞게 손봐서 쓰는 템플릿**입니다. 개인 식별 정보는 지우고 플레이스홀더로 바꿔 두었고, 일부 섹션은 그 안에서 언급하는 도구를 함께 도입해야만 의미가 있습니다.
 
 </details>
 
@@ -59,14 +59,14 @@ claude-clone-template/
 │   ├── hooks/block-dangerous-git.py       # PreToolUse gate that asks before risky git commands
 │   ├── hooks/graphify-auto-update.py      # PostToolUse hook — keeps the graphify knowledge graph in sync after edits
 │   ├── rules/ecc-common/                  # 10 engineering-discipline rule files (ecc plugin ecosystem)
-│   ├── skills/                            # 67 curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
+│   ├── skills/                            # 66 curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
 │   ├── SKILLS_INDEX.md                    # Personal index of installed skills/plugins + when to use which
 │   ├── memory-examples/                   # 7 real auto-memory entries showing the memory system's format/patterns
 │   ├── templates/                         # 2 starter templates to copy into a new repo (project-CLAUDE.md, conventions.md)
 │   └── tools/
 │       ├── skill-update-check/
 │       │   ├── check.ps1                  # Weekly update checker — reads sources.json from this same folder
-│       │   └── sources.json               # Real provenance manifest: 67 personal skills + 3 pip + 2 npm + 1 binary tool
+│       │   └── sources.json               # Real provenance manifest: 66 personal skills + 3 pip + 2 npm + 1 binary tool
 │       └── ollama/ollama-digest.ps1       # On-demand local-model pre-digest helper (see the Ollama section below)
 └── notes/                                 # 3 notes: a personal cross-project "second brain" vault (example content)
 ```
@@ -89,7 +89,7 @@ claude-clone-template/
 ecc(everything-claude-code) 플러그인 생태계에서 가져온 일반적인 엔지니어링 규율입니다: TDD 워크플로우, 불변성, 커밋 형식, 보안 체크리스트, 코드 리뷰 심각도 단계, 에이전트 위임 규칙. ecc를 함께 사용할 때만 유용합니다(아래 "별도로 설치해야 할 것들" 참고).
 
 ### `global-config/skills/`
-`SKILL.md` 폴더 67개(스킬에 따라 스크립트·참고 자료·데이터 파일이 딸려 있는 경우도 있습니다)로, 글쓰기/마케팅 실무(copywriting, copy-editing, hallmark, marketing-council, pricing 등), 엔지니어링 프로세스(debug-mantra, poka-yoke, second-brain, dependency-audit, secrets-audit 등), 디자인(design-system, ui-ux-pro-max, banner-design, mobbin-references 등), 그리고 Claude Code 자체를 관리하기 위한 메타 스킬(skillify, grilling, second-brain, graphify, plan-pro, shipping-a-branch 등)을 다룹니다. `poka-yoke`, `plan-pro`, `shipping-a-branch`는 처음부터 직접 작성했고, `graphify`, `dembrandt`, `markitdown`, `mobbin-references`는 SKILL.md는 직접 썼지만 내부적으로 쓰는 도구는 서드파티인 래퍼 스킬입니다(`ATTRIBUTION.md`에 출처를 명시하고 `sources.json`에 버전을 추적합니다). `deslop-defaults`는 각색한 것으로(`ibelick/ui-skills`에서 가져와 스택에 종속되지 않도록 다시 썼습니다), 나머지는 업스트림 저장소에서 그대로 가져온 것입니다 — 스킬별 출처는 `sources.json`을, 업스트림 크레딧은 `ATTRIBUTION.md`를 참고하세요. 이 스킬들은 단순히 설명만 적힌 문서가 아니라 실제로 재사용 가능한 프롬프트 엔지니어링 산출물입니다 — `~/.claude/skills/`에 복사하면 바로 동작합니다.
+`SKILL.md` 폴더 66개(스킬에 따라 스크립트·참고 자료·데이터 파일이 딸려 있는 경우도 있습니다)로, 글쓰기/마케팅 실무(copywriting, copy-editing, hallmark, marketing-council, pricing 등), 엔지니어링 프로세스(debug-mantra, poka-yoke, second-brain, dependency-audit, secrets-audit 등), 디자인(design-system, ui-ux-pro-max, banner-design, mobbin-references 등), 그리고 Claude Code 자체를 관리하기 위한 메타 스킬(skillify, grilling, second-brain, graphify, plan-pro, shipping-a-branch 등)을 다룹니다. `poka-yoke`, `plan-pro`, `shipping-a-branch`는 처음부터 직접 작성했고, `graphify`, `dembrandt`, `markitdown`, `mobbin-references`는 SKILL.md는 직접 썼지만 내부적으로 쓰는 도구는 서드파티인 래퍼 스킬입니다(`ATTRIBUTION.md`에 출처를 명시하고 `sources.json`에 버전을 추적합니다). `deslop-defaults`는 각색한 것으로(`ibelick/ui-skills`에서 가져와 스택에 종속되지 않도록 다시 썼습니다), 나머지는 업스트림 저장소에서 그대로 가져온 것입니다 — 스킬별 출처는 `sources.json`을, 업스트림 크레딧은 `ATTRIBUTION.md`를 참고하세요. 이 스킬들은 단순히 설명만 적힌 문서가 아니라 실제로 재사용 가능한 프롬프트 엔지니어링 산출물입니다 — `~/.claude/skills/`에 복사하면 바로 동작합니다.
 
 <details>
 <summary><b>45개 스킬 전체를 카테고리별로 보기</b> (클릭해서 펼치기)</summary>
@@ -163,14 +163,14 @@ ecc(everything-claude-code) 플러그인 생태계에서 가져온 일반적인 
 
 </details>
 
-> **Bonus skills:** 22 more skills were added in October 2026 (67 in total). The table above lists the original 45; see the [English README](README.md#bonus-skills-22-added-in-the-october-2026-patch) for the rest.
+> **Bonus skills:** 21 more skills were added in October 2026 (66 in total). The table above lists the original 45; see the [English README](README.md#bonus-skills-21-added-in-the-october-2026-patch) for the rest.
 
 
 ### `global-config/memory-examples/`
 소유자의 실제 Claude Code 자동 메모리 시스템에서 가져온 항목 7개입니다(프로젝트별 사실이 아니라 이식 가능한 "일하는 방식" 습관입니다): 세션 간 메시징 관련 네이밍 규칙을 명확히 한 항목, 로컬 Ollama를 사전 압축으로 쓰는 패턴, "스킬 노트 갱신"이 실제로 무엇을 의미하는지에 대한 규칙, 셸 이스케이프 관련 주의사항(`\b`가 조용히 백스페이스 바이트로 바뀌는 문제), 컨텍스트 비대화를 얼마나 공격적으로 줄여야 하는지에 대한 피드백 항목, 그리고 CLAUDE.md의 AI 티 안 나게 쓰는 규칙을 뒷받침하는 전체 세부 내용(어휘 표 + before/after 예시)을 태국어와 영어 두 언어로 담은 항목입니다. 이 항목들은 특정 내용 자체보다는 좋은 메모리 항목이 어떤 *형태*(규칙 + 이유 + 적용 방법)를 갖는지를 보여주기 위해 존재합니다 — 메모리가 전체 워크플로우에서 어떻게 맞물리는지는 `global-config/rules/ecc-common/`을, 이 소유자가 사용하는 로컬 대 글로벌 메모리 구분은 CLAUDE.md의 "จำ/บัญญัติ" 섹션을 참고하세요.
 
 ### `global-config/tools/skill-update-check/sources.json`
-소유자의 실제 스킬/도구 도입 매니페스트입니다 — 67개의 개인 스킬(자체 작성 및 각색한 것 포함)과 pip 패키지 3개, npm 패키지 2개, 바이너리 도구 1개에 대한 실제 출처 데이터(원본 저장소 URL, 설치 메모, 버전 이력)를 담고 있습니다. `check.ps1`과 짝을 이루어, `claude-clone-template`을 도입한 사람이 `~/.claude/skills/`로 복사해 온 스킬들의 업스트림 업데이트를 원래 소유자와 똑같은 방식으로 추적할 수 있게 해 줍니다. `last_seen_commit` 값은 받는 사람 입장에서는 대부분 `unknown`이거나 오래된 상태이며, `check.ps1 -Ack`를 한 번 실행해서 자신만의 기준점을 세우기 전까지는 그렇습니다.
+소유자의 실제 스킬/도구 도입 매니페스트입니다 — 66개의 개인 스킬(자체 작성 및 각색한 것 포함)과 pip 패키지 3개, npm 패키지 2개, 바이너리 도구 1개에 대한 실제 출처 데이터(원본 저장소 URL, 설치 메모, 버전 이력)를 담고 있습니다. `check.ps1`과 짝을 이루어, `claude-clone-template`을 도입한 사람이 `~/.claude/skills/`로 복사해 온 스킬들의 업스트림 업데이트를 원래 소유자와 똑같은 방식으로 추적할 수 있게 해 줍니다. `last_seen_commit` 값은 받는 사람 입장에서는 대부분 `unknown`이거나 오래된 상태이며, `check.ps1 -Ack`를 한 번 실행해서 자신만의 기준점을 세우기 전까지는 그렇습니다.
 
 ### `global-config/templates/`
 새 저장소에 처음 세팅할 때 복사해 넣는 작은 시작 파일 2개입니다(`project-CLAUDE.md`, `conventions.md`) — 45줄 이하의 "라우터" 역할을 하는 프로젝트 CLAUDE.md와 conventions/green-gate 템플릿입니다. 각 파일에는 부트스트랩하려는 스택에 맞춰 채워 넣는 PRESET 주석 블록이 있습니다(현재는 Python 웹 예시 하나뿐입니다). 자신의 스택에 필요하다면 같은 방식으로 프리셋을 추가하면 됩니다.
@@ -182,7 +182,7 @@ ecc(everything-claude-code) 플러그인 생태계에서 가져온 일반적인 
 
 1. **`global-config/CLAUDE.md`를 복사**해서 자신의 `~/.claude/CLAUDE.md`로 넣으세요. 기존 내용과 병합하거나 아예 대체해도 됩니다 — 판단은 각자의 몫입니다. 먼저 읽어보고 자신에게 맞지 않는 섹션은 지우세요. **다른 무엇보다 먼저 "Installed Plugins" 섹션을 다시 써야 합니다** — 현재는 특정 플러그인(superpowers, ecc, pordee, lazyweb, andrej-karpathy-skills)이 설치되고 활성화되어 있다고 단언하며, Claude에게 설치를 언급하지 말라고까지 지시합니다. 이는 원래 소유자에게만 해당하는 내용이지 여러분에게는 아닙니다. 실제로 설치한 플러그인 목록으로 바꾸거나, 뭔가 설치하기 전까지는 지워 두세요.
 2. **`global-config/agents/*.md`를 `~/.claude/agents/`로, `global-config/hooks/*.py`를 `~/.claude/hooks/`로 복사**하세요. 이 파일들이 있어야 CLAUDE.md의 모델 라우팅 규칙, git 안전장치, graphify 자동 동기화 훅이 단순한 텍스트가 아니라 실제로 동작합니다.
-3. **`global-config/skills/*`를 `~/.claude/skills/`로 복사**하세요. 이 부분이 실질적인 가치의 대부분을 차지합니다 — 67개의 실제로 동작하는 스킬 폴더이지, 단순히 설명만 있는 게 아닙니다.
+3. **`global-config/skills/*`를 `~/.claude/skills/`로 복사**하세요. 이 부분이 실질적인 가치의 대부분을 차지합니다 — 66개의 실제로 동작하는 스킬 폴더이지, 단순히 설명만 있는 게 아닙니다.
 4. **`global-config/settings.example.json`을 자신의 `~/.claude/settings.json`에 병합**하세요(먼저 `<YOUR_HOME>`을 실제 홈 경로로 바꾸세요). 이미 settings.json이 있다면 덮어쓰지 말고 병합하세요 — `hooks.PreToolUse` 항목과 `enabledPlugins`에서 원하는 부분을 가져오면 됩니다. 배포된 훅 명령은 Windows의 `py` 런처를 사용합니다. macOS/Linux에서는 먼저 `python3`로 바꾸세요.
 5. ecc 플러그인을 설치할 **경우에만** **`global-config/rules/ecc-common/`을 `~/.claude/rules/`로 복사**하세요. 그렇지 않다면 건너뛰세요.
 6. **`global-config/memory-examples/*.md`를 적용하고 싶은 프로젝트의 자동 메모리 폴더로 복사**하세요(Claude Code 자동 메모리는 프로젝트별로 `~/.claude/projects/<project>/memory/`에 저장됩니다). 혹은 참고 자료로만 읽고 자신만의 내용을 처음부터 작성해도 됩니다.

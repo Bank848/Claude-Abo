@@ -26,7 +26,7 @@ A project that has been migrated to the two-tier layout has a **2-tier** `memory
 - **`MEMORY.md`** (resident, auto-loaded every session, budget **≤4KB**): holds **category-level pointers** only (e.g. "all project notes → `memory/INDEX.md` notes section"), no longer per-file pointers.
 - **`memory/INDEX.md`** (retrievable, not auto-loaded, no size limit): holds **a pointer for every file** the way MEMORY.md used to.
 
-A project that has not migrated has only the old-style `MEMORY.md` (per-file pointers directly, no INDEX.md). Both are valid. Check against what that project actually uses, and do not complain about a missing INDEX.md if the project does not yet meet the migration criteria (see check 8).
+A project that has not migrated has only the old-style `MEMORY.md` (per-file pointers directly, no INDEX.md). Both are valid. Check against what that project actually uses, and do not complain about a missing INDEX.md if the project does not yet meet the migration criteria.
 
 **"Remember" (the original command) writes a retrievable file by default and no longer forces an auto-entry in MEMORY.md.** A file with no pointer is therefore a normal state, not a fault (see check 3, amended below).
 
@@ -39,9 +39,9 @@ A project that has not migrated has only the old-style `MEMORY.md` (per-file poi
 6. **Should be in the repo, not memory**: an entry recording something the repo already records (code structure / git history / CLAUDE.md). The rules forbid storing it.
 7. **MEMORY.md / INDEX.md drift**: a pointer in `MEMORY.md` or `memory/INDEX.md` whose target file has been deleted.
 8. **Tier report (new)**: measure the size of `MEMORY.md` against the ≤4KB budget (`wc -c`):
-   - If over budget → name **demote candidates** line by line, with reasons citing your own resident-memory criteria (trigger invisible ∨ costly if missed). An entry that fails B∨C is the one to propose demoting (squeeze to a category-level pointer in MEMORY.md + move the details to INDEX.md / the original sub-file).
-   - Use `search_session_transcripts` to check the **real usage** of the topic/entry historically. The default threshold is **5 sessions** (an entry actually used in fewer than 1 of the last 5 sessions that also fails B∨C is a stronger demote candidate). Note: as tested, this tool searches back at least roughly 1 week across multiple projects/sessions. If a search returns an unusually empty result (you expected hits and found none), judge from the B/C criteria alone and tag the report **"no usage data"**. Do not guess.
-   - Output as a table: `<file/entry>`, size (bytes), usage (how many of the last 5 sessions, or "no usage data"), passes B/C criteria?, verdict (resident/demote candidate).
+   - If over budget → name **demote candidates** line by line, with reasons citing your own resident-memory criteria (trigger invisible ∨ costly if missed). An entry that fails your criteria is the one to propose demoting (squeeze to a category-level pointer in MEMORY.md + move the details to INDEX.md / the original sub-file).
+   - Use `search_session_transcripts` to check the **real usage** of the topic/entry historically. The default threshold is **5 sessions** (an entry actually used in fewer than 1 of the last 5 sessions that also fails your criteria is a stronger demote candidate). Note: as tested, this tool searches back at least roughly 1 week across multiple projects/sessions. If a search returns an unusually empty result (you expected hits and found none), judge from your own criteria alone and tag the report **"no usage data"**. Do not guess.
+   - Output as a table: `<file/entry>`, size (bytes), usage (how many of the last 5 sessions, or "no usage data"), passes your criteria?, verdict (resident/demote candidate).
    - **Always read-only**: propose candidates and wait for user confirmation before actually moving anything, like every other check.
 9. **INDEX.md coverage (new)**: if the project has `memory/INDEX.md` (already 2-tier), check that it covers 100% of the files in `memory/*.md` (`ls memory/*.md | wc -l` against `grep -c '^- ' memory/INDEX.md`, not counting INDEX.md/MEMORY.md themselves). Any file with no pointer in either MEMORY.md or INDEX.md is flagged as an orphan per check 3.
 

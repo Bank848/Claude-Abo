@@ -34,7 +34,7 @@ For both moments: **if unsure whether it qualifies, do not trigger** (keep the c
 ## Decision ladder: ask in order before writing anything new
 1. **Does this need to exist at all?** (YAGNI: work nobody asked for / hedging for a future that has not arrived = skip)
 2. **Does the stdlib / language already do it?**
-3. **Is it a native feature of the platform?** (e.g. a game engine's built-in screen/transform/animation system, persistent storage, existing engine APIs: do not write your own)
+3. **Is it a native feature of the platform?** (e.g. a framework's built-in features: do not write your own)
 4. **Can a dependency that is already installed solve it?**
 5. **Can it be done in one line?**
 6. If all of those pass → write the **minimum that works correctly**, with no abstraction/boilerplate nobody asked for.

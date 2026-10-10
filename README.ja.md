@@ -5,11 +5,11 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Claude%20Code%20Clone%20Template&fontSize=38&fontColor=ffffff&fontAlignY=38&desc=A%20portable%20snapshot%20of%20one%20person's%20Claude%20Code%20setup&descAlignY=58&descSize=17&descColor=ffffff&animation=fadeIn" alt="Claude Code Clone Template banner" width="100%"/>
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-67%20curated-brightgreen)](#global-configskills)
+[![Skills](https://img.shields.io/badge/skills-66%20curated-brightgreen)](#global-configskills)
 [![Languages](https://img.shields.io/badge/languages-10-orange)](#top)
 [![Template](https://img.shields.io/badge/type-adapt%2C%20not%20run%20as--is-lightgrey)](#caveat-this-is-one-persons-setup)
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=1200&color=6C63FF&center=true&vCenter=true&width=640&lines=67+curated+skills+with+full+provenance;Cost-aware+Sonnet+%2F+Opus+%2F+Haiku+model+routing;Git+safety+hooks+%2B+%2Fplan-pro+workflow;Cross-project+second-brain+vault" alt="rotating feature highlights"/>
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=1200&color=6C63FF&center=true&vCenter=true&width=640&lines=66+curated+skills+with+full+provenance;Cost-aware+Sonnet+%2F+Opus+%2F+Haiku+model+routing;Git+safety+hooks+%2B+%2Fplan-pro+workflow;Cross-project+second-brain+vault" alt="rotating feature highlights"/>
 
 </div>
 
@@ -18,7 +18,7 @@
 <details>
 <summary>フルバージョンを読む</summary>
 
-ある個人のClaude Codeセットアップを持ち運び可能な形にまとめたスナップショットです。グローバル指示、エンジニアリングルール、**厳選されたスキル67個**（自作21個 — うち16個はゼロから執筆、5個はサードパーティ製ツールを包むラッパーとして自作、2個は既存スキルを改変したもの、残りはアップストリームのリポジトリから採用したもので、各スキルの出典は`sources.json`に記載）、実際のメモリ例、スキルの出典管理台帳、プロジェクト横断のナレッジボルトが含まれます。すべては、新しいマシンで真新しいClaude Codeインスタンス（あるいはそれをセットアップする本人）が同じワークフローの習慣と能力をブートストラップできるようにパッケージ化されています。これは**そのまま実行する設定ファイルではなく、自分向けに手を加えるためのテンプレート**です。個人を特定できる情報はすべて除去してプレースホルダーに置き換えてあり、一部のセクションは説明されているツール自体を導入して初めて意味を持ちます。
+ある個人のClaude Codeセットアップを持ち運び可能な形にまとめたスナップショットです。グローバル指示、エンジニアリングルール、**厳選されたスキル66個**（自作20個 — うち15個はゼロから執筆、5個はサードパーティ製ツールを包むラッパーとして自作、2個は既存スキルを改変したもの、残りはアップストリームのリポジトリから採用したもので、各スキルの出典は`sources.json`に記載）、実際のメモリ例、スキルの出典管理台帳、プロジェクト横断のナレッジボルトが含まれます。すべては、新しいマシンで真新しいClaude Codeインスタンス（あるいはそれをセットアップする本人）が同じワークフローの習慣と能力をブートストラップできるようにパッケージ化されています。これは**そのまま実行する設定ファイルではなく、自分向けに手を加えるためのテンプレート**です。個人を特定できる情報はすべて除去してプレースホルダーに置き換えてあり、一部のセクションは説明されているツール自体を導入して初めて意味を持ちます。
 
 </details>
 
@@ -59,14 +59,14 @@ claude-clone-template/
 │   ├── hooks/block-dangerous-git.py       # PreToolUse gate that asks before risky git commands
 │   ├── hooks/graphify-auto-update.py      # PostToolUse hook — 編集のたびにgraphifyのナレッジグラフを同期し続ける
 │   ├── rules/ecc-common/                  # 10 engineering-discipline rule files (ecc plugin ecosystem)
-│   ├── skills/                            # 67 curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
+│   ├── skills/                            # 66 curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
 │   ├── SKILLS_INDEX.md                    # Personal index of installed skills/plugins + when to use which
 │   ├── memory-examples/                   # 7 real auto-memory entries showing the memory system's format/patterns
 │   ├── templates/                         # 2 starter templates to copy into a new repo (project-CLAUDE.md, conventions.md)
 │   └── tools/
 │       ├── skill-update-check/
 │       │   ├── check.ps1                  # Weekly update checker — reads sources.json from this same folder
-│       │   └── sources.json               # Real provenance manifest: 67 personal skills + 3 pip + 2 npm + 1 binary tool
+│       │   └── sources.json               # Real provenance manifest: 66 personal skills + 3 pip + 2 npm + 1 binary tool
 │       └── ollama/ollama-digest.ps1       # On-demand local-model pre-digest helper (see the Ollama section below)
 └── notes/                                 # 3 notes: a personal cross-project "second brain" vault (example content)
 ```
@@ -89,7 +89,7 @@ claude-clone-template/
 ecc(everything-claude-code)プラグインエコシステムからの一般的なエンジニアリング規律です。TDDワークフロー、イミュータビリティ、コミット形式、セキュリティチェックリスト、コードレビューの重大度レベル、エージェントへの委譲などが含まれます。eccも併せて導入している場合のみ役立ちます(下記「別途インストールが必要なもの」参照)。
 
 ### `global-config/skills/`
-厳選された`SKILL.md`フォルダが67個(スキルによっては補助スクリプト・リファレンス・データファイルも同梱)あり、ライティング/マーケティング関連(copywriting、copy-editing、hallmark、marketing-council、pricingなど)、エンジニアリングプロセス(debug-mantra、poka-yoke、second-brain、dependency-audit、secrets-auditなど)、デザイン(design-system、ui-ux-pro-max、banner-design、mobbin-referencesなど)、そしてClaude Code自体を管理するためのメタスキル(skillify、grilling、second-brain、graphify、plan-pro、shipping-a-branchなど)をカバーしています。`poka-yoke`、`plan-pro`、`shipping-a-branch`はゼロから自作したものです。`graphify`、`dembrandt`、`markitdown`、`mobbin-references`は自作のラッパースキルで、SKILL.md自体はオリジナルですが、裏側で使うツールはサードパーティ製です(`ATTRIBUTION.md`にクレジット、`sources.json`にバージョン履歴あり)。`deslop-defaults`は改変版(`ibelick/ui-skills`から抽出しスタック非依存に書き直したもの)です。残りはアップストリームのリポジトリから採用したものです — スキルごとの出典は`sources.json`、アップストリームへのクレジットは`ATTRIBUTION.md`を参照してください。これらは単なるスキルの説明ではなく、実際に再利用可能なプロンプトエンジニアリングの成果物です。`~/.claude/skills/`にコピーすればすぐに動作します。
+厳選された`SKILL.md`フォルダが66個(スキルによっては補助スクリプト・リファレンス・データファイルも同梱)あり、ライティング/マーケティング関連(copywriting、copy-editing、hallmark、marketing-council、pricingなど)、エンジニアリングプロセス(debug-mantra、poka-yoke、second-brain、dependency-audit、secrets-auditなど)、デザイン(design-system、ui-ux-pro-max、banner-design、mobbin-referencesなど)、そしてClaude Code自体を管理するためのメタスキル(skillify、grilling、second-brain、graphify、plan-pro、shipping-a-branchなど)をカバーしています。`poka-yoke`、`plan-pro`、`shipping-a-branch`はゼロから自作したものです。`graphify`、`dembrandt`、`markitdown`、`mobbin-references`は自作のラッパースキルで、SKILL.md自体はオリジナルですが、裏側で使うツールはサードパーティ製です(`ATTRIBUTION.md`にクレジット、`sources.json`にバージョン履歴あり)。`deslop-defaults`は改変版(`ibelick/ui-skills`から抽出しスタック非依存に書き直したもの)です。残りはアップストリームのリポジトリから採用したものです — スキルごとの出典は`sources.json`、アップストリームへのクレジットは`ATTRIBUTION.md`を参照してください。これらは単なるスキルの説明ではなく、実際に再利用可能なプロンプトエンジニアリングの成果物です。`~/.claude/skills/`にコピーすればすぐに動作します。
 
 <details>
 <summary><b>45個のスキルをすべてカテゴリ別に見る</b>(クリックで展開)</summary>
@@ -163,14 +163,14 @@ ecc(everything-claude-code)プラグインエコシステムからの一般的�
 
 </details>
 
-> **Bonus skills:** 22 more skills were added in October 2026 (67 in total). The table above lists the original 45; see the [English README](README.md#bonus-skills-22-added-in-the-october-2026-patch) for the rest.
+> **Bonus skills:** 21 more skills were added in October 2026 (66 in total). The table above lists the original 45; see the [English README](README.md#bonus-skills-21-added-in-the-october-2026-patch) for the rest.
 
 
 ### `global-config/memory-examples/`
 オーナーのClaude Code自動メモリシステムからの実際のエントリーが7件(プロジェクト固有の事実ではなく、持ち運び可能な「自分の仕事の仕方」に関する習慣)含まれています。セッション間メッセージングの命名規則を曖昧さなく決める話、ローカルOllamaを事前圧縮として使うパターン、「スキルノートブックを更新する」が具体的に何を意味するかというルール、シェルのクォーティングに関する落とし穴(`\b`が静かにバックスペース文字になってしまう問題)、コンテキストの肥大化をどれだけ積極的に削るかについてのフィードバック、そしてCLAUDE.mdにあるAIらしさを消す文章ルールの裏付けとなる完全な詳細(語彙表 + 修正前後の例)をタイ語・英語の両方で収録しています。これらは、内容そのものと同じくらい、良いメモリエントリーの「形」(ルール + 理由 + 適用方法)を示すために存在しています — メモリが全体のワークフローにどう組み込まれるかは`global-config/rules/ecc-common/`を、ローカルメモリとグローバルメモリの使い分けはCLAUDE.mdの「จำ/บัญญัติ」セクションを参照してください。
 
 ### `global-config/tools/skill-update-check/sources.json`
-オーナーの実際のスキル/ツール採用台帳です — 自作および改変したものを含む、67個の個人用スキルすべてと、pipパッケージ3個、npmパッケージ2個、バイナリツール1個についての実際の出典データ(ソースリポジトリのURL、インストールメモ、バージョン履歴)が記載されています。`check.ps1`と組み合わせることで、`claude-clone-template`の導入者は、`~/.claude/skills/`にコピーしたスキルのアップストリームでの更新を、オリジナルのオーナーと同じ方法で追跡できます。`last_seen_commit`の値は、受け取った側が一度`check.ps1 -Ack`を実行して自分の基準点を確立するまでは、ほとんどが`unknown`または古いままです。
+オーナーの実際のスキル/ツール採用台帳です — 自作および改変したものを含む、66個の個人用スキルすべてと、pipパッケージ3個、npmパッケージ2個、バイナリツール1個についての実際の出典データ(ソースリポジトリのURL、インストールメモ、バージョン履歴)が記載されています。`check.ps1`と組み合わせることで、`claude-clone-template`の導入者は、`~/.claude/skills/`にコピーしたスキルのアップストリームでの更新を、オリジナルのオーナーと同じ方法で追跡できます。`last_seen_commit`の値は、受け取った側が一度`check.ps1 -Ack`を実行して自分の基準点を確立するまでは、ほとんどが`unknown`または古いままです。
 
 ### `global-config/templates/`
 新規リポジトリの初期セットアップ時にコピーする小さなスターターファイルが2つあります(`project-CLAUDE.md`、`conventions.md`)。45行以下の「ルーター」役プロジェクトCLAUDE.mdと、コンベンション/グリーンゲートのテンプレートです。それぞれに、ブートストラップ対象のスタック向けの穴埋め式PRESET(現状はPythonウェブの例のみ)を示すコメントブロックがあります。必要なスタックがあれば、同じ要領で自分用のプリセットを追加してください。
@@ -182,7 +182,7 @@ ecc(everything-claude-code)プラグインエコシステムからの一般的�
 
 1. **`global-config/CLAUDE.md`をコピー**して、自分の`~/.claude/CLAUDE.md`にします。既存のものとマージするか、完全に置き換えるかは任意です。まず読んでから、自分に当てはまらないセクションは削除してください。**このファイルに手を加える前に、まず「Installed Plugins」セクションを書き直してください** — 現状は特定のプラグイン(superpowers、ecc、pordee、lazyweb、andrej-karpathy-skills)がインストールされ有効になっていると主張しており、Claudeにインストールについて言及しないよう指示しています。これは元のオーナーにとっては事実ですが、あなたにとってはそうではありません。実際のプラグイン一覧に置き換えるか、何かをインストールするまでは削除しておいてください。
 2. **`global-config/agents/*.md`をコピー**して`~/.claude/agents/`に、**`global-config/hooks/*.py`をコピー**して`~/.claude/hooks/`に置きます(2つのフック両方です)。これらがあって初めて、CLAUDE.md内のモデルルーティングルール、gitセーフティゲート、graphify自動同期フックが単なる文章ではなく実際に機能します。
-3. **`global-config/skills/*`をコピー**して`~/.claude/skills/`に置きます。これが実際の価値の大部分を占めます — 67個の、単なる説明ではない、実際に動作するスキルフォルダです。
+3. **`global-config/skills/*`をコピー**して`~/.claude/skills/`に置きます。これが実際の価値の大部分を占めます — 66個の、単なる説明ではない、実際に動作するスキルフォルダです。
 4. **`global-config/settings.example.json`をマージ**して自分の`~/.claude/settings.json`にします(まず`<YOUR_HOME>`を実際のホームパスに置き換えてください)。すでにsettings.jsonがある場合は上書きせずマージし、`hooks.PreToolUse`のエントリーや、`enabledPlugins`から必要なものを取り込んでください。同梱のフックコマンドはWindowsの`py`ランチャーを使っています。macOS/Linuxではまず`python3`に変更してください。
 5. **`global-config/rules/ecc-common/`をコピー**して`~/.claude/rules/`に置くのは、eccプラグインを導入する場合のみです。それ以外はスキップしてください。
 6. **`global-config/memory-examples/*.md`をコピー**して、適用したいプロジェクトの自動メモリフォルダに置きます(Claude Codeの自動メモリはプロジェクトごとで、`~/.claude/projects/<project>/memory/`にあります)。あるいは参考として読み、自分のものをゼロから書いてください。

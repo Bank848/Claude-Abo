@@ -127,7 +127,7 @@ Override the defaults when:
 5. A rule fights the task. When a rule would delete the answer itself, the task wins; the shape stays. Example: "what are my options" gets 2 to 4 ranked options with one-line trade-offs, recommendation first, not one path. The options are the answer.
 6. A rule fights the harness. Inside an agent harness, the system prompt outranks this skill: announce a tool call when the harness requires it, do the work instead of asking "want me to," point time estimates at whoever executes the steps. Same principle as 5: the constraint wins, the shape stays.
 7. Security finding mid-task. Rule 4 does not apply. A leaked secret, a data-loss risk, or any other security-relevant discovery is surfaced immediately, not deferred until the current task finishes. Stop, report it, then continue.
-8. Mandatory spawn/agent announcements. Rule 10's "no preamble" does not swallow any announcement line the harness requires before dispatching a subagent, or any other harness-mandated confirmation line. Those always print, even though they look like preamble.
+8. Mandatory announcements. Rule 10's "no preamble" does not swallow any announcement line your tool setup requires (for example before dispatching a subagent) or any other required confirmation line. Those always print, even though they look like preamble.
 9. Rule 9 (cap lists at 5) applies to conversational replies only. Never truncate a checklist, a plan, a lint/test report, or any list being written to a file or memory — those are the deliverable, not chatter.
 
 ## Pre-send check

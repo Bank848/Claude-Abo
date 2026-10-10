@@ -479,13 +479,6 @@
       "note": "Proactive Supabase RLS and anon-key audit rule. No upstream; checker skips it. Added in the October 2026 patch."
     },
     {
-      "name": "thai-docx",
-      "source_repo_url": "self-authored",
-      "subpath_in_repo": "",
-      "last_seen_commit": "",
-      "note": "Thai .docx rendering fix (complex-script XML properties, per-language font split); ships its own scripts and references. No upstream; checker skips it. Added in the October 2026 patch."
-    },
-    {
       "name": "thai-no-quote-emphasis",
       "source_repo_url": "self-authored",
       "subpath_in_repo": "",

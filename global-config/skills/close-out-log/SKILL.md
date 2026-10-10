@@ -40,7 +40,7 @@ Reciting takes about 5 seconds (does not affect P0). Then write the file using t
 | User facts / cross-project knowledge / glossary / feedback | The **memory** system (`~/.claude/memory` + MEMORY.md) |
 | State for resuming a session | ECC skill **save-session** |
 | Architecture-level decisions (someone will ask "why" in 6 months) | **ADR** (`docs/adr/`, immutable + supersede) |
-| Cross-project status of plans and UI artifacts ("how far along") | The worklog index in your notes vault: a single pointer, not content |
+| Cross-project status of plans and UI artifacts ("how far along") | A cross-project status note, if you keep one: a single pointer, not content |
 | **What the next session reading this repo must know to continue** | ✅ **Here** |
 
 ## File format
@@ -68,7 +68,7 @@ If there are leftover non-blocker findings from a review/verify, drop them at th
 2. Closing a piece of work (or before the session ends / before a commit that ends a chunk): recite the mantra, then append the 4 headers.
 3. Over 25 lines = distill it shorter. Do not stretch the file.
 4. If you find a new glossary term, a cross-project lesson, or a user preference along the way, write it to **memory** immediately (type reference/feedback per the global rules), and the log gets only a "→ memory" pointer. A fact lives in one place, memory (P1).
-5. If the work being closed has an open row in the worklog index in your notes vault (grep by project slug; the slug registry is at the top of that file), flip that row's status to `done`/`superseded`/`abandoned` as appropriate before writing the close-out log.
+5. If the work being closed has an open row in a cross-project status note, if you keep one, flip that row's status to `done`/`superseded`/`abandoned` as appropriate before writing the close-out log.
 6. When creating a new `docs/log/YYYY-MM-DD.md` (the first file of that day), **also update `docs/log/INDEX.md`. This is no longer optional**:
    - `INDEX.md` already exists: add 1 line pointing at the new file (date + a short summary of what opened today) at the top (newest on top).
    - No `INDEX.md` at all (older repo / never done): **create it right now in this round**. List every existing file in `docs/log/*.md` (oldest at the bottom, newest at the top) so the INDEX is complete from the start, not just a lone pointer to the new file.

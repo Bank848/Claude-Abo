@@ -100,13 +100,12 @@ Added after the first release; see the README for caveats (several are written f
 | `english-writing-anti-ai-tell` | English anti-AI-tell writing checklist. |
 | `github-pr-review-draft` | Pending-review (draft) PR review workflow via the GitHub API. |
 | `grill-with-docs` | Thin wrapper combining grilling and domain-modeling (from mattpocock/skills). |
-| `i-have-adhd` | ADHD-friendly output style. Frontmatter says MIT but there is no upstream source URL in the skill folder, so its upstream source is not recorded. |
+| `i-have-adhd` | Output style for readers who want the next action first (numbered steps, short state recaps). Frontmatter says MIT but there is no upstream source URL in the skill folder, so its upstream source is not recorded. |
 | `memory-lint` | Read-only health check of a project memory folder. |
 | `ponytail` | Write the least code that is still correct (YAGNI, stdlib, native, existing dependency ladder); adapted from DietrichGebert/ponytail. |
 | `project-bootstrap` | One-shot scaffold for docs-driven continuity (CLAUDE.md router, docs/log, docs/adr, conventions). |
 | `pruning-branches` | Periodic git branch housekeeping. |
 | `supabase-rls-safety-check` | Proactive Supabase RLS and anon-key audit rule. |
-| `thai-docx` | Thai .docx rendering fix (complex-script XML properties, per-language font split); ships its own scripts and references. |
 | `thai-no-quote-emphasis` | Rule against quote-mark emphasis in Thai writing. |
 | `thai-writing-anti-ai-tell` | Thai anti-AI-tell writing checklist. |
 | `agent-reach` | Panniantong/Agent-Reach (MIT). Router for internet research across many platforms via a multi-backend CLI. Run check.ps1 -Ack once to set your own baseline. |
