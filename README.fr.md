@@ -5,11 +5,11 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Claude%20Code%20Clone%20Template&fontSize=38&fontColor=ffffff&fontAlignY=38&desc=A%20portable%20snapshot%20of%20one%20person's%20Claude%20Code%20setup&descAlignY=58&descSize=17&descColor=ffffff&animation=fadeIn" alt="Claude Code Clone Template banner" width="100%"/>
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-45%20curated-brightgreen)](#global-configskills)
+[![Skills](https://img.shields.io/badge/skills-67%20curated-brightgreen)](#global-configskills)
 [![Languages](https://img.shields.io/badge/languages-10-orange)](#top)
 [![Template](https://img.shields.io/badge/type-adapt%2C%20not%20run%20as--is-lightgrey)](#caveat-this-is-one-persons-setup)
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=1200&color=6C63FF&center=true&vCenter=true&width=640&lines=45+curated+skills+with+full+provenance;Cost-aware+Sonnet+%2F+Opus+%2F+Haiku+model+routing;Git+safety+hooks+%2B+%2Fplan-pro+workflow;Cross-project+second-brain+vault" alt="rotating feature highlights"/>
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=1200&color=6C63FF&center=true&vCenter=true&width=640&lines=67+curated+skills+with+full+provenance;Cost-aware+Sonnet+%2F+Opus+%2F+Haiku+model+routing;Git+safety+hooks+%2B+%2Fplan-pro+workflow;Cross-project+second-brain+vault" alt="rotating feature highlights"/>
 
 </div>
 
@@ -18,7 +18,7 @@ Un instantané portable de la configuration Claude Code d'une personne — instr
 <details>
 <summary>Lire le pitch complet</summary>
 
-Un instantané portable de la configuration Claude Code d'une personne — instructions globales, règles d'ingénierie, **45 skills sélectionnées** (7 conçues en interne — 3 écrites de zéro, 4 wrappers maison autour d'outils tiers — 1 adaptée d'une skill amont, le reste repris de dépôts amont, chacune avec sa provenance détaillée dans `sources.json`), des exemples de mémoire réels, un manifeste de provenance des skills, et un coffre de connaissances transversal aux projets — le tout packagé pour qu'une instance Claude Code toute neuve (ou la personne qui la configure) puisse reproduire les mêmes habitudes de travail et capacités sur une nouvelle machine. Ceci est un **template à adapter, pas une config à lancer telle quelle** : les identifiants personnels ont été retirés et remplacés par des placeholders, et plusieurs sections n'ont de sens que si vous adoptez aussi les outils qu'elles décrivent.
+Un instantané portable de la configuration Claude Code d'une personne — instructions globales, règles d'ingénierie, **67 skills sélectionnées** (7 conçues en interne — 3 écrites de zéro, 4 wrappers maison autour d'outils tiers — 1 adaptée d'une skill amont, le reste repris de dépôts amont, chacune avec sa provenance détaillée dans `sources.json`), des exemples de mémoire réels, un manifeste de provenance des skills, et un coffre de connaissances transversal aux projets — le tout packagé pour qu'une instance Claude Code toute neuve (ou la personne qui la configure) puisse reproduire les mêmes habitudes de travail et capacités sur une nouvelle machine. Ceci est un **template à adapter, pas une config à lancer telle quelle** : les identifiants personnels ont été retirés et remplacés par des placeholders, et plusieurs sections n'ont de sens que si vous adoptez aussi les outils qu'elles décrivent.
 
 </details>
 
@@ -59,14 +59,14 @@ claude-clone-template/
 │   ├── hooks/block-dangerous-git.py       # PreToolUse gate that asks before risky git commands
 │   ├── hooks/graphify-auto-update.py      # Hook PostToolUse — garde le graphe de connaissances graphify synchronisé après les modifications
 │   ├── rules/ecc-common/                  # 10 engineering-discipline rule files (ecc plugin ecosystem)
-│   ├── skills/                            # 45 curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
+│   ├── skills/                            # 67 curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
 │   ├── SKILLS_INDEX.md                    # Personal index of installed skills/plugins + when to use which
 │   ├── memory-examples/                   # 7 real auto-memory entries showing the memory system's format/patterns
 │   ├── templates/                         # 2 starter templates to copy into a new repo (project-CLAUDE.md, conventions.md)
 │   └── tools/
 │       ├── skill-update-check/
 │       │   ├── check.ps1                  # Weekly update checker — reads sources.json from this same folder
-│       │   └── sources.json               # Real provenance manifest: 45 personal skills + 3 pip + 2 npm + 1 binary tool
+│       │   └── sources.json               # Real provenance manifest: 67 personal skills + 3 pip + 2 npm + 1 binary tool
 │       └── ollama/ollama-digest.ps1       # On-demand local-model pre-digest helper (see the Ollama section below)
 └── notes/                                 # 3 notes: a personal cross-project "second brain" vault (example content)
 ```
@@ -89,7 +89,7 @@ Le cœur de la configuration. Il encode :
 Discipline d'ingénierie générale issue de l'écosystème de plugins ecc (everything-claude-code) : workflow TDD, immutabilité, format de commit, checklist de sécurité, niveaux de gravité de revue de code, délégation aux agents. Utile uniquement si vous utilisez aussi ecc (voir « Ce qu'il vous faudra encore installer » plus bas).
 
 ### `global-config/skills/`
-45 dossiers `SKILL.md` sélectionnés (plus scripts/référence/données annexes quand une skill en a) couvrant l'artisanat de l'écriture/marketing (copywriting, copy-editing, hallmark, marketing-council, pricing…), le processus d'ingénierie (debug-mantra, poka-yoke, second-brain, dependency-audit, secrets-audit…), le design (design-system, ui-ux-pro-max, banner-design, mobbin-references…), et des méta-skills pour piloter Claude Code lui-même (skillify, grilling, second-brain, graphify, plan-pro, shipping-a-branch…). `poka-yoke`, `plan-pro` et `shipping-a-branch` sont conçues de zéro en interne ; `graphify`, `dembrandt`, `markitdown` et `mobbin-references` sont des skills-wrappers maison dont le SKILL.md est original mais dont les outils sous-jacents sont tiers (crédités dans `ATTRIBUTION.md` et suivis en version dans `sources.json`) ; `deslop-defaults` est adaptée (reprise de `ibelick/ui-skills` et réécrite indépendamment de toute stack) ; le reste est repris de dépôts amont — voir `sources.json` pour la provenance skill par skill et `ATTRIBUTION.md` pour les crédits amont. Ce sont de véritables artefacts de prompt-engineering réutilisables, pas de simples descriptions de skills — copiez-les dans `~/.claude/skills/` et elles fonctionnent immédiatement.
+67 dossiers `SKILL.md` sélectionnés (plus scripts/référence/données annexes quand une skill en a) couvrant l'artisanat de l'écriture/marketing (copywriting, copy-editing, hallmark, marketing-council, pricing…), le processus d'ingénierie (debug-mantra, poka-yoke, second-brain, dependency-audit, secrets-audit…), le design (design-system, ui-ux-pro-max, banner-design, mobbin-references…), et des méta-skills pour piloter Claude Code lui-même (skillify, grilling, second-brain, graphify, plan-pro, shipping-a-branch…). `poka-yoke`, `plan-pro` et `shipping-a-branch` sont conçues de zéro en interne ; `graphify`, `dembrandt`, `markitdown` et `mobbin-references` sont des skills-wrappers maison dont le SKILL.md est original mais dont les outils sous-jacents sont tiers (crédités dans `ATTRIBUTION.md` et suivis en version dans `sources.json`) ; `deslop-defaults` est adaptée (reprise de `ibelick/ui-skills` et réécrite indépendamment de toute stack) ; le reste est repris de dépôts amont — voir `sources.json` pour la provenance skill par skill et `ATTRIBUTION.md` pour les crédits amont. Ce sont de véritables artefacts de prompt-engineering réutilisables, pas de simples descriptions de skills — copiez-les dans `~/.claude/skills/` et elles fonctionnent immédiatement.
 
 <details>
 <summary><b>Voir les 45 skills, regroupées par catégorie</b> (cliquez pour développer)</summary>
@@ -163,11 +163,14 @@ La provenance complète (dépôt source, date d'adoption, conçue en interne vs.
 
 </details>
 
+> **Bonus skills:** 22 more skills were added in October 2026 (67 in total). The table above lists the original 45; see the [English README](README.md#bonus-skills-22-added-in-the-october-2026-patch) for the rest.
+
+
 ### `global-config/memory-examples/`
 7 entrées réelles issues du système de mémoire automatique Claude Code du propriétaire (pas des faits spécifiques à un projet, mais des habitudes portables de « façon de travailler ») : une clarification de convention de nommage pour la messagerie inter-sessions, le motif « Ollama local comme pré-compression », une règle sur ce que signifie concrètement « mettre à jour le carnet de skills », un piège de guillemetage shell (`\b` devenant silencieusement un octet de retour arrière), une entrée de retour d'expérience sur l'agressivité avec laquelle réduire l'encombrement du contexte, et le détail complet (tableaux de vocabulaire + exemples avant/après) des règles anti-tics-d'IA d'écriture dans CLAUDE.md, en thaï comme en anglais. Elles existent pour montrer la *forme* d'une bonne entrée de mémoire (règle + pourquoi + comment l'appliquer) autant que leur contenu spécifique — voir `global-config/rules/ecc-common/` pour la place de la mémoire dans le workflow plus large, et la section « จำ/บัญญัติ » de CLAUDE.md pour la distinction mémoire locale/globale utilisée par ce propriétaire.
 
 ### `global-config/tools/skill-update-check/sources.json`
-Le manifeste réel d'adoption de skills/outils du propriétaire — données de provenance authentiques (URL des dépôts sources, notes d'installation, historique de version) pour les 45 skills personnelles (y compris celles conçues en interne et adaptées) plus 3 paquets pip, 2 paquets npm, et 1 outil binaire. Associé à `check.ps1`, c'est ce qui permet à quiconque adopte `claude-clone-template` de suivre les mises à jour amont des skills copiées dans `~/.claude/skills/`, de la même façon que le propriétaire d'origine. Les valeurs `last_seen_commit` sont surtout `unknown`/obsolètes du point de vue du destinataire jusqu'à ce qu'il exécute `check.ps1 -Ack` une fois pour établir sa propre base de référence.
+Le manifeste réel d'adoption de skills/outils du propriétaire — données de provenance authentiques (URL des dépôts sources, notes d'installation, historique de version) pour les 67 skills personnelles (y compris celles conçues en interne et adaptées) plus 3 paquets pip, 2 paquets npm, et 1 outil binaire. Associé à `check.ps1`, c'est ce qui permet à quiconque adopte `claude-clone-template` de suivre les mises à jour amont des skills copiées dans `~/.claude/skills/`, de la même façon que le propriétaire d'origine. Les valeurs `last_seen_commit` sont surtout `unknown`/obsolètes du point de vue du destinataire jusqu'à ce qu'il exécute `check.ps1 -Ack` une fois pour établir sa propre base de référence.
 
 ### `global-config/templates/`
 Deux petits fichiers de démarrage (`project-CLAUDE.md`, `conventions.md`) à copier dans un nouveau dépôt lors de la première configuration — un CLAUDE.md de projet « routeur » de ≤ 45 lignes et un template de conventions/green-gate. Chacun a un bloc de commentaire avec un PRESET à remplir pour la stack que vous mettez en place (actuellement seulement un exemple Python-web) ; ajoutez votre propre preset de la même façon si votre stack en a besoin d'un.
@@ -179,7 +182,7 @@ Contenu d'exemple issu du coffre second-brain Obsidian du propriétaire : invent
 
 1. **Copiez `global-config/CLAUDE.md`** vers votre propre `~/.claude/CLAUDE.md`. Fusionnez-le avec ce que vous avez déjà, ou remplacez-le carrément — à vous de voir. Lisez-le d'abord ; supprimez les sections qui ne s'appliquent pas à vous. **Réécrivez la section « Installed Plugins » avant toute autre chose sur ce fichier** — elle affirme actuellement que des plugins spécifiques (superpowers, ecc, pordee, lazyweb, andrej-karpathy-skills) sont installés et activés, et dit à Claude de ne pas mentionner qu'il faut les installer. C'est vrai pour le propriétaire d'origine, pas pour vous. Remplacez-la par votre propre liste réelle de plugins, ou supprimez-la jusqu'à ce que vous ayez installé quelque chose.
 2. **Copiez `global-config/agents/*.md`** dans `~/.claude/agents/` et **`global-config/hooks/*.py`** dans `~/.claude/hooks/`. Ce sont ces fichiers qui rendent les règles de routage de modèles, le garde-fou de sécurité git, et le hook de synchronisation graphify de CLAUDE.md réellement fonctionnels, plutôt que simple prose.
-3. **Copiez `global-config/skills/*`** dans `~/.claude/skills/`. C'est l'essentiel de la valeur réelle — 45 dossiers de skills fonctionnels, pas de simples descriptions.
+3. **Copiez `global-config/skills/*`** dans `~/.claude/skills/`. C'est l'essentiel de la valeur réelle — 67 dossiers de skills fonctionnels, pas de simples descriptions.
 4. **Fusionnez `global-config/settings.example.json`** dans votre propre `~/.claude/settings.json` (remplacez d'abord `<YOUR_HOME>` par votre vrai chemin home). Fusionnez, n'écrasez pas, si vous avez déjà un settings.json — reprenez l'entrée `hooks.PreToolUse` et ce que vous voulez d'`enabledPlugins`. La commande du hook livrée utilise le lanceur Windows `py` ; sur macOS/Linux, changez-le d'abord en `python3`.
 5. **Copiez `global-config/rules/ecc-common/`** dans `~/.claude/rules/` **uniquement si** vous installez le plugin ecc. Sinon, sautez cette étape.
 6. **Copiez `global-config/memory-examples/*.md`** dans le dossier de mémoire automatique du projet auquel vous voulez qu'elles s'appliquent (la mémoire automatique de Claude Code est par projet, dans `~/.claude/projects/<project>/memory/`), ou lisez-les comme référence et écrivez les vôtres de zéro.

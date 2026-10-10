@@ -83,6 +83,35 @@ metadata:
 | `wizard` | **Builds an interactive bash wizard** for manual procedures the agent can't do itself (Matt Pocock, source: [mattpocock/skills](https://github.com/mattpocock/skills), installed 2026-08-09). Use when provisioning infra / setting up credentials-CI secrets / walking an unfamiliar third-party dashboard / one-off migrations. Ships `template.sh` as a ready-made library (stage progress, cross-platform `open_url` including WSL, `ask`/`ask_secret`, idempotent `write_env`, `set_secret`/`set_var` via `gh`, closing summary) — the skill's job is only to scope the steps + author the stages; never edit the library part above the `STAGES` marker yourself. **Not for steps the agent can already do itself** |
 | `shipping-a-branch` | **End-to-end git ship flow** (planned by fable-medium, installed 2026-08-02). commit → confirm push → reuse-or-create PR (checks `gh pr list --head` to avoid duplicates) → choose review mode (human/self/both) → loop fixing feedback → confirm merge (method) → ask about branch cleanup. Every risky checkpoint (push/PR/merge/delete) is **confirmed separately each time**; an earlier "okay" is never used to cover a later one (per the system's instruction-priority). Use instead of `ecc:pr`/`ecc:review-pr` when you want the full flow, not just one phase. Works in every project (repo-agnostic via plain `git`/`gh`, no hardcoded branch/repo names) — invoke with `/ship` or say "ship this"/"commit and open a PR" |
 
+
+## Bonus skills (October 2026 patch)
+
+Added after the first release; see the README for caveats (several are written for the author workflow).
+
+| Skill | What it does / when to use |
+|---|---|
+| `browserclaw` | Operating discipline for driving a signed-in agent browser (snapshot, act, verify loop). |
+| `close-out-log` | Repo-local close-out ritual (docs/log entry with 4 fixed headers). Pattern adapted from a docs-driven continuity workflow. |
+| `codeburn-cost-check` | Thin wrapper so Claude can check AI spend via the codeburn CLI (the CLI itself is a separate npm package). |
+| `docx-human-sounding-report` | Structural checklist for human-sounding .docx reports. |
+| `docx-python-docx-justify` | python-docx rule: do not justify formula and code blocks with manual line breaks. |
+| `docx-th-sarabun-sizing` | TH Sarabun New sizing scale plus the base-style rule. |
+| `domain-modeling` | Domain-modeling and ADR discipline. |
+| `english-writing-anti-ai-tell` | English anti-AI-tell writing checklist. |
+| `github-pr-review-draft` | Pending-review (draft) PR review workflow via the GitHub API. |
+| `grill-with-docs` | Thin wrapper combining grilling and domain-modeling. |
+| `i-have-adhd` | ADHD-friendly output style. Frontmatter says MIT but there is no upstream source URL in the skill folder, so it is treated as self-authored. |
+| `memory-lint` | Read-only health check of a project memory folder. |
+| `ponytail` | Write the least code that is still correct (YAGNI, stdlib, native, existing dependency ladder). |
+| `project-bootstrap` | One-shot scaffold for docs-driven continuity (CLAUDE.md router, docs/log, docs/adr, conventions). |
+| `pruning-branches` | Periodic git branch housekeeping. |
+| `supabase-rls-safety-check` | Proactive Supabase RLS and anon-key audit rule. |
+| `thai-docx` | Thai .docx rendering fix (complex-script XML properties, per-language font split); ships its own scripts and references. |
+| `thai-no-quote-emphasis` | Rule against quote-mark emphasis in Thai writing. |
+| `thai-writing-anti-ai-tell` | Thai anti-AI-tell writing checklist. |
+| `agent-reach` | Panniantong/Agent-Reach (MIT). Router for internet research across many platforms via a multi-backend CLI. Run check.ps1 -Ack once to set your own baseline. |
+| `git-guardrails-claude-code` | utarn/engineer-skills (MIT). Original hook was jq/bash; a Python version is used in the author setup. Run check.ps1 -Ack once to set your own baseline. |
+| `prompt-master` | nidhinjs/prompt-master (MIT). Whole-repo skill clone (root SKILL.md plus references/). Run check.ps1 -Ack once to set your own baseline. |
 ---
 
 ## superpowers (obra/superpowers) — process discipline

@@ -2,7 +2,7 @@
 
 Most of `global-config/skills/` in this repo is **adopted from other people's public work**, not written by the owner of this template. This file credits the upstream sources. Per-skill provenance (subpath, commit baseline) lives in `global-config/tools/skill-update-check/sources.json`.
 
-Seven skills are self-authored: `poka-yoke`, `plan-pro`, and `shipping-a-branch` were written from scratch, and `graphify`, `dembrandt`, `markitdown`, and `mobbin-references` are self-written wrapper skills around third-party tools or services (the underlying tools are credited below and version-tracked in `global-config/tools/skill-update-check/sources.json`). One skill, `deslop-defaults`, is adapted — harvested from an upstream skill repo and rewritten. Everything else is adopted.
+Of the original 45, seven skills are self-authored: `poka-yoke`, `plan-pro`, and `shipping-a-branch` were written from scratch, and `graphify`, `dembrandt`, `markitdown`, and `mobbin-references` are self-written wrapper skills around third-party tools or services (the underlying tools are credited below and version-tracked in `global-config/tools/skill-update-check/sources.json`). One skill, `deslop-defaults`, is adapted — harvested from an upstream skill repo and rewritten. Everything else is adopted.
 
 ## Upstream repos the adopted skills came from
 
@@ -16,6 +16,9 @@ Seven skills are self-authored: `poka-yoke`, `plan-pro`, and `shipping-a-branch`
 | [`mattpocock/skills`](https://github.com/mattpocock/skills) | MIT (per upstream) | `grilling`, `teach`, `wait-what`, `wizard` |
 | [`briiirussell/cybersecurity-skills`](https://github.com/briiirussell/cybersecurity-skills) | MIT | `prompt-injection`, `secrets-audit`, `dependency-audit` |
 | [`Nutlope/hallmark`](https://github.com/Nutlope/hallmark) | MIT (per upstream) | `hallmark` |
+| [`Panniantong/Agent-Reach`](https://github.com/Panniantong/Agent-Reach) | MIT | `agent-reach` |
+| [`utarn/engineer-skills`](https://github.com/utarn/engineer-skills) | MIT | `git-guardrails-claude-code` |
+| [`nidhinjs/prompt-master`](https://github.com/nidhinjs/prompt-master) | MIT | `prompt-master` |
 
 ## Self-written wrappers around third-party tools
 
@@ -29,6 +32,10 @@ The SKILL.md prose for these is self-authored, but each one drives a third-party
 ## Adapted, no single fixed upstream
 
 - `deslop-defaults` — harvested from [`ibelick/ui-skills`](https://github.com/ibelick/ui-skills) (baseline-ui), rewritten stack-agnostic. Neither self-authored nor a verbatim adoption.
+
+## Self-authored bonus skills
+
+The other 19 skills in the October 2026 patch are self-authored: `browserclaw`, `close-out-log`, `codeburn-cost-check`, `docx-human-sounding-report`, `docx-python-docx-justify`, `docx-th-sarabun-sizing`, `domain-modeling`, `english-writing-anti-ai-tell`, `github-pr-review-draft`, `grill-with-docs`, `i-have-adhd`, `memory-lint`, `ponytail`, `project-bootstrap`, `pruning-branches`, `supabase-rls-safety-check`, `thai-docx`, `thai-no-quote-emphasis`, `thai-writing-anti-ai-tell`. `codeburn-cost-check` wraps the third-party `codeburn` CLI.
 
 ## A note on completeness
 

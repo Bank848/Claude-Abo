@@ -365,6 +365,160 @@
       "subpath_in_repo": "",
       "last_seen_commit": "",
       "note": "ADAPTED, not adopted and not self-authored: harvested from ibelick/ui-skills (baseline-ui) and rewritten stack-agnostic, so upstream commits do not apply 1:1. No commit baseline was recorded at harvest time (last_seen_commit intentionally empty) -- the first weekly check will flag it; review, then run check.ps1 -Ack to set the baseline. subpath_in_repo left empty pending verification of baseline-ui's exact path upstream."
+    },
+    {
+      "name": "browserclaw",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Operating discipline for driving a signed-in agent browser (snapshot, act, verify loop). No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "close-out-log",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Repo-local close-out ritual (docs/log entry with 4 fixed headers). Pattern adapted from a docs-driven continuity workflow. No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "codeburn-cost-check",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Thin wrapper so Claude can check AI spend via the codeburn CLI (the CLI itself is a separate npm package). No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "docx-human-sounding-report",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Structural checklist for human-sounding .docx reports. No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "docx-python-docx-justify",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "python-docx rule: do not justify formula and code blocks with manual line breaks. No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "docx-th-sarabun-sizing",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "TH Sarabun New sizing scale plus the base-style rule. No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "domain-modeling",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Domain-modeling and ADR discipline. No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "english-writing-anti-ai-tell",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "English anti-AI-tell writing checklist. No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "github-pr-review-draft",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Pending-review (draft) PR review workflow via the GitHub API. No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "grill-with-docs",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Thin wrapper combining grilling and domain-modeling. No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "i-have-adhd",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "ADHD-friendly output style. Frontmatter says MIT but there is no upstream source URL in the skill folder, so it is treated as self-authored. No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "memory-lint",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Read-only health check of a project memory folder. No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "ponytail",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Write the least code that is still correct (YAGNI, stdlib, native, existing dependency ladder). No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "project-bootstrap",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "One-shot scaffold for docs-driven continuity (CLAUDE.md router, docs/log, docs/adr, conventions). No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "pruning-branches",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Periodic git branch housekeeping. No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "supabase-rls-safety-check",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Proactive Supabase RLS and anon-key audit rule. No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "thai-docx",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Thai .docx rendering fix (complex-script XML properties, per-language font split); ships its own scripts and references. No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "thai-no-quote-emphasis",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Rule against quote-mark emphasis in Thai writing. No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "thai-writing-anti-ai-tell",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": "Thai anti-AI-tell writing checklist. No upstream; checker skips it. Added in the October 2026 patch."
+    },
+    {
+      "name": "agent-reach",
+      "source_repo_url": "https://github.com/Panniantong/Agent-Reach",
+      "subpath_in_repo": "",
+      "last_seen_commit": "unknown",
+      "note": "Panniantong/Agent-Reach (MIT). Router for internet research across many platforms via a multi-backend CLI. Run check.ps1 -Ack once to set your own baseline. Added in the October 2026 patch."
+    },
+    {
+      "name": "git-guardrails-claude-code",
+      "source_repo_url": "https://github.com/utarn/engineer-skills",
+      "subpath_in_repo": "skills/misc/git-guardrails-claude-code",
+      "last_seen_commit": "unknown",
+      "note": "utarn/engineer-skills (MIT). Original hook was jq/bash; a Python version is used in the author setup. Run check.ps1 -Ack once to set your own baseline. Added in the October 2026 patch."
+    },
+    {
+      "name": "prompt-master",
+      "source_repo_url": "https://github.com/nidhinjs/prompt-master",
+      "subpath_in_repo": "",
+      "last_seen_commit": "unknown",
+      "note": "nidhinjs/prompt-master (MIT). Whole-repo skill clone (root SKILL.md plus references/). Run check.ps1 -Ack once to set your own baseline. Added in the October 2026 patch."
     }
   ]
 }
