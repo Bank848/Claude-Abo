@@ -44,3 +44,5 @@ Of the 21 skills in the October 2026 patch, 13 are self-authored (12 written fro
 This list was compiled from `global-config/tools/skill-update-check/sources.json` plus a manual pass over the skills that weren't in that manifest. If you spot a missing or incorrect credit, please open an issue or PR — this repo wants to get attribution right, not just look like it does.
 
 Each upstream repo retains its own license. Check the linked repo before redistributing its skill folder outside this template. The MIT license in this repo's `LICENSE` file covers this repo's own original content only (see the note at the bottom of that file).
+
+Full upstream license texts and copyright lines are collected in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).

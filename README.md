@@ -13,6 +13,8 @@
 
 </div>
 
+**Jump to:** [Quickstart](#getting-started-quickstart) · [What's in here](#whats-in-here) · [Bonus skills](#bonus-skills-21-added-in-the-october-2026-patch) · [Licenses and credits](#license-and-credits)
+
 A portable snapshot of one person's Claude Code setup — instructions, skills, hooks, and a knowledge vault, packaged so a fresh Claude Code instance can bootstrap the same habits on a new machine. **A template to adapt, not a config to run as-is.**
 
 <details>
@@ -21,6 +23,14 @@ A portable snapshot of one person's Claude Code setup — instructions, skills, 
 Global instructions, engineering rules, **66 curated skills** (20 self-authored — 15 written from scratch (3 in the original 45 plus 12 bonus skills), 5 self-written wrappers around third-party tools (4 in the original 45 plus `codeburn-cost-check`) — 2 adapted from upstream skills, the rest adopted from upstream repos, all with per-skill provenance in `sources.json`), real memory examples, a skill-provenance manifest, and a cross-project knowledge vault — packaged so a fresh Claude Code instance (or the person setting one up) can bootstrap the same workflow habits and capabilities on a new machine. This is a **template to adapt, not a config to run as-is**: personal identifiers have been scrubbed and replaced with placeholders, and several sections only make sense if you also adopt the tools they describe.
 
 </details>
+
+## Who is this for
+
+| Good fit | Not a fit |
+|---|---|
+| You already use Claude Code daily and want ready-made habits: model routing by cost, git safety hooks, a plan-review loop | You want a one-click config. Nothing here runs as-is; everything is meant to be read and adapted |
+| You like reading other people's setups and copying only the parts that suit you | You need Windows-free or Thai-free defaults everywhere. The author's setup is Windows and Thai-English, and some sections show it |
+| You run more than one AI coding tool and want a portable `AGENTS.md` | You want a maintained product with releases and support. This is a personal snapshot |
 
 ## Getting started (quickstart)
 
@@ -295,6 +305,15 @@ What else *can* be adapted by hand if you want more than the AGENTS.md subset:
 If you use Codex/Cursor/Gemini CLI day to day, `AGENTS.md` gets you the engineering-discipline rules out of the box; the rest of the repo (skills, hooks, the .docx fixes) is still there as reference material to copy/paste from.
 
 </details>
+
+---
+
+## License and credits
+
+- This repository's own content is MIT licensed: see [LICENSE](LICENSE).
+- Most skills come from other people's public work. Credits and per-skill provenance: [ATTRIBUTION.md](ATTRIBUTION.md) and `global-config/tools/skill-update-check/sources.json`.
+- The upstream license texts and copyright lines are collected in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md). Two upstream repositories have no license file; they are listed there with a takedown note.
+- Spotted a missing credit or a skill you want removed? Open an issue and it will be fixed.
 
 ---
 
