@@ -214,16 +214,16 @@ claude-clone-template/
 
 ---
 
-## 关于订阅套餐与 Fable 5.1 层级的说明
+## 关于订阅套餐与 Fable 5.2 层级的说明
 
 `CLAUDE.md` 里的模型路由阶梯最顶层是 `fable-medium` 子代理,需要 **Max** 套餐才能用——如果是 **Pro** 套餐,调用它只会失败。`/adopt` 会在交互流程中询问这一点并替你修复。
 
 <details>
 <summary>如果你不是 Max 套餐,手动修复方法</summary>
 
-`CLAUDE.md` 里的模型路由阶梯最顶层是 `fable-medium` 子代理——这是一个刻意设置得很昂贵、极少使用的升级层级,专门留给最棘手的问题。原作者使用的是 **Max** 套餐,才能用上这个模型。如果你用的是 **Pro** 套餐(或任何没有 Fable 5.1 访问权限的套餐),调用 `fable-medium` 只会失败。
+`CLAUDE.md` 里的模型路由阶梯最顶层是 `fable-medium` 子代理——这是最昂贵的层级,用作困难决策时首选的顾问/第二意见模型。原作者使用的是 **Max** 套餐,才能用上这个模型。如果你用的是 **Pro** 套餐(或任何没有 Fable 5.2 访问权限的套餐),调用 `fable-medium` 只会失败。
 
-在原样复制 `CLAUDE.md` 之前,先确认你自己的套餐等级。如果你没有 Fable 5.1:
+在原样复制 `CLAUDE.md` 之前,先确认你自己的套餐等级。如果你没有 Fable 5.2:
 - 删除模型路由部分里关于 `fable-medium` 的段落,以及"สุดบันได"(阶梯顶层)那一条。
 - 把阶梯的顶层改为止于 `opus`——路由逻辑(在困难/高风险任务上升级到 Opus)依然成立,只是不再有比 Opus 更高的层级可以升级了。
 - 复制到 `~/.claude/agents/` 时,不要带上 `global-config/agents/fable-medium.md`。

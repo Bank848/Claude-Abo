@@ -60,7 +60,7 @@ Summarized from `~/.claude/SKILLS_INDEX.md` (full index, 200+ skills). This file
 
 ## 💰 Cost routing (applies to every task; not a skill but a rule)
 
-The main loop is Opus 5.5 or Sonnet 5.5 (your choice) and acts as orchestrator (plans, decides, checks work) → mechanical work spawns `haiku-batch` → reading many files spawns `Explore` → big chunks of standard work (main=Opus) spawn `sonnet-worker` → genuinely hard work (main=Sonnet) spawns `opus` → the highest-stakes work where opus still wavers spawns `fable-medium` (medium effort). Full rules live in `~/.claude/CLAUDE.md`
+The main loop is Opus 5.5 or Sonnet 5.5 (your choice) and acts as orchestrator (plans, decides, checks work) → mechanical work spawns `haiku-batch` → reading many files spawns `Explore` → big chunks of standard work (main=Opus) spawn `sonnet-worker` → genuinely hard work (main=Sonnet) spawns `opus` → the highest-stakes work and second opinions spawn `fable-medium` (medium effort). Full rules live in `~/.claude/CLAUDE.md`
 
 ---
 
