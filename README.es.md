@@ -214,16 +214,16 @@ Instálalos mediante el sistema de plugins de Claude Code en la máquina nueva, 
 
 ---
 
-## Una nota sobre el plan de suscripción y el nivel Fable 5.1
+## Una nota sobre el plan de suscripción y el nivel Fable 5.2
 
 La escalera de enrutamiento de modelos de `CLAUDE.md` culmina en un subagente `fable-medium`, que necesita un plan **Max** — en Pro, invocarlo simplemente falla. `/adopt` pregunta esto y lo arregla por ti.
 
 <details>
 <summary>Arreglo manual si no tienes Max</summary>
 
-La escalera de enrutamiento de modelos en `CLAUDE.md` culmina en un subagente `fable-medium`: un nivel de escalado deliberadamente caro y de uso poco frecuente para los problemas más difíciles. El dueño original tiene un plan **Max**, donde ese modelo está disponible. Si tienes el plan **Pro** (o cualquier plan sin acceso a Fable 5.1), invocar `fable-medium` simplemente fallará.
+La escalera de enrutamiento de modelos en `CLAUDE.md` culmina en un subagente `fable-medium`: el nivel más caro, usado como modelo asesor preferido y de segunda opinión para decisiones difíciles. El dueño original tiene un plan **Max**, donde ese modelo está disponible. Si tienes el plan **Pro** (o cualquier plan sin acceso a Fable 5.2), invocar `fable-medium` simplemente fallará.
 
-Antes de copiar `CLAUDE.md` tal cual, comprueba qué plan tienes. Si no tienes Fable 5.1:
+Antes de copiar `CLAUDE.md` tal cual, comprueba qué plan tienes. Si no tienes Fable 5.2:
 - Elimina los párrafos de `fable-medium` y la viñeta "สุดบันได" (tope de la escalera) de la sección de enrutamiento de modelos.
 - Cambia el techo de la escalera para que se detenga en `opus`: la lógica de enrutamiento (escalar a Opus en trabajo difícil o de alto riesgo) sigue siendo válida, simplemente no tendrá un nivel por encima de Opus al cual escalar.
 - Quita `global-config/agents/fable-medium.md` de lo que copies en `~/.claude/agents/`.

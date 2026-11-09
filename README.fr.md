@@ -214,16 +214,16 @@ Installez-les via le système de plugins de Claude Code sur la nouvelle machine,
 
 ---
 
-## Une note sur le plan d'abonnement et le palier Fable 5.1
+## Une note sur le plan d'abonnement et le palier Fable 5.2
 
 L'échelle de routage de `CLAUDE.md` culmine avec un sous-agent `fable-medium`, qui nécessite un plan Max — sur Pro, le lancer échoue simplement. `/adopt` pose la question et corrige ça pour vous.
 
 <details>
 <summary>Correctif manuel si vous n'êtes pas sur Max</summary>
 
-L'échelle de routage de modèles dans `CLAUDE.md` culmine avec un sous-agent `fable-medium` — un palier d'escalade délibérément coûteux et rarement utilisé pour les problèmes les plus difficiles. Le propriétaire d'origine est sur un plan **Max**, où ce modèle est disponible. Si vous êtes sur **Pro** (ou tout plan sans accès à Fable 5.1), lancer `fable-medium` échouera simplement.
+L'échelle de routage de modèles dans `CLAUDE.md` culmine avec un sous-agent `fable-medium` — le palier le plus coûteux, utilisé comme modèle conseiller et de second avis privilégié pour les décisions difficiles. Le propriétaire d'origine est sur un plan **Max**, où ce modèle est disponible. Si vous êtes sur **Pro** (ou tout plan sans accès à Fable 5.2), lancer `fable-medium` échouera simplement.
 
-Avant de copier `CLAUDE.md` tel quel, vérifiez quel plan vous avez. Si vous n'avez pas Fable 5.1 :
+Avant de copier `CLAUDE.md` tel quel, vérifiez quel plan vous avez. Si vous n'avez pas Fable 5.2 :
 - Supprimez les paragraphes `fable-medium` et la puce « สุดบันได » (sommet de l'échelle) de la section de routage de modèles.
 - Changez le plafond de l'échelle pour qu'elle s'arrête à `opus` — la logique de routage (escalader vers Opus sur les travaux difficiles/à fort enjeu) tient toujours, elle n'aura juste plus de palier au-dessus d'Opus vers lequel escalader.
 - Retirez `global-config/agents/fable-medium.md` de ce que vous copiez dans `~/.claude/agents/`.

@@ -214,16 +214,16 @@ Instale-os pelo sistema de plugins do Claude Code na máquina nova, depois recon
 
 ---
 
-## Uma nota sobre o plano de assinatura e o tier Fable 5.1
+## Uma nota sobre o plano de assinatura e o tier Fable 5.2
 
 A escada de roteamento do `CLAUDE.md` tem como teto um subagente `fable-medium`, que exige um plano Max — no Pro, disparar esse subagente simplesmente falha. O `/adopt` pergunta sobre isso e resolve para você.
 
 <details>
 <summary>Correção manual se você não estiver no Max</summary>
 
-A escada de roteamento de modelos em `CLAUDE.md` tem como topo um subagente `fable-medium` — um nível de escalada deliberadamente caro e de uso raro, para os problemas mais difíceis. O dono original está em um plano **Max**, onde esse modelo está disponível. Se você está no **Pro** (ou qualquer plano sem acesso ao Fable 5.1), disparar `fable-medium` simplesmente vai falhar.
+A escada de roteamento de modelos em `CLAUDE.md` tem como topo um subagente `fable-medium` — o nível mais caro, usado como modelo consultor/segunda opinião preferido para decisões difíceis. O dono original está em um plano **Max**, onde esse modelo está disponível. Se você está no **Pro** (ou qualquer plano sem acesso ao Fable 5.2), disparar `fable-medium` simplesmente vai falhar.
 
-Antes de copiar o `CLAUDE.md` como está, confira em qual plano você está. Se você não tem o Fable 5.1:
+Antes de copiar o `CLAUDE.md` como está, confira em qual plano você está. Se você não tem o Fable 5.2:
 - Apague os parágrafos do `fable-medium` e o item "สุดบันได" (topo da escada) da seção de roteamento de modelos.
 - Mude o teto da escada para parar no `opus` — a lógica de roteamento (escalar para o Opus em trabalho difícil/de alto risco) continua valendo, só que sem um nível acima do Opus para escalar.
 - Remova `global-config/agents/fable-medium.md` do que você copia para `~/.claude/agents/`.

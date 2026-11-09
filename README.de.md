@@ -214,16 +214,16 @@ Installiere sie über das Plugin-System von Claude Code auf der neuen Maschine u
 
 ---
 
-## Ein Hinweis zum Abo-Plan und zur Fable-5.1-Stufe
+## Ein Hinweis zum Abo-Plan und zur Fable-5.2-Stufe
 
 Die Routing-Leiter aus der CLAUDE.md endet oben bei einem `fable-medium`-Subagenten, der einen Max-Plan braucht — auf Pro schlägt das Spawnen einfach fehl. `/adopt` fragt das ab und behebt es für dich.
 
 <details>
 <summary>Manuelle Korrektur, falls du keinen Max-Plan hast</summary>
 
-Die Modell-Routing-Leiter in `CLAUDE.md` endet oben bei einem `fable-medium`-Subagenten — einer bewusst teuren, selten genutzten Eskalationsstufe für die schwierigsten Probleme. Der ursprüngliche Besitzer hat einen **Max**-Plan, bei dem dieses Modell verfügbar ist. Wenn du **Pro** hast (oder irgendeinen Plan ohne Fable-5.1-Zugriff), schlägt das Spawnen von `fable-medium` einfach fehl.
+Die Modell-Routing-Leiter in `CLAUDE.md` endet oben bei einem `fable-medium`-Subagenten — der teuersten Stufe, die als bevorzugtes Berater-/Zweitmeinungsmodell für schwierige Entscheidungen dient. Der ursprüngliche Besitzer hat einen **Max**-Plan, bei dem dieses Modell verfügbar ist. Wenn du **Pro** hast (oder irgendeinen Plan ohne Fable-5.2-Zugriff), schlägt das Spawnen von `fable-medium` einfach fehl.
 
-Bevor du `CLAUDE.md` unverändert kopierst, prüfe, welchen Plan du hast. Falls du kein Fable 5.1 hast:
+Bevor du `CLAUDE.md` unverändert kopierst, prüfe, welchen Plan du hast. Falls du kein Fable 5.2 hast:
 - Lösche die `fable-medium`-Absätze und den „สุดบันได"-Punkt (Spitze der Leiter) aus dem Modell-Routing-Abschnitt.
 - Ändere die Obergrenze der Leiter so, dass sie bei `opus` endet — die Routing-Logik (bei schwierigen/kritischen Aufgaben zu Opus eskalieren) bleibt gültig, es fehlt nur eine Stufe oberhalb von Opus, zu der weiter eskaliert werden könnte.
 - Lasse `global-config/agents/fable-medium.md` aus dem weg, was du nach `~/.claude/agents/` kopierst.

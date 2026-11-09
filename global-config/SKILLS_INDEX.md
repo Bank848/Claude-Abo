@@ -42,7 +42,7 @@ metadata:
 | 🪤 **Mistake-proofing at design time** | `/poka-yoke` |
 | 🚀 **Full commit→push→PR→review→merge flow** | `shipping-a-branch` (`/ship`) — every risky action (push/PR/merge/delete branch) is confirmed separately, one at a time; never one long blanket command |
 
-**Cost routing (every task):** main = Opus 5.5 or Sonnet 5.5 (your choice) · mechanical work→`haiku-batch` · reading many files→`Explore` · big chunks of standard work (main=Opus)→`sonnet-worker` · genuinely hard (main=Sonnet)→spawn `opus` · highest stakes where Opus still wavers→spawn `fable-medium`. (Full rules in `~/.claude/CLAUDE.md`)
+**Cost routing (every task):** main = Opus 5.5 or Sonnet 5.5 (your choice) · mechanical work→`haiku-batch` · reading many files→`Explore` · big chunks of standard work (main=Opus)→`sonnet-worker` · genuinely hard (main=Sonnet)→spawn `opus` · highest stakes / second opinions→spawn `fable-medium`. (Full rules in `~/.claude/CLAUDE.md`)
 
 ---
 
