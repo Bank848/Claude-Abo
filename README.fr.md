@@ -1,5 +1,5 @@
 [English](README.md) | [ภาษาไทย](README.th.md) | [简体中文](README.zh-Hans.md) | [日本語](README.ja.md) | [Español](README.es.md) | [한국어](README.ko.md) | [Português (Brasil)](README.pt-BR.md) | **Français** | [Deutsch](README.de.md) | [Русский](README.ru.md)
-<!-- abo:source-hash:8de5a318aa81 -->
+<!-- abo:source-hash:8a9163bf32af -->
 
 # Claude-Abo
 
@@ -7,6 +7,7 @@ Découvrez combien de contexte votre configuration Claude Code consomme à chaqu
 Une seule commande estime en tokens le contexte fixe de votre configuration (à côté du chiffre réel de `/context`) et liste ce qu'il faut couper ; le catalogue compte <!-- gen:skills-count:start -->68<!-- gen:skills-count:end --> skills, chacune avec sa licence, sa date de test et ses problèmes connus.
 `npx github:Bank848/Claude-Abo audit`  ·  [Site](https://bank848.github.io/Claude-Abo/)  ·  [Catalogue](https://bank848.github.io/Claude-Abo/#catalog)
 
+[![CI](https://github.com/Bank848/Claude-Abo/actions/workflows/ci.yml/badge.svg)](https://github.com/Bank848/Claude-Abo/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 <!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-68%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 

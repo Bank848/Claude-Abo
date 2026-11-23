@@ -1,5 +1,5 @@
 [English](README.md) | [ภาษาไทย](README.th.md) | **简体中文** | [日本語](README.ja.md) | [Español](README.es.md) | [한국어](README.ko.md) | [Português (Brasil)](README.pt-BR.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Русский](README.ru.md)
-<!-- abo:source-hash:8de5a318aa81 -->
+<!-- abo:source-hash:8a9163bf32af -->
 
 # Claude-Abo
 
@@ -7,6 +7,7 @@
 一条命令估算配置的固定上下文(单位 token,并与真实的 `/context` 数值对照),并列出该砍掉什么;目录收录 <!-- gen:skills-count:start -->68<!-- gen:skills-count:end --> 个 skills,每个都标有许可证、测试日期和已知问题。
 `npx github:Bank848/Claude-Abo audit`  ·  [网站](https://bank848.github.io/Claude-Abo/)  ·  [目录](https://bank848.github.io/Claude-Abo/#catalog)
 
+[![CI](https://github.com/Bank848/Claude-Abo/actions/workflows/ci.yml/badge.svg)](https://github.com/Bank848/Claude-Abo/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 <!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-68%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 
