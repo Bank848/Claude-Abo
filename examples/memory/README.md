@@ -1,6 +1,6 @@
 # Memory examples
 
-These notes show the format and the kind of habit worth saving. **Every example is invented from a short lesson outline. None is copied from, or edited from, anyone's real memory.** Project names such as `acme-shop` are made up.
+These notes show the format and the kind of habit worth saving. **Every example was written fresh from a short lesson outline, and the stories in them are illustrative.** Some habits echo rules in `global-config/CLAUDE.md`; no note is a copy of a real memory file. Project names such as `acme-shop` are made up. All eight are `feedback` notes; a `project` or `reference` note uses the same layout with a different `type`.
 
 Format of one note: a front matter block (`name`, `description`, `metadata.type`, `rewritten: true`) and a body with the rule, a **Why:** line and a **How to apply:** line.
 
