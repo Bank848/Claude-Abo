@@ -60,3 +60,10 @@ test('refuses an --out path inside the repo other than the gitignored file', () 
   const r = spawnSync(process.execPath, [bin, 'seed-denylist', '--out', path.join(d, 'tracked.txt')], { cwd: d, encoding: 'utf8' });
   assert.equal(r.status, 2);
 });
+
+test('short literals are written as inactive comments', () => {
+  const { out, run } = setup();
+  run();
+  const gh = readFileSync(out, 'utf8');
+  assert.doesNotMatch(gh, /^repo:.{1,5}$/m);
+});

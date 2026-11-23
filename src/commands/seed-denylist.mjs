@@ -80,11 +80,18 @@ export default async function seedDenylist(argv) {
   let existing = '';
   try { existing = await readFile(out, 'utf8'); } catch { /* new file */ }
   const have = new Set(parseDenylist(existing).map((d) => d.literal.toLowerCase()));
+  for (const m of existing.matchAll(/^# short-literal, not active: [a-z]+:(.+)$/gm)) have.add(m[1].trim().toLowerCase());
   const counts = {};
   let add = '';
   for (const [category, literal] of candidates) {
     if (have.has(literal.toLowerCase())) continue;
     have.add(literal.toLowerCase());
+    if (literal.length < 6) {
+      // Too short to match safely as a substring (it would hit ordinary words); the owner decides.
+      add += `# short-literal, not active: ${category}:${literal}\n`;
+      counts.short = (counts.short ?? 0) + 1;
+      continue;
+    }
     add += `${category}:${literal}\n`;
     counts[category] = (counts[category] ?? 0) + 1;
   }
