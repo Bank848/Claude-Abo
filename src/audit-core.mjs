@@ -120,6 +120,11 @@ export function analyze(inv, catalog = null, opts = {}) {
   const notes = ['Token numbers are estimates (see docs/audit-method.md); run /context in Claude Code for exact numbers. To measure a saving, compare /context before and after; do not use these estimates for that.'];
   if (inv.mcpServers.length || inv.plugins.some((p) => p.mcpCount)) notes.push('MCP tool schemas and claude.ai connectors are not measured offline.');
   if (typeof budget !== 'number') notes.push('Skill listing cap not modelled (unverified); large skill sets may be overcounted.');
+  if (inv.usage) {
+    notes.push('Usage comes from transcripts that Claude Code prunes (cleanupPeriodDays), and skills typed as slash commands may not appear as Skill calls, so "0 calls" means "no record", not "never used".');
+    if (inv.usage.partial) notes.push('The transcript scan hit its time budget; call counts are partial.');
+  }
+  if (inv.hookProbe?.skippedProject > 0) notes.push(`${inv.hookProbe.skippedProject} project-level hook(s) were not run by the probe.`);
   if (partial) notes.push('Partial input: only skill names were pasted, so checks are skipped.');
 
   return { totals, estimate, checks, cuts, notes };

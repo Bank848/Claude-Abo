@@ -6,6 +6,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { parseFrontmatter } from './frontmatter.mjs';
 import { estimateTokens } from './tokens.mjs';
+import { probeHooks } from './hook-probe.mjs';
+import { scanUsage } from './usage-scan.mjs';
 
 // Docs (code.claude.com/docs/en/skills, memory): description + when_to_use is cut at 1536
 // characters in the listing; @imports go at most 4 hops deep; auto-memory MEMORY.md loads
@@ -220,6 +222,11 @@ export async function collectWithRaw(opts = {}) {
     if (!disabled.includes(name)) inv.mcpServers.push({ name, scope: 'project' });
   }
 
+  if (opts.usage) inv.usage = await scanUsage(path.join(config, 'projects'), { days: opts.days ?? 30, budgetMs: opts.usageBudgetMs ?? 10_000 });
+  if (opts.probeHooks) {
+    inv.hookProbe = await probeHooks(rawHooks, { timeoutMs: opts.probeTimeoutMs ?? 5000, log: opts.log });
+    inv.hookProbe.skippedProject = inv.hooks.length - rawHooks.length;
+  }
   return { inventory: inv, rawHooks };
 }
 
