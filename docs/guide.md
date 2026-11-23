@@ -86,7 +86,7 @@ General engineering discipline from the ecc (everything-claude-code) plugin ecos
 (The full skill list, generated from the catalog, is in [README.md](../README.md#skills).)
 
 ### `examples/memory/`
-Eight invented example notes (rule, **Why:**, **How to apply:**) covering memory habits, model routing, hook safety and skill use. Each was written from a short lesson outline, none is copied from a real memory. Copy one into a project's auto-memory folder and rewrite it with your own facts. See `examples/memory/README.md`.
+Ten invented example notes (rule, **Why:**, **How to apply:**) covering memory habits, model routing, hook safety and skill use, plus one project note and one reference note. Each was written from a short lesson outline, none is copied from a real memory. Copy one into a project's auto-memory folder and rewrite it with your own facts. See `examples/memory/README.md`.
 
 ### `global-config/tools/skill-update-check/sources.json`
 The owner's actual skill/tool adoption manifest — real provenance data (source repo URLs, install notes, version history) for all <!-- gen:skills-count-5:start -->66<!-- gen:skills-count-5:end --> personal skills (including the self-authored and adapted ones) plus 3 pip packages, 2 npm packages, and 1 binary tool. Paired with `check.ps1`, this is what lets a `claude-clone-template` adopter track upstream updates to the skills they copied into `~/.claude/skills/`, the same way the original owner does. Update `last_seen_commit` values are mostly `unknown`/stale from the recipient's perspective until they run `check.ps1 -Ack` once to establish their own baseline.
