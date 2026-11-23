@@ -90,8 +90,7 @@ function root() {
   const badge = '<!-- gen:skills-count-badge:start -->old<!-- gen:skills-count-badge:end -->';
   put('README.md', `${badge}\n<!-- gen:skills-table:start -->\n<!-- gen:skills-table:end -->\n`);
   for (const l of ['de', 'es', 'fr', 'ja', 'ko', 'pt-BR', 'ru', 'th', 'zh-Hans']) put(`README.${l}.md`, `${badge}\n`);
-  put('docs/guide.md', 'tree <!-- gen:skills-count:start -->0<!-- gen:skills-count:end --> and <!-- gen:skills-count-4:start -->0<!-- gen:skills-count-4:end -->
-');
+  put('docs/guide.md', 'tree <!-- gen:skills-count:start -->0<!-- gen:skills-count:end --> and <!-- gen:skills-count-4:start -->0<!-- gen:skills-count-4:end -->\n');
   put('ATTRIBUTION.md', '<!-- gen:upstreams-table:start -->\n<!-- gen:upstreams-table:end -->\n');
   put('THIRD_PARTY_LICENSES.md', '<!-- gen:mit-table:start -->\n<!-- gen:mit-table:end -->\n<!-- gen:no-license-list:start -->\n<!-- gen:no-license-list:end -->\n');
   put('global-config/tools/skill-update-check/sources.json', SRC());
