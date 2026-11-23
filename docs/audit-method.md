@@ -25,3 +25,40 @@ Items marked *(summary)* came from a model-extracted summary of a long page, not
 - The collector truncates each description (+ `when_to_use`) at 1,536 characters before estimating tokens.
 - MCP is not measured offline (deferred loading); the audit reports server counts only.
 - Any "reduces context by X%" claim must come from `/context` before vs after, never from the estimate.
+
+## What is counted
+
+Each session loads a fixed amount of text before you type anything. The audit estimates it from:
+
+- CLAUDE.md files and the memory index (first 200 lines), with `@import` followed up to 4 hops.
+- Skill descriptions (name, `description`, `when_to_use`), each cut at 1,536 characters.
+- Agent descriptions.
+
+MCP servers are counted, not measured: their tool definitions are deferred, so tokens only show up in `/context`.
+Tokens are estimated as ASCII characters / 4 plus other characters / 1.5.
+
+## Estimate and listing cap
+
+The headline is `fixed tokens` with a likely range of minus and plus 25% (`ESTIMATE_ERROR`, a placeholder until
+calibration in Task 9). The skill listing cap is not modelled (`SKILL_LISTING_CHAR_BUDGET = null`) because the
+default is not documented. If you pass a cap, skills past it count as zero and cutting them is reported as
+saving nothing. Pass `--context-tokens N` with the number from `/context` to see the estimate next to the real figure.
+
+## Checklist
+
+| Check | Pass when |
+|---|---|
+| Git push guard hook | `--probe-hooks` shows a dangerous test command blocked and the harmless control command allowed. Without the probe, a static match is only a warning. |
+| Config files guarded | An ask or deny rule covers `.claude/**` or `settings.json`. |
+| Permission mode | Default mode is not `bypassPermissions`. |
+| Hygiene | No duplicate skill names, no description over 1,024 characters, no unreadable files. |
+| CLAUDE.md size | Under about 8,000 tokens. |
+
+Only `PreToolUse` hooks with a Bash matcher count. `PostToolUse` hooks cannot stop a command.
+
+## Limits
+
+- There is no score or grade. A number would suggest precision the estimate does not have.
+- A reduction claim must come from `/context` before and after, never from this estimate.
+- Plugin-provided hooks and claude.ai connectors are not inspected offline.
+- A pasted skill list gives names only, so every check is skipped.
