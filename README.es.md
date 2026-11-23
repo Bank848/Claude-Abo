@@ -1,230 +1,33 @@
 [English](README.md) | [ภาษาไทย](README.th.md) | [简体中文](README.zh-Hans.md) | [日本語](README.ja.md) | **Español** | [한국어](README.ko.md) | [Português (Brasil)](README.pt-BR.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Русский](README.ru.md)
+<!-- abo:source-hash:8de5a318aa81 -->
 
-<div align="center">
+# Claude-Abo
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Claude%20Code%20Clone%20Template&fontSize=38&fontColor=ffffff&fontAlignY=38&desc=A%20portable%20snapshot%20of%20one%20person's%20Claude%20Code%20setup&descAlignY=58&descSize=17&descColor=ffffff&animation=fadeIn" alt="Claude Code Clone Template banner" width="100%"/>
+Descubre cuánto contexto consume tu configuración de Claude Code en cada sesión y si detiene un `git push --force`.
+Un solo comando estima en tokens el contexto fijo de tu configuración (junto a la cifra real de `/context`) y lista qué recortar; el catálogo tiene <!-- gen:skills-count:start -->61<!-- gen:skills-count:end --> skills, cada una con licencia, fecha de prueba y problemas conocidos.
+`npx github:Bank848/Claude-Abo audit`  ·  [Sitio](https://bank848.github.io/Claude-Abo/)  ·  [Catálogo](https://bank848.github.io/Claude-Abo/#catalog)
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 <!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-61%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
-[![Languages](https://img.shields.io/badge/languages-10-orange)](#top)
-[![Template](https://img.shields.io/badge/type-adapt%2C%20not%20run%20as--is-lightgrey)](#caveat-this-is-one-persons-setup)
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=1200&color=6C63FF&center=true&vCenter=true&width=640&lines=66+curated+skills+with+full+provenance;Cost-aware+Sonnet+%2F+Opus+%2F+Haiku+model+routing;Git+safety+hooks+%2B+%2Fplan-pro+workflow;Cross-project+second-brain+vault" alt="rotating feature highlights"/>
+<p align="center"><img src="assets/audit-demo.gif" alt="claude-abo audit" width="820"/></p>
 
-</div>
+## Qué revisa la auditoría
 
-**Ir a:** [Inicio rápido](#primeros-pasos-inicio-rápido) · [Qué hay aquí](#qué-hay-aquí) · [Licencias y créditos](#licencia-y-créditos)
+La lista completa y sus límites están en [docs/audit-method.md](docs/audit-method.md) (en inglés).
 
-Una instantánea portátil de la configuración de Claude Code de una persona —instrucciones, skills, hooks y una bóveda de conocimiento— empaquetada para que una instancia nueva de Claude Code pueda hacer bootstrap de los mismos hábitos. Esto es **una plantilla para adaptar, no una configuración para ejecutar tal cual**.
+## Usar la plantilla
 
-<details>
-<summary>Leer la propuesta completa</summary>
+Clona el repositorio, ábrelo en Claude Code y ejecuta `/adopt`. Si prefieres hacerlo a mano, mira la [guía](docs/guide.md) (en inglés).
 
-Una instantánea portátil de la configuración de Claude Code de una persona: instrucciones globales, reglas de ingeniería, **66 skills seleccionadas** (20 de autoría propia —15 escritas desde cero, 5 wrappers propios sobre herramientas de terceros— 2 adaptadas de una skill original, y el resto adoptadas de repositorios externos, todas con procedencia documentada por skill en `sources.json`), ejemplos reales de memoria, un manifiesto de procedencia de skills y una bóveda de conocimiento entre proyectos, todo empaquetado para que una instancia nueva de Claude Code (o la persona que la configura) pueda replicar los mismos hábitos de trabajo y capacidades en una máquina nueva. Esto es una **plantilla para adaptar, no una configuración para ejecutar tal cual**: se han eliminado los identificadores personales y sustituido por marcadores de posición, y varias secciones solo cobran sentido si además adoptas las herramientas que describen.
+## Skills
 
-</details>
-
-## Para quién es esto
-
-| Encaja bien | No encaja |
-|---|---|
-| Ya usas Claude Code a diario y quieres hábitos listos: enrutamiento de modelos por costo, hooks de seguridad para git, un ciclo de revisión de planes | Quieres una configuración de un solo clic. Nada de aquí funciona tal cual; todo está pensado para leerse y adaptarse |
-| Te gusta leer las configuraciones de otras personas y copiar solo las partes que te sirven | Necesitas valores por defecto sin Windows ni tailandés en todas partes. La configuración del autor es Windows y tailandés-inglés, y algunas secciones lo reflejan |
-| Usas más de una herramienta de codificación con IA y quieres un `AGENTS.md` portátil | Quieres un producto mantenido, con versiones y soporte. Esto es una instantánea personal |
-
-## Primeros pasos (inicio rápido)
-
-> **Atajo:** clona el repositorio, ábrelo en Claude Code y ejecuta `/adopt`; te hace una entrevista y realiza por ti los pasos 2, 3, 5 y 7 de abajo. El paso 6 (instalar los propios ecosistemas de plugins) queda deliberadamente fuera del alcance de `/adopt`; ese sigue siendo trabajo tuyo.
-
-<p align="center"><img src="assets/quickstart-flow.svg" alt="Clona, luego copia las configuraciones, luego ejecuta /adopt, luego verifica" width="100%"/></p>
-
-| # | Paso | Dónde |
-|---|---|---|
-| 1 | Clona el repositorio | en cualquier ubicación conveniente |
-| 2 | Decide: ¿quieres precompresión local con Ollama? | consulta [Opcional: IA local](#opcional-ia-local-ollama-como-precompresión) |
-| 3 | Copia las configuraciones a `~/.claude/` | `CLAUDE.md`, `agents/*.md`, `hooks/*.py`, `skills/*`, `tools/` — **reescribe primero "Installed Plugins"** |
-| 4 | Fusiona la configuración | `global-config/settings.example.json` → `~/.claude/settings.json` (reemplaza `<YOUR_HOME>`) |
-| 5 | Busca y reemplaza los marcadores de posición | lista completa en [Cómo adoptar esto](#cómo-adoptar-esto), paso 8 |
-| 6 | Instala los ecosistemas de plugins | consulta [Qué más necesitarás instalar por tu cuenta](#qué-más-necesitarás-instalar-por-tu-cuenta) |
-| 7 | Copia `notes/` + `memory-examples/` (opcional) | tu propia bóveda / carpeta de memoria automática |
-| 8 | Verifica | pide un plan de implementación — ¿se invoca `/plan-pro`? |
-
-¿Shop multiagente (Codex, Cursor, Gemini CLI, ...)? Copia también `global-config/AGENTS.md` en la raíz de cada proyecto — consulta [Compatibilidad con otras herramientas de codificación con IA](#compatibilidad-con-otras-herramientas-de-codificación-con-ia).
-
-El resto de este README explica cada pieza en detalle.
-
-## Qué hay aquí
-
-```
-claude-clone-template/
-├── README.md
-├── LICENSE                                # MIT license for this repo's own content
-├── ATTRIBUTION.md                         # Credits for the upstream repos the third-party skills were adopted from
-├── .claude/commands/adopt.md              # Run `/adopt` in this repo to interview + auto-apply the steps below
-├── global-config/
-│   ├── CLAUDE.md                          # Global instruction file (~/.claude/CLAUDE.md equivalent)
-│   ├── AGENTS.md                          # Subconjunto portátil de CLAUDE.md para agentes que no son Claude Code (Codex, Cursor, Gemini CLI, ...)
-│   ├── settings.example.json              # Sanitized ~/.claude/settings.json — hooks, plugins, model default
-│   ├── agents/                            # 3 pinned-model subagent definitions (opus, haiku-batch, fable-medium)
-│   ├── hooks/block-dangerous-git.py       # PreToolUse gate that asks before risky git commands
-│   ├── hooks/graphify-auto-update.py      # Hook PostToolUse — mantiene sincronizado el grafo de conocimiento de graphify después de cada edición
-│   ├── rules/ecc-common/                  # 10 engineering-discipline rule files (ecc plugin ecosystem)
-│   ├── skills/                            # 66 curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
-│   ├── SKILLS_INDEX.md                    # Personal index of installed skills/plugins + when to use which
-│   ├── memory-examples/                   # 7 real auto-memory entries showing the memory system's format/patterns
-│   ├── templates/                         # 2 starter templates to copy into a new repo (project-CLAUDE.md, conventions.md)
-│   └── tools/
-│       ├── skill-update-check/
-│       │   ├── check.ps1                  # Weekly update checker — reads sources.json from this same folder
-│       │   └── sources.json               # Real provenance manifest: 66 personal skills + 3 pip + 2 npm + 1 binary tool
-│       └── ollama/ollama-digest.ps1       # On-demand local-model pre-digest helper (see the Ollama section below)
-└── notes/                                 # 3 notes: a personal cross-project "second brain" vault (example content)
-```
-
-### `global-config/CLAUDE.md`
-El corazón de la configuración. Codifica:
-
-- **Enrutamiento de modelos sensible al costo**: bucle principal en Sonnet como orquestador, delegando a subagentes de Haiku/Opus/Fable según la dificultad de la tarea, con reglas estrictas sobre quién lee los archivos en bruto y quién lee solo las conclusiones.
-- **Descarga de ejecución pesada**: enviar tareas grandes a sesiones separadas en lugar de inflar (y facturar de más) la sesión actual.
-- **Flujo de planificación**: `/plan-pro` como planificador predeterminado.
-- **Convención de la bóveda de segundo cerebro**: una sola regla ("¿está ligado a un solo repositorio?") que decide qué vive en la bóveda y qué en los docs/ADR de un repo.
-- **Hook de seguridad de git**: una barrera PreToolUse que pide confirmación antes de comandos git destructivos.
-- **Hook de sincronización automática de graphify**: un hook PostToolUse que mantiene actualizado el grafo de conocimiento después de cada edición, sin bloquear la edición en sí.
-- **Peculiaridades de shell**: reglas sobre la sintaxis de heredoc de la herramienta Bash frente a la herramienta PowerShell (un dolor de cabeza específico de Windows, aprendido a las malas).
-- **Automonitoreo de contexto**: cuándo debe Claude sugerir proactivamente `/compact`.
-- **Reglas anti-rasgos-de-IA en la escritura**: un conjunto completo de reglas en tailandés e inglés para lograr que el texto redactado se lea como escrito por un humano (vocabulario a evitar, patrones estructurales, ajuste de registro); la pieza más grande y de aplicación más amplia del archivo. El detalle de respaldo vive en `memory-examples/`.
-- **PR en modo borrador por defecto**, **pedir confirmación antes de programar cron/agentes en la nube**, **narración escueta durante comandos de larga duración**, una **peculiaridad de grupos de pestañas compartidos de claude-in-chrome** para sesiones en paralelo, y una **comprobación proactiva de RLS de Supabase** para cualquier proyecto que use Supabase.
-
-### `global-config/rules/ecc-common/`
-Disciplina general de ingeniería del ecosistema de plugins ecc (everything-claude-code): flujo TDD, inmutabilidad, formato de commits, checklist de seguridad, niveles de severidad en revisión de código, delegación a agentes. Solo es útil si también usas ecc (consulta "Qué más necesitarás instalar" más abajo).
-
-### `global-config/skills/`
-66 carpetas `SKILL.md` seleccionadas (más scripts/referencias/datos de apoyo cuando una skill los tiene) que cubren oficio de escritura/marketing (copywriting, copy-editing, hallmark, marketing-council, pricing...), proceso de ingeniería (debug-mantra, poka-yoke, second-brain, dependency-audit, secrets-audit...), diseño (design-system, ui-ux-pro-max, banner-design, mobbin-references...) y meta-skills para gestionar el propio Claude Code (skillify, grilling, second-brain, graphify, plan-pro, shipping-a-branch...). `poka-yoke`, `plan-pro` y `shipping-a-branch` son de autoría propia desde cero; `graphify`, `dembrandt`, `markitdown` y `mobbin-references` son skills-wrapper propias cuyo SKILL.md es original pero cuyas herramientas subyacentes son de terceros (con crédito en `ATTRIBUTION.md` y seguimiento de versión en `sources.json`); `deslop-defaults` está adaptada (tomada de `ibelick/ui-skills` y reescrita de forma agnóstica al stack); el resto están adoptadas de repositorios externos; consulta `sources.json` para la procedencia por skill y `ATTRIBUTION.md` para los créditos de origen. Son artefactos de prompt-engineering genuinamente reutilizables, no meras descripciones de skills: cópialas en `~/.claude/skills/` y funcionan de inmediato.
-
-Full skill table (generated from the manifest): see the English [README](README.md#global-configskills).
-
-### `global-config/memory-examples/`
-7 entradas reales del sistema de memoria automática de Claude Code del dueño (no son datos específicos de un proyecto, sino hábitos portátiles de "cómo trabajo"): una desambiguación de convención de nombres para mensajería entre sesiones, el patrón de usar Ollama local como precompresión, una regla sobre qué significa realmente en la práctica "actualizar el cuaderno de skills", una peculiaridad de escapado de shell (`\b` convirtiéndose silenciosamente en un byte de retroceso), una entrada de retroalimentación sobre con cuánta agresividad recortar el exceso de contexto, y el detalle de respaldo completo (tablas de vocabulario + ejemplos de antes/después) de las reglas anti-rasgos-de-IA de escritura en CLAUDE.md, tanto en tailandés como en inglés. Existen para mostrar tanto la *forma* de una buena entrada de memoria (regla + por qué + cómo aplicarla) como su contenido concreto; consulta `global-config/rules/ecc-common/` para ver cómo encaja la memoria en el flujo de trabajo más amplio, y la sección "จำ/บัญญัติ" de CLAUDE.md para la distinción entre memoria local y global que usa este dueño.
-
-### `global-config/tools/skill-update-check/sources.json`
-El manifiesto real de adopción de skills/herramientas del dueño: datos de procedencia reales (URLs de repositorios de origen, notas de instalación, historial de versiones) para las 66 skills personales (incluidas las de autoría propia y las adaptadas), más 3 paquetes pip, 2 paquetes npm y 1 herramienta binaria. Junto con `check.ps1`, esto es lo que le permite a quien adopte `claude-clone-template` seguir las actualizaciones de origen de las skills que copió en `~/.claude/skills/`, igual que hace el dueño original. Los valores de `last_seen_commit` estarán en su mayoría en `unknown` o desactualizados desde la perspectiva del receptor hasta que ejecute `check.ps1 -Ack` una vez para establecer su propia línea base.
-
-### `global-config/templates/`
-Dos archivos iniciales pequeños (`project-CLAUDE.md`, `conventions.md`) para copiar en un repositorio nuevo en la primera configuración: un `CLAUDE.md` de proyecto tipo "enrutador" de ≤45 líneas y una plantilla de convenciones/green-gate. Cada uno tiene un bloque de comentarios con un PRESET para rellenar según el stack que estés configurando (por ahora solo un ejemplo de Python-web); añade tu propio preset del mismo modo si tu stack lo necesita.
-
-### `notes/`
-Contenido de ejemplo de la bóveda de segundo cerebro en Obsidian del dueño: inventario de modelos locales de Ollama, repositorios marcados y notas de referencia varias. Muestran *qué tipo de cosa* pertenece a una bóveda entre proyectos; no son imprescindibles universales. Conserva la idea de estructura y sustituye el contenido con el tuyo con el tiempo.
-
-## Cómo adoptar esto
-
-1. **Copia `global-config/CLAUDE.md`** en tu propio `~/.claude/CLAUDE.md`. Fusiónalo con lo que ya tengas, o reemplázalo por completo: tú decides. Léelo primero; elimina las secciones que no te apliquen. **Reescribe la sección "Installed Plugins" antes de hacer cualquier otra cosa con este archivo**: actualmente afirma que ciertos plugins concretos (superpowers, ecc, pordee, lazyweb, andrej-karpathy-skills) están instalados y habilitados, y le dice a Claude que no mencione instalarlos. Eso es cierto para el dueño original, no para ti. Sustitúyela por tu propia lista real de plugins, o bórrala hasta que hayas instalado algo.
-2. **Copia `global-config/agents/*.md`** en `~/.claude/agents/` y **`global-config/hooks/*.py`** en `~/.claude/hooks/`. Son estos archivos los que hacen que las reglas de enrutamiento de modelos, la barrera de seguridad de git y el hook de sincronización automática de graphify de CLAUDE.md funcionen de verdad, en lugar de quedarse en simple prosa.
-3. **Copia `global-config/skills/*`** en `~/.claude/skills/`. Aquí está el grueso del valor real: 66 carpetas de skills funcionales, no meras descripciones de ellas.
-4. **Fusiona `global-config/settings.example.json`** en tu propio `~/.claude/settings.json` (reemplaza primero `<YOUR_HOME>` por tu ruta de inicio real). Fusiona, no sobrescribas, si ya tienes un settings.json: toma la entrada `hooks.PreToolUse` y lo que quieras de `enabledPlugins`. El comando del hook tal como se distribuye usa el lanzador `py` de Windows; en macOS/Linux, cámbialo primero a `python3`.
-5. **Copia `global-config/rules/ecc-common/`** en `~/.claude/rules/` **solo si** instalas el plugin ecc. En caso contrario, omite este paso.
-6. **Copia `global-config/memory-examples/*.md`** en la carpeta de memoria automática del proyecto al que quieras que se apliquen (la memoria automática de Claude Code es por proyecto, en `~/.claude/projects/<project>/memory/`), o léelas como referencia y escribe las tuyas desde cero.
-7. **Copia `notes/`** en la ubicación de tu propia bóveda de segundo cerebro (cualquier carpeta que Obsidian u otras herramientas de markdown puedan ver), u omite este paso por completo si no quieres una bóveda.
-8. **Busca y reemplaza cada marcador de posición**; este es el paso más importante:
-   - `<YOUR_USERNAME>`, `<YOUR_HOME>` → tu nombre de usuario real de Windows/sistema y tu ruta de inicio
-   - `<YOUR_VAULT_PATH>` → dondequiera que guardes (o planees guardar) tu bóveda de segundo cerebro
-9. **Copia `global-config/tools/`** (tanto `skill-update-check/` como, si conservaste Ollama, `ollama/`) en `~/.claude/tools/`, y luego **establece tu propia línea base en `sources.json`**: ejecuta `check.ps1 -Ack` una vez después de copiar las skills, para que `last_seen_commit` refleje un punto de partida que tú controlas y no el historial del dueño original.
-
-## Qué más necesitarás instalar por tu cuenta
-
-Este repositorio contiene **referencias y reglas para** ecosistemas de skills, no los ecosistemas en sí. Para que las instrucciones de CLAUDE.md signifiquen algo, necesitas instalar:
-
-- **superpowers** (obra/superpowers) — skills de brainstorming, redacción de planes, TDD, depuración
-- **ecc / everything-claude-code** (affaan-m/ECC) — agentes, skills, comandos, servidores MCP
-- Cualquier otro plugin nombrado en `SKILLS_INDEX.md` que decidas que quieres
-
-Instálalos mediante el sistema de plugins de Claude Code en la máquina nueva, y luego concilia `SKILLS_INDEX.md` con lo que realmente instalaste.
-
----
-
-## Una nota sobre el plan de suscripción y el nivel Fable 5.2
-
-La escalera de enrutamiento de modelos de `CLAUDE.md` culmina en un subagente `fable-medium`, que necesita un plan **Max** — en Pro, invocarlo simplemente falla. `/adopt` pregunta esto y lo arregla por ti.
-
-<details>
-<summary>Arreglo manual si no tienes Max</summary>
-
-La escalera de enrutamiento de modelos en `CLAUDE.md` culmina en un subagente `fable-medium`: el nivel más caro, usado como modelo asesor preferido y de segunda opinión para decisiones difíciles. El dueño original tiene un plan **Max**, donde ese modelo está disponible. Si tienes el plan **Pro** (o cualquier plan sin acceso a Fable 5.2), invocar `fable-medium` simplemente fallará.
-
-Antes de copiar `CLAUDE.md` tal cual, comprueba qué plan tienes. Si no tienes Fable 5.2:
-- Elimina los párrafos de `fable-medium` y la viñeta "สุดบันได" (tope de la escalera) de la sección de enrutamiento de modelos.
-- Cambia el techo de la escalera para que se detenga en `opus`: la lógica de enrutamiento (escalar a Opus en trabajo difícil o de alto riesgo) sigue siendo válida, simplemente no tendrá un nivel por encima de Opus al cual escalar.
-- Quita `global-config/agents/fable-medium.md` de lo que copies en `~/.claude/agents/`.
-
-`/adopt` te pregunta esto como parte de su entrevista y hace este ajuste por ti; si copias los archivos a mano en su lugar, hazlo tú mismo para que Claude no siga intentando invocar un subagente al que tu plan no puede acceder.
-
-</details>
-
----
-
-## Opcional: IA local (Ollama) como precompresión
-
-**Un nivel de precompresión gratuito y con pérdida** — un modelo local digiere texto largo de bajo riesgo antes de que llegue al contexto de un modelo de pago. No añade capacidad, solo ahorra costos. Se puede omitir; nada más aquí depende de esto.
-
-<details>
-<summary>Detalles — ¿lo quieres?</summary>
-
-La configuración original usa modelos locales de Ollama como un **nivel de precompresión gratuito y con pérdida**: pasa texto largo y de bajo riesgo (logs, documentación extensa) por un modelo local para digerirlo *antes* de que entre en el contexto de un modelo de pago. Se sitúa **por debajo de Haiku** en la escalera de costos y no es un nivel de enrutamiento: sin acceso a herramientas, sin contexto del repositorio, solo texto de entrada y texto de salida. Ahorra dinero; no añade capacidad. Nada más en este repositorio depende de ello.
-
-**Así que hay una pregunta que debes responderte a ti mismo: ¿quieres configurar modelos locales de Ollama para esto?**
-
-### Si la respuesta es no
-Omite esta sección entera. Elimina los párrafos de Ollama de tu copia de `CLAUDE.md` y descarta `notes/local-ollama-models.md`. Todo lo demás funciona bien sin ello.
-
-### Si la respuesta es sí
-1. **Instala Ollama** desde [ollama.com](https://ollama.com).
-2. **Decide dónde vivirá el almacén de modelos.** Los modelos son grandes (un modelo de 27B ocupa decenas de GB) y la ubicación predeterminada está en tu unidad de sistema (`%USERPROFILE%\.ollama` en Windows). Si tu unidad de sistema anda justa de espacio, mueve el almacén a una unidad más grande; la configuración original usaba `<YOUR_DRIVE>:\ollama` exactamente por esta razón. En Windows, define la variable de entorno `OLLAMA_MODELS` con la ruta elegida antes de descargar modelos; otras plataformas tienen enfoques equivalentes con variables de entorno o enlaces simbólicos.
-3. **Descarga al menos un modelo de instrucciones de propósito general** (por ejemplo, `ollama pull qwen2.5:7b-instruct` o un modelo de instrucciones similar de ~7-9B: lo bastante pequeño para ir rápido, lo bastante bueno para resumir). El inventario original en `notes/local-ollama-models.md` muestra una posible combinación: un modelo pesado de 27B para la mejor calidad, modelos medianos de 7-9B para velocidad/razonamiento/código, y un modelo con capacidad de visión (`llava:7b`); toma esa lista como inspiración, no como lista de compras.
-4. **Aprende el patrón de uso:** pasa un archivo por la tubería y obtén un resumen —
-   ```powershell
-   Get-Content <file> | ollama run <model> "<instruction>"
-   ```
-   (Pasa el archivo por la tubería; no metas prompts largos en el argumento.)
-5. **Ten presente la única regla estricta:** la salida de un modelo local **nunca es verdad fundamental**. Es compresión con pérdida para texto de bajo riesgo. Si una decisión depende del contenido, el modelo de pago lee el original, siempre.
-
-Esto es 100% opcional y se puede omitir. Existe únicamente para recortar el costo en tokens de texto masivo.
-
-</details>
-
----
-
-## Compatibilidad con otras herramientas de codificación con IA
-
-Se distribuyen dos archivos en vez de uno: `CLAUDE.md` (exclusivo de Claude Code) y `AGENTS.md` (el subconjunto portátil — [agents.md](https://agents.md), que también leen Codex, Cursor, Gemini CLI y Copilot).
-
-<details>
-<summary>Cómo interactúan los dos archivos</summary>
-
-Esta plantilla está construida específicamente para **Claude Code**, pero desde Claude Code 2.1.277 (septiembre de 2026), el propio Claude Code también lee [`AGENTS.md`](https://agents.md) como respaldo cuando un proyecto no tiene `CLAUDE.md` — la misma convención que ya leen Codex CLI, Cursor, Gemini CLI y GitHub Copilot. Por eso esta plantilla distribuye dos archivos en vez de uno:
-
-- **`global-config/CLAUDE.md`** — la configuración completa: enrutamiento de modelos sensible al costo, `/plan-pro`, el catálogo de skills, hooks, enrutamiento de subagentes, todo lo que solo tiene sentido dentro de Claude Code.
-- **`global-config/AGENTS.md`** — el subconjunto portátil (estilo de código, flujo de git, pruebas, revisión de código, checklist de seguridad, patrones comunes) con cada mecanismo exclusivo de Claude Code eliminado. Colócalo en cualquier proyecto y cualquier agente compatible con AGENTS.md lo recoge, Claude Code incluido.
-
-Si un proyecto tiene **ambos** archivos, Claude Code lee `CLAUDE.md` e ignora `AGENTS.md` — los dos no se combinan, así que no esperes que las reglas exclusivas de Claude Code se apliquen solo porque AGENTS.md también esté presente. Otras herramientas (Codex, Cursor, etc.) solo leen `AGENTS.md`; no tienen concepto de `CLAUDE.md`, la herramienta `Skill`, los hooks de `settings.json` ni las definiciones de subagentes, así que eso sigue siendo exclusivo de Claude Code pase lo que pase.
-
-Qué más *se puede* adaptar a mano si quieres más que el subconjunto de AGENTS.md:
-- Cada skill bajo `global-config/skills/<name>/SKILL.md` es solo un archivo de instrucciones en markdown. Puedes pegar una en las instrucciones personalizadas de otra herramienta, pero pierdes el disparo automático, y cualquier script incluido asume un shell que esa herramienta realmente pueda ejecutar.
-- Los hooks (`settings.json`) y los archivos de subagentes (`agents/*.md`) son exclusivos de Claude Code; no hay un equivalente al que portarlos.
-
-Si usas Codex/Cursor/Gemini CLI en tu día a día, `AGENTS.md` te da de entrada las reglas de disciplina de ingeniería; el resto del repositorio (skills, hooks, las correcciones de .docx) sigue ahí como material de referencia para copiar y pegar.
-
-</details>
+La lista completa está en el [catálogo del sitio](https://bank848.github.io/Claude-Abo/#catalog).
 
 ## Licencia y créditos
 
-- El contenido propio de este repositorio tiene licencia MIT: consulta [LICENSE](LICENSE).
-- La mayoría de los skills provienen del trabajo público de otras personas. Créditos y procedencia de cada skill: [ATTRIBUTION.md](ATTRIBUTION.md) y `global-config/tools/skill-update-check/sources.json`.
-- Los textos de licencia y las líneas de copyright de los proyectos originales están reunidos en [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md). Dos repositorios originales no tienen archivo de licencia; allí figuran con una nota de retirada.
-- ¿Notas que falta un crédito o quieres que se quite un skill? Abre un issue y se corregirá.
+El contenido propio de este repositorio es MIT: ver [LICENSE](LICENSE). Los créditos de las skills de terceros están en [ATTRIBUTION.md](ATTRIBUTION.md) y [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).
 
----
+## Aviso: es la configuración de una persona
 
-## Advertencia: esta es la configuración de una sola persona
-
-Esta instantánea proviene de un flujo de trabajo específico: un usuario bilingüe tailandés-inglés en una máquina Windows. Eso se nota en todas partes: las secciones bilingües en CLAUDE.md, las peculiaridades de PowerShell frente a Bash.
-
-Adopta lo que te sea útil, descarta lo que no. Nada de esto es una mejor práctica prescriptiva: es lo que le funcionó a una persona, escrito con el detalle suficiente para ser portátil. El valor real está en la *forma* del sistema (enrutamiento por costo, descarga de trabajo pesado, un solo hogar por cada pieza de conocimiento, barreras de seguridad en comandos destructivos), no en ninguna regla individual.
+Este repositorio nace del flujo de trabajo de un usuario tailandés en Windows, y se nota en el tailandés y en PowerShell. Toma lo útil y adáptalo a tu caso.

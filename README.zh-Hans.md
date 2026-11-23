@@ -1,230 +1,33 @@
 [English](README.md) | [ภาษาไทย](README.th.md) | **简体中文** | [日本語](README.ja.md) | [Español](README.es.md) | [한국어](README.ko.md) | [Português (Brasil)](README.pt-BR.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Русский](README.ru.md)
+<!-- abo:source-hash:8de5a318aa81 -->
 
-<div align="center">
+# Claude-Abo
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Claude%20Code%20Clone%20Template&fontSize=38&fontColor=ffffff&fontAlignY=38&desc=A%20portable%20snapshot%20of%20one%20person's%20Claude%20Code%20setup&descAlignY=58&descSize=17&descColor=ffffff&animation=fadeIn" alt="Claude Code Clone Template banner" width="100%"/>
+查看你的 Claude Code 配置每个会话占用多少上下文,以及它能否拦住 `git push --force`。
+一条命令估算配置的固定上下文(单位 token,并与真实的 `/context` 数值对照),并列出该砍掉什么;目录收录 <!-- gen:skills-count:start -->61<!-- gen:skills-count:end --> 个 skills,每个都标有许可证、测试日期和已知问题。
+`npx github:Bank848/Claude-Abo audit`  ·  [网站](https://bank848.github.io/Claude-Abo/)  ·  [目录](https://bank848.github.io/Claude-Abo/#catalog)
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 <!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-61%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
-[![Languages](https://img.shields.io/badge/languages-10-orange)](#top)
-[![Template](https://img.shields.io/badge/type-adapt%2C%20not%20run%20as--is-lightgrey)](#caveat-this-is-one-persons-setup)
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=1200&color=6C63FF&center=true&vCenter=true&width=640&lines=66+curated+skills+with+full+provenance;Cost-aware+Sonnet+%2F+Opus+%2F+Haiku+model+routing;Git+safety+hooks+%2B+%2Fplan-pro+workflow;Cross-project+second-brain+vault" alt="rotating feature highlights"/>
+<p align="center"><img src="assets/audit-demo.gif" alt="claude-abo audit" width="820"/></p>
 
-</div>
+## 审计检查什么
 
-**快速跳转:** [快速上手](#快速上手quickstart) · [仓库内容](#仓库内容) · [许可证与致谢](#许可证与致谢)
+完整检查清单与局限见 [docs/audit-method.md](docs/audit-method.md)(英文)。
 
-这是某位开发者 Claude Code 配置的可移植快照——包含指令、skill、hook 和知识库,让全新的 Claude Code 实例也能在新机器上复刻同一套工作习惯。**这是一份用来参考改造、而非照搬即用的模板。**
+## 使用模板
 
-<details>
-<summary>阅读完整介绍</summary>
+克隆仓库,在 Claude Code 中打开并运行 `/adopt`。想手动操作请看[指南](docs/guide.md)(英文)。
 
-这是一份来自某位开发者的 Claude Code 配置快照——包含全局指令、工程规范、**66 个精选 skill**(其中 20 个为原创:15 个从零写成,5 个是围绕第三方工具自写的封装;2 个由上游 skill 改编而来;其余均采纳自上游仓库,每个 skill 的来源都记录在 `sources.json` 中)、真实的 memory 示例、一份 skill 溯源清单,以及一个跨项目知识库——把这些打包在一起,是为了让一个全新的 Claude Code 实例(或负责搭建它的人)能在新机器上复刻同一套工作流习惯与能力。这是一份**用来参考改造、而非照搬即用的模板**:个人身份信息已被清除并替换为占位符,其中一些章节也只有在你同时采用了它们所描述的工具后才有意义。
+## Skills
 
-</details>
-
-## 适合谁
-
-| 适合 | 不适合 |
-|---|---|
-| 你已经每天使用 Claude Code,想要现成的工作习惯:按成本路由模型、git 安全 hook、计划评审循环 | 你想要一键可用的配置。这里的内容都不能原样运行,一切都是用来阅读和改造的 |
-| 你喜欢阅读别人的配置,只挑适合自己的部分拿来用 | 你需要处处都不依赖 Windows、不依赖泰语的默认设置。作者的配置基于 Windows 和泰英双语,部分章节能看出这一点 |
-| 你同时使用不止一种 AI 编程工具,想要一份可移植的 `AGENTS.md` | 你想要有版本发布和技术支持、持续维护的产品。这只是一份个人快照 |
-
-## 快速上手(Quickstart)
-
-> **捷径:** clone 仓库,在 Claude Code 中打开,然后运行 `/adopt`——它会通过对话询问你,并自动帮你完成下面第 2、3、5、7 步。第 6 步(安装插件生态本身)特意不包含在 `/adopt` 范围内——这一步仍需要你自己动手。
-
-<p align="center"><img src="assets/quickstart-flow.svg" alt="克隆仓库,然后复制配置,然后运行 /adopt,然后验证" width="100%"/></p>
-
-| # | 步骤 | 位置 |
-|---|---|---|
-| 1 | 克隆仓库 | 目标机器上任意方便的位置 |
-| 2 | 决定:是否需要本地 Ollama 预压缩? | 详见 [可选:本地 AI](#可选本地-aiollama预压缩) |
-| 3 | 将配置复制进 `~/.claude/` | `CLAUDE.md`、`agents/*.md`、`hooks/*.py`、`skills/*`、`tools/` ——**先重写"Installed Plugins"一节** |
-| 4 | 合并 settings | `global-config/settings.example.json` → `~/.claude/settings.json`(替换 `<YOUR_HOME>`) |
-| 5 | 查找替换占位符 | 完整清单见 [如何采用本仓库](#如何采用本仓库) 第 8 步 |
-| 6 | 安装插件生态 | 详见 [你还需要单独安装的东西](#你还需要单独安装的东西) |
-| 7 | 复制 `notes/` + `memory-examples/`(可选) | 你自己的知识库 / auto-memory 文件夹 |
-| 8 | 验证 | 让它写一份实现计划——`/plan-pro` 是否会被调用? |
-
-同时使用多个 AI coding agent(Codex、Cursor、Gemini CLI 等)?也把 `global-config/AGENTS.md` 复制到每个项目根目录——详见 [与其他 AI 编程工具的兼容性](#与其他-ai-编程工具的兼容性)。
-
-本 README 的其余部分会详细解释每一部分内容。
-
-## 仓库内容
-
-```
-claude-clone-template/
-├── README.md
-├── LICENSE                                # MIT license for this repo's own content
-├── ATTRIBUTION.md                         # Credits for the upstream repos the third-party skills were adopted from
-├── .claude/commands/adopt.md              # Run `/adopt` in this repo to interview + auto-apply the steps below
-├── global-config/
-│   ├── CLAUDE.md                          # Global instruction file (~/.claude/CLAUDE.md equivalent)
-│   ├── AGENTS.md                                  # CLAUDE.md 的可移植子集,供非 Claude Code 的代理使用(Codex、Cursor、Gemini CLI 等)
-│   ├── settings.example.json              # Sanitized ~/.claude/settings.json — hooks, plugins, model default
-│   ├── agents/                            # 3 pinned-model subagent definitions (opus, haiku-batch, fable-medium)
-│   ├── hooks/block-dangerous-git.py       # PreToolUse gate that asks before risky git commands
-│   ├── hooks/graphify-auto-update.py              # PostToolUse hook——在每次编辑后保持 graphify 知识图谱同步
-│   ├── rules/ecc-common/                  # 10 engineering-discipline rule files (ecc plugin ecosystem)
-│   ├── skills/                            # 66 curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
-│   ├── SKILLS_INDEX.md                    # Personal index of installed skills/plugins + when to use which
-│   ├── memory-examples/                   # 7 real auto-memory entries showing the memory system's format/patterns
-│   ├── templates/                         # 2 starter templates to copy into a new repo (project-CLAUDE.md, conventions.md)
-│   └── tools/
-│       ├── skill-update-check/
-│       │   ├── check.ps1                  # Weekly update checker — reads sources.json from this same folder
-│       │   └── sources.json               # Real provenance manifest: 66 personal skills + 3 pip + 2 npm + 1 binary tool
-│       └── ollama/ollama-digest.ps1       # On-demand local-model pre-digest helper (see the Ollama section below)
-└── notes/                                 # 3 notes: a personal cross-project "second brain" vault (example content)
-```
-
-### `global-config/CLAUDE.md`
-整套配置的核心,它规定了:
-
-- **成本感知的模型路由** ——主循环用 Sonnet 担任协调者,根据任务难度把工作委派给 Haiku/Opus/Fable 子代理,并附有"谁读原始文件、谁只读结论"的硬性规则。
-- **重型任务的外部执行** ——把大任务分派到独立会话中,而不是让当前会话越滚越大(账单也跟着涨)。
-- **规划工作流** ——`/plan-pro` 作为默认的计划撰写工具。
-- **第二大脑知识库的组织约定** ——一条规则("是否绑定到某个仓库?")就决定了内容应该放进知识库还是某个仓库的 docs/ADR。
-- **Git 安全 hook** ——一个在执行破坏性 git 命令前弹出确认的 PreToolUse 网关。
-- **graphify 自动同步 hook** ——一个 PostToolUse hook,在每次编辑之后自动让知识图谱保持最新,且不会阻塞编辑本身。
-- **Shell 使用陷阱** ——Bash 工具与 PowerShell 工具在 heredoc 语法上的差异规则(Windows 特有的坑,踩过才知道)。
-- **上下文自我监控** ——Claude 何时应该主动建议 `/compact`。
-- **反 AI 腔写作规则** ——一整套泰语+英语规则集,让草拟的文本读起来像人写的(要避免的词汇、结构模式、语域匹配);这是该文件里体量最大、最具普适性的一部分。背景细节保存在 `memory-examples/` 中。
-- **PR 默认先开 draft**、**创建定时/云端代理前先询问**、**长时间运行命令期间的简洁叙述原则**、面向并行会话的 **claude-in-chrome 共享标签组陷阱**,以及针对任何使用 Supabase 的项目的**主动 RLS 安全检查**。
-
-### `global-config/rules/ecc-common/`
-来自 ecc(everything-claude-code)插件生态的通用工程规范:TDD 工作流、不可变性原则、提交信息格式、安全检查清单、代码评审严重级别、代理委派规则。只有在你也运行 ecc 时才有用(见下方"你还需要单独安装"章节)。
-
-### `global-config/skills/`
-66 个精选的 `SKILL.md` 文件夹(部分 skill 还附带脚本/参考资料/数据文件),覆盖写作与营销技巧(copywriting、copy-editing、hallmark、marketing-council、pricing……)、工程流程(debug-mantra、poka-yoke、second-brain、dependency-audit、secrets-audit……)、设计(design-system、ui-ux-pro-max、banner-design、mobbin-references……),以及用于管理 Claude Code 自身的元技能(skillify、grilling、second-brain、graphify、plan-pro、shipping-a-branch……)。其中 `poka-yoke`、`plan-pro`、`shipping-a-branch` 是从零原创;`graphify`、`dembrandt`、`markitdown`、`mobbin-references` 是自写的封装 skill——SKILL.md 是原创内容,但底层工具来自第三方(致谢见 `ATTRIBUTION.md`,版本追踪见 `sources.json`);`deslop-defaults` 属于改编(取材自 `ibelick/ui-skills` 并改写为技术栈无关版本);其余均采纳自上游仓库——每个 skill 的具体来源见 `sources.json`,上游致谢见 `ATTRIBUTION.md`。这些都是真正可复用的 prompt 工程成果,而不只是对 skill 的文字描述——把它们复制进 `~/.claude/skills/` 就能立即生效。
-
-Full skill table (generated from the manifest): see the English [README](README.md#global-configskills).
-
-### `global-config/memory-examples/`
-来自原作者 Claude Code auto-memory 系统的 7 条真实条目(并非项目相关的具体事实,而是可移植的"我的工作方式"习惯):一条跨会话消息命名歧义的澄清、"本地 Ollama 作为预压缩层"的模式、一条关于"更新 skill 笔记本"实际操作含义的规则、一个 shell 转义的坑(`\b` 会被悄悄转成退格字节)、一条关于清理上下文膨胀应该多激进的反馈条目,以及 CLAUDE.md 中反 AI 腔写作规则的完整背景资料(词汇表+前后对比示例,中泰英双语版本对应为泰语和英语)。这些条目的意义更多在于展示一条好的 memory 条目应有的*形态*(规则 + 原因 + 应用方法),而不只是具体内容本身——关于 memory 如何融入更大的工作流,可参考 `global-config/rules/ecc-common/`;关于本地记忆与全局记忆的区分方式,可参考 CLAUDE.md 中的"จำ/บัญญัติ"一节。
-
-### `global-config/tools/skill-update-check/sources.json`
-原作者真实的 skill/工具采纳清单——包含全部 66 个个人 skill(含原创和改编的)以及 3 个 pip 包、2 个 npm 包、1 个二进制工具的真实溯源数据(来源仓库 URL、安装备注、版本历史)。配合 `check.ps1` 使用,这套机制能让 `claude-clone-template` 的使用者像原作者一样,追踪自己复制到 `~/.claude/skills/` 中的 skill 在上游的更新情况。对接收者而言,`last_seen_commit` 的值大多是 `unknown` 或过期状态,直到运行一次 `check.ps1 -Ack` 建立起自己的基线为止。
-
-### `global-config/templates/`
-两个用于新仓库初始配置的小型起始文件(`project-CLAUDE.md`、`conventions.md`)——一份不超过 45 行的"路由型"项目 CLAUDE.md,以及一份约定/绿灯门槛模板。每个文件都带有注释块,提供了针对特定技术栈的填空式 PRESET(目前只有一个 Python-web 示例);如果你的技术栈需要,可以用同样的方式添加自己的 preset。
-
-### `notes/`
-来自原作者 Obsidian 第二大脑知识库的示例内容:本地 Ollama 模型清单、收藏的仓库、以及各种参考笔记。这些内容展示的是"跨项目知识库里应该放什么类型的东西",而不是放之四海皆准的必备项。保留这种结构思路即可,内容可以随时间替换成你自己的。
-
-## 如何采用本仓库
-
-1. **复制 `global-config/CLAUDE.md`** 到你自己的 `~/.claude/CLAUDE.md`。可以与你现有的内容合并,也可以直接替换——由你决定。先通读一遍,删掉不适用于你的部分。**在做任何其他操作之前,先重写"Installed Plugins"一节**——它目前声明了特定插件(superpowers、ecc、pordee、lazyweb、andrej-karpathy-skills)已安装并启用,并且告诉 Claude 不要提及安装这些插件。这对原作者是事实,对你未必是。把它替换成你自己实际的插件列表,或者在你安装好东西之前先删掉这部分。
-2. **将 `global-config/agents/*.md`** 复制到 `~/.claude/agents/`,并把 **`global-config/hooks/*.py`**(两个 hook 都要)复制到 `~/.claude/hooks/`。正是这些文件让 CLAUDE.md 里的模型路由规则、git 安全网关,以及 graphify 自动同步 hook 真正起作用,而不只是文字说明。
-3. **将 `global-config/skills/*`** 复制到 `~/.claude/skills/`。这是本仓库实际价值的主体——66 个可直接使用的 skill 文件夹,而不只是对它们的描述。
-4. **将 `global-config/settings.example.json` 合并**进你自己的 `~/.claude/settings.json`(先把 `<YOUR_HOME>` 替换成你真实的家目录路径)。如果你已经有一份 settings.json,应该合并而不是覆盖——取 `hooks.PreToolUse` 条目以及 `enabledPlugins` 中你想要的部分。shipped 的 hook 命令用的是 Windows 的 `py` 启动器;在 macOS/Linux 上,先把它改成 `python3`。
-5. **将 `global-config/rules/ecc-common/` 复制**到 `~/.claude/rules/`,**仅当**你安装了 ecc 插件时才这么做,否则跳过。
-6. **将 `global-config/memory-examples/*.md` 复制**到你希望它们生效的那个项目对应的 auto-memory 文件夹中(Claude Code 的 auto-memory 是按项目划分的,位于 `~/.claude/projects/<project>/memory/`),或者只是把它们当作参考读一遍,自己从零写一份。
-7. **将 `notes/` 复制**到你自己的第二大脑知识库位置(任何 Obsidian 或纯 markdown 工具能看到的文件夹都行),如果不需要知识库可以完全跳过。
-8. **对每一个占位符做查找替换**——这是最重要的一步:
-   - `<YOUR_USERNAME>`、`<YOUR_HOME>` → 你实际的 Windows/系统用户名和家目录路径
-   - `<YOUR_VAULT_PATH>` → 你存放(或打算存放)第二大脑知识库的位置
-9. **将 `global-config/tools/`**(包括 `skill-update-check/`,以及如果你保留了 Ollama 的话还有 `ollama/`)复制到 `~/.claude/tools/`,然后**在 `sources.json` 中建立你自己的基线**:把 skill 复制过去之后运行一次 `check.ps1 -Ack`,让 `last_seen_commit` 反映出属于你自己的起点,而不是原作者的历史记录。
-
-## 你还需要单独安装的东西
-
-本仓库包含的是对各类 skill 生态的**引用和相关规则**,并不包含这些生态本身。要让 CLAUDE.md 里的指令真正发挥作用,你还需要安装:
-
-- **superpowers**(obra/superpowers)——brainstorming、writing-plans、TDD、调试相关 skill
-- **ecc / everything-claude-code**(affaan-m/ECC)——代理、skill、命令、MCP 服务器
-- `SKILLS_INDEX.md` 中提到的、你觉得需要的其他插件
-
-在新机器上通过 Claude Code 的插件系统安装它们,然后把 `SKILLS_INDEX.md` 与你实际安装的内容对齐。
-
----
-
-## 关于订阅套餐与 Fable 5.2 层级的说明
-
-`CLAUDE.md` 里的模型路由阶梯最顶层是 `fable-medium` 子代理,需要 **Max** 套餐才能用——如果是 **Pro** 套餐,调用它只会失败。`/adopt` 会在交互流程中询问这一点并替你修复。
-
-<details>
-<summary>如果你不是 Max 套餐,手动修复方法</summary>
-
-`CLAUDE.md` 里的模型路由阶梯最顶层是 `fable-medium` 子代理——这是最昂贵的层级,用作困难决策时首选的顾问/第二意见模型。原作者使用的是 **Max** 套餐,才能用上这个模型。如果你用的是 **Pro** 套餐(或任何没有 Fable 5.2 访问权限的套餐),调用 `fable-medium` 只会失败。
-
-在原样复制 `CLAUDE.md` 之前,先确认你自己的套餐等级。如果你没有 Fable 5.2:
-- 删除模型路由部分里关于 `fable-medium` 的段落,以及"สุดบันได"(阶梯顶层)那一条。
-- 把阶梯的顶层改为止于 `opus`——路由逻辑(在困难/高风险任务上升级到 Opus)依然成立,只是不再有比 Opus 更高的层级可以升级了。
-- 复制到 `~/.claude/agents/` 时,不要带上 `global-config/agents/fable-medium.md`。
-
-`/adopt` 会在交互流程中主动询问这一点,并替你完成相应修改;如果你是手动逐个复制文件,请自己完成这一步,以免 Claude 一直尝试调用一个你的套餐根本用不了的子代理。
-
-</details>
-
----
-
-## 可选:本地 AI(Ollama)预压缩
-
-一层免费、有损的预压缩——本地模型在长而低风险的文本进入付费模型上下文之前先消化压缩一遍。不增加任何能力,纯粹省钱。可以跳过,本仓库其余部分都不依赖它。
-
-<details>
-<summary>详情——你需要这个吗?</summary>
-
-原始配置把本地 Ollama 模型用作一层**免费、有损的预压缩层**——把冗长、低风险的文本(日志、啰嗦的文档)先通过本地模型消化压缩一遍,再送入付费模型的上下文中。它位于成本阶梯中**比 Haiku 更低**的位置,本身不算一个路由层级:没有工具访问权限,没有仓库上下文,纯粹是文本进、文本出。它能省钱,但不增加任何能力。本仓库中的其他内容都不依赖它。
-
-**所以,有一个问题需要你自己回答:你想为此配置本地 Ollama 模型吗?**
-
-### 如果不想
-跳过整个章节。从你的 `CLAUDE.md` 副本中删除 Ollama 相关段落,并去掉 `notes/local-ollama-models.md`。没有它,其余部分照样能正常工作。
-
-### 如果想
-1. 从 [ollama.com](https://ollama.com) **安装 Ollama**。
-2. **决定模型存放位置。** 模型体积很大(一个 27B 模型能有几十 GB),默认位置在系统盘(Windows 上是 `%USERPROFILE%\.ollama`)。如果系统盘空间紧张,把存储位置迁移到更大的盘——原始配置正是出于这个原因,把它放在了 `<YOUR_DRIVE>:\ollama`。在 Windows 上,拉取模型之前先设置好 `OLLAMA_MODELS` 环境变量指向你选定的路径;其他平台有对应的环境变量或符号链接做法。
-3. **至少拉取一个通用指令模型**(例如 `ollama pull qwen2.5:7b-instruct` 或类似的约 7-9B 指令模型——足够小、跑得快,摘要效果也够用)。`notes/local-ollama-models.md` 中记录的原始配置提供了一种可能的组合方式:一个 27B 的大模型追求最佳质量,若干 7-9B 的中等模型兼顾速度/推理/代码,再加一个具备视觉能力的模型(`llava:7b`)——把它当作参考,而不是照单全收的购物清单。
-4. **掌握使用模式:** 把文件当输入喂进去,拿到摘要输出——
-   ```powershell
-   Get-Content <file> | ollama run <model> "<instruction>"
-   ```
-   (用管道传入文件,不要把长文本塞进命令行参数里。)
-5. **记住这条铁律:** 本地模型的输出**永远不是可信的事实来源**。它只是对低风险文本的有损压缩。如果某个决策依赖于这些内容,付费模型必须读原文——永远如此。
-
-这一部分完全可选,可以跳过。它存在的唯一目的就是替批量文本省一点 token 成本。
-
-</details>
-
----
-
-## 与其他 AI 编程工具的兼容性
-
-这里提供两个文件,而不是一个:`CLAUDE.md`(仅限 Claude Code)和 `AGENTS.md`(可移植的子集——[agents.md](https://agents.md),Codex、Cursor、Gemini CLI、Copilot 也会读取)。
-
-<details>
-<summary>两个文件如何配合</summary>
-
-本模板是专门为 **Claude Code** 打造的,但从 Claude Code 2.1.277(2026 年 9 月)起,Claude Code 自己在项目没有 `CLAUDE.md` 时,也会读取 [`AGENTS.md`](https://agents.md) 作为兜底——这正是 Codex CLI、Cursor、Gemini CLI、GitHub Copilot 早已在用的同一套约定。这就是为什么本模板准备了两个文件,而不是一个:
-
-- **`global-config/CLAUDE.md`** ——完整配置:成本感知的模型路由、`/plan-pro`、skill 目录、hooks、子代理路由,所有只在 Claude Code 里才有意义的东西。
-- **`global-config/AGENTS.md`** ——可移植的子集(编码风格、git 工作流、测试、代码审查、安全检查清单、常见模式),去掉了所有 Claude Code 专属机制。把它放进任何项目,任何支持 AGENTS.md 约定的代理都能读取,包括 Claude Code 自己。
-
-如果一个项目**同时**有这两个文件,Claude Code 会读取 `CLAUDE.md` 并忽略 `AGENTS.md`——两者不会合并,所以不要指望只因为项目里也放了 AGENTS.md,Claude Code 专属的规则就会生效。其他工具(Codex、Cursor 等)则始终只读取 `AGENTS.md`;它们不理解 `CLAUDE.md`、`Skill` 工具、`settings.json` 里的 hooks 或子代理定义这些概念,所以无论如何这些部分都只对 Claude Code 有效。
-
-如果你想要的不只是 AGENTS.md 这个子集,以下内容*可以*手动改编:
-- `global-config/skills/<name>/SKILL.md` 下的每个 skill 本质上就是一份 markdown 指令文件。你可以把某一个粘贴进另一个工具的自定义指令里,但会失去自动触发能力,而且任何附带的脚本都假定运行在某个特定 shell 环境下,不一定能在别的工具里跑起来。
-- Hooks(`settings.json`)和子代理文件(`agents/*.md`)是 Claude Code 专属的——没有对应的东西可以移植过去。
-
-如果你日常使用 Codex/Cursor/Gemini CLI,`AGENTS.md` 能让你直接用上那套工程纪律规则;仓库里其余部分(skill、hooks、.docx 修复方法)依然可以当作参考资料来复制粘贴。
-
-</details>
+完整列表见[网站目录](https://bank848.github.io/Claude-Abo/#catalog)。
 
 ## 许可证与致谢
 
-- 本仓库自身的内容采用 MIT 许可证:见 [LICENSE](LICENSE)。
-- 大多数 skill 来自其他人的公开成果。致谢与各 skill 的来源:[ATTRIBUTION.md](ATTRIBUTION.md) 和 `global-config/tools/skill-update-check/sources.json`。
-- 上游项目的许可证文本和版权声明汇总在 [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md)。有两个上游仓库没有许可证文件,已在其中列出并附有下架说明。
-- 发现遗漏的致谢,或希望移除某个 skill?请提交 issue,我们会处理。
+本仓库自有内容采用 MIT,见 [LICENSE](LICENSE)。第三方 skills 的致谢见 [ATTRIBUTION.md](ATTRIBUTION.md) 和 [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md)。
 
----
+## 说明:这是一个人的配置
 
-## 提醒:这是一个人的个人配置
-
-这份快照来自一套具体的工作流:一位泰英双语用户,在 Windows 机器上工作。这一点在各处都能看出来——CLAUDE.md 里的双语章节,以及 PowerShell 与 Bash 之间的种种坑。
-
-有用的就采纳,没用的就丢掉。这里的内容都不是什么规定性的最佳实践——它只是对一个人真正管用的做法,被足够详细地写了下来,使其具备可移植性。真正的价值在于这套系统的*整体形态*(按成本分级路由、把重活外包出去、每类知识只有一个归属地、对破坏性命令设安全网),而不是其中任何一条具体规则。
+本仓库来自一位泰语用户在 Windows 上的工作流,因此带有泰语和 PowerShell 的痕迹。只取对你有用的部分,并按自己的情况调整。
