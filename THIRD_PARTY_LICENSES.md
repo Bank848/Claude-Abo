@@ -19,6 +19,8 @@ All of the projects below use the standard MIT license text printed once at the 
 | [`nidhinjs/prompt-master`](https://github.com/nidhinjs/prompt-master) | Copyright (c) 2026 Nidhin Joseph Nelson |
 | [`DietrichGebert/ponytail`](https://github.com/DietrichGebert/ponytail) | Copyright (c) 2026 DietrichGebert |
 | [`ibelick/ui-skills`](https://github.com/ibelick/ui-skills) | Copyright (c) 2026 Julien Thibeaut |
+| [`idan-rubin/browserclaw`](https://github.com/idan-rubin/browserclaw) | Copyright (c) 2025 Peter Steinberger (OpenClaw); Copyright (c) 2026 Idan Rubin |
+| [`ayghri/i-have-adhd`](https://github.com/ayghri/i-have-adhd) | Copyright (c) 2026 Ayoub Ghriss |
 
 ```text
 MIT License
@@ -46,7 +48,7 @@ SOFTWARE.
 
 ## Upstream projects without a license file
 
-These repositories had no license file when this template was assembled. Under default copyright rules all rights are reserved by their authors. The skills taken from them are included on an assumption of permissive intent. If you are the author and want them removed or credited differently, open an issue and they will be taken out.
+These repositories had no repository-level license file when checked on 2026-11-23. Under default copyright rules all rights are reserved by their authors, so nothing from them is copied into this repository: the skills taken from them are listed as pointers (links and install lines) in the skill catalog.
 
 - [`thananon/9arm-skills`](https://github.com/thananon/9arm-skills)
 - [`mrgoonie/claudekit-skills`](https://github.com/mrgoonie/claudekit-skills)
@@ -54,4 +56,3 @@ These repositories had no license file when this template was assembled. Under d
 ## Bundled license files
 
 - `global-config/skills/prompt-master/LICENSE`: the upstream MIT license shipped with that skill.
-- `browserclaw`: vendor-generated instructions for the BrowserOS browser integration; no license text is shipped with it.

@@ -8,9 +8,9 @@ Of the original 45, seven skills are self-authored: `poka-yoke`, `plan-pro`, and
 
 | Upstream repo | License (as adopted) | Skills taken |
 |---|---|---|
-| [`thananon/9arm-skills`](https://github.com/thananon/9arm-skills) | **no license file upstream** — all rights reserved by default; redistributed here on assumed permissive intent, contact upstream before reuse elsewhere | `debug-mantra`, `post-mortem`, `scrutinize`, `management-talk` |
+| [`thananon/9arm-skills`](https://github.com/thananon/9arm-skills) | no license file upstream; **not bundled**: listed as a pointer, install from the upstream repo | `debug-mantra`, `post-mortem`, `scrutinize`, `management-talk` |
 | [`nextlevelbuilder/ui-ux-pro-max-skill`](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | MIT (per upstream) | `ui-ux-pro-max`, `design`, `design-system`, `banner-design`, `brand`, `slides` |
-| [`mrgoonie/claudekit-skills`](https://github.com/mrgoonie/claudekit-skills) | **no license file upstream** — all rights reserved by default; redistributed here on assumed permissive intent, contact upstream before reuse elsewhere | `ui-styling` |
+| [`mrgoonie/claudekit-skills`](https://github.com/mrgoonie/claudekit-skills) | no license file upstream; **not bundled**: listed as a pointer, install from the upstream repo | `ui-styling` |
 | [`coreyhaines31/makerskills`](https://github.com/coreyhaines31/makerskills) | MIT | `second-brain`, `decide`, `unstuck`, `skillify`, `deep-research`, `watch-video` |
 | [`coreyhaines31/marketingskills`](https://github.com/coreyhaines31/marketingskills) | MIT | `product-marketing`, `launch`, `copywriting`, `copy-editing`, `social`, `community-marketing`, `content-strategy`, `image`, `marketing-ideas`, `marketing-psychology`, `pricing`, `marketing-council` |
 | [`mattpocock/skills`](https://github.com/mattpocock/skills) | MIT (per upstream) | `grilling`, `teach`, `wait-what`, `wizard`, `domain-modeling`, `grill-with-docs` (`git-guardrails-claude-code` also exists here) |
@@ -19,6 +19,8 @@ Of the original 45, seven skills are self-authored: `poka-yoke`, `plan-pro`, and
 | [`Nutlope/hallmark`](https://github.com/Nutlope/hallmark) | MIT (per upstream) | `hallmark` |
 | [`Panniantong/Agent-Reach`](https://github.com/Panniantong/Agent-Reach) | MIT | `agent-reach` |
 | [`utarn/engineer-skills`](https://github.com/utarn/engineer-skills) | MIT | `git-guardrails-claude-code` |
+| [`idan-rubin/browserclaw`](https://github.com/idan-rubin/browserclaw) | MIT | `browserclaw` |
+| [`ayghri/i-have-adhd`](https://github.com/ayghri/i-have-adhd) | MIT | `i-have-adhd` |
 | [`nidhinjs/prompt-master`](https://github.com/nidhinjs/prompt-master) | MIT | `prompt-master` |
 
 ## Self-written wrappers around third-party tools
@@ -37,7 +39,7 @@ The SKILL.md prose for these is self-authored, but each one drives a third-party
 
 ## Self-authored bonus skills
 
-Of the 21 skills in the October 2026 patch, 13 are self-authored (12 written from scratch, plus the `codeburn-cost-check` wrapper): `close-out-log`, `codeburn-cost-check`, `docx-human-sounding-report`, `docx-python-docx-justify`, `docx-th-sarabun-sizing`, `english-writing-anti-ai-tell`, `github-pr-review-draft`, `memory-lint`, `project-bootstrap`, `pruning-branches`, `supabase-rls-safety-check`, `thai-no-quote-emphasis`, `thai-writing-anti-ai-tell`. `codeburn-cost-check` wraps the third-party `codeburn` CLI. `domain-modeling` and `grill-with-docs` come from `mattpocock/skills` and `ponytail` is adapted from `DietrichGebert/ponytail` (see the tables above); `agent-reach`, `git-guardrails-claude-code`, and `prompt-master` come from the upstream repos listed above. `browserclaw` and `i-have-adhd` are vendor/upstream-derived, source not recorded (they are listed in `sources.json` with an unknown source URL). In total, 20 of the 66 skills are self-authored (7 of the original 45 plus these 13): 15 written from scratch and 5 self-written wrappers. Two more, `deslop-defaults` and `ponytail`, are adapted.
+Of the 21 skills in the October 2026 patch, 13 are self-authored (12 written from scratch, plus the `codeburn-cost-check` wrapper): `close-out-log`, `codeburn-cost-check`, `docx-human-sounding-report`, `docx-python-docx-justify`, `docx-th-sarabun-sizing`, `english-writing-anti-ai-tell`, `github-pr-review-draft`, `memory-lint`, `project-bootstrap`, `pruning-branches`, `supabase-rls-safety-check`, `thai-no-quote-emphasis`, `thai-writing-anti-ai-tell`. `codeburn-cost-check` wraps the third-party `codeburn` CLI. `domain-modeling` and `grill-with-docs` come from `mattpocock/skills` and `ponytail` is adapted from `DietrichGebert/ponytail` (see the tables above); `agent-reach`, `git-guardrails-claude-code`, and `prompt-master` come from the upstream repos listed above. `browserclaw` (from `idan-rubin/browserclaw`) and `i-have-adhd` (from `ayghri/i-have-adhd`) come from upstream repos under MIT. Five skills (`debug-mantra`, `post-mortem`, `scrutinize`, `management-talk`, `ui-styling`) are not bundled because their upstream has no usable licence or by owner choice: the manifest lists them as pointers to the author. In total, 20 of the 66 skills are self-authored (7 of the original 45 plus these 13): 15 written from scratch and 5 self-written wrappers. Two more, `deslop-defaults` and `ponytail`, are adapted.
 
 ## A note on completeness
 

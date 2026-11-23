@@ -66,30 +66,6 @@
     "reason": "documents blocked private ranges (SSRF guidance)"
   },
   {
-    "file": "global-config/skills/ui-styling/canvas-fonts/ArsenalSC-OFL.txt",
-    "rule": "email",
-    "match": "andrij.design@gmail.com",
-    "reason": "font licence copyright line; remove in Task 4 (ui-styling becomes a pointer)"
-  },
-  {
-    "file": "global-config/skills/ui-styling/canvas-fonts/EricaOne-OFL.txt",
-    "rule": "email",
-    "match": "luciano@latinotype.com",
-    "reason": "font licence copyright line; remove in Task 4 (ui-styling becomes a pointer)"
-  },
-  {
-    "file": "global-config/skills/ui-styling/canvas-fonts/Italiana-OFL.txt",
-    "rule": "email",
-    "match": "hi@typemade.mx",
-    "reason": "font licence copyright line; remove in Task 4 (ui-styling becomes a pointer)"
-  },
-  {
-    "file": "global-config/skills/ui-styling/canvas-fonts/PoiretOne-OFL.txt",
-    "rule": "email",
-    "match": "denis.masharov@gmail.com",
-    "reason": "font licence copyright line; remove in Task 4 (ui-styling becomes a pointer)"
-  },
-  {
     "file": "global-config/memory-examples/cross-session-send-message.md",
     "rule": "uuid",
     "match": "33856e17",
