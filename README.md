@@ -10,6 +10,8 @@ One command estimates your setup's fixed context in tokens (next to the real `/c
 <!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-61%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 [![Template](https://img.shields.io/badge/type-adapt%2C%20not%20run%20as--is-lightgrey)](#caveat-this-is-one-persons-setup)
 
+<p align="center"><img src="assets/audit-demo.gif" alt="Terminal recording of the audit command on a sample setup: estimated tokens, what to cut first, safety checklist" width="820"/></p>
+
 ## What the audit checks
 
 - **Fixed context:** CLAUDE.md, skill descriptions, custom agents and MCP tool lists, summed as an estimate in tokens. Compare it with `/context`; an estimate is not a measurement ([method](docs/audit-method.md#what-is-counted)).
