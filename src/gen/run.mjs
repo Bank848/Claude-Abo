@@ -51,6 +51,12 @@ export async function runGen({ root, check = false } = {}) {
     ['skills-count-2', count, false],
     ['skills-count-3', count, false],
   ])]);
+  jobs.push(['docs/guide.md', (t) => applyRegions(t, [
+    ['skills-count', count, false],
+    ['skills-count-3', count, false],
+    ['skills-count-4', manifest.skills.length, false],
+    ['skills-count-5', manifest.skills.length, false],
+  ])]);
   for (const l of README_TRANSLATIONS) {
     jobs.push([`README.${l}.md`, (t) => applyRegions(t, [['skills-count-badge', skillsBadge(manifest), true], ['skills-count', count, false]])]);
   }
