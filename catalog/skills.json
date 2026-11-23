@@ -14,6 +14,12 @@
       "licenseUrl": null
     },
     {
+      "repo": "cathrynlavery/diagram-design",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2025 Cathryn Lavery",
+      "licenseUrl": null
+    },
+    {
       "repo": "coreyhaines31/makerskills",
       "license": "MIT",
       "copyright": "Copyright (c) 2026 Corey Haines",
@@ -29,6 +35,12 @@
       "repo": "DietrichGebert/ponytail",
       "license": "MIT",
       "copyright": "Copyright (c) 2026 DietrichGebert",
+      "licenseUrl": null
+    },
+    {
+      "repo": "garrytan/gstack",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2026 Garry Tan",
       "licenseUrl": null
     },
     {
@@ -56,9 +68,21 @@
       "licenseUrl": null
     },
     {
+      "repo": "nateherkai/scroll-craft",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2026 Nate Herk",
+      "licenseUrl": null
+    },
+    {
       "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
       "license": "MIT",
       "copyright": "Copyright (c) 2024 Next Level Builder",
+      "licenseUrl": null
+    },
+    {
+      "repo": "nexu-io/motion-anything",
+      "license": "Apache-2.0",
+      "copyright": "Apache License 2.0; the upstream LICENSE file carries no copyright line",
       "licenseUrl": null
     },
     {
@@ -83,6 +107,12 @@
       "repo": "thananon/9arm-skills",
       "license": "NOASSERTION",
       "copyright": null,
+      "licenseUrl": null
+    },
+    {
+      "repo": "tt-a1i/archify",
+      "license": "Apache-2.0",
+      "copyright": "Apache License 2.0; the upstream LICENSE file carries no copyright line",
       "licenseUrl": null
     },
     {
@@ -122,6 +152,45 @@
         "scanned": "2026-11-23",
         "scanner": "skill-scan v1",
         "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "archify",
+      "path": null,
+      "summary": "Interactive architecture diagrams derived from code, exported as a single HTML file.",
+      "category": "engineering",
+      "origin": "adopted",
+      "upstream": "tt-a1i/archify",
+      "source": {
+        "subpath": "archify",
+        "commit": "3ca198d867ce4b616332f846ff66e5c8e5e60f95",
+        "note": "Recorded by intake at 3ca198d867ce."
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "redistribution": "not-bundled",
+        "checked": "2026-11-24",
+        "evidence": "https://github.com/tt-a1i/archify/blob/3ca198d867ce4b616332f846ff66e5c8e5e60f95/archify/LICENSE"
+      },
+      "pointer": {
+        "url": "https://github.com/tt-a1i/archify/tree/3ca198d867ce4b616332f846ff66e5c8e5e60f95/archify",
+        "install": "see the upstream README for install steps",
+        "note": "Large folder (about 310 files) with a vendored parser bundle, so it is linked and not bundled."
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "pointer",
+      "knownIssues": [
+        "intake scan: 10 errors, 9 hidden-unicode hits inside the vendored deps.cjs and one binary file; read them before installing"
+      ],
+      "security": {
+        "scanned": null,
+        "scanner": null,
+        "errors": null,
         "reviewed": false
       }
     },
@@ -407,6 +476,36 @@
       }
     },
     {
+      "name": "council-deliberate",
+      "path": "global-config/skills/council-deliberate",
+      "summary": "Adds an anonymized cross-exam round and a hand-computed weighted tally to a four-voice decision council.",
+      "category": "meta",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "expects the ecc plugin council skill",
+        "spawns several subagents, so it costs real tokens"
+      ],
+      "security": {
+        "scanned": "2026-11-24",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
       "name": "debug-mantra",
       "path": null,
       "summary": "Four-step debugging discipline (reproduce → trace → falsify → cross-reference) recited before proposing any fix.",
@@ -663,6 +762,45 @@
       }
     },
     {
+      "name": "diagram-design",
+      "path": null,
+      "summary": "Polished static diagrams and restyling of Mermaid or draw.io output.",
+      "category": "design",
+      "origin": "adopted",
+      "upstream": "cathrynlavery/diagram-design",
+      "source": {
+        "subpath": "skills/diagram-design",
+        "commit": "0eeda75a708f419560d5e032693618bb9954f17b",
+        "note": "Recorded by intake at 0eeda75a708f."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "not-bundled",
+        "checked": "2026-11-24",
+        "evidence": "https://github.com/cathrynlavery/diagram-design/blob/0eeda75a708f419560d5e032693618bb9954f17b/LICENSE"
+      },
+      "pointer": {
+        "url": "https://github.com/cathrynlavery/diagram-design/tree/0eeda75a708f419560d5e032693618bb9954f17b/skills/diagram-design",
+        "install": "see the upstream README for install steps",
+        "note": "Large folder (about 280 files), so it is linked and not bundled."
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "pointer",
+      "knownIssues": [
+        "example assets load fonts from fonts.googleapis.com"
+      ],
+      "security": {
+        "scanned": null,
+        "scanner": null,
+        "errors": null,
+        "reviewed": false
+      }
+    },
+    {
       "name": "docx-human-sounding-report",
       "path": "global-config/skills/docx-human-sounding-report",
       "summary": "Fixes for a .docx report that should not read as machine-made.",
@@ -868,6 +1006,36 @@
       }
     },
     {
+      "name": "git-retro",
+      "path": "global-config/skills/git-retro",
+      "summary": "Turns recent git history into a short retrospective of what changed and what keeps breaking.",
+      "category": "engineering",
+      "origin": "adapted",
+      "upstream": "garrytan/gstack",
+      "source": {
+        "note": "Standalone port of the idea in garrytan/gstack (MIT), rewritten without its preamble, telemetry or hooks. Ported at gstack commit 9a1dc81."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://github.com/garrytan/gstack/blob/main/LICENSE"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-24",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
       "name": "graphify",
       "path": "global-config/skills/graphify",
       "summary": "Turns any input (code/docs/papers/images) into a clustered knowledge graph with an audit report.",
@@ -1050,6 +1218,36 @@
       "knownIssues": [],
       "security": {
         "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "instruction-lint",
+      "path": "global-config/skills/instruction-lint",
+      "summary": "Audits auto-loaded instruction files for byte bloat and says which rules can stop being resident.",
+      "category": "meta",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "partly written in Thai",
+        "example Python reads ~/.claude/CLAUDE.md"
+      ],
+      "security": {
+        "scanned": "2026-11-24",
         "scanner": "skill-scan v1",
         "errors": 0,
         "reviewed": false
@@ -1611,6 +1809,107 @@
       }
     },
     {
+      "name": "repo-security-posture",
+      "path": "global-config/skills/repo-security-posture",
+      "summary": "Phased security review of an unfamiliar repo before you run or install anything from it.",
+      "category": "security",
+      "origin": "adapted",
+      "upstream": "garrytan/gstack",
+      "source": {
+        "note": "Standalone port of the idea in garrytan/gstack (MIT), rewritten without its preamble, telemetry or hooks. Ported at gstack commit 9a1dc81."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://github.com/garrytan/gstack/blob/main/LICENSE"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "skill-scan reports 6 findings in references/audit-phases.md: they are the grep patterns the skill tells you to search for, not code that runs"
+      ],
+      "security": {
+        "scanned": "2026-11-24",
+        "scanner": "skill-scan v1",
+        "errors": 6,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "review-specialists",
+      "path": "global-config/skills/review-specialists",
+      "summary": "Splits a code review into specialist passes (security, performance, testing, API contract, migration and more).",
+      "category": "engineering",
+      "origin": "adapted",
+      "upstream": "garrytan/gstack",
+      "source": {
+        "note": "Standalone port of the idea in garrytan/gstack (MIT), rewritten without its preamble, telemetry or hooks. Ported at gstack commit 9a1dc81."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://github.com/garrytan/gstack/blob/main/LICENSE"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-24",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "scroll-craft",
+      "path": null,
+      "summary": "Builds scroll-driven landing pages with a scrub engine and a feel checklist.",
+      "category": "design",
+      "origin": "adopted",
+      "upstream": "nateherkai/scroll-craft",
+      "source": {
+        "subpath": "plugins/nateherk-design/skills/scroll-craft",
+        "commit": "75d81f74e83692add18cd7a8a8e078b8a887a579",
+        "note": "Recorded by intake at 75d81f74e836."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "not-bundled",
+        "checked": "2026-11-24",
+        "evidence": "https://github.com/nateherkai/scroll-craft/blob/75d81f74e83692add18cd7a8a8e078b8a887a579/LICENSE"
+      },
+      "pointer": {
+        "url": "https://github.com/nateherkai/scroll-craft/tree/75d81f74e83692add18cd7a8a8e078b8a887a579/plugins/nateherk-design/skills/scroll-craft",
+        "install": "see the upstream README for install steps",
+        "note": "Linked, not bundled, because it ships an engine and scripts."
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "pointer",
+      "knownIssues": [
+        "intake scan: scripts/kie.mjs reads credentials in a file that also makes network calls (image generation API); review before use"
+      ],
+      "security": {
+        "scanned": null,
+        "scanner": null,
+        "errors": null,
+        "reviewed": false
+      }
+    },
+    {
       "name": "scrutinize",
       "path": null,
       "summary": "Outsider-perspective review of a plan/PR/diff — checks intent first, then traces the real code path.",
@@ -1899,6 +2198,36 @@
       }
     },
     {
+      "name": "test-audit",
+      "path": "global-config/skills/test-audit",
+      "summary": "Rates which tests are worth their cost: a value bar, a low-value catalog and a regression-proof rule.",
+      "category": "engineering",
+      "origin": "adapted",
+      "upstream": "garrytan/gstack",
+      "source": {
+        "note": "Standalone port of the idea in garrytan/gstack (MIT), rewritten without its preamble, telemetry or hooks. Ported at gstack commit 9a1dc81."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://github.com/garrytan/gstack/blob/main/LICENSE"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-24",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
       "name": "thai-no-quote-emphasis",
       "path": "global-config/skills/thai-no-quote-emphasis",
       "summary": "Rule against quote marks for emphasis in Thai text.",
@@ -2118,6 +2447,38 @@
       "knownIssues": [],
       "security": {
         "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "web-motion",
+      "path": "global-config/skills/web-motion",
+      "summary": "Restrained motion for web pages: token values, a motion budget and a scroll-reveal recipe.",
+      "category": "design",
+      "origin": "adapted",
+      "upstream": "nexu-io/motion-anything",
+      "source": {
+        "note": "Token values and restraint budget distilled from motion-anything MOTION-SPEC.md (Apache-2.0); the skill text is original. references/scroll-world-engine keeps its own MIT licence file."
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://github.com/nexu-io/motion-anything/blob/main/LICENSE"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "pairs with a design skill; it does not pick colours or layout"
+      ],
+      "security": {
+        "scanned": "2026-11-24",
         "scanner": "skill-scan v1",
         "errors": 0,
         "reviewed": false

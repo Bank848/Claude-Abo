@@ -4,11 +4,11 @@
 # Claude-Abo
 
 Finde heraus, wie viel Kontext dein Claude-Code-Setup in jeder Sitzung kostet und ob es ein `git push --force` stoppt.
-Ein Befehl schätzt den festen Kontext deines Setups in Tokens (neben dem echten `/context`-Wert) und listet auf, was du streichen kannst; der Katalog enthält <!-- gen:skills-count:start -->61<!-- gen:skills-count:end --> Skills, jeweils mit Lizenz, Testdatum und bekannten Problemen.
+Ein Befehl schätzt den festen Kontext deines Setups in Tokens (neben dem echten `/context`-Wert) und listet auf, was du streichen kannst; der Katalog enthält <!-- gen:skills-count:start -->68<!-- gen:skills-count:end --> Skills, jeweils mit Lizenz, Testdatum und bekannten Problemen.
 `npx github:Bank848/Claude-Abo audit`  ·  [Website](https://bank848.github.io/Claude-Abo/)  ·  [Katalog](https://bank848.github.io/Claude-Abo/#catalog)
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-61%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
+<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-68%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 
 <p align="center"><img src="assets/audit-demo.gif" alt="claude-abo audit" width="820"/></p>
 

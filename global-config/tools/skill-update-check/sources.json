@@ -512,6 +512,76 @@
       "subpath_in_repo": "",
       "last_seen_commit": "unknown",
       "note": "nidhinjs/prompt-master (MIT). Whole-repo skill clone (root SKILL.md plus references/). Run check.ps1 -Ack once to set your own baseline. Added in the October 2026 patch."
+    },
+    {
+      "name": "archify",
+      "source_repo_url": "https://github.com/tt-a1i/archify",
+      "subpath_in_repo": "archify",
+      "last_seen_commit": "3ca198d867ce4b616332f846ff66e5c8e5e60f95",
+      "note": "Recorded by intake at 3ca198d867ce."
+    },
+    {
+      "name": "council-deliberate",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": ""
+    },
+    {
+      "name": "diagram-design",
+      "source_repo_url": "https://github.com/cathrynlavery/diagram-design",
+      "subpath_in_repo": "skills/diagram-design",
+      "last_seen_commit": "0eeda75a708f419560d5e032693618bb9954f17b",
+      "note": "Recorded by intake at 0eeda75a708f."
+    },
+    {
+      "name": "git-retro",
+      "source_repo_url": "https://github.com/garrytan/gstack",
+      "subpath_in_repo": "",
+      "last_seen_commit": "unknown",
+      "note": "Standalone port of the idea in garrytan/gstack (MIT), rewritten without its preamble, telemetry or hooks. Ported at gstack commit 9a1dc81."
+    },
+    {
+      "name": "instruction-lint",
+      "source_repo_url": "self-authored",
+      "subpath_in_repo": "",
+      "last_seen_commit": "",
+      "note": ""
+    },
+    {
+      "name": "repo-security-posture",
+      "source_repo_url": "https://github.com/garrytan/gstack",
+      "subpath_in_repo": "",
+      "last_seen_commit": "unknown",
+      "note": "Standalone port of the idea in garrytan/gstack (MIT), rewritten without its preamble, telemetry or hooks. Ported at gstack commit 9a1dc81."
+    },
+    {
+      "name": "review-specialists",
+      "source_repo_url": "https://github.com/garrytan/gstack",
+      "subpath_in_repo": "",
+      "last_seen_commit": "unknown",
+      "note": "Standalone port of the idea in garrytan/gstack (MIT), rewritten without its preamble, telemetry or hooks. Ported at gstack commit 9a1dc81."
+    },
+    {
+      "name": "scroll-craft",
+      "source_repo_url": "https://github.com/nateherkai/scroll-craft",
+      "subpath_in_repo": "plugins/nateherk-design/skills/scroll-craft",
+      "last_seen_commit": "75d81f74e83692add18cd7a8a8e078b8a887a579",
+      "note": "Recorded by intake at 75d81f74e836."
+    },
+    {
+      "name": "test-audit",
+      "source_repo_url": "https://github.com/garrytan/gstack",
+      "subpath_in_repo": "",
+      "last_seen_commit": "unknown",
+      "note": "Standalone port of the idea in garrytan/gstack (MIT), rewritten without its preamble, telemetry or hooks. Ported at gstack commit 9a1dc81."
+    },
+    {
+      "name": "web-motion",
+      "source_repo_url": "https://github.com/nexu-io/motion-anything",
+      "subpath_in_repo": "",
+      "last_seen_commit": "unknown",
+      "note": "Token values and restraint budget distilled from motion-anything MOTION-SPEC.md (Apache-2.0); the skill text is original. references/scroll-world-engine keeps its own MIT licence file."
     }
   ]
 }

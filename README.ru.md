@@ -4,11 +4,11 @@
 # Claude-Abo
 
 Узнайте, сколько контекста съедает ваша настройка Claude Code в каждой сессии и останавливает ли она `git push --force`.
-Одна команда оценивает постоянный контекст вашей настройки в токенах (рядом с реальным значением из `/context`) и перечисляет, что можно убрать; в каталоге <!-- gen:skills-count:start -->61<!-- gen:skills-count:end --> skills, у каждого есть лицензия, дата проверки и известные проблемы.
+Одна команда оценивает постоянный контекст вашей настройки в токенах (рядом с реальным значением из `/context`) и перечисляет, что можно убрать; в каталоге <!-- gen:skills-count:start -->68<!-- gen:skills-count:end --> skills, у каждого есть лицензия, дата проверки и известные проблемы.
 `npx github:Bank848/Claude-Abo audit`  ·  [Сайт](https://bank848.github.io/Claude-Abo/)  ·  [Каталог](https://bank848.github.io/Claude-Abo/#catalog)
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-61%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
+<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-68%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 
 <p align="center"><img src="assets/audit-demo.gif" alt="claude-abo audit" width="820"/></p>
 

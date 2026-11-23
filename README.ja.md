@@ -4,11 +4,11 @@
 # Claude-Abo
 
 Claude Code の設定がセッションごとにどれだけコンテキストを使うか、そして `git push --force` を止められるかを調べます。
-1 つのコマンドで、設定が常に消費するコンテキストをトークン数で見積もり(実際の `/context` の値と並べて表示)、削るべきものを一覧にします。カタログには <!-- gen:skills-count:start -->61<!-- gen:skills-count:end --> 個の skills があり、それぞれにライセンス、テスト日、既知の問題が付いています。
+1 つのコマンドで、設定が常に消費するコンテキストをトークン数で見積もり(実際の `/context` の値と並べて表示)、削るべきものを一覧にします。カタログには <!-- gen:skills-count:start -->68<!-- gen:skills-count:end --> 個の skills があり、それぞれにライセンス、テスト日、既知の問題が付いています。
 `npx github:Bank848/Claude-Abo audit`  ·  [サイト](https://bank848.github.io/Claude-Abo/)  ·  [カタログ](https://bank848.github.io/Claude-Abo/#catalog)
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-61%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
+<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-68%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 
 <p align="center"><img src="assets/audit-demo.gif" alt="claude-abo audit" width="820"/></p>
 

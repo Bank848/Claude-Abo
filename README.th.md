@@ -4,11 +4,11 @@
 # Claude-Abo
 
 ดูว่า Claude Code setup ของคุณกินพื้นที่ context ไปเท่าไรทุก session และมี hook กัน `git push --force` หรือเปล่า
-คำสั่งเดียวประเมิน context คงที่ของ setup เป็นจำนวน token (เทียบกับตัวเลขจริงจาก `/context`) และบอกว่าควรตัดอะไร ส่วน catalog มี <!-- gen:skills-count:start -->61<!-- gen:skills-count:end --> skills พร้อม license วันที่ทดสอบ และปัญหาที่รู้อยู่แล้วของแต่ละตัว
+คำสั่งเดียวประเมิน context คงที่ของ setup เป็นจำนวน token (เทียบกับตัวเลขจริงจาก `/context`) และบอกว่าควรตัดอะไร ส่วน catalog มี <!-- gen:skills-count:start -->68<!-- gen:skills-count:end --> skills พร้อม license วันที่ทดสอบ และปัญหาที่รู้อยู่แล้วของแต่ละตัว
 `npx github:Bank848/Claude-Abo audit`  ·  [เว็บไซต์](https://bank848.github.io/Claude-Abo/)  ·  [Catalog](https://bank848.github.io/Claude-Abo/#catalog)
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-61%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
+<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-68%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 
 <p align="center"><img src="assets/audit-demo.gif" alt="claude-abo audit" width="820"/></p>
 

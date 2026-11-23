@@ -50,7 +50,7 @@ Claude-Abo/
 │   ├── hooks/block-endless-stdin-build.py # PreToolUse gate: denies `yes | <build tool>` so a build cannot log forever
 │   ├── hooks/freeze-guard.py              # PreToolUse gate: while a freeze is on, Edit/Write only inside one chosen folder
 │   ├── rules/ecc-common/                  # 10 engineering-discipline rule files (ecc plugin ecosystem)
-│   ├── skills/                            # <!-- gen:skills-count:start -->61<!-- gen:skills-count:end --> curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
+│   ├── skills/                            # <!-- gen:skills-count:start -->68<!-- gen:skills-count:end --> curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
 │   ├── SKILLS_INDEX.md                    # Personal index of installed skills/plugins + when to use which
 │   ├── reference/                         # the two long anti-AI-tell writing references that CLAUDE.md links to
 │   ├── templates/                         # 2 starter templates to copy into a new repo (project-CLAUDE.md, conventions.md)
@@ -60,7 +60,7 @@ Claude-Abo/
 │       ├── security-hooks/README.md       # Pointers to three open-source guard tools (nothing vendored)
 │       ├── skill-update-check/
 │       │   ├── check.ps1                  # Weekly update checker — reads sources.json from this same folder
-│       │   └── sources.json               # Provenance manifest: <!-- gen:skills-count-4:start -->66<!-- gen:skills-count-4:end --> personal skills + 3 pip + 2 npm + 1 binary tool
+│       │   └── sources.json               # Provenance manifest: <!-- gen:skills-count-4:start -->76<!-- gen:skills-count-4:end --> personal skills + 3 pip + 2 npm + 1 binary tool
 │       └── ollama/ollama-digest.ps1       # On-demand local-model pre-digest helper (see the Ollama section below)
 └── notes/                                 # 3 notes: a personal cross-project "second brain" vault (example content)
 ```
@@ -89,7 +89,7 @@ General engineering discipline from the ecc (everything-claude-code) plugin ecos
 Ten invented example notes (rule, **Why:**, **How to apply:**) covering memory habits, model routing, hook safety and skill use, plus one project note and one reference note. Each was written from a short lesson outline, none is copied from a real memory. Copy one into a project's auto-memory folder and rewrite it with your own facts. See `examples/memory/README.md`.
 
 ### `global-config/tools/skill-update-check/sources.json`
-The owner's actual skill/tool adoption manifest — real provenance data (source repo URLs, install notes, version history) for all <!-- gen:skills-count-5:start -->66<!-- gen:skills-count-5:end --> personal skills (including the self-authored and adapted ones) plus 3 pip packages, 2 npm packages, and 1 binary tool. Paired with `check.ps1`, this is what lets a `claude-clone-template` adopter track upstream updates to the skills they copied into `~/.claude/skills/`, the same way the original owner does. Update `last_seen_commit` values are mostly `unknown`/stale from the recipient's perspective until they run `check.ps1 -Ack` once to establish their own baseline.
+The owner's actual skill/tool adoption manifest — real provenance data (source repo URLs, install notes, version history) for all <!-- gen:skills-count-5:start -->76<!-- gen:skills-count-5:end --> personal skills (including the self-authored and adapted ones) plus 3 pip packages, 2 npm packages, and 1 binary tool. Paired with `check.ps1`, this is what lets a `claude-clone-template` adopter track upstream updates to the skills they copied into `~/.claude/skills/`, the same way the original owner does. Update `last_seen_commit` values are mostly `unknown`/stale from the recipient's perspective until they run `check.ps1 -Ack` once to establish their own baseline.
 
 ### `global-config/templates/`
 Two small starter files (`project-CLAUDE.md`, `conventions.md`) to copy into a new repo on first setup — a ≤45-line "router" project CLAUDE.md and a conventions/green-gate template. Each has a comment block with a fill-in-the-blank PRESET for the stack you're bootstrapping (currently just a Python-web example); add your own preset the same way if your stack needs one.
@@ -101,7 +101,7 @@ Example content from the owner's Obsidian second-brain vault: local Ollama model
 
 1. **Copy `global-config/CLAUDE.md`** into your own `~/.claude/CLAUDE.md`. Merge it with what you already have, or replace outright — your call. Read it first; delete sections that don't apply to you. **Rewrite the "Installed Plugins" section before you do anything else with this file** — it currently asserts specific plugins (superpowers, ecc, pordee, lazyweb, andrej-karpathy-skills) are installed and enabled, and tells Claude not to mention installing them. That's true for the original owner, not for you. Replace it with your own actual plugin list, or delete it until you've installed something.
 2. **Copy `global-config/agents/*.md`** into `~/.claude/agents/` and **`global-config/hooks/*.py`** into `~/.claude/hooks/`. These are what make the model-routing rules, the git safety gate, and the graphify auto-sync hook in CLAUDE.md actually functional, rather than just prose.
-3. **Copy `global-config/skills/*`** into `~/.claude/skills/`. This is the bulk of the actual value — <!-- gen:skills-count-3:start -->61<!-- gen:skills-count-3:end --> working skill folders, not just descriptions of them.
+3. **Copy `global-config/skills/*`** into `~/.claude/skills/`. This is the bulk of the actual value — <!-- gen:skills-count-3:start -->68<!-- gen:skills-count-3:end --> working skill folders, not just descriptions of them.
 4. **Merge `global-config/settings.example.json`** into your own `~/.claude/settings.json` (replace `<YOUR_HOME>` with your real home path first). Merge, don't overwrite, if you already have a settings.json — take the `hooks.PreToolUse`/`hooks.PostToolUse` entries, the `permissions.ask` block, and whatever else you want from `enabledPlugins`. The shipped hook commands use the Windows `py` launcher; on macOS/Linux, change them to `python3` first.
 5. **Copy `global-config/rules/ecc-common/`** into `~/.claude/rules/` **only if** you install the ecc plugin. Otherwise skip.
 6. **Copy `examples/memory/*.md`** into the auto-memory folder for whichever project you want them to apply to (Claude Code auto-memory is per-project, at `~/.claude/projects/<project>/memory/`), or read them as reference and write your own from scratch.

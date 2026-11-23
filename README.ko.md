@@ -4,11 +4,11 @@
 # Claude-Abo
 
 Claude Code 설정이 세션마다 컨텍스트를 얼마나 쓰는지, 그리고 `git push --force`를 막아 주는지 확인하세요.
-명령어 하나로 설정의 고정 컨텍스트를 토큰 수로 추정하고(실제 `/context` 값과 나란히 표시) 줄일 항목을 알려 줍니다. 카탈로그에는 <!-- gen:skills-count:start -->61<!-- gen:skills-count:end -->개의 skills가 있으며 각각 라이선스, 테스트 날짜, 알려진 문제가 붙어 있습니다.
+명령어 하나로 설정의 고정 컨텍스트를 토큰 수로 추정하고(실제 `/context` 값과 나란히 표시) 줄일 항목을 알려 줍니다. 카탈로그에는 <!-- gen:skills-count:start -->68<!-- gen:skills-count:end -->개의 skills가 있으며 각각 라이선스, 테스트 날짜, 알려진 문제가 붙어 있습니다.
 `npx github:Bank848/Claude-Abo audit`  ·  [사이트](https://bank848.github.io/Claude-Abo/)  ·  [카탈로그](https://bank848.github.io/Claude-Abo/#catalog)
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-61%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
+<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-68%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 
 <p align="center"><img src="assets/audit-demo.gif" alt="claude-abo audit" width="820"/></p>
 

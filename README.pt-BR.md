@@ -4,11 +4,11 @@
 # Claude-Abo
 
 Descubra quanto contexto a sua configuração do Claude Code consome a cada sessão e se ela bloqueia um `git push --force`.
-Um comando estima em tokens o contexto fixo da sua configuração (ao lado do valor real do `/context`) e lista o que cortar; o catálogo tem <!-- gen:skills-count:start -->61<!-- gen:skills-count:end --> skills, cada uma com licença, data de teste e problemas conhecidos.
+Um comando estima em tokens o contexto fixo da sua configuração (ao lado do valor real do `/context`) e lista o que cortar; o catálogo tem <!-- gen:skills-count:start -->68<!-- gen:skills-count:end --> skills, cada uma com licença, data de teste e problemas conhecidos.
 `npx github:Bank848/Claude-Abo audit`  ·  [Site](https://bank848.github.io/Claude-Abo/)  ·  [Catálogo](https://bank848.github.io/Claude-Abo/#catalog)
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-61%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
+<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-68%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 
 <p align="center"><img src="assets/audit-demo.gif" alt="claude-abo audit" width="820"/></p>
 

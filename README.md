@@ -3,11 +3,11 @@
 # Claude-Abo
 
 Find out what your Claude Code setup costs you in context every session, and whether it stops a `git push --force`.
-One command estimates your setup's fixed context in tokens (next to the real `/context` figure) and lists what to cut; the catalog has <!-- gen:skills-count:start -->61<!-- gen:skills-count:end --> skills with license, test date and known issues for each.
+One command estimates your setup's fixed context in tokens (next to the real `/context` figure) and lists what to cut; the catalog has <!-- gen:skills-count:start -->68<!-- gen:skills-count:end --> skills with license, test date and known issues for each.
 `npx github:Bank848/Claude-Abo audit`  ·  [Site](https://bank848.github.io/Claude-Abo/)  ·  [Catalog](https://bank848.github.io/Claude-Abo/#catalog)
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-61%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
+<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-68%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 [![Template](https://img.shields.io/badge/type-adapt%2C%20not%20run%20as--is-lightgrey)](#caveat-this-is-one-persons-setup)
 
 <p align="center"><img src="assets/audit-demo.gif" alt="Terminal recording of the audit command on a sample setup: estimated tokens, what to cut first, safety checklist" width="820"/></p>
@@ -35,27 +35,30 @@ Nothing here runs as-is: read it, then adapt it. The steps assume Claude Code; `
 <details>
 <summary>Every bundled skill and where the rest come from</summary>
 
-<!-- gen:skills-count-2:start -->61<!-- gen:skills-count-2:end --> curated `SKILL.md` folders (plus supporting scripts/reference/data files where a skill has them) covering writing/marketing craft (copywriting, copy-editing, hallmark, marketing-council, pricing...), engineering process (debug-mantra, poka-yoke, second-brain, dependency-audit, secrets-audit...), design (design-system, ui-ux-pro-max, banner-design, mobbin-references...), and meta-skills for managing Claude Code itself (skillify, grilling, second-brain, graphify, plan-pro, shipping-a-branch...). `poka-yoke`, `plan-pro`, and `shipping-a-branch` are self-authored from scratch; `graphify`, `dembrandt`, `markitdown`, and `mobbin-references` are self-written wrapper skills whose SKILL.md is original but whose underlying tools are third-party (credited in `ATTRIBUTION.md` and version-tracked in `sources.json`); `deslop-defaults` is adapted (harvested from `ibelick/ui-skills` and rewritten stack-agnostic); the rest are adopted from upstream repos — see `sources.json` for per-skill provenance and `ATTRIBUTION.md` for upstream credits. These are genuinely reusable prompt-engineering artifacts, not just descriptions of skills — copy them into `~/.claude/skills/` and they work immediately.
+<!-- gen:skills-count-2:start -->68<!-- gen:skills-count-2:end --> curated `SKILL.md` folders (plus supporting scripts/reference/data files where a skill has them) covering writing/marketing craft (copywriting, copy-editing, hallmark, marketing-council, pricing...), engineering process (debug-mantra, poka-yoke, second-brain, dependency-audit, secrets-audit...), design (design-system, ui-ux-pro-max, banner-design, mobbin-references...), and meta-skills for managing Claude Code itself (skillify, grilling, second-brain, graphify, plan-pro, shipping-a-branch...). `poka-yoke`, `plan-pro`, and `shipping-a-branch` are self-authored from scratch; `graphify`, `dembrandt`, `markitdown`, and `mobbin-references` are self-written wrapper skills whose SKILL.md is original but whose underlying tools are third-party (credited in `ATTRIBUTION.md` and version-tracked in `sources.json`); `deslop-defaults` is adapted (harvested from `ibelick/ui-skills` and rewritten stack-agnostic); the rest are adopted from upstream repos — see `sources.json` for per-skill provenance and `ATTRIBUTION.md` for upstream credits. These are genuinely reusable prompt-engineering artifacts, not just descriptions of skills — copy them into `~/.claude/skills/` and they work immediately.
 
 Every bundled skill is listed below. The tables are generated from `catalog/skills.json` (run `npm run gen`); do not edit them by hand.
 
 <!-- gen:skills-table:start -->
-**Engineering (10)**
+**Engineering (13)**
 
 | Skill | What it does | Origin | License | Status | ~Tokens |
 |---|---|---|---|---|---|
 | `domain-modeling` | Pins down domain terms and records ADRs while a plan is being stress-tested. | adopted | MIT | experimental | 54 |
 | `github-pr-review-draft` | Pending-review PR workflow: findings wait in the GitHub UI, nothing posts silently. | self-authored | MIT | experimental | 64 |
+| `git-retro` | Turns recent git history into a short retrospective of what changed and what keeps breaking. | adapted | MIT | experimental | 95 |
 | `grill-with-docs` | Stress-tests a plan against the repo docs and records decisions as ADRs. | adopted | MIT | experimental | 27 |
 | `plan-pro` | Implementation-plan writer with a spawned multi-agent review loop and an HTML before/after output. | self-authored | MIT | experimental | 107 |
 | `poka-yoke` | Mistake-proofing review — makes a bad state impossible/obvious at the source instead of catching it after the fact. | self-authored | MIT | experimental | 136 |
 | `ponytail` | Writes the least code that is still correct: climbs a ladder before adding anything. | adapted | MIT | experimental | 125 |
 | `project-bootstrap` | One-shot repo scaffold: thin CLAUDE.md router, docs/log/, docs/adr/, conventions. | self-authored | MIT | experimental | 131 |
 | `pruning-branches` | Periodic branch and worktree cleanup with a survey first and a log entry after. | self-authored | MIT | experimental | 50 |
+| `review-specialists` | Splits a code review into specialist passes (security, performance, testing, API contract, migration and more). | adapted | MIT | experimental | 113 |
 | `shipping-a-branch` | Drives commit → push → PR → review → merge end to end, confirming each risky step separately. | self-authored | MIT | experimental | 58 |
+| `test-audit` | Rates which tests are worth their cost: a value bar, a low-value catalog and a regression-proof rule. | adapted | MIT | experimental | 100 |
 | `wizard` | Generates an interactive bash wizard for steps only a human can perform (credentials, dashboards, migrations). | adopted | MIT | experimental | 79 |
 
-**Design (10)**
+**Design (11)**
 
 | Skill | What it does | Origin | License | Status | ~Tokens |
 |---|---|---|---|---|---|
@@ -69,6 +72,7 @@ Every bundled skill is listed below. The tables are generated from `catalog/skil
 | `mobbin-references` | Pulls real-app reference screenshots (onboarding, paywalls, empty states...) before a UI is designed. | wrapper | MIT | experimental | 86 |
 | `slides` | Builds strategic HTML presentations with Chart.js and design-token theming. | adopted | MIT | experimental | 35 |
 | `ui-ux-pro-max` | Searchable UI/UX database — styles, palettes, font pairings, UX guidelines, motion presets, chart types. | adopted | MIT | experimental | 149 |
+| `web-motion` | Restrained motion for web pages: token values, a motion budget and a scroll-reveal recipe. | adapted | Apache-2.0 | experimental | 130 |
 
 **Marketing (12)**
 
@@ -118,12 +122,14 @@ Every bundled skill is listed below. The tables are generated from `catalog/skil
 | `docx-python-docx-justify` | python-docx: never justify formulas or code blocks that break their own lines. | self-authored | MIT | workflow-specific | 49 |
 | `docx-th-sarabun-sizing` | Thai Sarabun sizing scale for Word, fixing the base style instead of per-run sizes. | self-authored | MIT | workflow-specific | 56 |
 
-**Meta (managing Claude Code itself) (8)**
+**Meta (managing Claude Code itself) (10)**
 
 | Skill | What it does | Origin | License | Status | ~Tokens |
 |---|---|---|---|---|---|
 | `codeburn-cost-check` | Breaks down AI spend per project and model from local usage data. | wrapper | MIT | experimental | 75 |
+| `council-deliberate` | Adds an anonymized cross-exam round and a hand-computed weighted tally to a four-voice decision council. | self-authored | MIT | experimental | 209 |
 | `decide` | Structured decision workflow (37signals-style question set) that also archives the rationale. | adopted | MIT | experimental | 214 |
+| `instruction-lint` | Audits auto-loaded instruction files for byte bloat and says which rules can stop being resident. | self-authored | MIT | experimental | 93 |
 | `memory-lint` | Read-only health check of a project's memory files. | self-authored | MIT | experimental | 90 |
 | `prompt-master` | Writes and tunes prompts for other AI tools. | adopted | MIT | experimental | 84 |
 | `skillify` | Creates, adapts, or updates a Claude Code skill (from chat, video, dump, or an external repo). | adopted | MIT | experimental | 318 |
@@ -131,23 +137,27 @@ Every bundled skill is listed below. The tables are generated from `catalog/skil
 | `unstuck` | Lateral-thinking technique bank for cracking a roadblock instead of reporting "not possible". | adopted | MIT | experimental | 309 |
 | `wait-what` | Flags a message that didn't land and re-pitches it. | adopted | MIT | experimental | 14 |
 
-**Security (5)**
+**Security (6)**
 
 | Skill | What it does | Origin | License | Status | ~Tokens |
 |---|---|---|---|---|---|
 | `dependency-audit` | Checks project dependencies for known CVEs and supply-chain risks. | adopted | MIT | experimental | 112 |
 | `git-guardrails-claude-code` | Blocks dangerous git commands (push, force, clean, branch deletion) with a hook. | adopted | MIT | experimental | 61 |
 | `prompt-injection` | Audits apps/agents for prompt-injection and LLM permission-boundary vulnerabilities. | adopted | MIT | experimental | 124 |
+| `repo-security-posture` | Phased security review of an unfamiliar repo before you run or install anything from it. | adapted | MIT | experimental | 82 |
 | `secrets-audit` | Scans source, git history, and infra for leaked credentials and weak secrets-management posture. | adopted | MIT | experimental | 136 |
 | `supabase-rls-safety-check` | Proactive Row Level Security and anon-key audit for Supabase projects. | self-authored | MIT | experimental | 49 |
 
-**Not bundled, install from upstream (5)**
+**Not bundled, install from upstream (8)**
 
 | Skill | Upstream | Install |
 |---|---|---|
+| `archify` | [tt-a1i/archify](https://github.com/tt-a1i/archify/tree/3ca198d867ce4b616332f846ff66e5c8e5e60f95/archify) | see the upstream README for install steps |
 | `debug-mantra` | [thananon/9arm-skills](https://github.com/thananon/9arm-skills/tree/a1fc303b274ed06c32d405ba5a6db00ded6e5663/skills/engineering/debug-mantra) | npx skills add thananon/9arm-skills |
+| `diagram-design` | [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design/tree/0eeda75a708f419560d5e032693618bb9954f17b/skills/diagram-design) | see the upstream README for install steps |
 | `management-talk` | [thananon/9arm-skills](https://github.com/thananon/9arm-skills/tree/a1fc303b274ed06c32d405ba5a6db00ded6e5663/skills/productivity/management-talk) | npx skills add thananon/9arm-skills |
 | `post-mortem` | [thananon/9arm-skills](https://github.com/thananon/9arm-skills/tree/a1fc303b274ed06c32d405ba5a6db00ded6e5663/skills/engineering/post-mortem) | npx skills add thananon/9arm-skills |
+| `scroll-craft` | [nateherkai/scroll-craft](https://github.com/nateherkai/scroll-craft/tree/75d81f74e83692add18cd7a8a8e078b8a887a579/plugins/nateherk-design/skills/scroll-craft) | see the upstream README for install steps |
 | `scrutinize` | [thananon/9arm-skills](https://github.com/thananon/9arm-skills/tree/a1fc303b274ed06c32d405ba5a6db00ded6e5663/skills/engineering/scrutinize) | npx skills add thananon/9arm-skills |
 | `ui-styling` | [mrgoonie/claudekit-skills](https://github.com/mrgoonie/claudekit-skills/tree/80113d86bc4407f105af40a2c4ea58194f7c370a/.claude/skills/ui-styling) | /plugin marketplace add mrgoonie/claudekit-skills (then install the plugin that contains ui-styling) |
 <!-- gen:skills-table:end -->
