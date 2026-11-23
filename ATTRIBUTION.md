@@ -6,22 +6,25 @@ Of the original 45, seven skills are self-authored: `poka-yoke`, `plan-pro`, and
 
 ## Upstream repos the adopted skills came from
 
+<!-- gen:upstreams-table:start -->
 | Upstream repo | License (as adopted) | Skills taken |
 |---|---|---|
-| [`thananon/9arm-skills`](https://github.com/thananon/9arm-skills) | no license file upstream; **not bundled**: listed as a pointer, install from the upstream repo | `debug-mantra`, `post-mortem`, `scrutinize`, `management-talk` |
-| [`nextlevelbuilder/ui-ux-pro-max-skill`](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | MIT (per upstream) | `ui-ux-pro-max`, `design`, `design-system`, `banner-design`, `brand`, `slides` |
-| [`mrgoonie/claudekit-skills`](https://github.com/mrgoonie/claudekit-skills) | no license file upstream; **not bundled**: listed as a pointer, install from the upstream repo | `ui-styling` |
-| [`coreyhaines31/makerskills`](https://github.com/coreyhaines31/makerskills) | MIT | `second-brain`, `decide`, `unstuck`, `skillify`, `deep-research`, `watch-video` |
-| [`coreyhaines31/marketingskills`](https://github.com/coreyhaines31/marketingskills) | MIT | `product-marketing`, `launch`, `copywriting`, `copy-editing`, `social`, `community-marketing`, `content-strategy`, `image`, `marketing-ideas`, `marketing-psychology`, `pricing`, `marketing-council` |
-| [`mattpocock/skills`](https://github.com/mattpocock/skills) | MIT (per upstream) | `grilling`, `teach`, `wait-what`, `wizard`, `domain-modeling`, `grill-with-docs` (`git-guardrails-claude-code` also exists here) |
-| [`briiirussell/cybersecurity-skills`](https://github.com/briiirussell/cybersecurity-skills) | MIT | `prompt-injection`, `secrets-audit`, `dependency-audit` |
-| [`DietrichGebert/ponytail`](https://github.com/DietrichGebert/ponytail) | MIT | `ponytail` (adapted) |
-| [`Nutlope/hallmark`](https://github.com/Nutlope/hallmark) | MIT (per upstream) | `hallmark` |
-| [`Panniantong/Agent-Reach`](https://github.com/Panniantong/Agent-Reach) | MIT | `agent-reach` |
-| [`utarn/engineer-skills`](https://github.com/utarn/engineer-skills) | MIT | `git-guardrails-claude-code` |
-| [`idan-rubin/browserclaw`](https://github.com/idan-rubin/browserclaw) | MIT | `browserclaw` |
 | [`ayghri/i-have-adhd`](https://github.com/ayghri/i-have-adhd) | MIT | `i-have-adhd` |
+| [`briiirussell/cybersecurity-skills`](https://github.com/briiirussell/cybersecurity-skills) | MIT | `dependency-audit`, `prompt-injection`, `secrets-audit` |
+| [`coreyhaines31/makerskills`](https://github.com/coreyhaines31/makerskills) | MIT | `decide`, `deep-research`, `second-brain`, `skillify`, `unstuck`, `watch-video` |
+| [`coreyhaines31/marketingskills`](https://github.com/coreyhaines31/marketingskills) | MIT | `community-marketing`, `content-strategy`, `copy-editing`, `copywriting`, `image`, `launch`, `marketing-council`, `marketing-ideas`, `marketing-psychology`, `pricing`, `product-marketing`, `social` |
+| [`DietrichGebert/ponytail`](https://github.com/DietrichGebert/ponytail) | MIT | `ponytail` (adapted) |
+| [`ibelick/ui-skills`](https://github.com/ibelick/ui-skills) | MIT | `deslop-defaults` (adapted) |
+| [`idan-rubin/browserclaw`](https://github.com/idan-rubin/browserclaw) | MIT | `browserclaw` |
+| [`mattpocock/skills`](https://github.com/mattpocock/skills) | MIT | `domain-modeling`, `grilling`, `grill-with-docs`, `teach`, `wait-what`, `wizard` |
+| [`mrgoonie/claudekit-skills`](https://github.com/mrgoonie/claudekit-skills) | no licence at repo level; **not bundled**: listed as a pointer, install from the upstream repo | `ui-styling` |
+| [`nextlevelbuilder/ui-ux-pro-max-skill`](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | MIT | `banner-design`, `brand`, `design`, `design-system`, `slides`, `ui-ux-pro-max` |
 | [`nidhinjs/prompt-master`](https://github.com/nidhinjs/prompt-master) | MIT | `prompt-master` |
+| [`Nutlope/hallmark`](https://github.com/Nutlope/hallmark) | MIT | `hallmark` |
+| [`Panniantong/Agent-Reach`](https://github.com/Panniantong/Agent-Reach) | MIT | `agent-reach` |
+| [`thananon/9arm-skills`](https://github.com/thananon/9arm-skills) | no licence at repo level; **not bundled**: listed as a pointer, install from the upstream repo | `debug-mantra`, `management-talk`, `post-mortem`, `scrutinize` |
+| [`utarn/engineer-skills`](https://github.com/utarn/engineer-skills) | MIT | `git-guardrails-claude-code` |
+<!-- gen:upstreams-table:end -->
 
 ## Self-written wrappers around third-party tools
 

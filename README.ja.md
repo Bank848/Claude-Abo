@@ -5,7 +5,7 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Claude%20Code%20Clone%20Template&fontSize=38&fontColor=ffffff&fontAlignY=38&desc=A%20portable%20snapshot%20of%20one%20person's%20Claude%20Code%20setup&descAlignY=58&descSize=17&descColor=ffffff&animation=fadeIn" alt="Claude Code Clone Template banner" width="100%"/>
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-66%20curated-brightgreen)](#global-configskills)
+<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-61%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 [![Languages](https://img.shields.io/badge/languages-10-orange)](#top)
 [![Template](https://img.shields.io/badge/type-adapt%2C%20not%20run%20as--is-lightgrey)](#caveat-this-is-one-persons-setup)
 
@@ -101,80 +101,7 @@ ecc(everything-claude-code)プラグインエコシステムからの一般的�
 ### `global-config/skills/`
 厳選された`SKILL.md`フォルダが66個(スキルによっては補助スクリプト・リファレンス・データファイルも同梱)あり、ライティング/マーケティング関連(copywriting、copy-editing、hallmark、marketing-council、pricingなど)、エンジニアリングプロセス(debug-mantra、poka-yoke、second-brain、dependency-audit、secrets-auditなど)、デザイン(design-system、ui-ux-pro-max、banner-design、mobbin-referencesなど)、そしてClaude Code自体を管理するためのメタスキル(skillify、grilling、second-brain、graphify、plan-pro、shipping-a-branchなど)をカバーしています。`poka-yoke`、`plan-pro`、`shipping-a-branch`はゼロから自作したものです。`graphify`、`dembrandt`、`markitdown`、`mobbin-references`は自作のラッパースキルで、SKILL.md自体はオリジナルですが、裏側で使うツールはサードパーティ製です(`ATTRIBUTION.md`にクレジット、`sources.json`にバージョン履歴あり)。`deslop-defaults`は改変版(`ibelick/ui-skills`から抽出しスタック非依存に書き直したもの)です。残りはアップストリームのリポジトリから採用したものです — スキルごとの出典は`sources.json`、アップストリームへのクレジットは`ATTRIBUTION.md`を参照してください。これらは単なるスキルの説明ではなく、実際に再利用可能なプロンプトエンジニアリングの成果物です。`~/.claude/skills/`にコピーすればすぐに動作します。
 
-<details>
-<summary><b>45個のスキルをすべてカテゴリ別に見る</b>(クリックで展開)</summary>
-
-**エンジニアリングプロセス & ワークフロー (15)**
-
-| スキル | 内容 |
-|---|---|
-| `debug-mantra` | 修正案を出す前に唱える、4段階のデバッグ規律(再現 → 追跡 → 反証 → 相互参照)。 |
-| `poka-yoke` *(自作)* | ミス防止レビュー — 悪い状態を事後に検知するのではなく、そもそも発生源で不可能/自明にする。 |
-| `post-mortem` | バグが修正・検証された後に、正式な根本原因レポートを作成する。 |
-| `scrutinize` | 計画/PR/差分を第三者視点でレビューする — まず意図を確認し、その後実際のコードパスを追跡する。 |
-| `shipping-a-branch` *(自作)* | コミット → プッシュ → PR → レビュー → マージを一気通貫で進め、リスクのある各ステップごとに個別に確認を取る。 |
-| `plan-pro` *(自作)* | 実装計画の作成者。マルチエージェントによるレビューループとHTML形式の変更前後出力を備える。 |
-| `dependency-audit` | プロジェクトの依存関係を既知のCVEやサプライチェーンリスクについてチェックする。 |
-| `secrets-audit` | ソースコード、gitの履歴、インフラを対象に、漏えいした認証情報や脆弱なシークレット管理体制をスキャンする。 |
-| `prompt-injection` | プロンプトインジェクションやLLMの権限境界の脆弱性についてアプリ/エージェントを監査する。 |
-| `decide` | 根拠も記録する、構造化された意思決定ワークフロー(37signals流の質問セット)。 |
-| `unstuck` | 「不可能」と結論づける代わりに、行き詰まりを突破するための水平思考テクニック集。 |
-| `teach` | 現在のワークスペース内で、ユーザーに新しい概念やスキルを教える。 |
-| `wait-what` | 意図が伝わらなかったメッセージにフラグを立て、言い直す。 |
-| `skillify` | Claude Codeのスキルを作成・改変・更新する(チャット、動画、ダンプ、外部リポジトリから)。 |
-| `wizard` | 人間しか実行できない手順(認証情報、ダッシュボード、マイグレーションなど)向けに、対話式のbashウィザードを生成する。 |
-
-**デザイン & UI (11)**
-
-| スキル | 内容 |
-|---|---|
-| `banner-design` | さまざまなアートディレクション・スタイルで、ソーシャル/広告/ウェブ/印刷用バナーをデザインする。 |
-| `design` | 汎用デザインスキル — ロゴ、CIPモックアップ、スライド、バナー、アイコン、ソーシャル用写真。 |
-| `design-system` | 3層のデザイントークン構造(プリミティブ → セマンティック → コンポーネント)とスライド生成。 |
-| `deslop-defaults` *(改変)* | AI生成UIが「平均化されて見える」のを防ぐ構造的デフォルト(z-index、アクセントの抑制、状態表現)。 |
-| `hallmark` | 新規ページ、リデザイン、URL/スクリーンショットからのデザイン抽出向けの、AIスロップ対策デザインスキル。 |
-| `ui-styling` | shadcn/ui、Tailwind、ダークモード対応テーマでアクセシブルなUIを構築する。 |
-| `ui-ux-pro-max` | 検索可能なUI/UXデータベース — スタイル、パレット、フォントの組み合わせ、UXガイドライン、モーションプリセット、チャートの種類。 |
-| `mobbin-references` | UIを設計する前に、実際のアプリのリファレンス用スクリーンショット(オンボーディング、ペイウォール、空状態など)を取得する。 |
-| `dembrandt` *(ラッパー)* | DOM/CSS検査を通じて、実在するウェブサイトの実際のデザイントークン(色、タイポグラフィ、余白)を抽出する。 |
-| `image` | マーケティング用画像(ヒーロー画像、ソーシャル用グラフィック、モックアップ、OG画像)を生成・編集・最適化する。 |
-| `slides` | Chart.jsとデザイントークンによるテーマ設定を用いた、戦略的なHTMLプレゼンテーションを構築する。 |
-
-**マーケティング、コンテンツ & ブランド (13)**
-
-| スキル | 内容 |
-|---|---|
-| `brand` | ブランドボイス、ビジュアルアイデンティティ、メッセージングフレームワーク、一貫性チェック。 |
-| `community-marketing` | コミュニティ主導の成長戦略(Discord/Slack/フォーラム、アンバサダープログラム、アドボカシー)。 |
-| `content-strategy` | 何のコンテンツを作るかを決める — トピッククラスター、編集カレンダー、コンテンツの柱。 |
-| `copy-editing` | 既存のマーケティングコピーを編集・引き締め・刷新する。 |
-| `copywriting` | ランディング/価格/機能/aboutページ向けの新規マーケティングコピーを書く。 |
-| `launch` | 製品ローンチ、機能発表、またはGo-to-marketチェックリストを計画する。 |
-| `management-talk` | エンジニア間の文章を、送信先チャネル(Slack/メール/スタンドアップ)に合わせてマネジメント向けに書き直す。 |
-| `marketing-council` | ポジショニングの問いを議論する、名前付きマーケターによる模擬アドバイザリーボード。 |
-| `marketing-ideas` | SaaS/ソフトウェア製品向けの成長・マーケティングアイデアジェネレーター。 |
-| `marketing-psychology` | アンカリング、社会的証明、フレーミングなど行動科学の原則をマーケティング判断に適用する。 |
-| `pricing` | 価格・パッケージング戦略、価格ページの監査。 |
-| `product-marketing` | 他のマーケティングスキルが参照する、再利用可能な製品/対象ユーザー/ポジショニングのコンテキストドキュメントを構築する。 |
-| `social` | プラットフォーム横断でのソーシャルコンテンツ作成、スケジューリング、再利用、ソーシャルリスニング。 |
-
-**リサーチ & ナレッジマネジメント (6)**
-
-| スキル | 内容 |
-|---|---|
-| `deep-research` | 引用、矛盾点、ギャップを含む、複数ソース・複数パスのリサーチブリーフ。 |
-| `graphify` *(ラッパー、自作)* | 任意の入力(コード/ドキュメント/論文/画像)を、監査レポート付きのクラスタリングされたナレッジグラフに変換する。 |
-| `grilling` | 構築前に計画をストレステストするため、ユーザーに執拗にインタビューする。 |
-| `second-brain` | Obsidian風の個人ナレッジボルトに対する、取り込み/編集/検索/リント/連携のワークフロー。 |
-| `watch-video` | yt-dlpが対応する任意の動画ソースから、文字起こし/映像/マルチモーダルなコンテンツを抽出する。 |
-| `markitdown` *(ラッパー)* | PDF/スライド/表計算/音声/HTMLなどを、LLM/RAG用途向けのクリーンなMarkdownに変換する。 |
-
-すべてのエントリーの完全な出典(ソースリポジトリ、採用日、自作/採用/改変の別)は`global-config/tools/skill-update-check/sources.json`に、アップストリームへのクレジットは`ATTRIBUTION.md`にあります。
-
-</details>
-
-> **Bonus skills:** 21 more skills were added in October 2026 (66 in total). The table above lists the original 45; see the [English README](README.md#bonus-skills-21-added-in-the-october-2026-patch) for the rest.
-
+Full skill table (generated from the manifest): see the English [README](README.md#global-configskills).
 
 ### `global-config/memory-examples/`
 オーナーのClaude Code自動メモリシステムからの実際のエントリーが7件(プロジェクト固有の事実ではなく、持ち運び可能な「自分の仕事の仕方」に関する習慣)含まれています。セッション間メッセージングの命名規則を曖昧さなく決める話、ローカルOllamaを事前圧縮として使うパターン、「スキルノートブックを更新する」が具体的に何を意味するかというルール、シェルのクォーティングに関する落とし穴(`\b`が静かにバックスペース文字になってしまう問題)、コンテキストの肥大化をどれだけ積極的に削るかについてのフィードバック、そしてCLAUDE.mdにあるAIらしさを消す文章ルールの裏付けとなる完全な詳細(語彙表 + 修正前後の例)をタイ語・英語の両方で収録しています。これらは、内容そのものと同じくらい、良いメモリエントリーの「形」(ルール + 理由 + 適用方法)を示すために存在しています — メモリが全体のワークフローにどう組み込まれるかは`global-config/rules/ecc-common/`を、ローカルメモリとグローバルメモリの使い分けはCLAUDE.mdの「จำ/บัญญัติ」セクションを参照してください。

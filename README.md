@@ -5,7 +5,7 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Claude%20Code%20Clone%20Template&fontSize=38&fontColor=ffffff&fontAlignY=38&desc=A%20portable%20snapshot%20of%20one%20person's%20Claude%20Code%20setup&descAlignY=58&descSize=17&descColor=ffffff&animation=fadeIn" alt="Claude Code Clone Template banner" width="100%"/>
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-66%20curated-brightgreen)](#global-configskills)
+<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-61%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 [![Languages](https://img.shields.io/badge/languages-10-orange)](#top)
 [![Template](https://img.shields.io/badge/type-adapt%2C%20not%20run%20as--is-lightgrey)](#caveat-this-is-one-persons-setup)
 
@@ -72,7 +72,7 @@ claude-clone-template/
 │   ├── hooks/block-dangerous-git.py       # PreToolUse gate that asks before risky git commands
 │   ├── hooks/graphify-auto-update.py      # PostToolUse hook — keeps the graphify knowledge graph in sync after edits
 │   ├── rules/ecc-common/                  # 10 engineering-discipline rule files (ecc plugin ecosystem)
-│   ├── skills/                            # 66 curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
+│   ├── skills/                            # <!-- gen:skills-count:start -->61<!-- gen:skills-count:end --> curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
 │   ├── SKILLS_INDEX.md                    # Personal index of installed skills/plugins + when to use which
 │   ├── memory-examples/                   # 7 real auto-memory entries showing the memory system's format/patterns
 │   ├── templates/                         # 2 starter templates to copy into a new repo (project-CLAUDE.md, conventions.md)
@@ -103,99 +103,122 @@ The heart of the setup. It encodes:
 General engineering discipline from the ecc (everything-claude-code) plugin ecosystem: TDD workflow, immutability, commit format, security checklist, code-review severity levels, agent delegation. Only useful if you also run ecc (see "What you'll still need to install" below).
 
 ### `global-config/skills/`
-66 curated `SKILL.md` folders (plus supporting scripts/reference/data files where a skill has them) covering writing/marketing craft (copywriting, copy-editing, hallmark, marketing-council, pricing...), engineering process (debug-mantra, poka-yoke, second-brain, dependency-audit, secrets-audit...), design (design-system, ui-ux-pro-max, banner-design, mobbin-references...), and meta-skills for managing Claude Code itself (skillify, grilling, second-brain, graphify, plan-pro, shipping-a-branch...). `poka-yoke`, `plan-pro`, and `shipping-a-branch` are self-authored from scratch; `graphify`, `dembrandt`, `markitdown`, and `mobbin-references` are self-written wrapper skills whose SKILL.md is original but whose underlying tools are third-party (credited in `ATTRIBUTION.md` and version-tracked in `sources.json`); `deslop-defaults` is adapted (harvested from `ibelick/ui-skills` and rewritten stack-agnostic); the rest are adopted from upstream repos — see `sources.json` for per-skill provenance and `ATTRIBUTION.md` for upstream credits. These are genuinely reusable prompt-engineering artifacts, not just descriptions of skills — copy them into `~/.claude/skills/` and they work immediately.
+<!-- gen:skills-count-2:start -->61<!-- gen:skills-count-2:end --> curated `SKILL.md` folders (plus supporting scripts/reference/data files where a skill has them) covering writing/marketing craft (copywriting, copy-editing, hallmark, marketing-council, pricing...), engineering process (debug-mantra, poka-yoke, second-brain, dependency-audit, secrets-audit...), design (design-system, ui-ux-pro-max, banner-design, mobbin-references...), and meta-skills for managing Claude Code itself (skillify, grilling, second-brain, graphify, plan-pro, shipping-a-branch...). `poka-yoke`, `plan-pro`, and `shipping-a-branch` are self-authored from scratch; `graphify`, `dembrandt`, `markitdown`, and `mobbin-references` are self-written wrapper skills whose SKILL.md is original but whose underlying tools are third-party (credited in `ATTRIBUTION.md` and version-tracked in `sources.json`); `deslop-defaults` is adapted (harvested from `ibelick/ui-skills` and rewritten stack-agnostic); the rest are adopted from upstream repos — see `sources.json` for per-skill provenance and `ATTRIBUTION.md` for upstream credits. These are genuinely reusable prompt-engineering artifacts, not just descriptions of skills — copy them into `~/.claude/skills/` and they work immediately.
 
-<details>
-<summary><b>See all 45 skills, grouped by category</b> (click to expand)</summary>
+Every bundled skill is listed below. The tables are generated from `catalog/skills.json` (run `npm run gen`); do not edit them by hand.
 
-**Engineering process & workflow (15)**
+<!-- gen:skills-table:start -->
+**Engineering (10)**
 
-| Skill | What it does |
-|---|---|
-| `debug-mantra` | Four-step debugging discipline (reproduce → trace → falsify → cross-reference) recited before proposing any fix. |
-| `poka-yoke` *(self-authored)* | Mistake-proofing review — makes a bad state impossible/obvious at the source instead of catching it after the fact. |
-| `post-mortem` | Writes the canonical root-cause writeup after a bug is fixed and validated. |
-| `scrutinize` | Outsider-perspective review of a plan/PR/diff — checks intent first, then traces the real code path. |
-| `shipping-a-branch` *(self-authored)* | Drives commit → push → PR → review → merge end to end, confirming each risky step separately. |
-| `plan-pro` *(self-authored)* | Implementation-plan writer with a spawned multi-agent review loop and an HTML before/after output. |
-| `dependency-audit` | Checks project dependencies for known CVEs and supply-chain risks. |
-| `secrets-audit` | Scans source, git history, and infra for leaked credentials and weak secrets-management posture. |
-| `prompt-injection` | Audits apps/agents for prompt-injection and LLM permission-boundary vulnerabilities. |
-| `decide` | Structured decision workflow (37signals-style question set) that also archives the rationale. |
-| `unstuck` | Lateral-thinking technique bank for cracking a roadblock instead of reporting "not possible". |
-| `teach` | Teaches the user a new concept/skill within the current workspace. |
-| `wait-what` | Flags a message that didn't land and re-pitches it. |
-| `skillify` | Creates, adapts, or updates a Claude Code skill (from chat, video, dump, or an external repo). |
-| `wizard` | Generates an interactive bash wizard for steps only a human can perform (credentials, dashboards, migrations). |
+| Skill | What it does | Origin | License | Status | ~Tokens |
+|---|---|---|---|---|---|
+| `domain-modeling` | Pins down domain terms and records ADRs while a plan is being stress-tested. | adopted | MIT | experimental | 54 |
+| `github-pr-review-draft` | Pending-review PR workflow: findings wait in the GitHub UI, nothing posts silently. | self-authored | MIT | experimental | 64 |
+| `grill-with-docs` | Stress-tests a plan against the repo docs and records decisions as ADRs. | adopted | MIT | experimental | 27 |
+| `plan-pro` | Implementation-plan writer with a spawned multi-agent review loop and an HTML before/after output. | self-authored | MIT | experimental | 107 |
+| `poka-yoke` | Mistake-proofing review — makes a bad state impossible/obvious at the source instead of catching it after the fact. | self-authored | MIT | experimental | 136 |
+| `ponytail` | Writes the least code that is still correct: climbs a ladder before adding anything. | adapted | MIT | experimental | 125 |
+| `project-bootstrap` | One-shot repo scaffold: thin CLAUDE.md router, docs/log/, docs/adr/, conventions. | self-authored | MIT | experimental | 131 |
+| `pruning-branches` | Periodic branch and worktree cleanup with a survey first and a log entry after. | self-authored | MIT | experimental | 50 |
+| `shipping-a-branch` | Drives commit → push → PR → review → merge end to end, confirming each risky step separately. | self-authored | MIT | experimental | 58 |
+| `wizard` | Generates an interactive bash wizard for steps only a human can perform (credentials, dashboards, migrations). | adopted | MIT | experimental | 79 |
 
-**Design & UI (11)**
+**Design (10)**
 
-| Skill | What it does |
-|---|---|
-| `banner-design` | Designs social/ad/web/print banners across many art-direction styles. |
-| `design` | Broad design skill — logos, CIP mockups, slides, banners, icons, social photos. |
-| `design-system` | Three-layer design-token architecture (primitive → semantic → component) plus slide generation. |
-| `deslop-defaults` *(adapted)* | Structural defaults that stop AI-generated UI from looking averaged-out (z-index, accent restraint, states). |
-| `hallmark` | Anti-AI-slop design skill for greenfield pages, redesigns, and design extraction from URLs/screenshots. |
-| `ui-styling` | Builds accessible UI with shadcn/ui, Tailwind, and dark-mode-aware theming. |
-| `ui-ux-pro-max` | Searchable UI/UX database — styles, palettes, font pairings, UX guidelines, motion presets, chart types. |
-| `mobbin-references` | Pulls real-app reference screenshots (onboarding, paywalls, empty states...) before a UI is designed. |
-| `dembrandt` *(wrapper)* | Extracts a live website's actual design tokens (colors, type, spacing) via DOM/CSS inspection. |
-| `image` | Generates/edits/optimizes marketing images (heroes, social graphics, mockups, OG images). |
-| `slides` | Builds strategic HTML presentations with Chart.js and design-token theming. |
+| Skill | What it does | Origin | License | Status | ~Tokens |
+|---|---|---|---|---|---|
+| `banner-design` | Designs social/ad/web/print banners across many art-direction styles. | adopted | MIT | experimental | 124 |
+| `dembrandt` | Extracts a live website's actual design tokens (colors, type, spacing) via DOM/CSS inspection. | wrapper | MIT | experimental | 141 |
+| `design` | Broad design skill — logos, CIP mockups, slides, banners, icons, social photos. | adopted | MIT | experimental | 154 |
+| `design-system` | Three-layer design-token architecture (primitive → semantic → component) plus slide generation. | adopted | MIT | experimental | 70 |
+| `deslop-defaults` | Structural defaults that stop AI-generated UI from looking averaged-out (z-index, accent restraint, states). | adapted | MIT | experimental | 112 |
+| `hallmark` | Anti-AI-slop design skill for greenfield pages, redesigns, and design extraction from URLs/screenshots. | adopted | MIT | experimental | 65 |
+| `image` | Generates/edits/optimizes marketing images (heroes, social graphics, mockups, OG images). | adopted | MIT | experimental | 205 |
+| `mobbin-references` | Pulls real-app reference screenshots (onboarding, paywalls, empty states...) before a UI is designed. | wrapper | MIT | experimental | 86 |
+| `slides` | Builds strategic HTML presentations with Chart.js and design-token theming. | adopted | MIT | experimental | 35 |
+| `ui-ux-pro-max` | Searchable UI/UX database — styles, palettes, font pairings, UX guidelines, motion presets, chart types. | adopted | MIT | experimental | 149 |
 
-**Marketing, content & brand (13)**
+**Marketing (12)**
 
-| Skill | What it does |
-|---|---|
-| `brand` | Brand voice, visual identity, messaging frameworks, and consistency checks. |
-| `community-marketing` | Community-led growth strategy (Discord/Slack/forum, ambassador programs, advocacy). |
-| `content-strategy` | Decides what content to create — topic clusters, editorial calendars, content pillars. |
-| `copy-editing` | Edits/tightens/refreshes existing marketing copy. |
-| `copywriting` | Writes new marketing copy for landing/pricing/feature/about pages. |
-| `launch` | Plans a product launch, feature announcement, or go-to-market checklist. |
-| `management-talk` | Rewrites engineer-to-engineer writing for leadership, shaped to the target channel (Slack/email/standup). |
-| `marketing-council` | Simulated advisory board of named marketers debating a positioning question. |
-| `marketing-ideas` | Growth/marketing idea generator for SaaS and software products. |
-| `marketing-psychology` | Applies behavioral-science principles (anchoring, social proof, framing) to marketing decisions. |
-| `pricing` | Pricing/packaging strategy and pricing-page audits. |
-| `product-marketing` | Builds the reusable product/audience/positioning context doc other marketing skills reference. |
-| `social` | Social content creation, scheduling, repurposing, and social listening across platforms. |
+| Skill | What it does | Origin | License | Status | ~Tokens |
+|---|---|---|---|---|---|
+| `brand` | Brand voice, visual identity, messaging frameworks, and consistency checks. | adopted | MIT | experimental | 46 |
+| `community-marketing` | Community-led growth strategy (Discord/Slack/forum, ambassador programs, advocacy). | adopted | MIT | experimental | 158 |
+| `content-strategy` | Decides what content to create — topic clusters, editorial calendars, content pillars. | adopted | MIT | experimental | 165 |
+| `copy-editing` | Edits/tightens/refreshes existing marketing copy. | adopted | MIT | experimental | 149 |
+| `copywriting` | Writes new marketing copy for landing/pricing/feature/about pages. | adopted | MIT | experimental | 189 |
+| `launch` | Plans a product launch, feature announcement, or go-to-market checklist. | adopted | MIT | experimental | 138 |
+| `marketing-council` | Simulated advisory board of named marketers debating a positioning question. | adopted | MIT | experimental | 205 |
+| `marketing-ideas` | Growth/marketing idea generator for SaaS and software products. | adopted | MIT | experimental | 141 |
+| `marketing-psychology` | Applies behavioral-science principles (anchoring, social proof, framing) to marketing decisions. | adopted | MIT | experimental | 150 |
+| `pricing` | Pricing/packaging strategy and pricing-page audits. | adopted | MIT | experimental | 217 |
+| `product-marketing` | Builds the reusable product/audience/positioning context doc other marketing skills reference. | adopted | MIT | experimental | 138 |
+| `social` | Social content creation, scheduling, repurposing, and social listening across platforms. | adopted | MIT | experimental | 252 |
 
-**Research & knowledge management (6)**
+**Research (8)**
 
-| Skill | What it does |
-|---|---|
-| `deep-research` | Multi-source, multi-pass research brief with citations, contradictions, and gaps. |
-| `graphify` *(wrapper, self-authored)* | Turns any input (code/docs/papers/images) into a clustered knowledge graph with an audit report. |
-| `grilling` | Interviews the user relentlessly to stress-test a plan before building it. |
-| `second-brain` | Capture/compile/query/lint/connect workflow for a personal Obsidian-style knowledge vault. |
-| `watch-video` | Extracts transcript/visual/multimodal content from any yt-dlp-supported video source. |
-| `markitdown` *(wrapper)* | Converts PDFs/slides/sheets/audio/HTML/etc. into clean Markdown for LLM/RAG use. |
+| Skill | What it does | Origin | License | Status | ~Tokens |
+|---|---|---|---|---|---|
+| `agent-reach` | Web research across sources an agent can reach. | adopted | MIT | experimental | 298 |
+| `browserclaw` | Drives a signed-in agent browser (BrowserOS integration instructions). | adopted | MIT | experimental | 126 |
+| `deep-research` | Multi-source, multi-pass research brief with citations, contradictions, and gaps. | adopted | MIT | experimental | 221 |
+| `graphify` | Turns any input (code/docs/papers/images) into a clustered knowledge graph with an audit report. | wrapper | MIT | experimental | 29 |
+| `grilling` | Interviews the user relentlessly to stress-test a plan before building it. | adopted | MIT | experimental | 51 |
+| `markitdown` | Converts PDFs/slides/sheets/audio/HTML/etc. into clean Markdown for LLM/RAG use. | wrapper | MIT | experimental | 140 |
+| `second-brain` | Capture/compile/query/lint/connect workflow for a personal Obsidian-style knowledge vault. | adopted | MIT | experimental | 245 |
+| `watch-video` | Extracts transcript/visual/multimodal content from any yt-dlp-supported video source. | adopted | MIT | experimental | 234 |
 
-Full provenance (source repo, adoption date, self-authored vs. adopted vs. adapted) for every entry is in `global-config/tools/skill-update-check/sources.json`; upstream credits are in `ATTRIBUTION.md`.
+**Writing (4)**
 
-</details>
+| Skill | What it does | Origin | License | Status | ~Tokens |
+|---|---|---|---|---|---|
+| `english-writing-anti-ai-tell` | Checklist that keeps English drafts from reading as AI-written. | self-authored | MIT | experimental | 74 |
+| `i-have-adhd` | Output style for readers who want the next action first; ships an optional always-on hook. | adopted | MIT | experimental | 61 |
+| `thai-no-quote-emphasis` | Rule against quote marks for emphasis in Thai text. | self-authored | MIT | workflow-specific | 38 |
+| `thai-writing-anti-ai-tell` | Checklist that keeps Thai drafts from reading as AI-written. | self-authored | MIT | workflow-specific | 94 |
 
-### Bonus skills (21 added in the October 2026 patch)
+**Documents (4)**
 
-Added after the first release. Nothing above changed. Several are written for one specific workflow (Thai documents), with SKILL.md text partly in Thai. Read each one and adapt it before relying on it.
+| Skill | What it does | Origin | License | Status | ~Tokens |
+|---|---|---|---|---|---|
+| `close-out-log` | End-of-task ritual: append a dated entry to docs/log/ so the next session inherits the reasons. | self-authored | MIT | experimental | 147 |
+| `docx-human-sounding-report` | Fixes for a .docx report that should not read as machine-made. | self-authored | MIT | workflow-specific | 54 |
+| `docx-python-docx-justify` | python-docx: never justify formulas or code blocks that break their own lines. | self-authored | MIT | workflow-specific | 49 |
+| `docx-th-sarabun-sizing` | Thai Sarabun sizing scale for Word, fixing the base style instead of per-run sizes. | self-authored | MIT | workflow-specific | 56 |
 
-| Skill | What it is for |
-|---|---|
-| `close-out-log` | End-of-task ritual: append a dated entry to `docs/log/YYYY-MM-DD.md` (why-now / decisions / watch-out / not-done) so the next session inherits the reasons. |
-| `project-bootstrap` | One-shot scaffold for a repo: thin CLAUDE.md router, `docs/log/`, `docs/adr/`, conventions. |
-| `domain-modeling` / `grill-with-docs` | Pin down domain terms and record ADRs while a plan is being stress-tested. |
-| `ponytail` | Write the least code that is still correct: climb a ladder (YAGNI, stdlib, native, existing dependency) before adding anything. |
-| `git-guardrails-claude-code` | Gate dangerous git commands (push, force operations, clean, branch deletion) with a blocking hook. |
-| `github-pr-review-draft` / `pruning-branches` | Pending-review PR workflow and periodic branch cleanup. |
-| `memory-lint` | Read-only health check of a project's memory files. |
-| `prompt-master` | Writes and tunes prompts for other AI tools. |
-| `agent-reach` / `browserclaw` / `codeburn-cost-check` | Web research, driving a signed-in agent browser, and AI spend breakdowns. |
-| `i-have-adhd` | Output style for readers who want the next action first (numbered steps, short state recaps). Ships an optional `always-on.sh` hook. |
-| `english-writing-anti-ai-tell` / `thai-writing-anti-ai-tell` / `thai-no-quote-emphasis` | Checklists for drafts that should not read as AI-written. |
-| `docx-human-sounding-report` / `docx-python-docx-justify` / `docx-th-sarabun-sizing` | .docx report fixes, including Thai rendering in Word. |
-| `supabase-rls-safety-check` | Proactive Row Level Security and anon-key audit for Supabase projects. |
+**Meta (managing Claude Code itself) (8)**
+
+| Skill | What it does | Origin | License | Status | ~Tokens |
+|---|---|---|---|---|---|
+| `codeburn-cost-check` | Breaks down AI spend per project and model from local usage data. | wrapper | MIT | experimental | 75 |
+| `decide` | Structured decision workflow (37signals-style question set) that also archives the rationale. | adopted | MIT | experimental | 214 |
+| `memory-lint` | Read-only health check of a project's memory files. | self-authored | MIT | experimental | 90 |
+| `prompt-master` | Writes and tunes prompts for other AI tools. | adopted | MIT | experimental | 84 |
+| `skillify` | Creates, adapts, or updates a Claude Code skill (from chat, video, dump, or an external repo). | adopted | MIT | experimental | 318 |
+| `teach` | Teaches the user a new concept/skill within the current workspace. | adopted | MIT | experimental | 16 |
+| `unstuck` | Lateral-thinking technique bank for cracking a roadblock instead of reporting "not possible". | adopted | MIT | experimental | 309 |
+| `wait-what` | Flags a message that didn't land and re-pitches it. | adopted | MIT | experimental | 14 |
+
+**Security (5)**
+
+| Skill | What it does | Origin | License | Status | ~Tokens |
+|---|---|---|---|---|---|
+| `dependency-audit` | Checks project dependencies for known CVEs and supply-chain risks. | adopted | MIT | experimental | 112 |
+| `git-guardrails-claude-code` | Blocks dangerous git commands (push, force, clean, branch deletion) with a hook. | adopted | MIT | experimental | 61 |
+| `prompt-injection` | Audits apps/agents for prompt-injection and LLM permission-boundary vulnerabilities. | adopted | MIT | experimental | 124 |
+| `secrets-audit` | Scans source, git history, and infra for leaked credentials and weak secrets-management posture. | adopted | MIT | experimental | 136 |
+| `supabase-rls-safety-check` | Proactive Row Level Security and anon-key audit for Supabase projects. | self-authored | MIT | experimental | 49 |
+
+**Not bundled, install from upstream (5)**
+
+| Skill | Upstream | Install |
+|---|---|---|
+| `debug-mantra` | [thananon/9arm-skills](https://github.com/thananon/9arm-skills/tree/a1fc303b274ed06c32d405ba5a6db00ded6e5663/skills/engineering/debug-mantra) | npx skills add thananon/9arm-skills |
+| `management-talk` | [thananon/9arm-skills](https://github.com/thananon/9arm-skills/tree/a1fc303b274ed06c32d405ba5a6db00ded6e5663/skills/productivity/management-talk) | npx skills add thananon/9arm-skills |
+| `post-mortem` | [thananon/9arm-skills](https://github.com/thananon/9arm-skills/tree/a1fc303b274ed06c32d405ba5a6db00ded6e5663/skills/engineering/post-mortem) | npx skills add thananon/9arm-skills |
+| `scrutinize` | [thananon/9arm-skills](https://github.com/thananon/9arm-skills/tree/a1fc303b274ed06c32d405ba5a6db00ded6e5663/skills/engineering/scrutinize) | npx skills add thananon/9arm-skills |
+| `ui-styling` | [mrgoonie/claudekit-skills](https://github.com/mrgoonie/claudekit-skills/tree/80113d86bc4407f105af40a2c4ea58194f7c370a/.claude/skills/ui-styling) | /plugin marketplace add mrgoonie/claudekit-skills (then install the plugin that contains ui-styling) |
+<!-- gen:skills-table:end -->
 
 ### `global-config/memory-examples/`
 7 real entries from the owner's Claude Code auto-memory system (not project-specific facts — portable "how I work" habits): a naming-convention disambiguation for cross-session messaging, the local-Ollama-as-pre-compression pattern, a rule about what "update the skill notebook" actually means operationally, a shell-quoting gotcha (`\b` silently becoming a backspace byte), a feedback entry on how aggressively to trim context bloat, and the full backing detail (vocab tables + before/after examples) for the anti-AI-tell writing rules in CLAUDE.md, in both Thai and English. These exist to show the *shape* of a good memory entry (rule + why + how-to-apply) as much as their specific content — see `global-config/rules/ecc-common/` for how memory fits into the broader workflow, and CLAUDE.md's "จำ/บัญญัติ" section for the local-vs-global memory distinction this owner uses.
@@ -213,7 +236,7 @@ Example content from the owner's Obsidian second-brain vault: local Ollama model
 
 1. **Copy `global-config/CLAUDE.md`** into your own `~/.claude/CLAUDE.md`. Merge it with what you already have, or replace outright — your call. Read it first; delete sections that don't apply to you. **Rewrite the "Installed Plugins" section before you do anything else with this file** — it currently asserts specific plugins (superpowers, ecc, pordee, lazyweb, andrej-karpathy-skills) are installed and enabled, and tells Claude not to mention installing them. That's true for the original owner, not for you. Replace it with your own actual plugin list, or delete it until you've installed something.
 2. **Copy `global-config/agents/*.md`** into `~/.claude/agents/` and **`global-config/hooks/*.py`** into `~/.claude/hooks/`. These are what make the model-routing rules, the git safety gate, and the graphify auto-sync hook in CLAUDE.md actually functional, rather than just prose.
-3. **Copy `global-config/skills/*`** into `~/.claude/skills/`. This is the bulk of the actual value — 66 working skill folders, not just descriptions of them.
+3. **Copy `global-config/skills/*`** into `~/.claude/skills/`. This is the bulk of the actual value — <!-- gen:skills-count-3:start -->61<!-- gen:skills-count-3:end --> working skill folders, not just descriptions of them.
 4. **Merge `global-config/settings.example.json`** into your own `~/.claude/settings.json` (replace `<YOUR_HOME>` with your real home path first). Merge, don't overwrite, if you already have a settings.json — take the `hooks.PreToolUse`/`hooks.PostToolUse` entries, the `permissions.ask` block, and whatever else you want from `enabledPlugins`. The shipped hook commands use the Windows `py` launcher; on macOS/Linux, change them to `python3` first.
 5. **Copy `global-config/rules/ecc-common/`** into `~/.claude/rules/` **only if** you install the ecc plugin. Otherwise skip.
 6. **Copy `global-config/memory-examples/*.md`** into the auto-memory folder for whichever project you want them to apply to (Claude Code auto-memory is per-project, at `~/.claude/projects/<project>/memory/`), or read them as reference and write your own from scratch.

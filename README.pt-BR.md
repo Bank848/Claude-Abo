@@ -5,7 +5,7 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Claude%20Code%20Clone%20Template&fontSize=38&fontColor=ffffff&fontAlignY=38&desc=A%20portable%20snapshot%20of%20one%20person's%20Claude%20Code%20setup&descAlignY=58&descSize=17&descColor=ffffff&animation=fadeIn" alt="Claude Code Clone Template banner" width="100%"/>
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-66%20curated-brightgreen)](#global-configskills)
+<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-61%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 [![Languages](https://img.shields.io/badge/languages-10-orange)](#top)
 [![Template](https://img.shields.io/badge/type-adapt%2C%20not%20run%20as--is-lightgrey)](#caveat-this-is-one-persons-setup)
 
@@ -101,80 +101,7 @@ Disciplina geral de engenharia do ecossistema de plugins ecc (everything-claude-
 ### `global-config/skills/`
 66 pastas `SKILL.md` selecionadas (mais scripts/referências/dados de apoio quando a skill os tem) cobrindo ofício de escrita/marketing (copywriting, copy-editing, hallmark, marketing-council, pricing...), processo de engenharia (debug-mantra, poka-yoke, second-brain, dependency-audit, secrets-audit...), design (design-system, ui-ux-pro-max, banner-design, mobbin-references...) e meta-skills para gerenciar o próprio Claude Code (skillify, grilling, second-brain, graphify, plan-pro, shipping-a-branch...). `poka-yoke`, `plan-pro` e `shipping-a-branch` são de autoria própria e escritas do zero; `graphify`, `dembrandt`, `markitdown` e `mobbin-references` são skills-wrapper próprias, cujo SKILL.md é original mas cujas ferramentas subjacentes são de terceiros (creditadas em `ATTRIBUTION.md` e com versão rastreada em `sources.json`); `deslop-defaults` é adaptada (extraída de `ibelick/ui-skills` e reescrita de forma agnóstica de stack); o restante é adotado de repositórios upstream — veja `sources.json` para a proveniência de cada skill e `ATTRIBUTION.md` para os créditos das fontes upstream. São artefatos de prompt engineering genuinamente reutilizáveis, não apenas descrições de skills — copie-os para `~/.claude/skills/` e eles funcionam imediatamente.
 
-<details>
-<summary><b>Ver as 45 skills, agrupadas por categoria</b> (clique para expandir)</summary>
-
-**Processo de engenharia e fluxo de trabalho (15)**
-
-| Skill | O que faz |
-|---|---|
-| `debug-mantra` | Disciplina de depuração em quatro passos (reproduzir → rastrear → refutar → cruzar referências) recitada antes de propor qualquer correção. |
-| `poka-yoke` *(autoria própria)* | Revisão à prova de erros — torna um estado ruim impossível/óbvio na origem em vez de detectá-lo depois do fato. |
-| `post-mortem` | Redige o relatório canônico de causa raiz depois que um bug é corrigido e validado. |
-| `scrutinize` | Revisão com perspectiva de outsider de um plano/PR/diff — checa a intenção primeiro, depois rastreia o caminho real do código. |
-| `shipping-a-branch` *(autoria própria)* | Conduz commit → push → PR → review → merge de ponta a ponta, confirmando cada passo arriscado separadamente. |
-| `plan-pro` *(autoria própria)* | Escritor de planos de implementação com um loop de revisão multiagente disparado e saída em HTML com antes/depois. |
-| `dependency-audit` | Checa as dependências do projeto em busca de CVEs conhecidas e riscos de supply chain. |
-| `secrets-audit` | Varre código-fonte, histórico do git e infraestrutura em busca de credenciais vazadas e postura fraca de gestão de segredos. |
-| `prompt-injection` | Audita apps/agentes em busca de vulnerabilidades de prompt injection e violação de limites de permissão de LLM. |
-| `decide` | Fluxo estruturado de tomada de decisão (conjunto de perguntas estilo 37signals) que também arquiva a justificativa. |
-| `unstuck` | Banco de técnicas de pensamento lateral para destravar um obstáculo em vez de reportar "não é possível". |
-| `teach` | Ensina o usuário um novo conceito/habilidade dentro do workspace atual. |
-| `wait-what` | Sinaliza uma mensagem que não foi compreendida e a reapresenta. |
-| `skillify` | Cria, adapta ou atualiza uma skill do Claude Code (a partir de chat, vídeo, despejo de conteúdo ou repositório externo). |
-| `wizard` | Gera um assistente interativo em bash para passos que só um humano pode executar (credenciais, dashboards, migrações). |
-
-**Design e UI (11)**
-
-| Skill | O que faz |
-|---|---|
-| `banner-design` | Projeta banners sociais/de anúncio/web/impressos em vários estilos de direção de arte. |
-| `design` | Skill de design amplo — logos, mockups de CIP, slides, banners, ícones, fotos sociais. |
-| `design-system` | Arquitetura de design tokens em três camadas (primitiva → semântica → componente), mais geração de slides. |
-| `deslop-defaults` *(adaptada)* | Padrões estruturais que impedem que UI gerada por IA pareça "média demais" (z-index, contenção de cor de destaque, estados). |
-| `hallmark` | Skill de design anti-slop de IA para páginas do zero, redesenhos e extração de design a partir de URLs/screenshots. |
-| `ui-styling` | Constrói UI acessível com shadcn/ui, Tailwind e temas com suporte a dark mode. |
-| `ui-ux-pro-max` | Base de dados pesquisável de UI/UX — estilos, paletas, combinações de fontes, diretrizes de UX, presets de movimento, tipos de gráfico. |
-| `mobbin-references` | Traz screenshots de referência de apps reais (onboarding, paywalls, estados vazios...) antes de uma UI ser desenhada. |
-| `dembrandt` *(wrapper)* | Extrai os design tokens reais de um site ao vivo (cores, tipografia, espaçamento) via inspeção de DOM/CSS. |
-| `image` | Gera/edita/otimiza imagens de marketing (heroes, gráficos sociais, mockups, imagens OG). |
-| `slides` | Constrói apresentações estratégicas em HTML com Chart.js e temas de design tokens. |
-
-**Marketing, conteúdo e marca (13)**
-
-| Skill | O que faz |
-|---|---|
-| `brand` | Voz de marca, identidade visual, frameworks de mensagem e checagens de consistência. |
-| `community-marketing` | Estratégia de crescimento liderado por comunidade (Discord/Slack/fórum, programas de embaixadores, advocacy). |
-| `content-strategy` | Decide que conteúdo criar — clusters de tópicos, calendários editoriais, pilares de conteúdo. |
-| `copy-editing` | Edita/aperta/atualiza copy de marketing já existente. |
-| `copywriting` | Escreve nova copy de marketing para páginas de landing/preço/funcionalidade/sobre. |
-| `launch` | Planeja um lançamento de produto, anúncio de funcionalidade ou checklist de go-to-market. |
-| `management-talk` | Reescreve textos de engenheiro para engenheiro em linguagem de liderança, ajustada ao canal de destino (Slack/e-mail/standup). |
-| `marketing-council` | Conselho consultivo simulado de marqueteiros nomeados debatendo uma questão de posicionamento. |
-| `marketing-ideas` | Gerador de ideias de growth/marketing para produtos SaaS e de software. |
-| `marketing-psychology` | Aplica princípios de ciência comportamental (ancoragem, prova social, enquadramento) a decisões de marketing. |
-| `pricing` | Estratégia de preço/empacotamento e auditorias de página de preços. |
-| `product-marketing` | Constrói o documento de contexto reutilizável de produto/público/posicionamento que outras skills de marketing referenciam. |
-| `social` | Criação de conteúdo social, agendamento, reaproveitamento e social listening em várias plataformas. |
-
-**Pesquisa e gestão de conhecimento (6)**
-
-| Skill | O que faz |
-|---|---|
-| `deep-research` | Briefing de pesquisa multi-fonte e multi-passada com citações, contradições e lacunas. |
-| `graphify` *(wrapper, autoria própria)* | Transforma qualquer entrada (código/docs/artigos/imagens) em um grafo de conhecimento agrupado com relatório de auditoria. |
-| `grilling` | Entrevista o usuário sem trégua para estressar um plano antes de construí-lo. |
-| `second-brain` | Fluxo de captura/compilação/consulta/lint/conexão para um cofre de conhecimento pessoal estilo Obsidian. |
-| `watch-video` | Extrai conteúdo em transcrição/visual/multimodal de qualquer fonte de vídeo suportada pelo yt-dlp. |
-| `markitdown` *(wrapper)* | Converte PDFs/slides/planilhas/áudio/HTML/etc. em Markdown limpo para uso em LLM/RAG. |
-
-A proveniência completa (repositório de origem, data de adoção, autoria própria vs. adotada vs. adaptada) de cada entrada está em `global-config/tools/skill-update-check/sources.json`; os créditos das fontes upstream estão em `ATTRIBUTION.md`.
-
-</details>
-
-> **Bonus skills:** 21 more skills were added in October 2026 (66 in total). The table above lists the original 45; see the [English README](README.md#bonus-skills-21-added-in-the-october-2026-patch) for the rest.
-
+Full skill table (generated from the manifest): see the English [README](README.md#global-configskills).
 
 ### `global-config/memory-examples/`
 7 entradas reais do sistema de auto-memória do Claude Code do dono original (não são fatos específicos de projeto, e sim hábitos portáveis de "como eu trabalho"): uma desambiguação de convenção de nomes para mensagens entre sessões, o padrão de usar Ollama local como pré-compressão, uma regra sobre o que "atualizar o caderno de skills" de fato significa operacionalmente, uma pegadinha de escaping de shell (`\b` virando silenciosamente um byte de backspace), uma entrada de feedback sobre o quão agressivamente cortar o inchaço de contexto, e o detalhamento completo de apoio (tabelas de vocabulário + exemplos de antes/depois) das regras anti-marca-de-IA na escrita presentes no CLAUDE.md, tanto em tailandês quanto em inglês. Elas existem para mostrar a *forma* de uma boa entrada de memória (regra + porquê + como aplicar) tanto quanto o conteúdo específico — veja `global-config/rules/ecc-common/` para como a memória se encaixa no fluxo de trabalho mais amplo, e a seção "จำ/บัญญัติ" do CLAUDE.md para a distinção entre memória local e global que este dono usa.

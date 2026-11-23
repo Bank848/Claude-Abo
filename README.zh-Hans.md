@@ -5,7 +5,7 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Claude%20Code%20Clone%20Template&fontSize=38&fontColor=ffffff&fontAlignY=38&desc=A%20portable%20snapshot%20of%20one%20person's%20Claude%20Code%20setup&descAlignY=58&descSize=17&descColor=ffffff&animation=fadeIn" alt="Claude Code Clone Template banner" width="100%"/>
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-66%20curated-brightgreen)](#global-configskills)
+<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-61%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 [![Languages](https://img.shields.io/badge/languages-10-orange)](#top)
 [![Template](https://img.shields.io/badge/type-adapt%2C%20not%20run%20as--is-lightgrey)](#caveat-this-is-one-persons-setup)
 
@@ -101,80 +101,7 @@ claude-clone-template/
 ### `global-config/skills/`
 66 个精选的 `SKILL.md` 文件夹(部分 skill 还附带脚本/参考资料/数据文件),覆盖写作与营销技巧(copywriting、copy-editing、hallmark、marketing-council、pricing……)、工程流程(debug-mantra、poka-yoke、second-brain、dependency-audit、secrets-audit……)、设计(design-system、ui-ux-pro-max、banner-design、mobbin-references……),以及用于管理 Claude Code 自身的元技能(skillify、grilling、second-brain、graphify、plan-pro、shipping-a-branch……)。其中 `poka-yoke`、`plan-pro`、`shipping-a-branch` 是从零原创;`graphify`、`dembrandt`、`markitdown`、`mobbin-references` 是自写的封装 skill——SKILL.md 是原创内容,但底层工具来自第三方(致谢见 `ATTRIBUTION.md`,版本追踪见 `sources.json`);`deslop-defaults` 属于改编(取材自 `ibelick/ui-skills` 并改写为技术栈无关版本);其余均采纳自上游仓库——每个 skill 的具体来源见 `sources.json`,上游致谢见 `ATTRIBUTION.md`。这些都是真正可复用的 prompt 工程成果,而不只是对 skill 的文字描述——把它们复制进 `~/.claude/skills/` 就能立即生效。
 
-<details>
-<summary><b>查看全部 45 个 skill(按类别分组)</b>(点击展开)</summary>
-
-**工程流程与工作流(15)**
-
-| Skill | 功能说明 |
-|---|---|
-| `debug-mantra` | 四步调试准则(复现 → 追踪 → 证伪 → 交叉验证),在提出任何修复方案前先诵读一遍。 |
-| `poka-yoke` *(原创)* | 防呆式评审——让错误状态在源头就变得不可能发生或一眼可见,而不是事后才去抓。 |
-| `post-mortem` | 在 bug 被修复并验证后,撰写标准的根因分析报告。 |
-| `scrutinize` | 以局外人视角评审计划/PR/diff——先审视意图,再追踪真实的代码路径。 |
-| `shipping-a-branch` *(原创)* | 端到端驱动"提交 → 推送 → 开 PR → 评审 → 合并"流程,每一步高风险操作都单独确认。 |
-| `plan-pro` *(原创)* | 实现计划撰写工具,带有多代理评审循环和 HTML 前后对比输出。 |
-| `dependency-audit` | 检查项目依赖是否存在已知 CVE 和供应链风险。 |
-| `secrets-audit` | 扫描源代码、git 历史和基础设施,查找泄露的凭据和薄弱的密钥管理实践。 |
-| `prompt-injection` | 审计应用/代理是否存在 prompt injection 漏洞及 LLM 权限边界问题。 |
-| `decide` | 结构化决策流程(37signals 风格的问题清单),并归档决策理由。 |
-| `unstuck` | 横向思维技巧库,用于突破卡壳点,而不是直接回复"做不到"。 |
-| `teach` | 在当前工作环境中,向用户讲解一个新概念或技能。 |
-| `wait-what` | 标记出没有被理解到位的消息,并重新表达一遍。 |
-| `skillify` | 创建、改编或更新一个 Claude Code skill(来源可以是对话、视频、资料转储或外部仓库)。 |
-| `wizard` | 为只能由人工完成的步骤(凭据、控制台操作、迁移等)生成一个交互式 bash 向导。 |
-
-**设计与 UI(11)**
-
-| Skill | 功能说明 |
-|---|---|
-| `banner-design` | 跨多种美术风格设计社交/广告/网页/印刷 banner。 |
-| `design` | 综合设计 skill——logo、CIP 视觉规范、幻灯片、banner、图标、社交配图。 |
-| `design-system` | 三层设计令牌架构(基础层 → 语义层 → 组件层),外加幻灯片生成。 |
-| `deslop-defaults` *(改编)* | 一套结构性默认规则,避免 AI 生成的 UI 显得平庸(z-index、强调色克制、状态处理)。 |
-| `hallmark` | 面向从零设计、重新设计以及从 URL/截图提取设计的反 AI 套路设计 skill。 |
-| `ui-styling` | 用 shadcn/ui、Tailwind 和暗色模式感知的主题构建无障碍 UI。 |
-| `ui-ux-pro-max` | 可检索的 UI/UX 数据库——风格、配色方案、字体搭配、UX 准则、动效预设、图表类型。 |
-| `mobbin-references` | 在设计 UI 之前,拉取真实 App 的参考截图(引导流程、付费墙、空状态等)。 |
-| `dembrandt` *(封装)* | 通过 DOM/CSS 检查,提取某个真实网站实际使用的设计令牌(颜色、字体、间距)。 |
-| `image` | 生成/编辑/优化营销图像(主视觉图、社交配图、产品效果图、OG 图片)。 |
-| `slides` | 用 Chart.js 和设计令牌主题构建策略型 HTML 演示文稿。 |
-
-**营销、内容与品牌(13)**
-
-| Skill | 功能说明 |
-|---|---|
-| `brand` | 品牌语调、视觉识别、信息传达框架及一致性检查。 |
-| `community-marketing` | 社区驱动的增长策略(Discord/Slack/论坛、大使计划、拥护者运营)。 |
-| `content-strategy` | 决定要创作什么内容——主题集群、编辑日历、内容支柱。 |
-| `copy-editing` | 编辑、精简、刷新现有营销文案。 |
-| `copywriting` | 为落地页/定价页/功能页/关于页撰写新的营销文案。 |
-| `launch` | 规划产品发布、功能公告或上市清单。 |
-| `management-talk` | 把工程师之间的沟通改写成适合管理层的表达,并根据目标渠道(Slack/邮件/站会)调整。 |
-| `marketing-council` | 模拟一个由多位知名营销人组成的顾问团,围绕定位问题展开辩论。 |
-| `marketing-ideas` | 面向 SaaS 与软件产品的增长/营销点子生成器。 |
-| `marketing-psychology` | 将行为科学原理(锚定、社会认同、框架效应)应用到营销决策中。 |
-| `pricing` | 定价/套餐策略以及定价页审计。 |
-| `product-marketing` | 构建其他营销 skill 会引用的、可复用的产品/受众/定位背景文档。 |
-| `social` | 跨平台的社交内容创作、排期、二次利用与社交聆听。 |
-
-**研究与知识管理(6)**
-
-| Skill | 功能说明 |
-|---|---|
-| `deep-research` | 多来源、多轮次的研究简报,附引用、矛盾点和信息缺口。 |
-| `graphify` *(封装,原创)* | 把任意输入(代码/文档/论文/图像)转换为带聚类和审计报告的知识图谱。 |
-| `grilling` | 在动手构建之前,持续追问用户,对计划做压力测试。 |
-| `second-brain` | 面向个人 Obsidian 风格知识库的捕获/整理/查询/校验/关联工作流。 |
-| `watch-video` | 从任意 yt-dlp 支持的视频源提取文字稿/视觉/多模态内容。 |
-| `markitdown` *(封装)* | 将 PDF/幻灯片/表格/音频/HTML 等转换为适合 LLM/RAG 使用的干净 Markdown。 |
-
-每个条目完整的溯源信息(来源仓库、采纳日期、原创 vs. 采纳 vs. 改编)都在 `global-config/tools/skill-update-check/sources.json` 中;上游致谢见 `ATTRIBUTION.md`。
-
-</details>
-
-> **Bonus skills:** 21 more skills were added in October 2026 (66 in total). The table above lists the original 45; see the [English README](README.md#bonus-skills-21-added-in-the-october-2026-patch) for the rest.
-
+Full skill table (generated from the manifest): see the English [README](README.md#global-configskills).
 
 ### `global-config/memory-examples/`
 来自原作者 Claude Code auto-memory 系统的 7 条真实条目(并非项目相关的具体事实,而是可移植的"我的工作方式"习惯):一条跨会话消息命名歧义的澄清、"本地 Ollama 作为预压缩层"的模式、一条关于"更新 skill 笔记本"实际操作含义的规则、一个 shell 转义的坑(`\b` 会被悄悄转成退格字节)、一条关于清理上下文膨胀应该多激进的反馈条目,以及 CLAUDE.md 中反 AI 腔写作规则的完整背景资料(词汇表+前后对比示例,中泰英双语版本对应为泰语和英语)。这些条目的意义更多在于展示一条好的 memory 条目应有的*形态*(规则 + 原因 + 应用方法),而不只是具体内容本身——关于 memory 如何融入更大的工作流,可参考 `global-config/rules/ecc-common/`;关于本地记忆与全局记忆的区分方式,可参考 CLAUDE.md 中的"จำ/บัญญัติ"一节。

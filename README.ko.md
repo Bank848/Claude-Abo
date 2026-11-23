@@ -5,7 +5,7 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Claude%20Code%20Clone%20Template&fontSize=38&fontColor=ffffff&fontAlignY=38&desc=A%20portable%20snapshot%20of%20one%20person's%20Claude%20Code%20setup&descAlignY=58&descSize=17&descColor=ffffff&animation=fadeIn" alt="Claude Code Clone Template banner" width="100%"/>
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-66%20curated-brightgreen)](#global-configskills)
+<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-61%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 [![Languages](https://img.shields.io/badge/languages-10-orange)](#top)
 [![Template](https://img.shields.io/badge/type-adapt%2C%20not%20run%20as--is-lightgrey)](#caveat-this-is-one-persons-setup)
 
@@ -101,80 +101,7 @@ ecc(everything-claude-code) 플러그인 생태계에서 가져온 일반적인 
 ### `global-config/skills/`
 `SKILL.md` 폴더 66개(스킬에 따라 스크립트·참고 자료·데이터 파일이 딸려 있는 경우도 있습니다)로, 글쓰기/마케팅 실무(copywriting, copy-editing, hallmark, marketing-council, pricing 등), 엔지니어링 프로세스(debug-mantra, poka-yoke, second-brain, dependency-audit, secrets-audit 등), 디자인(design-system, ui-ux-pro-max, banner-design, mobbin-references 등), 그리고 Claude Code 자체를 관리하기 위한 메타 스킬(skillify, grilling, second-brain, graphify, plan-pro, shipping-a-branch 등)을 다룹니다. `poka-yoke`, `plan-pro`, `shipping-a-branch`는 처음부터 직접 작성했고, `graphify`, `dembrandt`, `markitdown`, `mobbin-references`는 SKILL.md는 직접 썼지만 내부적으로 쓰는 도구는 서드파티인 래퍼 스킬입니다(`ATTRIBUTION.md`에 출처를 명시하고 `sources.json`에 버전을 추적합니다). `deslop-defaults`는 각색한 것으로(`ibelick/ui-skills`에서 가져와 스택에 종속되지 않도록 다시 썼습니다), 나머지는 업스트림 저장소에서 그대로 가져온 것입니다 — 스킬별 출처는 `sources.json`을, 업스트림 크레딧은 `ATTRIBUTION.md`를 참고하세요. 이 스킬들은 단순히 설명만 적힌 문서가 아니라 실제로 재사용 가능한 프롬프트 엔지니어링 산출물입니다 — `~/.claude/skills/`에 복사하면 바로 동작합니다.
 
-<details>
-<summary><b>45개 스킬 전체를 카테고리별로 보기</b> (클릭해서 펼치기)</summary>
-
-**엔지니어링 프로세스 & 워크플로우 (15)**
-
-| 스킬 | 하는 일 |
-|---|---|
-| `debug-mantra` | 재현 → 추적 → 반증 → 교차 확인 순서로 진행하는 4단계 디버깅 규율로, 수정안을 제시하기 전에 반드시 암송합니다. |
-| `poka-yoke` *(자체 작성)* | 문제가 생긴 뒤 잡아내는 대신, 애초에 잘못된 상태 자체가 불가능하거나 눈에 바로 띄게 만드는 실수 방지 리뷰입니다. |
-| `post-mortem` | 버그가 수정되고 검증된 뒤 표준 형식의 근본 원인 보고서를 작성합니다. |
-| `scrutinize` | 계획/PR/diff를 외부인의 시각으로 검토합니다 — 먼저 의도를 확인한 뒤 실제 코드 경로를 추적합니다. |
-| `shipping-a-branch` *(자체 작성)* | 커밋 → 푸시 → PR → 리뷰 → 머지를 처음부터 끝까지 진행하며, 위험한 단계마다 따로 확인을 받습니다. |
-| `plan-pro` *(자체 작성)* | 멀티 에이전트 리뷰 루프와 HTML before/after 출력이 포함된 구현 계획 작성기입니다. |
-| `dependency-audit` | 프로젝트 의존성에서 알려진 CVE와 공급망 리스크를 점검합니다. |
-| `secrets-audit` | 소스 코드, git 히스토리, 인프라에서 유출된 인증 정보와 취약한 비밀 관리 상태를 스캔합니다. |
-| `prompt-injection` | 앱/에이전트에서 프롬프트 인젝션과 LLM 권한 경계 취약점을 점검합니다. |
-| `decide` | 구조화된 의사결정 워크플로우(37signals 스타일의 질문 세트)로, 근거도 함께 보관합니다. |
-| `unstuck` | "불가능하다"고 결론 내리는 대신 막힌 지점을 뚫을 수 있는 측면 사고 기법 모음입니다. |
-| `teach` | 현재 작업 공간 안에서 사용자에게 새로운 개념/기술을 가르칩니다. |
-| `wait-what` | 제대로 전달되지 않은 메시지를 표시하고 다시 설명합니다. |
-| `skillify` | Claude Code 스킬을 대화, 영상, 덤프, 외부 저장소로부터 만들거나 각색하거나 업데이트합니다. |
-| `wizard` | 사람만 수행할 수 있는 단계(자격 증명, 대시보드, 마이그레이션)를 위한 대화형 bash 마법사를 생성합니다. |
-
-**디자인 & UI (11)**
-
-| 스킬 | 하는 일 |
-|---|---|
-| `banner-design` | 다양한 아트 디렉션 스타일로 소셜/광고/웹/인쇄용 배너를 디자인합니다. |
-| `design` | 로고, CIP 목업, 슬라이드, 배너, 아이콘, 소셜용 이미지를 아우르는 폭넓은 디자인 스킬입니다. |
-| `design-system` | 원시(primitive) → 시맨틱 → 컴포넌트로 이어지는 3계층 디자인 토큰 구조와 슬라이드 생성을 제공합니다. |
-| `deslop-defaults` *(각색)* | AI가 만든 UI가 밋밋하게 평준화되어 보이지 않도록 막는 구조적 기본값입니다(z-index, 강조색 절제, 상태 표현). |
-| `hallmark` | 신규 페이지, 리디자인, URL/스크린샷에서의 디자인 추출을 위한 AI 슬롭 방지 디자인 스킬입니다. |
-| `ui-styling` | shadcn/ui, Tailwind, 다크모드를 고려한 테마로 접근성 있는 UI를 만듭니다. |
-| `ui-ux-pro-max` | 스타일, 팔레트, 폰트 조합, UX 가이드라인, 모션 프리셋, 차트 유형을 검색할 수 있는 UI/UX 데이터베이스입니다. |
-| `mobbin-references` | UI를 디자인하기 전에 실제 앱의 레퍼런스 스크린샷(온보딩, 결제 화면, 빈 상태 등)을 가져옵니다. |
-| `dembrandt` *(래퍼)* | DOM/CSS 검사를 통해 실제 웹사이트의 디자인 토큰(색상, 타이포그래피, 여백)을 추출합니다. |
-| `image` | 마케팅용 이미지(히어로, 소셜 그래픽, 목업, OG 이미지)를 생성/편집/최적화합니다. |
-| `slides` | Chart.js와 디자인 토큰 테마를 활용한 전략적 HTML 프레젠테이션을 만듭니다. |
-
-**마케팅, 콘텐츠 & 브랜드 (13)**
-
-| 스킬 | 하는 일 |
-|---|---|
-| `brand` | 브랜드 보이스, 비주얼 아이덴티티, 메시징 프레임워크, 일관성 점검을 다룹니다. |
-| `community-marketing` | 커뮤니티 주도 성장 전략(디스코드/슬랙/포럼, 앰배서더 프로그램, 옹호 활동)을 세웁니다. |
-| `content-strategy` | 어떤 콘텐츠를 만들지 결정합니다 — 토픽 클러스터, 에디토리얼 캘린더, 콘텐츠 축입니다. |
-| `copy-editing` | 기존 마케팅 카피를 다듬고 손보고 리프레시합니다. |
-| `copywriting` | 랜딩/가격/기능/소개 페이지용 새로운 마케팅 카피를 작성합니다. |
-| `launch` | 제품 출시, 기능 발표, 고투마켓 체크리스트를 계획합니다. |
-| `management-talk` | 엔지니어끼리 쓰던 글을 대상 채널(슬랙/이메일/스탠드업)에 맞춰 리더십용으로 다시 씁니다. |
-| `marketing-council` | 포지셔닝 질문을 놓고 토론하는 가상의 마케터 자문단을 시뮬레이션합니다. |
-| `marketing-ideas` | SaaS 및 소프트웨어 제품을 위한 성장/마케팅 아이디어를 생성합니다. |
-| `marketing-psychology` | 행동과학 원리(앵커링, 사회적 증거, 프레이밍)를 마케팅 의사결정에 적용합니다. |
-| `pricing` | 가격/패키징 전략과 가격 페이지 감사를 수행합니다. |
-| `product-marketing` | 다른 마케팅 스킬들이 참조하는 재사용 가능한 제품/타겟/포지셔닝 컨텍스트 문서를 만듭니다. |
-| `social` | 여러 플랫폼에 걸친 소셜 콘텐츠 제작, 스케줄링, 재가공, 소셜 리스닝을 다룹니다. |
-
-**리서치 & 지식 관리 (6)**
-
-| 스킬 | 하는 일 |
-|---|---|
-| `deep-research` | 인용, 상충되는 정보, 빈틈까지 담은 다중 출처·다단계 리서치 보고서를 작성합니다. |
-| `graphify` *(래퍼, 자체 작성)* | 코드/문서/논문/이미지 등 어떤 입력이든 감사 보고서가 딸린 클러스터형 지식 그래프로 변환합니다. |
-| `grilling` | 계획을 실제로 구축하기 전에 사용자를 집요하게 인터뷰해 압박 테스트합니다. |
-| `second-brain` | Obsidian 스타일의 개인 지식 볼트를 위한 수집/정리/조회/린트/연결 워크플로우입니다. |
-| `watch-video` | yt-dlp가 지원하는 모든 영상 소스에서 대본/시각/멀티모달 콘텐츠를 추출합니다. |
-| `markitdown` *(래퍼)* | PDF/슬라이드/시트/오디오/HTML 등을 LLM/RAG용으로 깔끔한 마크다운으로 변환합니다. |
-
-각 항목의 전체 출처(원본 저장소, 도입 날짜, 자체 작성/도입/각색 여부)는 `global-config/tools/skill-update-check/sources.json`에 있으며, 업스트림 크레딧은 `ATTRIBUTION.md`에 있습니다.
-
-</details>
-
-> **Bonus skills:** 21 more skills were added in October 2026 (66 in total). The table above lists the original 45; see the [English README](README.md#bonus-skills-21-added-in-the-october-2026-patch) for the rest.
-
+Full skill table (generated from the manifest): see the English [README](README.md#global-configskills).
 
 ### `global-config/memory-examples/`
 소유자의 실제 Claude Code 자동 메모리 시스템에서 가져온 항목 7개입니다(프로젝트별 사실이 아니라 이식 가능한 "일하는 방식" 습관입니다): 세션 간 메시징 관련 네이밍 규칙을 명확히 한 항목, 로컬 Ollama를 사전 압축으로 쓰는 패턴, "스킬 노트 갱신"이 실제로 무엇을 의미하는지에 대한 규칙, 셸 이스케이프 관련 주의사항(`\b`가 조용히 백스페이스 바이트로 바뀌는 문제), 컨텍스트 비대화를 얼마나 공격적으로 줄여야 하는지에 대한 피드백 항목, 그리고 CLAUDE.md의 AI 티 안 나게 쓰는 규칙을 뒷받침하는 전체 세부 내용(어휘 표 + before/after 예시)을 태국어와 영어 두 언어로 담은 항목입니다. 이 항목들은 특정 내용 자체보다는 좋은 메모리 항목이 어떤 *형태*(규칙 + 이유 + 적용 방법)를 갖는지를 보여주기 위해 존재합니다 — 메모리가 전체 워크플로우에서 어떻게 맞물리는지는 `global-config/rules/ecc-common/`을, 이 소유자가 사용하는 로컬 대 글로벌 메모리 구분은 CLAUDE.md의 "จำ/บัญญัติ" 섹션을 참고하세요.

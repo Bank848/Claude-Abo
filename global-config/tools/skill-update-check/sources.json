@@ -1,5 +1,5 @@
 ﻿{
-  "_README": "Manifest for the weekly skill/plugin update checker. The CHECK is deterministic (git/pip only, ZERO LLM tokens). It only REPORTS what is new — REVIEW-BEFORE-APPLY: it NEVER auto-updates anything. You read skill-update-report.md and update each item yourself, one at a time.",
+  "_README": "Manifest for the weekly skill/plugin update checker. The CHECK is deterministic (git/pip only, ZERO LLM tokens). It only REPORTS what is new — REVIEW-BEFORE-APPLY: it NEVER auto-updates anything. You read skill-update-report.md and update each item yourself, one at a time. personal_skills is generated from catalog/skills.json in the Claude-Abo repo; do not run -Ack here.",
   "_baseline_rule": "last_seen_commit is the baseline used to detect 'something changed upstream'. The normal weekly check NEVER edits the baseline (so you cannot miss an update). Only `check.ps1 -Ack` records the current upstream HEAD as the new baseline — run it ONLY after you have actually applied the update.",
   "_ls_remote_caveat": "Personal skills are checked with `git ls-remote <repo> HEAD`, which returns the WHOLE repo's HEAD, not the HEAD of subpath_in_repo. So a change anywhere in the source repo will flag the skill as 'maybe updated' even if your subpath did not change. This over-reports on purpose — it is safe because you review before applying.",
   "git_plugins": {
@@ -368,7 +368,7 @@
     },
     {
       "name": "browserclaw",
-      "source_repo_url": "unknown",
+      "source_repo_url": "https://github.com/idan-rubin/browserclaw",
       "subpath_in_repo": "",
       "last_seen_commit": "",
       "note": "Vendor-managed instructions for the BrowserOS browser integration; folder is browserclaw. No upstream URL recorded; checker reports it as unknown."
@@ -438,7 +438,7 @@
     },
     {
       "name": "i-have-adhd",
-      "source_repo_url": "unknown",
+      "source_repo_url": "https://github.com/ayghri/i-have-adhd",
       "subpath_in_repo": "",
       "last_seen_commit": "",
       "note": "Frontmatter declares MIT and Hermes metadata; upstream source not recorded. Checker reports it as unknown."
