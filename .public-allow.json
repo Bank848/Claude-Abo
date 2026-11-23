@@ -64,23 +64,5 @@
     "rule": "ipv4",
     "match": "169.254.169.254",
     "reason": "documents blocked private ranges (SSRF guidance)"
-  },
-  {
-    "file": "global-config/memory-examples/cross-session-send-message.md",
-    "rule": "uuid",
-    "match": "33856e17",
-    "reason": "remove in Task 26 (memory examples are rewritten)"
-  },
-  {
-    "file": "global-config/memory-examples/ollama-digest-tool.md",
-    "rule": "uuid",
-    "match": "ab22e91f",
-    "reason": "remove in Task 26 (memory examples are rewritten)"
-  },
-  {
-    "file": "global-config/memory-examples/skill-notebook-means-sources-json.md",
-    "rule": "uuid",
-    "match": "ef553e1f",
-    "reason": "remove in Task 26 (memory examples are rewritten)"
   }
 ]

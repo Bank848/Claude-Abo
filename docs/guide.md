@@ -24,7 +24,7 @@ Long-form notes that used to be the top of the README: what each piece is, how t
 | 4 | Merge settings | `global-config/settings.example.json` → `~/.claude/settings.json` (replace `<YOUR_HOME>`) |
 | 5 | Find-and-replace placeholders | full list in [How to adopt this](#how-to-adopt-this), step 8 |
 | 6 | Install the plugin ecosystems | see [What you'll still need to install](#what-youll-still-need-to-install-separately) |
-| 7 | Copy `notes/` + `memory-examples/` (optional) | your own vault / auto-memory folder |
+| 7 | Copy `notes/` + `examples/memory/` (optional) | your own vault / auto-memory folder |
 | 8 | Verify | ask for an implementation plan — does `/plan-pro` fire? |
 
 Multi-agent shop (Codex, Cursor, Gemini CLI, ...)? Also copy `global-config/AGENTS.md` into each project root — see [Compatibility with other AI coding tools](#compatibility-with-other-ai-coding-tools).
@@ -50,7 +50,7 @@ Claude-Abo/
 │   ├── rules/ecc-common/                  # 10 engineering-discipline rule files (ecc plugin ecosystem)
 │   ├── skills/                            # <!-- gen:skills-count:start -->61<!-- gen:skills-count:end --> curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
 │   ├── SKILLS_INDEX.md                    # Personal index of installed skills/plugins + when to use which
-│   ├── memory-examples/                   # example auto-memory entries showing the memory system's format/patterns
+│   ├── reference/                         # the two long anti-AI-tell writing references that CLAUDE.md links to
 │   ├── templates/                         # 2 starter templates to copy into a new repo (project-CLAUDE.md, conventions.md)
 │   └── tools/
 │       ├── skill-update-check/
@@ -72,7 +72,7 @@ The heart of the setup. It encodes:
 - **Auto Mode classifier workaround** — what to do when Auto Mode's own safety classifier silently re-blocks a command you already approved in chat, including a permanent `permissions.ask` fix for the "editing your own Claude Code config" case specifically.
 - **Shell gotchas** — Bash tool vs. PowerShell tool heredoc syntax rules (Windows-specific pain, learned the hard way).
 - **Context self-monitoring** — when Claude should proactively suggest `/compact`.
-- **Anti-AI-tell writing rules** — a full Thai + English ruleset for making drafted text read as human-written (vocab to avoid, structural patterns, register matching); the largest, most broadly reusable piece in the file. Backing detail lives in `memory-examples/`.
+- **Anti-AI-tell writing rules** — a full Thai + English ruleset for making drafted text read as human-written (vocab to avoid, structural patterns, register matching); the largest, most broadly reusable piece in the file. Backing detail lives in `global-config/reference/`.
 - **PR draft-first default**, **ask-before-scheduling cron/cloud agents**, **terse narration during long-running commands**, a **claude-in-chrome shared-tab-group gotcha** for parallel sessions, and a **proactive Supabase RLS check** for any project using Supabase.
 
 ### `global-config/rules/ecc-common/`
@@ -80,8 +80,8 @@ General engineering discipline from the ecc (everything-claude-code) plugin ecos
 
 (The full skill list, generated from the catalog, is in [README.md](../README.md#skills).)
 
-### `global-config/memory-examples/`
-Example entries from a Claude Code auto-memory system (not project-specific facts — portable "how I work" habits): a naming-convention disambiguation for cross-session messaging, the local-Ollama-as-pre-compression pattern, a rule about what "update the skill notebook" actually means operationally, a shell-quoting gotcha (`\b` silently becoming a backspace byte), a feedback entry on how aggressively to trim context bloat, and the full backing detail (vocab tables + before/after examples) for the anti-AI-tell writing rules in CLAUDE.md, in both Thai and English. These exist to show the *shape* of a good memory entry (rule + why + how-to-apply) as much as their specific content — see `global-config/rules/ecc-common/` for how memory fits into the broader workflow, and CLAUDE.md's "จำ/บัญญัติ" section for the local-vs-global memory distinction this owner uses.
+### `examples/memory/`
+Eight invented example notes (rule, **Why:**, **How to apply:**) covering memory habits, model routing, hook safety and skill use. Each was written from a short lesson outline, none is copied from a real memory. Copy one into a project's auto-memory folder and rewrite it with your own facts. See `examples/memory/README.md`.
 
 ### `global-config/tools/skill-update-check/sources.json`
 The owner's actual skill/tool adoption manifest — real provenance data (source repo URLs, install notes, version history) for all <!-- gen:skills-count-5:start -->66<!-- gen:skills-count-5:end --> personal skills (including the self-authored and adapted ones) plus 3 pip packages, 2 npm packages, and 1 binary tool. Paired with `check.ps1`, this is what lets a `claude-clone-template` adopter track upstream updates to the skills they copied into `~/.claude/skills/`, the same way the original owner does. Update `last_seen_commit` values are mostly `unknown`/stale from the recipient's perspective until they run `check.ps1 -Ack` once to establish their own baseline.
@@ -99,7 +99,7 @@ Example content from the owner's Obsidian second-brain vault: local Ollama model
 3. **Copy `global-config/skills/*`** into `~/.claude/skills/`. This is the bulk of the actual value — <!-- gen:skills-count-3:start -->61<!-- gen:skills-count-3:end --> working skill folders, not just descriptions of them.
 4. **Merge `global-config/settings.example.json`** into your own `~/.claude/settings.json` (replace `<YOUR_HOME>` with your real home path first). Merge, don't overwrite, if you already have a settings.json — take the `hooks.PreToolUse`/`hooks.PostToolUse` entries, the `permissions.ask` block, and whatever else you want from `enabledPlugins`. The shipped hook commands use the Windows `py` launcher; on macOS/Linux, change them to `python3` first.
 5. **Copy `global-config/rules/ecc-common/`** into `~/.claude/rules/` **only if** you install the ecc plugin. Otherwise skip.
-6. **Copy `global-config/memory-examples/*.md`** into the auto-memory folder for whichever project you want them to apply to (Claude Code auto-memory is per-project, at `~/.claude/projects/<project>/memory/`), or read them as reference and write your own from scratch.
+6. **Copy `examples/memory/*.md`** into the auto-memory folder for whichever project you want them to apply to (Claude Code auto-memory is per-project, at `~/.claude/projects/<project>/memory/`), or read them as reference and write your own from scratch.
 7. **Copy `notes/`** into your own second-brain vault location (any folder Obsidian or plain markdown tools can see), or skip entirely if you don't want a vault.
 8. **Find-and-replace every placeholder** — this is the most important step:
    - `<YOUR_USERNAME>`, `<YOUR_HOME>` → your actual Windows/system username and home path
