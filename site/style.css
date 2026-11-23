@@ -51,3 +51,10 @@ th, td { text-align: left; padding: var(--s2) var(--s3); border-bottom: 1px soli
 th { color: var(--muted); font-weight: 600; }
 .foot { max-width: 64rem; margin: 0 auto; padding: var(--s5) var(--s4); color: var(--muted); font-size: var(--t-sm); }
 @media (min-width: 48rem) { h2 { font-size: var(--t-2xl); } main { padding: 0 var(--s5); } }
+
+/* Sections are filled by script after load; reserve space so the content below does not jump. */
+#tour { min-height: 16rem; }
+#catalog { min-height: 80rem; }
+#audit { min-height: 30rem; }
+#learn { min-height: 26rem; }
+#about { min-height: 12rem; }

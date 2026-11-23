@@ -1,5 +1,6 @@
 // Builds _site/: static site files, the browser-safe src modules and data/catalog.json. No bundler.
 import { cp, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseFrontmatter } from '../src/frontmatter.mjs';
@@ -27,7 +28,8 @@ export async function buildSite({ root, out }) {
   const manifest = await loadManifest(path.join(root, 'catalog/skills.json'));
   const skills = [];
   for (const s of manifest.skills) skills.push({ ...s, descTokens: await descTokens(root, s) });
-  await writeFile(path.join(out, 'data/catalog.json'), `${JSON.stringify({ skills, count: skills.length })}\n`);
+  const tourClip = existsSync(path.join(root, 'site/media/tour.mp4'));
+  await writeFile(path.join(out, 'data/catalog.json'), `${JSON.stringify({ skills, count: skills.length, tourClip })}\n`);
 
   // Lessons arrive with the /learn module; the file always exists so the page can fetch it.
   const lessons = [];

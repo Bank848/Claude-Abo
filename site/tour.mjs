@@ -1,5 +1,5 @@
-// Tour: three steps beside an optional clip. The clip is shown only when media/tour.mp4 was shipped,
-// so the page never carries a broken player.
+// Tour: three steps beside an optional clip. The build sets data.tourClip when site/media/tour.mp4 exists,
+// so the page never carries a broken player and never probes for a missing file.
 
 const STEPS = [
   ['Run the audit', 'One command reads your Claude Code folder and estimates what it costs in context every session.', 'npx github:Bank848/Claude-Abo audit'],
@@ -14,14 +14,7 @@ function el(tag, text, cls) {
   return e;
 }
 
-async function hasClip() {
-  try {
-    const res = await fetch('media/tour.mp4', { method: 'HEAD' });
-    return res.ok;
-  } catch { return false; }
-}
-
-export async function mount(sec) {
+export function mount(sec, data = {}) {
   const h = el('h2', 'Tour');
   h.id = 'tour-h';
   sec.append(h);
@@ -34,7 +27,7 @@ export async function mount(sec) {
     ol.append(li);
   }
   wrap.append(ol);
-  if (await hasClip()) {
+  if (data.tourClip) {
     const v = document.createElement('video');
     v.controls = true;
     v.preload = 'none';
