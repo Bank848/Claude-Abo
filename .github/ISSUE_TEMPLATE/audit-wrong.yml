@@ -1,0 +1,29 @@
+name: Audit looks wrong
+description: The audit counted something incorrectly or crashed
+title: "[audit] "
+labels: ["audit"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Run `npx github:Bank848/Claude-Abo audit --export audit.json` and paste the file below. It contains counts and skill names only and is checked for leaks before it is written.
+        **Do not paste file paths, tokens, or your CLAUDE.md.**
+  - type: textarea
+    id: export
+    attributes:
+      label: Output of audit --export
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+      description: For example, the total from your own /context command.
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Operating system and Node version
+      placeholder: Windows 11, Node 20
