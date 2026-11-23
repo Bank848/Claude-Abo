@@ -1,0 +1,64 @@
+name: ci
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-latest, node: 18 }
+          - { os: ubuntu-latest, node: 20 }
+          - { os: ubuntu-latest, node: 22 }
+          - { os: windows-latest, node: 22 }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm test
+      - run: npm run check
+
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  npx-entry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: npx github entry point resolves the bin
+        run: npx --yes github:${{ github.repository }}#${{ github.sha }} --help
+
+  private-gate:
+    runs-on: ubuntu-latest
+    env:
+      PUBLIC_DENYLIST: ${{ secrets.PUBLIC_DENYLIST }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Denylist scan (detection only)
+        run: |
+          if [ -z "$PUBLIC_DENYLIST" ]; then
+            echo "::warning::PUBLIC_DENYLIST secret not set (forks); private-gate skipped"
+            exit 0
+          fi
+          f="$RUNNER_TEMP/denylist.txt"
+          printf '%s\n' "$PUBLIC_DENYLIST" > "$f"
+          node bin/claude-abo.mjs check --local-denylist "$f"
