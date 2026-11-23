@@ -109,3 +109,13 @@ test('formatText output has no absolute paths and fits 80 columns', () => {
   for (const line of text.split('\n')) assert.ok(line.length <= 80, `too long: ${line}`);
   assert.doesNotMatch(text, /[A-Za-z]:\\|\/Users\/|\/home\//);
 });
+
+test('a missing config folder is named in the hygiene check', () => {
+  const r = analyze(inv({ problems: [{ where: 'config', message: 'no Claude Code config found' }] }));
+  assert.match(check(r, 'hygiene').detail, /no Claude Code config found/);
+  assert.doesNotMatch(check(r, 'hygiene').detail, /unreadable or invalid/);
+});
+test('an invalid file is counted separately from a missing config', () => {
+  const r = analyze(inv({ problems: [{ where: 'user settings.json', message: 'invalid JSON' }] }));
+  assert.match(check(r, 'hygiene').detail, /1 unreadable or invalid file/);
+});

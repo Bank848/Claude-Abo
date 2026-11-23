@@ -79,7 +79,9 @@ export function analyze(inv, catalog = null, opts = {}) {
     if (dups.length) hyg.push(`${dups.length} skill name(s) exist in more than one place: ${dups.slice(0, 5).join(', ')}`);
     const long = inv.skills.filter((s) => s.descChars > LONG_DESCRIPTION_CHARS).length;
     if (long) hyg.push(`${long} skill description(s) longer than ${LONG_DESCRIPTION_CHARS} characters`);
-    if (inv.problems.length) hyg.push(`${inv.problems.length} unreadable or invalid file(s)`);
+    if (inv.problems.some((x) => x.where === 'config')) hyg.push('no Claude Code config found in the folder that was read');
+    const fileProblems = inv.problems.filter((x) => x.where !== 'config').length;
+    if (fileProblems) hyg.push(`${fileProblems} unreadable or invalid file(s)`);
     checks.push({ id: 'hygiene', status: hyg.length ? 'warn' : 'pass', title: 'Hygiene', detail: hyg.length ? hyg.join('; ') : 'no duplicates, long descriptions or unreadable files' });
     checks.push(claudeMdTokens > BIG_CLAUDEMD_TOKENS
       ? { id: 'claudemd-size', status: 'warn', title: 'CLAUDE.md size', detail: `about ${claudeMdTokens} tokens loaded every session (over ${BIG_CLAUDEMD_TOKENS})` }
