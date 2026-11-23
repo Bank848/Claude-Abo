@@ -271,7 +271,7 @@ Skip this entire section. Delete the Ollama paragraphs from your copy of `CLAUDE
 
 ### If yes
 1. **Install Ollama** from [ollama.com](https://ollama.com).
-2. **Decide where the model store lives.** Models are large (a 27B model is tens of GB) and the default location is on your system drive (`%USERPROFILE%\.ollama` on Windows). If your system drive is tight on space, relocate the store to a bigger drive — the original setup used `D:\ollama` for exactly this reason. On Windows, set the `OLLAMA_MODELS` environment variable to your chosen path before pulling models; other platforms have equivalent env-var or symlink approaches.
+2. **Decide where the model store lives.** Models are large (a 27B model is tens of GB) and the default location is on your system drive (`%USERPROFILE%\.ollama` on Windows). If your system drive is tight on space, relocate the store to a bigger drive — the original setup used `<YOUR_DRIVE>:\ollama` for exactly this reason. On Windows, set the `OLLAMA_MODELS` environment variable to your chosen path before pulling models; other platforms have equivalent env-var or symlink approaches.
 3. **Pull at least one general-purpose instruct model** (e.g. `ollama pull qwen2.5:7b-instruct` or a similar ~7–9B instruct model — small enough to run fast, good enough to summarize). The original inventory in `notes/local-ollama-models.md` shows one possible spread: a heavy 27B for best quality, mid-size 7–9B models for speed/reasoning/code, and one vision-capable model (`llava:7b`) — treat that list as inspiration, not a shopping list.
 4. **Learn the usage pattern:** pipe a file in, get a digest out —
    ```powershell

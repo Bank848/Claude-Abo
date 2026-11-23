@@ -253,7 +253,7 @@ Setup ต้นฉบับใช้ local Ollama model เป็น **tier pre-
 
 ### ถ้าเอา
 1. **ติดตั้ง Ollama** จาก [ollama.com](https://ollama.com)
-2. **ตัดสินใจว่า model store จะอยู่ที่ไหน** Model มีขนาดใหญ่ (model 27B กินหลายสิบ GB) และตำแหน่ง default อยู่บน system drive (`%USERPROFILE%\.ollama` บน Windows) ถ้า system drive พื้นที่ตึง ให้ย้าย store ไปไดรฟ์ที่ใหญ่กว่า — setup ต้นฉบับใช้ `D:\ollama` ด้วยเหตุผลนี้เอง บน Windows ตั้ง environment variable `OLLAMA_MODELS` ไปที่ path ที่เลือกก่อน pull model แพลตฟอร์มอื่นมีวิธีเทียบเท่าผ่าน env-var หรือ symlink
+2. **ตัดสินใจว่า model store จะอยู่ที่ไหน** Model มีขนาดใหญ่ (model 27B กินหลายสิบ GB) และตำแหน่ง default อยู่บน system drive (`%USERPROFILE%\.ollama` บน Windows) ถ้า system drive พื้นที่ตึง ให้ย้าย store ไปไดรฟ์ที่ใหญ่กว่า — setup ต้นฉบับใช้ `<YOUR_DRIVE>:\ollama` ด้วยเหตุผลนี้เอง บน Windows ตั้ง environment variable `OLLAMA_MODELS` ไปที่ path ที่เลือกก่อน pull model แพลตฟอร์มอื่นมีวิธีเทียบเท่าผ่าน env-var หรือ symlink
 3. **Pull instruct model general-purpose อย่างน้อย 1 ตัว** (เช่น `ollama pull qwen2.5:7b-instruct` หรือ instruct model ขนาดใกล้เคียง ~7-9B — เล็กพอให้รันเร็ว ดีพอให้สรุปได้) รายการต้นฉบับใน `notes/local-ollama-models.md` โชว์สเปรดหนึ่งแบบที่เป็นไปได้: model 27B ตัวหนักสำหรับคุณภาพดีสุด, model 7-9B ขนาดกลางสำหรับความเร็ว/reasoning/code, และ model รองรับภาพ 1 ตัว (`llava:7b`) — ใช้เป็นแรงบันดาลใจ ไม่ใช่ shopping list
 4. **เรียนรู้ pattern การใช้งาน:** pipe ไฟล์เข้าไป ได้ digest ออกมา —
    ```powershell

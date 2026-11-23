@@ -1,0 +1,110 @@
+[
+  {
+    "file": "global-config/skills/ui-ux-pro-max/data/stacks/avalonia.csv",
+    "rule": "win-path",
+    "match": "C:\\Users\\data\\config.json",
+    "reason": "bad-example code snippet in vendored data"
+  },
+  {
+    "file": "global-config/skills/ui-ux-pro-max/data/stacks/javafx.csv",
+    "rule": "posix-home",
+    "match": "/Users/me",
+    "reason": "bad-example code snippet in vendored data"
+  },
+  {
+    "file": "global-config/skills/ui-ux-pro-max/data/stacks/wpf.csv",
+    "rule": "win-path",
+    "match": "C:\\Resources\\icon.png",
+    "reason": "bad-example code snippet in vendored data"
+  },
+  {
+    "file": "global-config/skills/memory-lint/SKILL.md",
+    "rule": "win-path",
+    "match": "C:\\work\\my_project",
+    "reason": "generic example path in skill text"
+  },
+  {
+    "file": "global-config/skills/design-system/scripts/generate-slide.py",
+    "rule": "email",
+    "match": "hello@claudekit.ai",
+    "reason": "vendor contact address in vendored script"
+  },
+  {
+    "file": "global-config/skills/hallmark/references/study.md",
+    "rule": "ipv4",
+    "match": "127.0.0.0",
+    "reason": "documents blocked private ranges (SSRF guidance)"
+  },
+  {
+    "file": "global-config/skills/hallmark/references/study.md",
+    "rule": "ipv4",
+    "match": "10.0.0.0",
+    "reason": "documents blocked private ranges (SSRF guidance)"
+  },
+  {
+    "file": "global-config/skills/hallmark/references/study.md",
+    "rule": "ipv4",
+    "match": "172.16.0.0",
+    "reason": "documents blocked private ranges (SSRF guidance)"
+  },
+  {
+    "file": "global-config/skills/hallmark/references/study.md",
+    "rule": "ipv4",
+    "match": "192.168.0.0",
+    "reason": "documents blocked private ranges (SSRF guidance)"
+  },
+  {
+    "file": "global-config/skills/hallmark/references/study.md",
+    "rule": "ipv4",
+    "match": "169.254.0.0",
+    "reason": "documents blocked private ranges (SSRF guidance)"
+  },
+  {
+    "file": "global-config/skills/hallmark/references/study.md",
+    "rule": "ipv4",
+    "match": "169.254.169.254",
+    "reason": "documents blocked private ranges (SSRF guidance)"
+  },
+  {
+    "file": "global-config/skills/ui-styling/canvas-fonts/ArsenalSC-OFL.txt",
+    "rule": "email",
+    "match": "andrij.design@gmail.com",
+    "reason": "font licence copyright line; remove in Task 4 (ui-styling becomes a pointer)"
+  },
+  {
+    "file": "global-config/skills/ui-styling/canvas-fonts/EricaOne-OFL.txt",
+    "rule": "email",
+    "match": "luciano@latinotype.com",
+    "reason": "font licence copyright line; remove in Task 4 (ui-styling becomes a pointer)"
+  },
+  {
+    "file": "global-config/skills/ui-styling/canvas-fonts/Italiana-OFL.txt",
+    "rule": "email",
+    "match": "hi@typemade.mx",
+    "reason": "font licence copyright line; remove in Task 4 (ui-styling becomes a pointer)"
+  },
+  {
+    "file": "global-config/skills/ui-styling/canvas-fonts/PoiretOne-OFL.txt",
+    "rule": "email",
+    "match": "denis.masharov@gmail.com",
+    "reason": "font licence copyright line; remove in Task 4 (ui-styling becomes a pointer)"
+  },
+  {
+    "file": "global-config/memory-examples/cross-session-send-message.md",
+    "rule": "uuid",
+    "match": "33856e17",
+    "reason": "remove in Task 26 (memory examples are rewritten)"
+  },
+  {
+    "file": "global-config/memory-examples/ollama-digest-tool.md",
+    "rule": "uuid",
+    "match": "ab22e91f",
+    "reason": "remove in Task 26 (memory examples are rewritten)"
+  },
+  {
+    "file": "global-config/memory-examples/skill-notebook-means-sources-json.md",
+    "rule": "uuid",
+    "match": "ef553e1f",
+    "reason": "remove in Task 26 (memory examples are rewritten)"
+  }
+]

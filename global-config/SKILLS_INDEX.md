@@ -4,7 +4,7 @@ description: Central index of every installed skill — what each one is, how to
 metadata: 
   node_type: memory
   type: reference
-  originSessionId: 4adc6dba-7324-4362-a2a5-404665f85eed
+  originSessionId: 00000000-0000-4000-8000-000000000001
 ---
 
 # All Skills Index
