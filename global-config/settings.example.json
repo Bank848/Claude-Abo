@@ -24,6 +24,19 @@
           {
             "type": "command",
             "command": "py \"<YOUR_HOME>/.claude/hooks/block-dangerous-git.py\""
+          },
+          {
+            "type": "command",
+            "command": "py \"<YOUR_HOME>/.claude/hooks/block-endless-stdin-build.py\""
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "py \"<YOUR_HOME>/.claude/hooks/freeze-guard.py\""
           }
         ]
       }

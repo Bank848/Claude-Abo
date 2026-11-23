@@ -47,12 +47,17 @@ Claude-Abo/
 │   ├── hooks/i-have-adhd/always-on.sh       # Optional hook script for the i-have-adhd output style (wire it into settings.json yourself)
 │   ├── hooks/block-dangerous-git.py       # PreToolUse gate that asks before risky git commands
 │   ├── hooks/graphify-auto-update.py      # PostToolUse hook — keeps the graphify knowledge graph in sync after edits
+│   ├── hooks/block-endless-stdin-build.py # PreToolUse gate: denies `yes | <build tool>` so a build cannot log forever
+│   ├── hooks/freeze-guard.py              # PreToolUse gate: while a freeze is on, Edit/Write only inside one chosen folder
 │   ├── rules/ecc-common/                  # 10 engineering-discipline rule files (ecc plugin ecosystem)
 │   ├── skills/                            # <!-- gen:skills-count:start -->61<!-- gen:skills-count:end --> curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
 │   ├── SKILLS_INDEX.md                    # Personal index of installed skills/plugins + when to use which
 │   ├── reference/                         # the two long anti-AI-tell writing references that CLAUDE.md links to
 │   ├── templates/                         # 2 starter templates to copy into a new repo (project-CLAUDE.md, conventions.md)
 │   └── tools/
+│       ├── graphify-structural-diff/      # Filters comment-only edits out before a graphify extraction pass
+│       ├── prune-merged-worktrees.sh      # Dry-run-first removal of merged, clean git worktrees
+│       ├── security-hooks/README.md       # Pointers to three open-source guard tools (nothing vendored)
 │       ├── skill-update-check/
 │       │   ├── check.ps1                  # Weekly update checker — reads sources.json from this same folder
 │       │   └── sources.json               # Provenance manifest: <!-- gen:skills-count-4:start -->66<!-- gen:skills-count-4:end --> personal skills + 3 pip + 2 npm + 1 binary tool
