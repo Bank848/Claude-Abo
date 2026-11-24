@@ -20,7 +20,7 @@ Open an **Audit looks wrong** issue and attach the output of `npx github:Bank848
 
 ## Change code or docs
 
-- Node 18.18 or newer, no dependencies, no build step.
+- Node 22 or newer, no dependencies, no build step.
 - `npm test` runs the tests. `npm run check` runs the repo checks, including the public-data scan. Run both before you push.
 - Anything between `<!-- gen:... -->` markers is generated. Change `catalog/skills.json` and run `npm run gen`; do not edit generated regions by hand.
 - Keep personal data out of every file, fixture and commit message: names, emails, hosts, private repo names, and paths from your own machine.

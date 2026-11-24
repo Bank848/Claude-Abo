@@ -8,7 +8,7 @@
     "claude-abo": "bin/claude-abo.mjs"
   },
   "engines": {
-    "node": ">=18.18"
+    "node": ">=22"
   },
   "scripts": {
     "test": "node --test",
