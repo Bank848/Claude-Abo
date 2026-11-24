@@ -14,3 +14,4 @@
 .cat-detail dl { display: grid; grid-template-columns: max-content 1fr; gap: var(--s1) var(--s4); margin: 0 0 var(--s3); }
 .cat-detail dt { color: var(--muted); }
 .cat-detail dd { margin: 0; overflow-wrap: anywhere; }
+.cat-field input[type="checkbox"] { width: 24px; height: 24px; }

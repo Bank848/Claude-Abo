@@ -6,3 +6,5 @@
 .tour-steps .cmd { margin-top: var(--s2); }
 .tour-video { width: 100%; max-width: 40rem; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); }
 @media (min-width: 48rem) { .tour-wrap:has(.tour-video) { grid-template-columns: 1fr 1fr; align-items: start; } }
+.tour-wrap, .tour-steps, .tour-steps li { min-width: 0; }
+.tour-steps .cmd { white-space: pre-wrap; overflow-wrap: anywhere; }
