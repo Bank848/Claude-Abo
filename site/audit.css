@@ -1,17 +1,21 @@
-#audit textarea, #audit input[type="number"] { width: 100%; font: var(--t-sm)/1.5 var(--mono); color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: var(--s3); }
+#audit textarea, #audit input[type="number"] { width: 100%; font: var(--t-sm)/1.5 var(--mono); color: var(--text); background: var(--surface); border: 1px solid var(--faint); border-radius: 4px; padding: var(--s3); }
 .audit-label { display: block; font-weight: 600; margin: var(--s4) 0 var(--s2); }
 .audit-row { display: grid; gap: var(--s2); margin-top: var(--s2); }
 .audit-row .audit-label { margin: 0; }
 #audit button { justify-self: start; font: inherit; font-weight: 600; color: var(--accent-text); background: var(--accent); border: 0; border-radius: 4px; padding: var(--s3) var(--s5); min-height: 44px; cursor: pointer; }
 .audit-result { margin-top: var(--s5); border-top: 1px solid var(--line); padding-top: var(--s4); }
-.audit-head { font-size: var(--t-lg); font-weight: 700; margin-bottom: var(--s1); }
+.audit-head { font: 600 var(--t-xl)/1.2 var(--serif); margin-bottom: var(--s1); }
 .audit-sub, .audit-note { color: var(--muted); font-size: var(--t-sm); }
-.audit-error { color: var(--text); border-left: 4px solid var(--focus); padding-left: var(--s3); }
+.audit-error { color: var(--text); border-left: 3px solid var(--margin); padding-left: var(--s3); }
 .audit-parts { display: grid; grid-template-columns: max-content 1fr; gap: var(--s1) var(--s4); margin: var(--s4) 0; }
 .audit-parts dt { color: var(--muted); }
 .audit-parts dd { margin: 0; font-variant-numeric: tabular-nums; }
-.audit-result h3 { font-size: var(--t-lg); margin: var(--s5) 0 var(--s2); }
-.audit-result ul { padding-left: var(--s5); max-width: 42rem; }
+.audit-result h3 { font: 600 var(--t-lg)/1.3 var(--serif); margin: var(--s5) 0 var(--s2); }
+.audit-result ul, .audit-result ol { padding-left: var(--s5); max-width: 42rem; }
 .audit-checks { list-style: none; padding-left: 0; }
-.st-fail, .st-warn { color: var(--focus); }
+.cut-top { background: linear-gradient(var(--mark), var(--mark)) no-repeat 0 0 / 100% 100%; color: var(--mark-text); animation: mark 220ms ease-out; }
+@keyframes mark { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
+@media (prefers-reduced-motion: reduce) { .cut-top { animation: none; } }
+.st-fail { color: var(--margin); }
+.st-warn { color: var(--focus); }
 @media (min-width: 48rem) { .audit-row { grid-template-columns: 1fr max-content max-content; align-items: end; } .audit-row input { max-width: 14rem; } }

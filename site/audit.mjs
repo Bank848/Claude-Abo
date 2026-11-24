@@ -33,9 +33,9 @@ function renderReport(report, parsed) {
   box.append(el('h3', 'What to cut first'));
   if (report.cuts.length === 0) box.append(el('p', 'Nothing obvious.'));
   else {
-    const ul = el('ul');
-    for (const c of report.cuts) ul.append(el('li', `${c.kind} ${c.name}: ~${fmt(c.estTokens)} tokens. ${c.reason}`));
-    box.append(ul);
+    const ol = el('ol', null, 'audit-cuts');
+    report.cuts.forEach((c, i) => ol.append(el('li', `${c.kind} ${c.name}: ~${fmt(c.estTokens)} tokens. ${c.reason}`, i === 0 ? 'cut-top' : null)));
+    box.append(ol);
   }
 
   box.append(el('h3', 'Safety checklist'));

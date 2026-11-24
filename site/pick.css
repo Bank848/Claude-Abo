@@ -1,0 +1,15 @@
+#hero { padding-top: var(--s6); }
+#hero h1 { max-width: 20ch; }
+.pick-label { display: block; font-weight: 600; margin: var(--s4) 0 var(--s1); }
+.pick-input { width: 100%; max-width: 34rem; font: inherit; min-height: 44px; color: var(--text); background: var(--surface); border: 1px solid var(--faint); border-radius: 4px; padding: var(--s2) var(--s3); }
+.pick-note { color: var(--muted); font-size: var(--t-sm); margin: var(--s1) 0 var(--s4); }
+.pick-live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; margin: 0; }
+.pick { list-style: none; margin: 0; padding: 0; max-width: 34rem; min-height: calc(var(--line-h) * 13); line-height: var(--line-h); background: repeating-linear-gradient(transparent 0 calc(var(--line-h) - 1px), var(--line) 0 var(--line-h)); }
+.pick li { margin: 0; padding: 0; }
+.pick b { font-weight: 600; }
+.pick .t { color: var(--text); }
+.pick li[aria-current="true"] .t { background: linear-gradient(var(--mark), var(--mark)) no-repeat 0 0 / 100% 100%; color: var(--mark-text); animation: mark 220ms ease-out; }
+@keyframes mark { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
+@media (prefers-reduced-motion: reduce) { .pick li[aria-current="true"] .t { animation: none; } }
+@media (forced-colors: active) { .pick li[aria-current="true"] { border-left: 3px solid Highlight; padding-left: 0.5rem; } }
+@media (min-width: 48rem) { .pick { min-height: calc(var(--line-h) * 10); } }

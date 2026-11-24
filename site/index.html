@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="catalog.css">
 <link rel="stylesheet" href="learn.css">
 <link rel="stylesheet" href="tour.css">
+<link rel="stylesheet" href="pick.css">
 <script type="module" src="app.mjs"></script>
 </head>
 <body>
@@ -27,6 +28,21 @@
   </nav>
 </header>
 <main id="main">
+  <section id="hero" aria-labelledby="hero-h">
+    <h1 id="hero-h">Describe the job. Claude picks the skill.</h1>
+    <p>Claude reads one line about each skill and loads the one that fits your request. Type a request to see a rough version of that match.</p>
+    <label class="pick-label" for="pick-q">What do you want done?</label>
+    <input id="pick-q" class="pick-input" type="text" autocomplete="off" placeholder="Make my English draft stop reading as AI-written" aria-describedby="pick-note">
+    <p id="pick-note" class="pick-note">A rough illustration of how Claude matches descriptions.</p>
+    <p id="pick-live" class="pick-live" aria-live="polite"></p>
+    <ol class="pick" id="pick-list">
+      <li aria-current="true"><b>english-writing-anti-ai-tell</b> <span class="t">Checklist that keeps English drafts from reading as AI-written.</span></li>
+      <li><b>github-pr-review-draft</b> <span class="t">Pending-review PR workflow: findings wait in the GitHub UI, nothing posts silently.</span></li>
+      <li><b>markitdown</b> <span class="t">Converts PDFs/slides/sheets/audio/HTML/etc. into clean Markdown for LLM/RAG use.</span></li>
+      <li><b>dependency-audit</b> <span class="t">Checks project dependencies for known CVEs and supply-chain risks.</span></li>
+      <li><b>pruning-branches</b> <span class="t">Periodic branch and worktree cleanup with a survey first and a log entry after.</span></li>
+    </ol>
+  </section>
   <section id="tour" aria-labelledby="tour-h"></section>
   <section id="catalog" aria-labelledby="catalog-h"></section>
   <section id="audit" aria-labelledby="audit-h"></section>

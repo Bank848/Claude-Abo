@@ -63,6 +63,10 @@ function detail(s) {
   const d = el('div', null, 'cat-detail');
   const dl = el('dl');
   const add = (k, v) => { dl.append(el('dt', k)); const dd = el('dd'); if (typeof v === 'string') dd.textContent = v; else dd.append(v); dl.append(dd); };
+  add('Summary', s.summary ?? '');
+  add('Tested', s.tested?.date ?? 'not tested');
+  add('Category', s.category ?? '');
+  add('Licence', s.license?.spdx ?? 'unknown');
   add('Origin', s.origin ?? 'unknown');
   const up = upstreamUrl(s);
   if (up) {
@@ -154,7 +158,9 @@ export function mount(sec, data) {
         open = body.insertRow(row.rowIndex);
         const cell = open.insertCell();
         cell.colSpan = 7;
-        cell.append(detail(s));
+        const w = el('div', null, 'cat-detail-wrap');
+        w.append(detail(s));
+        cell.append(w);
         btn.setAttribute('aria-expanded', 'true');
       });
     }

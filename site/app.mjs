@@ -21,3 +21,5 @@ async function main() {
   }
 }
 main();
+
+import('./pick.mjs').then((m) => fetch('data/catalog.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({})).then((d) => m.mount(document.getElementById('hero'), d))).catch(() => {});
