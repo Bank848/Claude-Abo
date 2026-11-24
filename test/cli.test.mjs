@@ -41,3 +41,11 @@ test('no-private-files flags a tracked .public-denylist.txt', async () => {
   assert.equal(f.length, 1);
   assert.equal(f[0].file, '.public-denylist.txt');
 });
+
+test('listFiles falls back to a directory walk outside a git checkout', async () => {
+  const { listFiles } = await import('../src/checks/public-scan.mjs');
+  const dir = tmp();
+  mkdirSync(path.join(dir, 'a'));
+  writeFileSync(path.join(dir, 'a', 'x.md'), 'hi');
+  assert.deepEqual(listFiles(dir), ['a/x.md']);
+});

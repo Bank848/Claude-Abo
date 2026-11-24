@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
+import { readdirSync } from 'node:fs';
 import path from 'node:path';
 import { isTextBuffer, loadDenylist, scanText, staleAllowFindings } from '../public-scan.mjs';
 
@@ -13,8 +14,24 @@ export async function loadAllow(root) {
 }
 
 export function listFiles(root) {
-  return execFileSync('git', ['ls-files', '--cached', '--others', '--exclude-standard'], { cwd: root, encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 })
-    .split('\n').filter(Boolean);
+  try {
+    return execFileSync('git', ['ls-files', '--cached', '--others', '--exclude-standard'], { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'], maxBuffer: 256 * 1024 * 1024 })
+      .split(String.fromCharCode(10)).filter(Boolean);
+  } catch {
+    return walk(root, '');
+  }
+}
+
+// Not a git checkout (a bare temp folder): list every file except .git and node_modules.
+function walk(root, rel) {
+  const out = [];
+  for (const e of readdirSync(path.join(root, rel), { withFileTypes: true })) {
+    if (e.name === '.git' || e.name === 'node_modules') continue;
+    const r = rel ? `${rel}/${e.name}` : e.name;
+    if (e.isDirectory()) out.push(...walk(root, r));
+    else out.push(r);
+  }
+  return out;
 }
 
 export default async function publicScanCheck(root, opts = {}) {
