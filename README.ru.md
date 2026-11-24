@@ -1,10 +1,10 @@
 [English](README.md) | [ภาษาไทย](README.th.md) | [简体中文](README.zh-Hans.md) | [日本語](README.ja.md) | [Español](README.es.md) | [한국어](README.ko.md) | [Português (Brasil)](README.pt-BR.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | **Русский**
-<!-- abo:source-hash:8a9163bf32af -->
+<!-- abo:source-hash:71b757078bf5 -->
 
 # Claude-Abo
 
-Узнайте, сколько контекста съедает ваша настройка Claude Code в каждой сессии и останавливает ли она `git push --force`.
-Одна команда оценивает постоянный контекст вашей настройки в токенах (рядом с реальным значением из `/context`) и перечисляет, что можно убрать; в каталоге <!-- gen:skills-count:start -->68<!-- gen:skills-count:end --> skills, у каждого есть лицензия, дата проверки и известные проблемы.
+Блокнот навыков для Claude Code: у каждого навыка указаны источник, лицензия и статус, а Claude сам выбирает нужный по однострочному описанию навыка, без всяких команд.
+Эта строка тоже расходует контекст в каждой сессии. Одна команда оценивает расход в токенах (рядом с реальной цифрой из `/context`) и перечисляет, что можно убрать; в каталоге 68 навыков, у каждого есть лицензия, дата проверки и известные проблемы.
 `npx github:Bank848/Claude-Abo audit`  ·  [Сайт](https://bank848.github.io/Claude-Abo/)  ·  [Каталог](https://bank848.github.io/Claude-Abo/#catalog)
 
 [![CI](https://github.com/Bank848/Claude-Abo/actions/workflows/ci.yml/badge.svg)](https://github.com/Bank848/Claude-Abo/actions/workflows/ci.yml)
@@ -12,6 +12,16 @@
 <!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-68%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 
 <p align="center"><img src="assets/audit-demo.gif" alt="claude-abo audit" width="820"/></p>
+
+## Выбирает Claude, а не вы
+
+Claude читает однострочное `description` каждого навыка и загружает тот, чьё описание подходит под ваш запрос. Пишите эту строку как триггер: укажите, когда применять навык.
+
+- **Запрос (пересказ):** «Напиши пост о запуске этого проекта».
+- **Сработавший навык:** `english-writing-anti-ai-tell`, описание: "Use when drafting English-language text for the user (chat, email, essays, reports)..."
+- **Почему:** пост — это английский текст для читателей, именно это названо в описании.
+
+Замечено один раз, в сессии на настройке мейнтейнера, где правило в CLAUDE.md тоже называет этот навык. Это показывает, что описание подходит задаче, но не доказывает, что навык запускается одним описанием. Аудит помечает описания, слишком длинные или слишком короткие для сопоставления.
 
 ## Что проверяет аудит
 

@@ -2,8 +2,8 @@
 
 # Claude-Abo
 
-Find out what your Claude Code setup costs you in context every session, and whether it stops a `git push --force`.
-One command estimates your setup's fixed context in tokens (next to the real `/context` figure) and lists what to cut; the catalog has <!-- gen:skills-count:start -->68<!-- gen:skills-count:end --> skills with license, test date and known issues for each.
+A skill notebook for Claude Code: each skill is listed with its source, license and status, and Claude picks the right one itself from the skill's one-line description, so there is no command to type.
+That line also costs context every session. One command estimates the cost in tokens (next to the real `/context` figure) and lists what to cut; the catalog has 68 skills with license, test date and known issues for each.
 `npx github:Bank848/Claude-Abo audit`  ·  [Site](https://bank848.github.io/Claude-Abo/)  ·  [Catalog](https://bank848.github.io/Claude-Abo/#catalog)
 
 [![CI](https://github.com/Bank848/Claude-Abo/actions/workflows/ci.yml/badge.svg)](https://github.com/Bank848/Claude-Abo/actions/workflows/ci.yml)
@@ -12,6 +12,16 @@ One command estimates your setup's fixed context in tokens (next to the real `/c
 [![Template](https://img.shields.io/badge/type-adapt%2C%20not%20run%20as--is-lightgrey)](#caveat-this-is-one-persons-setup)
 
 <p align="center"><img src="assets/audit-demo.gif" alt="Terminal recording of the audit command on a sample setup: estimated tokens, what to cut first, safety checklist" width="820"/></p>
+
+## Claude picks, you don't
+
+Claude reads each skill's one-line `description` and loads the skill whose description fits your request. Write that line as a trigger: say when to use the skill.
+
+- **Prompt (paraphrased):** "Write the launch post for this project."
+- **Skill that fired:** `english-writing-anti-ai-tell`, described as "Use when drafting English-language text for the user (chat, email, essays, reports)..."
+- **Why:** the post is English text written for readers, which is what the description names.
+
+Seen once, in a session on the maintainer's setup, where a rule in CLAUDE.md also names this skill. It shows the description fits the task; it does not prove the description alone triggers it. The audit flags descriptions that are too long or too short to match.
 
 ## What the audit checks
 

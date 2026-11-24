@@ -43,7 +43,7 @@ export async function mount(sec) {
     sec.append(el('p', 'No lessons are available right now.'));
     return;
   }
-  sec.append(el('p', 'Five short lessons built from the files in this repo. Each takes 10 to 15 minutes.'));
+  sec.append(el('p', 'Six short lessons built from the files in this repo. Each takes 10 to 15 minutes.'));
   const layout = el('div', null, 'learn-layout');
   const nav = el('nav', null, 'learn-list');
   nav.setAttribute('aria-label', 'Lessons');

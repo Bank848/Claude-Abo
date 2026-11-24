@@ -51,7 +51,7 @@ saving nothing. Pass `--context-tokens N` with the number from `/context` to see
 | Git push guard hook | `--probe-hooks` shows a dangerous test command blocked and the harmless control command allowed. Without the probe, a static match is only a warning. |
 | Config files guarded | An ask or deny rule covers `.claude/**` or `settings.json`. |
 | Permission mode | Default mode is not `bypassPermissions`. |
-| Hygiene | No duplicate skill names, no description over 1,024 characters, no unreadable files. |
+| Hygiene | No duplicate skill names, no description over 1,024 characters or under 40, no unreadable files. |
 | CLAUDE.md size | Under about 8,000 tokens. |
 
 Only `PreToolUse` hooks with a Bash matcher count. `PostToolUse` hooks cannot stop a command.

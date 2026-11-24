@@ -53,7 +53,7 @@ th { color: var(--muted); font-weight: 600; }
 @media (min-width: 48rem) { h2 { font-size: var(--t-2xl); } main { padding: 0 var(--s5); } }
 
 /* Sections are filled by script after load; reserve space so the content below does not jump. */
-#tour { min-height: 16rem; }
+#tour { min-height: 20rem; }
 #catalog { min-height: 80rem; }
 #audit { min-height: 30rem; }
 #learn { min-height: 26rem; }

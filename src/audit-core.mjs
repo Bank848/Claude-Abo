@@ -5,6 +5,7 @@
 export const SKILL_LISTING_CHAR_BUDGET = null; // unverified default (see docs/audit-method.md); null = no cap modelled
 export const ESTIMATE_ERROR = { low: 0.25, high: 0.25 }; // placeholder until Task 9 publishes the measured range
 export const LONG_DESCRIPTION_CHARS = 1024;
+export const SHORT_DESCRIPTION_CHARS = 40;
 export const BIG_CLAUDEMD_TOKENS = 8000;
 export const DESC_CHAR_CAP = 1536;
 export const MAX_CUTS = 15;
@@ -79,6 +80,8 @@ export function analyze(inv, catalog = null, opts = {}) {
     if (dups.length) hyg.push(`${dups.length} skill name(s) exist in more than one place: ${dups.slice(0, 5).join(', ')}`);
     const long = inv.skills.filter((s) => s.descChars > LONG_DESCRIPTION_CHARS).length;
     if (long) hyg.push(`${long} skill description(s) longer than ${LONG_DESCRIPTION_CHARS} characters`);
+    const vague = inv.skills.filter((s) => s.descTokens > 0 && s.descChars < SHORT_DESCRIPTION_CHARS).length;
+    if (vague) hyg.push(`${vague} skill description(s) under ${SHORT_DESCRIPTION_CHARS} characters, too short for Claude to tell when to use them`);
     if (inv.problems.some((x) => x.where === 'config')) hyg.push('no Claude Code config found in the folder that was read');
     const fileProblems = inv.problems.filter((x) => x.where !== 'config').length;
     if (fileProblems) hyg.push(`${fileProblems} unreadable or invalid file(s)`);

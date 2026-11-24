@@ -19,7 +19,7 @@ const usesOf = (l) => {
   return block ? [...block[1].matchAll(/-[ \t]+(\S+)/g)].map((m) => m[1]) : [];
 };
 
-test('there are five lessons', () => assert.equal(lessons.length, 5));
+test('there are six lessons', () => assert.equal(lessons.length, 6));
 test('every lesson has the required frontmatter and four sections', () => {
   for (const l of lessons) {
     for (const k of ['id', 'title', 'order', 'minutes']) assert.ok(l.data[k], `${l.f} missing ${k}`);
@@ -32,7 +32,7 @@ test('every path in uses exists', () => {
   for (const l of lessons) for (const p of usesOf(l)) assert.ok(existsSync(path.join(ROOT, p)), `${l.f} uses ${p}`);
 });
 test('orders are unique and contiguous', () => {
-  assert.deepEqual(lessons.map((l) => Number(l.data.order)), [1, 2, 3, 4, 5]);
+  assert.deepEqual(lessons.map((l) => Number(l.data.order)), [0, 1, 2, 3, 4, 5]);
 });
 test('lessons pass the memory gate and the leak rules', () => {
   assert.deepEqual(gate({ files: lessons.map((l) => ({ file: `learn/lessons/${l.f}`, text: l.text })) }), []);

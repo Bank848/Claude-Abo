@@ -119,3 +119,7 @@ test('an invalid file is counted separately from a missing config', () => {
   const r = analyze(inv({ problems: [{ where: 'user settings.json', message: 'invalid JSON' }] }));
   assert.match(check(r, 'hygiene').detail, /1 unreadable or invalid file/);
 });
+test('a description too short to match is flagged, a hidden skill is not', () => {
+  const r = analyze(inv({ skills: [skill('tiny', 3, { descChars: 12 }), skill('ok', 30), skill('hidden', 0, { descChars: 5 })] }));
+  assert.match(check(r, 'hygiene').detail, /1 skill description\(s\) under 40 characters/);
+});

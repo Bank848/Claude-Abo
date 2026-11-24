@@ -92,6 +92,7 @@ export function mount(sec, data) {
   h.id = 'catalog-h';
   sec.append(h);
   sec.append(el('p', 'Every skill in this repo with where it came from, its licence and how well it has been checked. Tested dates stay empty until a skill has actually been run.'));
+  sec.append(el('p', "Claude picks a skill by matching your request against its one-line description, so a good description says when to use the skill. The Summary column is a short version of it."));
 
   const search = el('div', null, 'cat-field');
   const sl = el('label', 'Search name or summary');

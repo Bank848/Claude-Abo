@@ -2,6 +2,7 @@
 // so the page never carries a broken player and never probes for a missing file.
 
 const STEPS = [
+  ["Claude picks, you don't", "Each skill has a one-line description. Claude reads them and loads the one that fits your request, so there is no command to type.", null],
   ['Run the audit', 'One command reads your Claude Code folder and estimates what it costs in context every session.', 'npx github:Bank848/Claude-Abo audit'],
   ['See what to cut', 'The report lists the biggest skills, hooks and rules first, with the estimated tokens each one saves.', null],
   ['Pick skills from the catalog', 'Every skill shows its licence, when it was last tested and what is known to go wrong.', null],

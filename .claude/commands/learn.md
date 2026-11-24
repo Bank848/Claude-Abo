@@ -1,5 +1,5 @@
 ---
-description: Walk through one of five short lessons on memory, model routing, hooks, skill cost and planning, using this repo's own files as the examples.
+description: Walk through one of six short lessons on how skills get picked, memory, model routing, hooks, skill cost and planning, using this repo's own files as the examples.
 argument-hint: "[lesson id, e.g. 01-memory]"
 ---
 

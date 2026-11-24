@@ -1,10 +1,10 @@
 [English](README.md) | **ภาษาไทย** | [简体中文](README.zh-Hans.md) | [日本語](README.ja.md) | [Español](README.es.md) | [한국어](README.ko.md) | [Português (Brasil)](README.pt-BR.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Русский](README.ru.md)
-<!-- abo:source-hash:8a9163bf32af -->
+<!-- abo:source-hash:71b757078bf5 -->
 
 # Claude-Abo
 
-ดูว่า Claude Code setup ของคุณกินพื้นที่ context ไปเท่าไรทุก session และมี hook กัน `git push --force` หรือเปล่า
-คำสั่งเดียวประเมิน context คงที่ของ setup เป็นจำนวน token (เทียบกับตัวเลขจริงจาก `/context`) และบอกว่าควรตัดอะไร ส่วน catalog มี <!-- gen:skills-count:start -->68<!-- gen:skills-count:end --> skills พร้อม license วันที่ทดสอบ และปัญหาที่รู้อยู่แล้วของแต่ละตัว
+สมุดบันทึก skill สำหรับ Claude Code: ทุก skill มีแหล่งที่มา license และสถานะกำกับ และ Claude เลือก skill ที่ใช่เองจากคำอธิบายหนึ่งบรรทัดของ skill โดยไม่ต้องพิมพ์คำสั่ง
+บรรทัดนั้นกิน context ทุก session เหมือนกัน คำสั่งเดียวประเมินต้นทุนเป็น token (เทียบกับตัวเลขจริงจาก `/context`) และบอกว่าควรตัดอะไร ส่วน catalog มี 68 skills พร้อม license วันที่ทดสอบ และปัญหาที่รู้อยู่แล้วของแต่ละตัว
 `npx github:Bank848/Claude-Abo audit`  ·  [เว็บไซต์](https://bank848.github.io/Claude-Abo/)  ·  [Catalog](https://bank848.github.io/Claude-Abo/#catalog)
 
 [![CI](https://github.com/Bank848/Claude-Abo/actions/workflows/ci.yml/badge.svg)](https://github.com/Bank848/Claude-Abo/actions/workflows/ci.yml)
@@ -12,6 +12,16 @@
 <!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-68%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 
 <p align="center"><img src="assets/audit-demo.gif" alt="claude-abo audit" width="820"/></p>
+
+## Claude เลือกให้ ไม่ต้องสั่งเอง
+
+Claude อ่าน `description` หนึ่งบรรทัดของแต่ละ skill แล้วโหลด skill ที่คำอธิบายตรงกับคำขอ เขียนบรรทัดนั้นให้เป็นตัวกระตุ้น คือบอกว่าใช้ skill เมื่อไร
+
+- **Prompt (สรุปความ):** "เขียนโพสต์เปิดตัวโปรเจกต์นี้"
+- **Skill ที่ทำงาน:** `english-writing-anti-ai-tell` ซึ่งมีคำอธิบายว่า "Use when drafting English-language text for the user (chat, email, essays, reports)..."
+- **เหตุผล:** โพสต์เป็นข้อความภาษาอังกฤษที่เขียนให้คนอ่าน ตรงกับที่คำอธิบายระบุ
+
+เห็นครั้งเดียวใน session บน setup ของผู้ดูแล ซึ่งมีกฎใน CLAUDE.md ที่เอ่ยชื่อ skill นี้ด้วย ผลนี้บอกได้ว่าคำอธิบายเข้ากับงาน แต่ไม่ได้พิสูจน์ว่าคำอธิบายอย่างเดียวพอให้ skill ทำงาน audit จะเตือนคำอธิบายที่ยาวหรือสั้นเกินกว่าจะจับคู่ได้
 
 ## audit ตรวจอะไรบ้าง
 

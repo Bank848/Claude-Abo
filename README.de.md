@@ -1,10 +1,10 @@
 [English](README.md) | [ภาษาไทย](README.th.md) | [简体中文](README.zh-Hans.md) | [日本語](README.ja.md) | [Español](README.es.md) | [한국어](README.ko.md) | [Português (Brasil)](README.pt-BR.md) | [Français](README.fr.md) | **Deutsch** | [Русский](README.ru.md)
-<!-- abo:source-hash:8a9163bf32af -->
+<!-- abo:source-hash:71b757078bf5 -->
 
 # Claude-Abo
 
-Finde heraus, wie viel Kontext dein Claude-Code-Setup in jeder Sitzung kostet und ob es ein `git push --force` stoppt.
-Ein Befehl schätzt den festen Kontext deines Setups in Tokens (neben dem echten `/context`-Wert) und listet auf, was du streichen kannst; der Katalog enthält <!-- gen:skills-count:start -->68<!-- gen:skills-count:end --> Skills, jeweils mit Lizenz, Testdatum und bekannten Problemen.
+Ein Skill-Notizbuch für Claude Code: Jeder Skill ist mit Quelle, Lizenz und Status aufgeführt, und Claude wählt den passenden Skill anhand seiner einzeiligen Beschreibung selbst aus, ganz ohne Befehl.
+Diese Zeile kostet bei jeder Sitzung auch Kontext. Ein Befehl schätzt die Kosten in Tokens (neben dem echten `/context`-Wert) und listet, was sich kürzen lässt; der Katalog enthält 68 Skills mit Lizenz, Testdatum und bekannten Problemen.
 `npx github:Bank848/Claude-Abo audit`  ·  [Website](https://bank848.github.io/Claude-Abo/)  ·  [Katalog](https://bank848.github.io/Claude-Abo/#catalog)
 
 [![CI](https://github.com/Bank848/Claude-Abo/actions/workflows/ci.yml/badge.svg)](https://github.com/Bank848/Claude-Abo/actions/workflows/ci.yml)
@@ -12,6 +12,16 @@ Ein Befehl schätzt den festen Kontext deines Setups in Tokens (neben dem echten
 <!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-68%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 
 <p align="center"><img src="assets/audit-demo.gif" alt="claude-abo audit" width="820"/></p>
+
+## Claude wählt, du nicht
+
+Claude liest die einzeilige `description` jedes Skills und lädt den Skill, dessen Beschreibung zu deiner Anfrage passt. Schreibe diese Zeile als Auslöser: Sag, wann der Skill zu verwenden ist.
+
+- **Prompt (sinngemäß):** "Schreib den Launch-Post für dieses Projekt."
+- **Ausgelöster Skill:** `english-writing-anti-ai-tell`, beschrieben als "Use when drafting English-language text for the user (chat, email, essays, reports)..."
+- **Warum:** Der Post ist englischer Text für Leser, und genau das nennt die Beschreibung.
+
+Einmal beobachtet, in einer Sitzung mit dem Setup des Maintainers, in der auch eine Regel in CLAUDE.md diesen Skill nennt. Es zeigt, dass die Beschreibung zur Aufgabe passt; es beweist nicht, dass die Beschreibung allein ihn auslöst. Das Audit markiert Beschreibungen, die zu lang oder zu kurz zum Zuordnen sind.
 
 ## Was das Audit prüft
 

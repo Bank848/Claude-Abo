@@ -1,9 +1,10 @@
 # Lessons
 
-Five short lessons (10 to 15 minutes each) built from the files in this repo.
+Six short lessons (10 to 15 minutes each) built from the files in this repo.
 
 | # | Lesson | Topic |
 |---|---|---|
+| 0 | `00-how-skills-get-picked.md` | how Claude picks a skill from its description |
 | 1 | `01-memory.md` | memory notes that stay useful |
 | 2 | `02-model-routing.md` | pick the cheapest model that can do the job |
 | 3 | `03-hooks-and-safety.md` | hooks, draft-first PRs, a clean public repo |

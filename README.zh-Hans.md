@@ -1,10 +1,10 @@
 [English](README.md) | [ภาษาไทย](README.th.md) | **简体中文** | [日本語](README.ja.md) | [Español](README.es.md) | [한국어](README.ko.md) | [Português (Brasil)](README.pt-BR.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Русский](README.ru.md)
-<!-- abo:source-hash:8a9163bf32af -->
+<!-- abo:source-hash:71b757078bf5 -->
 
 # Claude-Abo
 
-查看你的 Claude Code 配置每个会话占用多少上下文,以及它能否拦住 `git push --force`。
-一条命令估算配置的固定上下文(单位 token,并与真实的 `/context` 数值对照),并列出该砍掉什么;目录收录 <!-- gen:skills-count:start -->68<!-- gen:skills-count:end --> 个 skills,每个都标有许可证、测试日期和已知问题。
+Claude Code 的技能笔记本：每个技能都标明来源、许可证和状态，Claude 会根据技能的一行描述自己挑出合适的技能，无需输入任何命令。
+这一行描述每次会话都会占用上下文。一条命令即可估算其 token 开销（并列出真实的 `/context` 数值），告诉你该删掉什么；目录收录了 68 个技能，每个都附有许可证、测试日期和已知问题。
 `npx github:Bank848/Claude-Abo audit`  ·  [网站](https://bank848.github.io/Claude-Abo/)  ·  [目录](https://bank848.github.io/Claude-Abo/#catalog)
 
 [![CI](https://github.com/Bank848/Claude-Abo/actions/workflows/ci.yml/badge.svg)](https://github.com/Bank848/Claude-Abo/actions/workflows/ci.yml)
@@ -12,6 +12,16 @@
 <!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-68%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 
 <p align="center"><img src="assets/audit-demo.gif" alt="claude-abo audit" width="820"/></p>
+
+## Claude 自己挑，你不用选
+
+Claude 会读取每个技能的一行 `description`，并加载描述与你的请求相符的技能。请把这一行写成触发条件：说明何时使用该技能。
+
+- **提示（意译）：** “为这个项目写发布帖。”
+- **被触发的技能：** `english-writing-anti-ai-tell`，其描述为 "Use when drafting English-language text for the user (chat, email, essays, reports)..."
+- **原因：** 发布帖是写给读者的英文文本，正是该描述所指的场景。
+
+仅观察到一次，发生在维护者自己的配置上，那里 CLAUDE.md 中也有一条规则点名了这个技能。这说明描述与任务相符，但不能证明仅凭描述就会触发。审计会标出过长或过短、难以匹配的描述。
 
 ## 审计检查什么
 
