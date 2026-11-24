@@ -19,7 +19,7 @@ test('unknown command exits 2 and lists commands', () => {
 
 test('check with no checks exits 0', () => {
   const r = run(['check'], { cwd: tmp() });
-  assert.equal(r.status, 0);
+  assert.equal(r.status, 0, r.stdout + r.stderr);
 });
 
 test('nested command dir dispatches to <cmd>/<sub>.mjs', () => {
