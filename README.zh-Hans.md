@@ -1,5 +1,5 @@
 [English](README.md) | [ภาษาไทย](README.th.md) | **简体中文** | [日本語](README.ja.md) | [Español](README.es.md) | [한국어](README.ko.md) | [Português (Brasil)](README.pt-BR.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Русский](README.ru.md)
-<!-- abo:source-hash:71b757078bf5 -->
+<!-- abo:source-hash:a85f9d675518 -->
 
 # Claude-Abo
 
@@ -17,11 +17,11 @@ Claude Code 的技能笔记本：每个技能都标明来源、许可证和状�
 
 Claude 会读取每个技能的一行 `description`，并加载描述与你的请求相符的技能。请把这一行写成触发条件：说明何时使用该技能。
 
-- **提示（意译）：** “为这个项目写发布帖。”
-- **被触发的技能：** `english-writing-anti-ai-tell`，其描述为 "Use when drafting English-language text for the user (chat, email, essays, reports)..."
+- **提示（示例）：** “为这个项目写发布帖。”
+- **匹配的技能：** `english-writing-anti-ai-tell`，其描述为 "Use when drafting English-language text for the user (chat, email, essays, reports)..."
 - **原因：** 发布帖是写给读者的英文文本，正是该描述所指的场景。
 
-仅观察到一次，发生在维护者自己的配置上，那里 CLAUDE.md 中也有一条规则点名了这个技能。这说明描述与任务相符，但不能证明仅凭描述就会触发。审计会标出过长或过短、难以匹配的描述。
+这是示意，不是实测。描述与任务相符，Claude 正是依据这种相符来匹配；但这不能证明仅凭描述就会触发该技能。审计会标出过长或过短、难以匹配的描述。
 
 ## 审计检查什么
 

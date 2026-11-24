@@ -1,5 +1,5 @@
 [English](README.md) | [ภาษาไทย](README.th.md) | [简体中文](README.zh-Hans.md) | [日本語](README.ja.md) | [Español](README.es.md) | **한국어** | [Português (Brasil)](README.pt-BR.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Русский](README.ru.md)
-<!-- abo:source-hash:71b757078bf5 -->
+<!-- abo:source-hash:a85f9d675518 -->
 
 # Claude-Abo
 
@@ -17,11 +17,11 @@ Claude Code용 스킬 노트: 각 스킬에 출처, 라이선스, 상태를 적�
 
 Claude는 각 스킬의 한 줄 `description`을 읽고, 요청과 맞는 설명을 가진 스킬을 불러옵니다. 그 줄은 언제 쓰는지 적은 트리거로 쓰세요.
 
-- **프롬프트(요약):** "이 프로젝트의 출시 글을 써 줘."
-- **작동한 스킬:** `english-writing-anti-ai-tell`, 설명은 "Use when drafting English-language text for the user (chat, email, essays, reports)..."
+- **프롬프트(예시):** "이 프로젝트의 출시 글을 써 줘."
+- **맞는 스킬:** `english-writing-anti-ai-tell`, 설명은 "Use when drafting English-language text for the user (chat, email, essays, reports)..."
 - **이유:** 출시 글은 독자를 위해 쓰는 영어 텍스트이고, 설명이 가리키는 상황이 바로 그것입니다.
 
-관리자의 환경에서 한 번 관찰한 결과이며, 그곳에는 CLAUDE.md 규칙도 이 스킬을 지목하고 있습니다. 설명이 작업과 맞는다는 것은 보여 주지만, 설명만으로 작동한다는 증거는 아닙니다. audit은 너무 길거나 너무 짧아 매칭하기 어려운 설명을 표시합니다.
+이것은 측정이 아니라 예시입니다. 설명이 작업과 맞는 것이 Claude가 매칭하는 근거이지만, 설명만으로 스킬이 작동한다는 증거는 아닙니다. audit은 너무 길거나 너무 짧아 매칭하기 어려운 설명을 표시합니다.
 
 ## 감사가 확인하는 것
 

@@ -17,11 +17,11 @@ That line also costs context every session. One command estimates the cost in to
 
 Claude reads each skill's one-line `description` and loads the skill whose description fits your request. Write that line as a trigger: say when to use the skill.
 
-- **Prompt (paraphrased):** "Write the launch post for this project."
-- **Skill that fired:** `english-writing-anti-ai-tell`, described as "Use when drafting English-language text for the user (chat, email, essays, reports)..."
+- **Prompt (illustrative):** "Write the launch post for this project."
+- **Skill that fits:** `english-writing-anti-ai-tell`, described as "Use when drafting English-language text for the user (chat, email, essays, reports)..."
 - **Why:** the post is English text written for readers, which is what the description names.
 
-Seen once, in a session on the maintainer's setup, where a rule in CLAUDE.md also names this skill. It shows the description fits the task; it does not prove the description alone triggers it. The audit flags descriptions that are too long or too short to match.
+This is an illustration, not a measurement. The description fits the task, and that fit is what Claude matches on; it does not prove the description alone triggers the skill. The audit flags descriptions that are too long or too short to match.
 
 ## What the audit checks
 

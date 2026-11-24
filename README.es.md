@@ -1,5 +1,5 @@
 [English](README.md) | [ภาษาไทย](README.th.md) | [简体中文](README.zh-Hans.md) | [日本語](README.ja.md) | **Español** | [한국어](README.ko.md) | [Português (Brasil)](README.pt-BR.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Русский](README.ru.md)
-<!-- abo:source-hash:71b757078bf5 -->
+<!-- abo:source-hash:a85f9d675518 -->
 
 # Claude-Abo
 
@@ -17,11 +17,11 @@ Esa línea también cuesta contexto en cada sesión. Un comando estima el coste 
 
 Claude lee la `description` de una línea de cada skill y carga la skill cuya descripción encaja con tu petición. Escribe esa línea como un disparador: di cuándo usar la skill.
 
-- **Prompt (parafraseado):** "Escribe el post de lanzamiento de este proyecto."
-- **Skill que se activó:** `english-writing-anti-ai-tell`, descrita como "Use when drafting English-language text for the user (chat, email, essays, reports)..."
+- **Prompt (ilustrativo):** "Escribe el post de lanzamiento de este proyecto."
+- **Skill que encaja:** `english-writing-anti-ai-tell`, descrita como "Use when drafting English-language text for the user (chat, email, essays, reports)..."
 - **Por qué:** el post es texto en inglés escrito para lectores, que es lo que nombra la descripción.
 
-Visto una sola vez, en una sesión con la configuración del mantenedor, donde una regla de CLAUDE.md también nombra esta skill. Muestra que la descripción encaja con la tarea; no prueba que la descripción sola la active. La auditoría marca las descripciones demasiado largas o demasiado cortas para coincidir.
+Es una ilustración, no una medición. La descripción encaja con la tarea, y ese encaje es lo que Claude usa para elegir; no prueba que la descripción sola active la skill. La auditoría marca las descripciones demasiado largas o demasiado cortas para coincidir.
 
 ## Qué revisa la auditoría
 

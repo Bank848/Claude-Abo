@@ -1,5 +1,5 @@
 [English](README.md) | [ภาษาไทย](README.th.md) | [简体中文](README.zh-Hans.md) | **日本語** | [Español](README.es.md) | [한국어](README.ko.md) | [Português (Brasil)](README.pt-BR.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Русский](README.ru.md)
-<!-- abo:source-hash:71b757078bf5 -->
+<!-- abo:source-hash:a85f9d675518 -->
 
 # Claude-Abo
 
@@ -17,11 +17,11 @@ Claude Code のスキルノート: 各スキルに出典・ライセンス・状
 
 Claude は各スキルの 1 行の `description` を読み、依頼に合う説明を持つスキルを読み込みます。この行は、いつ使うかを書いたトリガーとして書いてください。
 
-- **プロンプト（要約）:** 「このプロジェクトの公開告知の文章を書いて」
-- **動いたスキル:** `english-writing-anti-ai-tell`。説明は "Use when drafting English-language text for the user (chat, email, essays, reports)..."
+- **プロンプト（例）:** 「このプロジェクトの公開告知の文章を書いて」
+- **合致するスキル:** `english-writing-anti-ai-tell`。説明は "Use when drafting English-language text for the user (chat, email, essays, reports)..."
 - **理由:** 告知文は読者に向けた英文であり、説明が指している場面そのものだからです。
 
-メンテナの環境で 1 回観測しただけで、そこでは CLAUDE.md のルールもこのスキルを名指ししています。説明がタスクに合っていることは示せますが、説明だけで起動することの証明にはなりません。audit は、長すぎる説明や短すぎて照合できない説明を警告します。
+これは計測ではなく例示です。説明がタスクに合っていることが、Claude が照合する根拠ですが、説明だけでスキルが起動することの証明にはなりません。audit は、長すぎる説明や短すぎて照合できない説明を警告します。
 
 ## 監査で調べること
 

@@ -41,7 +41,7 @@ export async function buildSite({ root, out }) {
       const text = await readFile(path.join(dir, n), 'utf8');
       await writeFile(path.join(out, 'learn', n), text);
       const { data } = parseFrontmatter(text.split(String.fromCharCode(13)).join(''));
-      lessons.push({ id: n.replace(/\.md$/, ''), title: String(data.title ?? /^#\s+(.+)$/m.exec(text)?.[1] ?? n).trim(), order: Number(data.order) || i + 1, minutes: Number(data.minutes) || null });
+      lessons.push({ id: n.replace(/\.md$/, ''), title: String(data.title ?? /^#\s+(.+)$/m.exec(text)?.[1] ?? n).trim(), order: Number.isFinite(Number(data.order)) && String(data.order ?? '').trim() !== '' ? Number(data.order) : i + 1, minutes: Number(data.minutes) || null });
     }
   } catch { /* no lessons yet */ }
   await writeFile(path.join(out, 'data/lessons.json'), `${JSON.stringify(lessons)}\n`);

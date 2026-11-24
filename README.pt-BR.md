@@ -1,5 +1,5 @@
 [English](README.md) | [ภาษาไทย](README.th.md) | [简体中文](README.zh-Hans.md) | [日本語](README.ja.md) | [Español](README.es.md) | [한국어](README.ko.md) | **Português (Brasil)** | [Français](README.fr.md) | [Deutsch](README.de.md) | [Русский](README.ru.md)
-<!-- abo:source-hash:71b757078bf5 -->
+<!-- abo:source-hash:a85f9d675518 -->
 
 # Claude-Abo
 
@@ -17,11 +17,11 @@ Essa linha também custa contexto a cada sessão. Um comando estima o custo em t
 
 O Claude lê a `description` de uma linha de cada skill e carrega a skill cuja descrição combina com o seu pedido. Escreva essa linha como um gatilho: diga quando usar a skill.
 
-- **Prompt (parafraseado):** "Escreva o post de lançamento deste projeto."
-- **Skill que foi acionada:** `english-writing-anti-ai-tell`, descrita como "Use when drafting English-language text for the user (chat, email, essays, reports)..."
+- **Prompt (ilustrativo):** "Escreva o post de lançamento deste projeto."
+- **Skill que combina:** `english-writing-anti-ai-tell`, descrita como "Use when drafting English-language text for the user (chat, email, essays, reports)..."
 - **Por quê:** o post é texto em inglês escrito para leitores, que é o que a descrição nomeia.
 
-Visto uma única vez, numa sessão com a configuração do mantenedor, em que uma regra do CLAUDE.md também cita essa skill. Isso mostra que a descrição combina com a tarefa; não prova que só a descrição a aciona. A auditoria sinaliza descrições longas ou curtas demais para casar.
+Isto é uma ilustração, não uma medição. A descrição combina com a tarefa, e esse encaixe é o que o Claude usa para escolher; não prova que só a descrição aciona a skill. A auditoria sinaliza descrições longas ou curtas demais para casar.
 
 ## O que a auditoria verifica
 

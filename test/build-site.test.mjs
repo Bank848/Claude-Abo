@@ -56,3 +56,15 @@ test('lessons.json lists every lesson file in order', async () => {
   const l = JSON.parse(readFileSync(path.join(o, 'data/lessons.json'), 'utf8'));
   assert.deepEqual(l.map((x) => [x.id, x.title, x.order]), [['01-a', 'First', 1], ['02-b', 'Second', 2]]);
 });
+test('a lesson with order 0 sorts first and keeps order 0', async () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'abo-lessons0-'));
+  for (const d of ['site', 'src', 'catalog', 'learn/lessons']) mkdirSync(path.join(root, d), { recursive: true });
+  writeFileSync(path.join(root, 'site/index.html'), '<html></html>');
+  writeFileSync(path.join(root, 'catalog/skills.json'), readFileSync(path.join(ROOT, 'catalog/skills.json')));
+  writeFileSync(path.join(root, 'learn/lessons/01-a.md'), '---\norder: 1\ntitle: One\n---\n# One\n');
+  writeFileSync(path.join(root, 'learn/lessons/00-z.md'), '---\norder: 0\ntitle: Zero\n---\n# Zero\n');
+  const o = mkdtempSync(path.join(os.tmpdir(), 'abo-site3-'));
+  await buildSite({ root, out: o });
+  const l = JSON.parse(readFileSync(path.join(o, 'data/lessons.json'), 'utf8'));
+  assert.deepEqual(l.map((x) => [x.id, x.order]), [['00-z', 0], ['01-a', 1]]);
+});

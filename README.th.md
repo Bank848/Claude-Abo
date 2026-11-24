@@ -1,5 +1,5 @@
 [English](README.md) | **ภาษาไทย** | [简体中文](README.zh-Hans.md) | [日本語](README.ja.md) | [Español](README.es.md) | [한국어](README.ko.md) | [Português (Brasil)](README.pt-BR.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Русский](README.ru.md)
-<!-- abo:source-hash:71b757078bf5 -->
+<!-- abo:source-hash:a85f9d675518 -->
 
 # Claude-Abo
 
@@ -17,11 +17,11 @@
 
 Claude อ่าน `description` หนึ่งบรรทัดของแต่ละ skill แล้วโหลด skill ที่คำอธิบายตรงกับคำขอ เขียนบรรทัดนั้นให้เป็นตัวกระตุ้น คือบอกว่าใช้ skill เมื่อไร
 
-- **Prompt (สรุปความ):** "เขียนโพสต์เปิดตัวโปรเจกต์นี้"
-- **Skill ที่ทำงาน:** `english-writing-anti-ai-tell` ซึ่งมีคำอธิบายว่า "Use when drafting English-language text for the user (chat, email, essays, reports)..."
+- **Prompt (ตัวอย่างประกอบ):** "เขียนโพสต์เปิดตัวโปรเจกต์นี้"
+- **Skill ที่เข้ากับงาน:** `english-writing-anti-ai-tell` ซึ่งมีคำอธิบายว่า "Use when drafting English-language text for the user (chat, email, essays, reports)..."
 - **เหตุผล:** โพสต์เป็นข้อความภาษาอังกฤษที่เขียนให้คนอ่าน ตรงกับที่คำอธิบายระบุ
 
-เห็นครั้งเดียวใน session บน setup ของผู้ดูแล ซึ่งมีกฎใน CLAUDE.md ที่เอ่ยชื่อ skill นี้ด้วย ผลนี้บอกได้ว่าคำอธิบายเข้ากับงาน แต่ไม่ได้พิสูจน์ว่าคำอธิบายอย่างเดียวพอให้ skill ทำงาน audit จะเตือนคำอธิบายที่ยาวหรือสั้นเกินกว่าจะจับคู่ได้
+นี่เป็นตัวอย่างประกอบ ไม่ใช่ผลการวัด คำอธิบายเข้ากับงาน และความเข้ากันนี้คือสิ่งที่ Claude ใช้จับคู่ แต่ไม่ได้พิสูจน์ว่าคำอธิบายอย่างเดียวพอให้ skill ทำงาน audit จะเตือนคำอธิบายที่ยาวหรือสั้นเกินกว่าจะจับคู่ได้
 
 ## audit ตรวจอะไรบ้าง
 

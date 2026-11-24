@@ -1,5 +1,5 @@
 [English](README.md) | [ภาษาไทย](README.th.md) | [简体中文](README.zh-Hans.md) | [日本語](README.ja.md) | [Español](README.es.md) | [한국어](README.ko.md) | [Português (Brasil)](README.pt-BR.md) | [Français](README.fr.md) | **Deutsch** | [Русский](README.ru.md)
-<!-- abo:source-hash:71b757078bf5 -->
+<!-- abo:source-hash:a85f9d675518 -->
 
 # Claude-Abo
 
@@ -17,11 +17,11 @@ Diese Zeile kostet bei jeder Sitzung auch Kontext. Ein Befehl schätzt die Koste
 
 Claude liest die einzeilige `description` jedes Skills und lädt den Skill, dessen Beschreibung zu deiner Anfrage passt. Schreibe diese Zeile als Auslöser: Sag, wann der Skill zu verwenden ist.
 
-- **Prompt (sinngemäß):** "Schreib den Launch-Post für dieses Projekt."
-- **Ausgelöster Skill:** `english-writing-anti-ai-tell`, beschrieben als "Use when drafting English-language text for the user (chat, email, essays, reports)..."
+- **Prompt (zur Veranschaulichung):** "Schreib den Launch-Post für dieses Projekt."
+- **Passender Skill:** `english-writing-anti-ai-tell`, beschrieben als "Use when drafting English-language text for the user (chat, email, essays, reports)..."
 - **Warum:** Der Post ist englischer Text für Leser, und genau das nennt die Beschreibung.
 
-Einmal beobachtet, in einer Sitzung mit dem Setup des Maintainers, in der auch eine Regel in CLAUDE.md diesen Skill nennt. Es zeigt, dass die Beschreibung zur Aufgabe passt; es beweist nicht, dass die Beschreibung allein ihn auslöst. Das Audit markiert Beschreibungen, die zu lang oder zu kurz zum Zuordnen sind.
+Das ist eine Veranschaulichung, keine Messung. Die Beschreibung passt zur Aufgabe, und diese Passung nutzt Claude zur Auswahl; es beweist nicht, dass die Beschreibung allein den Skill auslöst. Das Audit markiert Beschreibungen, die zu lang oder zu kurz zum Zuordnen sind.
 
 ## Was das Audit prüft
 

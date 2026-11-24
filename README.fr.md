@@ -1,5 +1,5 @@
 [English](README.md) | [ภาษาไทย](README.th.md) | [简体中文](README.zh-Hans.md) | [日本語](README.ja.md) | [Español](README.es.md) | [한국어](README.ko.md) | [Português (Brasil)](README.pt-BR.md) | **Français** | [Deutsch](README.de.md) | [Русский](README.ru.md)
-<!-- abo:source-hash:71b757078bf5 -->
+<!-- abo:source-hash:a85f9d675518 -->
 
 # Claude-Abo
 
@@ -17,11 +17,11 @@ Cette ligne coûte aussi du contexte à chaque session. Une commande estime ce c
 
 Claude lit la `description` d'une ligne de chaque skill et charge celle dont la description correspond à votre demande. Écrivez cette ligne comme un déclencheur : dites quand utiliser la skill.
 
-- **Prompt (reformulé) :** « Écris le post de lancement de ce projet. »
-- **Skill déclenchée :** `english-writing-anti-ai-tell`, décrite par "Use when drafting English-language text for the user (chat, email, essays, reports)..."
+- **Prompt (illustratif) :** « Écris le post de lancement de ce projet. »
+- **Skill qui convient :** `english-writing-anti-ai-tell`, décrite par "Use when drafting English-language text for the user (chat, email, essays, reports)..."
 - **Pourquoi :** le post est un texte anglais écrit pour des lecteurs, ce que nomme la description.
 
-Observé une seule fois, dans une session sur la configuration du mainteneur, où une règle de CLAUDE.md nomme aussi cette skill. Cela montre que la description correspond à la tâche ; cela ne prouve pas que la description seule la déclenche. L'audit signale les descriptions trop longues ou trop courtes pour correspondre.
+C'est une illustration, pas une mesure. La description correspond à la tâche, et c'est cette correspondance que Claude utilise pour choisir ; cela ne prouve pas que la description seule déclenche la skill. L'audit signale les descriptions trop longues ou trop courtes pour correspondre.
 
 ## Ce que vérifie l'audit
 
