@@ -70,3 +70,8 @@ th { color: var(--muted); font-weight: 600; }
 #audit { min-height: 30rem; }
 #learn { min-height: 26rem; }
 #about { min-height: 12rem; }
+
+/* One pencil rule between catalog and audit; plain border in forced-colors. */
+#catalog { border-bottom: 0; }
+#audit::before { content: ""; display: block; height: 10px; margin-bottom: var(--s6); background: var(--muted); -webkit-mask: url(assets/divider-pencil.svg) center / 100% 100% no-repeat; mask: url(assets/divider-pencil.svg) center / 100% 100% no-repeat; }
+@media (forced-colors: active) { #audit::before { display: none; } #catalog { border-bottom: 1px solid CanvasText; } }

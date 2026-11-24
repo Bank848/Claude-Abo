@@ -8,8 +8,11 @@
 .pick li { margin: 0; padding: 0; }
 .pick b { font-weight: 600; }
 .pick .t { color: var(--text); }
-.pick li[aria-current="true"] .t { background: linear-gradient(var(--mark), var(--mark)) no-repeat 0 0 / 100% 100%; color: var(--mark-text); animation: mark 220ms ease-out; }
+.pick li[aria-current="true"] .t { padding: 0 0.15em; box-decoration-break: clone; -webkit-box-decoration-break: clone; background: linear-gradient(var(--mark), var(--mark)) no-repeat 0 0 / 100% 100%; color: var(--mark-text); animation: mark 220ms ease-out; }
 @keyframes mark { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
 @media (prefers-reduced-motion: reduce) { .pick li[aria-current="true"] .t { animation: none; } }
 @media (forced-colors: active) { .pick li[aria-current="true"] { border-left: 3px solid Highlight; padding-left: 0.5rem; } }
 @media (min-width: 48rem) { .pick { min-height: calc(var(--line-h) * 10); } }
+#hero { position: relative; }
+.hero-doodle { display: none; }
+@media (min-width: 60rem) { .hero-doodle { display: block; position: absolute; right: 0; top: var(--s6); width: 9rem; height: auto; } }

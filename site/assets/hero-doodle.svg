@@ -1,0 +1,15 @@
+<svg class="hero-doodle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 110" aria-hidden="true" focusable="false">
+  <path d="M16 34Q51 33 91 34M16 57Q53 55 91 56M17 80Q50 79 88 79"
+        fill="none" stroke="var(--rule, var(--line, var(--doodle-rule, #8a94a8)))" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M24 51Q52 48 83 49L82 61Q53 61 23 64L25 57Z"
+        fill="var(--mark, var(--doodle-mark, #fff1a8))"/>
+  <path d="M29 56Q51 54 74 54" fill="none" stroke="var(--ink, var(--text, var(--doodle-ink, #14213d)))" stroke-width="2" stroke-linecap="round"/>
+  <g stroke="var(--ink, var(--text, var(--doodle-ink, #14213d)))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M100 87L109 69 158 22Q161 19 164 22L171 29Q174 32 171 35L120 80Z"
+          fill="var(--paper, var(--bg, var(--doodle-paper, #f7f9fc)))"/>
+    <path d="M148 32L158 22Q161 19 164 22L171 29Q174 32 171 35L161 44Z"
+          fill="var(--margin, var(--doodle-margin, #b42335))"/>
+    <path d="M109 69L120 80M114 74L153 36" fill="none"/>
+    <path d="M104 79L109 84 100 87Z" fill="var(--ink, var(--text, var(--doodle-ink, #14213d)))"/>
+  </g>
+</svg>

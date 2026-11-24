@@ -65,3 +65,7 @@ These repositories had no repository-level license file when checked on 2026-11-
 ## Bundled license files
 
 - `global-config/skills/prompt-master/LICENSE`: the upstream MIT license shipped with that skill.
+
+## Generated site assets
+
+The favicon, apple-touch icon, social card (`og-card-1200x630.png`), hero doodle and pencil divider under `site/` were generated with OpenAI Codex for the repository owner. They are not copied from another project and are covered by this repository's MIT license.

@@ -2,7 +2,7 @@
 .learn-list ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; max-height: 14rem; overflow-y: auto; }
 .learn-list a { display: block; padding: var(--s2) var(--s3); min-height: 44px; border-left: 3px solid transparent; color: var(--text); text-decoration: none; }
 .learn-list a:hover { text-decoration: underline; }
-.learn-list a[aria-current="page"] { border-left-color: var(--margin); font-weight: 600; }
+.learn-list a[aria-current="page"] { border-left-color: var(--margin); font-weight: 600; text-decoration: underline 2px; text-underline-offset: 0.2em; }
 .learn-done { color: var(--ok); font-size: var(--t-sm); margin-left: var(--s2); }
 .learn-body { min-width: 0; }
 .learn-body h3 { font: 600 var(--t-lg)/1.3 var(--serif); margin: 0 0 var(--s3); }

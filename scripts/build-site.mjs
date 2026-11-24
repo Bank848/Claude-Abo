@@ -15,9 +15,28 @@ async function descTokens(root, skill) {
   } catch { return null; }
 }
 
+// Replaces <!-- include:PATH --> in index.html with the file's text (static markup, no runtime HTML parsing).
+async function includeAssets(root, out) {
+  const file = path.join(out, 'index.html');
+  if (!existsSync(file)) return;
+  let html = await readFile(file, 'utf8');
+  const re = /<!-- include:([A-Za-z0-9_./-]+) -->/g;
+  const parts = [];
+  let last = 0;
+  for (const m of html.matchAll(re)) {
+    parts.push(html.slice(last, m.index));
+    const src = path.join(root, 'site', m[1]);
+    parts.push(m[1].startsWith('assets/') && existsSync(src) ? (await readFile(src, 'utf8')).trim() : '');
+    last = m.index + m[0].length;
+  }
+  parts.push(html.slice(last));
+  await writeFile(file, parts.join(''));
+}
+
 export async function buildSite({ root, out }) {
   await mkdir(path.join(out, 'data'), { recursive: true });
   await cp(path.join(root, 'site'), out, { recursive: true });
+  await includeAssets(root, out);
 
   await mkdir(path.join(out, 'src'), { recursive: true });
   for (const f of (await readdir(path.join(root, 'src'))).filter((n) => n.endsWith('.mjs'))) {
