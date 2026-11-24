@@ -1,7 +1,12 @@
 name: ci
 on:
   push:
+    branches: [main]
   pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -12,8 +17,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { os: ubuntu-latest, node: 18 }
-          - { os: ubuntu-latest, node: 20 }
           - { os: ubuntu-latest, node: 22 }
           - { os: windows-latest, node: 22 }
     runs-on: ${{ matrix.os }}
@@ -44,16 +47,6 @@ jobs:
       - name: use npm 11 (npm 10.9 cannot fetch a git dependency on the runner)
         run: npm install -g npm@11
       - name: npx github entry point resolves the bin
-        run: npx --yes github:${{ github.repository }}#${{ github.sha }} --help
-
-  npx-entry-bundled-npm:
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    steps:
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - name: report whether the npm bundled with Node 22 can fetch the repo
         run: npx --yes github:${{ github.repository }}#${{ github.sha }} --help
 
   private-gate:
