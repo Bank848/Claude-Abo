@@ -107,9 +107,16 @@ export async function mount(sec) {
     body.append(btn);
   }
 
+  // Enter on a link fires click too. Fragment navigation blurs before hashchange, so remember it here.
+  let fromList = false;
+  nav.addEventListener('click', (e) => { if (e.target.closest('a')) fromList = true; });
+
   async function route() {
     const { id, notice } = routeFor(location.hash, lessons);
     drawList(id);
+    // Redrawing the list drops focus, so a lesson chosen from the list gets it back.
+    if (fromList) nav.querySelector('[aria-current="page"]')?.focus();
+    fromList = false;
     await drawBody(id, notice);
   }
   window.addEventListener('hashchange', route);
