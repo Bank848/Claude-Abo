@@ -1,4 +1,5 @@
 // Rewrites only the personal_skills array of sources.json (keeps BOM, CRLF, and every other block byte-identical).
+import { byText } from './order.mjs';
 
 const NOTE = ' personal_skills is generated from catalog/skills.json in the Claude-Abo repo; do not run -Ack here.';
 
@@ -29,7 +30,7 @@ export function syncSources(text, manifest) {
   // Keep the file's existing order (stable diffs); new skills go last, alphabetically.
   const order = [...existing.keys()];
   const rank = (n) => (order.includes(n) ? order.indexOf(n) : order.length);
-  const ordered = manifest.skills.slice().sort((a, b) => rank(a.name) - rank(b.name) || a.name.localeCompare(b.name));
+  const ordered = manifest.skills.slice().sort((a, b) => rank(a.name) - rank(b.name) || byText(a.name, b.name));
   const entries = ordered.map((s) => {
     const old = existing.get(s.name) ?? {};
     const upstream = s.upstream ? `https://github.com/${s.upstream}` : (old.source_repo_url === 'unknown' ? 'self-authored' : old.source_repo_url ?? 'self-authored');

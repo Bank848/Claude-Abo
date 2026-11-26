@@ -24,13 +24,15 @@ export function isBlocked(code, stdout) {
 function runHook(command, command2, timeoutMs) {
   const payload = JSON.stringify({ hook_event_name: 'PreToolUse', tool_name: 'Bash', tool_input: { command: command2 } });
   return new Promise((resolve) => {
-    const child = spawn(command, { shell: true, stdio: ['pipe', 'pipe', 'ignore'], windowsHide: true });
+    const child = spawn(command, { shell: true, stdio: ['pipe', 'pipe', 'ignore'], windowsHide: true, detached: process.platform !== 'win32' });
     let out = '';
     let done = false;
     const finish = (blocked) => { if (!done) { done = true; clearTimeout(timer); resolve(blocked); } };
     const timer = setTimeout(() => {
       if (process.platform === 'win32') spawnSync('taskkill', ['/pid', String(child.pid), '/T', '/F'], { stdio: 'ignore' });
-      else child.kill('SIGKILL');
+      // Kill the whole process group: killing only the shell leaves the hook alive and holding the pipe.
+      else try { process.kill(-child.pid, 'SIGKILL'); } catch { child.kill('SIGKILL'); }
+      child.stdout.destroy();
       finish(false); // a hook that hangs did not block anything
     }, timeoutMs);
     child.stdout.on('data', (d) => { out += d; });

@@ -56,8 +56,8 @@ Every bundled skill is listed below. The tables are generated from `catalog/skil
 | Skill | What it does | Origin | License | Status | ~Tokens |
 |---|---|---|---|---|---|
 | `domain-modeling` | Pins down domain terms and records ADRs while a plan is being stress-tested. | adopted | MIT | experimental | 54 |
-| `github-pr-review-draft` | Pending-review PR workflow: findings wait in the GitHub UI, nothing posts silently. | self-authored | MIT | experimental | 64 |
 | `git-retro` | Turns recent git history into a short retrospective of what changed and what keeps breaking. | adapted | MIT | experimental | 95 |
+| `github-pr-review-draft` | Pending-review PR workflow: findings wait in the GitHub UI, nothing posts silently. | self-authored | MIT | experimental | 64 |
 | `grill-with-docs` | Stress-tests a plan against the repo docs and records decisions as ADRs. | adopted | MIT | experimental | 27 |
 | `plan-pro` | Implementation-plan writer with a spawned multi-agent review loop and an HTML before/after output. | self-authored | MIT | experimental | 107 |
 | `poka-yoke` | Mistake-proofing review — makes a bad state impossible/obvious at the source instead of catching it after the fact. | self-authored | MIT | experimental | 136 |

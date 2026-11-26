@@ -129,3 +129,9 @@ test('CLI gen --check exits 1 when out of date and 0 after gen', () => {
   assert.equal(run().status, 0);
   assert.equal(run('--check').status, 0);
 });
+
+test('generated order does not depend on the machine locale', () => {
+  const skill = (name) => ({ name, summary: 's', category: 'engineering', origin: 'vendor', license: { spdx: 'MIT' }, status: 'experimental' });
+  const table = skillsTable({ skills: [skill('github-x'), skill('git-y')] });
+  assert.ok(table.indexOf('`git-y`') < table.indexOf('`github-x`'));
+});

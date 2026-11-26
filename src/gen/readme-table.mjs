@@ -1,4 +1,5 @@
 // Generators for the README regions. Pure functions of the manifest (plus optional description tokens).
+import { byText } from './order.mjs';
 import { CATEGORIES } from '../manifest.mjs';
 
 const TITLES = {
@@ -22,7 +23,7 @@ export function skillsBadge(m) {
 export function skillsTable(m, tokens = {}) {
   const lines = [];
   const withTokens = Object.keys(tokens).length > 0;
-  const rows = bundled(m).slice().sort((a, b) => CATEGORIES.indexOf(a.category) - CATEGORIES.indexOf(b.category) || a.name.localeCompare(b.name));
+  const rows = bundled(m).slice().sort((a, b) => CATEGORIES.indexOf(a.category) - CATEGORIES.indexOf(b.category) || byText(a.name, b.name));
   for (const cat of CATEGORIES) {
     const list = rows.filter((s) => s.category === cat);
     if (!list.length) continue;
@@ -38,7 +39,7 @@ export function skillsTable(m, tokens = {}) {
   if (ptr.length) {
     lines.push(`**Not bundled, install from upstream (${ptr.length})**`, '');
     lines.push('| Skill | Upstream | Install |', '|---|---|---|');
-    for (const s of ptr.slice().sort((a, b) => a.name.localeCompare(b.name))) {
+    for (const s of ptr.slice().sort((a, b) => byText(a.name, b.name))) {
       const install = s.pointer.install.replace(/\|/g, '/');
       lines.push(`| \`${s.name}\` | [${s.upstream}](${s.pointer.url}) | ${install} |`);
     }
