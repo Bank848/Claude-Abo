@@ -1,0 +1,5 @@
+[
+  { "repo": "cathrynlavery/diagram-design", "subpath": "skills/diagram-design", "why": "polished static diagrams, large folder so pointer" },
+  { "repo": "tt-a1i/archify", "subpath": "archify", "why": "interactive code-derived architecture diagrams, large folder so pointer" },
+  { "repo": "nateherkai/scroll-craft", "subpath": "plugins/nateherk-design/skills/scroll-craft", "why": "scroll-driven landing pages" }
+]

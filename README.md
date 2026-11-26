@@ -1,314 +1,179 @@
 **English** | [ภาษาไทย](README.th.md) | [简体中文](README.zh-Hans.md) | [日本語](README.ja.md) | [Español](README.es.md) | [한국어](README.ko.md) | [Português (Brasil)](README.pt-BR.md) | [Français](README.fr.md) | [Deutsch](README.de.md) | [Русский](README.ru.md)
 
-<div align="center">
+# Claude-Abo
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Claude%20Code%20Clone%20Template&fontSize=38&fontColor=ffffff&fontAlignY=38&desc=A%20portable%20snapshot%20of%20one%20person's%20Claude%20Code%20setup&descAlignY=58&descSize=17&descColor=ffffff&animation=fadeIn" alt="Claude Code Clone Template banner" width="100%"/>
+A skill notebook for Claude Code: each skill is listed with its source, license and status, and Claude picks the right one itself from the skill's one-line description, so there is no command to type.
+That line also costs context every session. One command estimates the cost in tokens (next to the real `/context` figure) and lists what to cut; the catalog has 68 skills with license, test date and known issues for each.
+`npx github:Bank848/Claude-Abo audit`  ·  [Site](https://bank848.github.io/Claude-Abo/)  ·  [Catalog](https://bank848.github.io/Claude-Abo/#catalog)
 
+[![CI](https://github.com/Bank848/Claude-Abo/actions/workflows/ci.yml/badge.svg)](https://github.com/Bank848/Claude-Abo/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-66%20curated-brightgreen)](#global-configskills)
-[![Languages](https://img.shields.io/badge/languages-10-orange)](#top)
+<!-- gen:skills-count-badge:start -->[![Skills](https://img.shields.io/badge/skills-68%20bundled-brightgreen)](#global-configskills)<!-- gen:skills-count-badge:end -->
 [![Template](https://img.shields.io/badge/type-adapt%2C%20not%20run%20as--is-lightgrey)](#caveat-this-is-one-persons-setup)
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=1200&color=6C63FF&center=true&vCenter=true&width=640&lines=66+curated+skills+with+full+provenance;Cost-aware+Sonnet+%2F+Opus+%2F+Haiku+model+routing;Git+safety+hooks+%2B+%2Fplan-pro+workflow;Cross-project+second-brain+vault" alt="rotating feature highlights"/>
+<p align="center"><img src="assets/audit-demo.gif" alt="Terminal recording of the audit command on a sample setup: estimated tokens, what to cut first, safety checklist" width="820"/></p>
 
-</div>
+## Claude picks, you don't
 
-<p align="center"><img src="assets/claude-abo-teaser.webp" alt="Animated preview: 66 skills, model routing by difficulty, a hook that asks before git push --force" width="720"/></p>
+Claude reads each skill's one-line `description` and loads the skill whose description fits your request. Write that line as a trigger: say when to use the skill.
 
-**Jump to:** [Quickstart](#getting-started-quickstart) · [What's in here](#whats-in-here) · [Bonus skills](#bonus-skills-21-added-in-the-october-2026-patch) · [Licenses and credits](#license-and-credits)
+- **Prompt (illustrative):** "Write the launch post for this project."
+- **Skill that fits:** `english-writing-anti-ai-tell`, described as "Use when drafting English-language text for the user (chat, email, essays, reports)..."
+- **Why:** the post is English text written for readers, which is what the description names.
 
-A portable snapshot of one person's Claude Code setup — instructions, skills, hooks, and a knowledge vault, packaged so a fresh Claude Code instance can bootstrap the same habits on a new machine. **A template to adapt, not a config to run as-is.**
+This is an illustration, not a measurement. The description fits the task, and that fit is what Claude matches on; it does not prove the description alone triggers the skill. The audit flags descriptions that are too long or too short to match.
+
+## What the audit checks
+
+- **Fixed context:** CLAUDE.md, skill descriptions, custom agents and MCP tool lists, summed as an estimate in tokens. Compare it with `/context`; an estimate is not a measurement ([method](docs/audit-method.md#what-is-counted)).
+- **Listing cap:** whether your skill descriptions fit the budget Claude Code reserves for the skill list ([method](docs/audit-method.md#estimate-and-listing-cap)).
+- **Usage:** which skills you have no record of calling in recent sessions, so you can decide what to cut (`--usage`).
+- **Safety hook:** runs your user-level hooks against a fake `git push --force` and a harmless control command (`--probe-hooks`).
+- **Sharing:** `--export` renames everything that is not in the catalog and refuses if it finds an email, IP or home path.
+
+Details, limits and the checklist: [docs/audit-method.md](docs/audit-method.md).
+
+## Use the template
+
+1. Clone the repo and open it in Claude Code.
+2. Run `/adopt`. It interviews you, copies only the pieces you pick and records progress in a journal.
+3. Prefer to do it by hand? See the [guide](docs/guide.md).
+
+Nothing here runs as-is: read it, then adapt it. The steps assume Claude Code; `global-config/AGENTS.md` is the portable subset for other agents.
+
+## Skills
 
 <details>
-<summary>Read the full pitch</summary>
+<summary>Every bundled skill and where the rest come from</summary>
 
-Global instructions, engineering rules, **66 curated skills** (20 self-authored — 15 written from scratch (3 in the original 45 plus 12 bonus skills), 5 self-written wrappers around third-party tools (4 in the original 45 plus `codeburn-cost-check`) — 2 adapted from upstream skills, the rest adopted from upstream repos, all with per-skill provenance in `sources.json`), real memory examples, a skill-provenance manifest, and a cross-project knowledge vault — packaged so a fresh Claude Code instance (or the person setting one up) can bootstrap the same workflow habits and capabilities on a new machine. This is a **template to adapt, not a config to run as-is**: personal identifiers have been scrubbed and replaced with placeholders, and several sections only make sense if you also adopt the tools they describe.
+<!-- gen:skills-count-2:start -->68<!-- gen:skills-count-2:end --> curated `SKILL.md` folders (plus supporting scripts/reference/data files where a skill has them) covering writing/marketing craft (copywriting, copy-editing, hallmark, marketing-council, pricing...), engineering process (debug-mantra, poka-yoke, second-brain, dependency-audit, secrets-audit...), design (design-system, ui-ux-pro-max, banner-design, mobbin-references...), and meta-skills for managing Claude Code itself (skillify, grilling, second-brain, graphify, plan-pro, shipping-a-branch...). `poka-yoke`, `plan-pro`, and `shipping-a-branch` are self-authored from scratch; `graphify`, `dembrandt`, `markitdown`, and `mobbin-references` are self-written wrapper skills whose SKILL.md is original but whose underlying tools are third-party (credited in `ATTRIBUTION.md` and version-tracked in `sources.json`); `deslop-defaults` is adapted (harvested from `ibelick/ui-skills` and rewritten stack-agnostic); the rest are adopted from upstream repos — see `sources.json` for per-skill provenance and `ATTRIBUTION.md` for upstream credits. These are genuinely reusable prompt-engineering artifacts, not just descriptions of skills — copy them into `~/.claude/skills/` and they work immediately.
 
-</details>
+Every bundled skill is listed below. The tables are generated from `catalog/skills.json` (run `npm run gen`); do not edit them by hand.
 
-## Who is this for
+<!-- gen:skills-table:start -->
+**Engineering (13)**
 
-| Good fit | Not a fit |
-|---|---|
-| You already use Claude Code daily and want ready-made habits: model routing by cost, git safety hooks, a plan-review loop | You want a one-click config. Nothing here runs as-is; everything is meant to be read and adapted |
-| You like reading other people's setups and copying only the parts that suit you | You need Windows-free or Thai-free defaults everywhere. The author's setup is Windows and Thai-English, and some sections show it |
-| You run more than one AI coding tool and want a portable `AGENTS.md` | You want a maintained product with releases and support. This is a personal snapshot |
+| Skill | What it does | Origin | License | Status | ~Tokens |
+|---|---|---|---|---|---|
+| `domain-modeling` | Pins down domain terms and records ADRs while a plan is being stress-tested. | adopted | MIT | experimental | 54 |
+| `git-retro` | Turns recent git history into a short retrospective of what changed and what keeps breaking. | adapted | MIT | experimental | 95 |
+| `github-pr-review-draft` | Pending-review PR workflow: findings wait in the GitHub UI, nothing posts silently. | self-authored | MIT | experimental | 64 |
+| `grill-with-docs` | Stress-tests a plan against the repo docs and records decisions as ADRs. | adopted | MIT | experimental | 27 |
+| `plan-pro` | Implementation-plan writer with a spawned multi-agent review loop and an HTML before/after output. | self-authored | MIT | experimental | 107 |
+| `poka-yoke` | Mistake-proofing review — makes a bad state impossible/obvious at the source instead of catching it after the fact. | self-authored | MIT | experimental | 136 |
+| `ponytail` | Writes the least code that is still correct: climbs a ladder before adding anything. | adapted | MIT | experimental | 125 |
+| `project-bootstrap` | One-shot repo scaffold: thin CLAUDE.md router, docs/log/, docs/adr/, conventions. | self-authored | MIT | experimental | 131 |
+| `pruning-branches` | Periodic branch and worktree cleanup with a survey first and a log entry after. | self-authored | MIT | experimental | 50 |
+| `review-specialists` | Splits a code review into specialist passes (security, performance, testing, API contract, migration and more). | adapted | MIT | experimental | 113 |
+| `shipping-a-branch` | Drives commit → push → PR → review → merge end to end, confirming each risky step separately. | self-authored | MIT | experimental | 58 |
+| `test-audit` | Rates which tests are worth their cost: a value bar, a low-value catalog and a regression-proof rule. | adapted | MIT | experimental | 100 |
+| `wizard` | Generates an interactive bash wizard for steps only a human can perform (credentials, dashboards, migrations). | adopted | MIT | experimental | 79 |
 
-## Getting started (quickstart)
+**Design (11)**
 
-> **Shortcut:** clone the repo, open it in Claude Code, and run `/adopt` — it interviews you and does steps 2, 3, 5, and 7 below for you, checking off progress in a resumable journal file. Step 6 (installing the plugin ecosystems themselves) is deliberately out of scope for `/adopt` — that one's still on you.
+| Skill | What it does | Origin | License | Status | ~Tokens |
+|---|---|---|---|---|---|
+| `banner-design` | Designs social/ad/web/print banners across many art-direction styles. | adopted | MIT | experimental | 124 |
+| `dembrandt` | Extracts a live website's actual design tokens (colors, type, spacing) via DOM/CSS inspection. | wrapper | MIT | experimental | 141 |
+| `design` | Broad design skill — logos, CIP mockups, slides, banners, icons, social photos. | adopted | MIT | experimental | 154 |
+| `design-system` | Three-layer design-token architecture (primitive → semantic → component) plus slide generation. | adopted | MIT | experimental | 70 |
+| `deslop-defaults` | Structural defaults that stop AI-generated UI from looking averaged-out (z-index, accent restraint, states). | adapted | MIT | experimental | 112 |
+| `hallmark` | Anti-AI-slop design skill for greenfield pages, redesigns, and design extraction from URLs/screenshots. | adopted | MIT | experimental | 65 |
+| `image` | Generates/edits/optimizes marketing images (heroes, social graphics, mockups, OG images). | adopted | MIT | experimental | 205 |
+| `mobbin-references` | Pulls real-app reference screenshots (onboarding, paywalls, empty states...) before a UI is designed. | wrapper | MIT | experimental | 86 |
+| `slides` | Builds strategic HTML presentations with Chart.js and design-token theming. | adopted | MIT | experimental | 35 |
+| `ui-ux-pro-max` | Searchable UI/UX database — styles, palettes, font pairings, UX guidelines, motion presets, chart types. | adopted | MIT | experimental | 149 |
+| `web-motion` | Restrained motion for web pages: token values, a motion budget and a scroll-reveal recipe. | adapted | Apache-2.0 | experimental | 130 |
 
-<p align="center"><img src="assets/quickstart-flow.svg" alt="Clone, then copy configs, then run /adopt, then verify" width="100%"/></p>
+**Marketing (12)**
 
-| # | Step | Where |
+| Skill | What it does | Origin | License | Status | ~Tokens |
+|---|---|---|---|---|---|
+| `brand` | Brand voice, visual identity, messaging frameworks, and consistency checks. | adopted | MIT | experimental | 46 |
+| `community-marketing` | Community-led growth strategy (Discord/Slack/forum, ambassador programs, advocacy). | adopted | MIT | experimental | 158 |
+| `content-strategy` | Decides what content to create — topic clusters, editorial calendars, content pillars. | adopted | MIT | experimental | 165 |
+| `copy-editing` | Edits/tightens/refreshes existing marketing copy. | adopted | MIT | experimental | 149 |
+| `copywriting` | Writes new marketing copy for landing/pricing/feature/about pages. | adopted | MIT | experimental | 189 |
+| `launch` | Plans a product launch, feature announcement, or go-to-market checklist. | adopted | MIT | experimental | 138 |
+| `marketing-council` | Simulated advisory board of named marketers debating a positioning question. | adopted | MIT | experimental | 205 |
+| `marketing-ideas` | Growth/marketing idea generator for SaaS and software products. | adopted | MIT | experimental | 141 |
+| `marketing-psychology` | Applies behavioral-science principles (anchoring, social proof, framing) to marketing decisions. | adopted | MIT | experimental | 150 |
+| `pricing` | Pricing/packaging strategy and pricing-page audits. | adopted | MIT | experimental | 217 |
+| `product-marketing` | Builds the reusable product/audience/positioning context doc other marketing skills reference. | adopted | MIT | experimental | 138 |
+| `social` | Social content creation, scheduling, repurposing, and social listening across platforms. | adopted | MIT | experimental | 252 |
+
+**Research (8)**
+
+| Skill | What it does | Origin | License | Status | ~Tokens |
+|---|---|---|---|---|---|
+| `agent-reach` | Web research across sources an agent can reach. | adopted | MIT | experimental | 298 |
+| `browserclaw` | Drives a signed-in agent browser (BrowserOS integration instructions). | adopted | MIT | experimental | 126 |
+| `deep-research` | Multi-source, multi-pass research brief with citations, contradictions, and gaps. | adopted | MIT | experimental | 221 |
+| `graphify` | Turns any input (code/docs/papers/images) into a clustered knowledge graph with an audit report. | wrapper | MIT | experimental | 29 |
+| `grilling` | Interviews the user relentlessly to stress-test a plan before building it. | adopted | MIT | experimental | 51 |
+| `markitdown` | Converts PDFs/slides/sheets/audio/HTML/etc. into clean Markdown for LLM/RAG use. | wrapper | MIT | experimental | 140 |
+| `second-brain` | Capture/compile/query/lint/connect workflow for a personal Obsidian-style knowledge vault. | adopted | MIT | experimental | 245 |
+| `watch-video` | Extracts transcript/visual/multimodal content from any yt-dlp-supported video source. | adopted | MIT | experimental | 234 |
+
+**Writing (4)**
+
+| Skill | What it does | Origin | License | Status | ~Tokens |
+|---|---|---|---|---|---|
+| `english-writing-anti-ai-tell` | Checklist that keeps English drafts from reading as AI-written. | self-authored | MIT | experimental | 74 |
+| `i-have-adhd` | Output style for readers who want the next action first; ships an optional always-on hook. | adopted | MIT | experimental | 61 |
+| `thai-no-quote-emphasis` | Rule against quote marks for emphasis in Thai text. | self-authored | MIT | workflow-specific | 38 |
+| `thai-writing-anti-ai-tell` | Checklist that keeps Thai drafts from reading as AI-written. | self-authored | MIT | workflow-specific | 94 |
+
+**Documents (4)**
+
+| Skill | What it does | Origin | License | Status | ~Tokens |
+|---|---|---|---|---|---|
+| `close-out-log` | End-of-task ritual: append a dated entry to docs/log/ so the next session inherits the reasons. | self-authored | MIT | experimental | 147 |
+| `docx-human-sounding-report` | Fixes for a .docx report that should not read as machine-made. | self-authored | MIT | workflow-specific | 54 |
+| `docx-python-docx-justify` | python-docx: never justify formulas or code blocks that break their own lines. | self-authored | MIT | workflow-specific | 49 |
+| `docx-th-sarabun-sizing` | Thai Sarabun sizing scale for Word, fixing the base style instead of per-run sizes. | self-authored | MIT | workflow-specific | 56 |
+
+**Meta (managing Claude Code itself) (10)**
+
+| Skill | What it does | Origin | License | Status | ~Tokens |
+|---|---|---|---|---|---|
+| `codeburn-cost-check` | Breaks down AI spend per project and model from local usage data. | wrapper | MIT | experimental | 75 |
+| `council-deliberate` | Adds an anonymized cross-exam round and a hand-computed weighted tally to a four-voice decision council. | self-authored | MIT | experimental | 209 |
+| `decide` | Structured decision workflow (37signals-style question set) that also archives the rationale. | adopted | MIT | experimental | 214 |
+| `instruction-lint` | Audits auto-loaded instruction files for byte bloat and says which rules can stop being resident. | self-authored | MIT | experimental | 93 |
+| `memory-lint` | Read-only health check of a project's memory files. | self-authored | MIT | experimental | 90 |
+| `prompt-master` | Writes and tunes prompts for other AI tools. | adopted | MIT | experimental | 84 |
+| `skillify` | Creates, adapts, or updates a Claude Code skill (from chat, video, dump, or an external repo). | adopted | MIT | experimental | 318 |
+| `teach` | Teaches the user a new concept/skill within the current workspace. | adopted | MIT | experimental | 16 |
+| `unstuck` | Lateral-thinking technique bank for cracking a roadblock instead of reporting "not possible". | adopted | MIT | experimental | 309 |
+| `wait-what` | Flags a message that didn't land and re-pitches it. | adopted | MIT | experimental | 14 |
+
+**Security (6)**
+
+| Skill | What it does | Origin | License | Status | ~Tokens |
+|---|---|---|---|---|---|
+| `dependency-audit` | Checks project dependencies for known CVEs and supply-chain risks. | adopted | MIT | experimental | 112 |
+| `git-guardrails-claude-code` | Blocks dangerous git commands (push, force, clean, branch deletion) with a hook. | adopted | MIT | experimental | 61 |
+| `prompt-injection` | Audits apps/agents for prompt-injection and LLM permission-boundary vulnerabilities. | adopted | MIT | experimental | 124 |
+| `repo-security-posture` | Phased security review of an unfamiliar repo before you run or install anything from it. | adapted | MIT | experimental | 82 |
+| `secrets-audit` | Scans source, git history, and infra for leaked credentials and weak secrets-management posture. | adopted | MIT | experimental | 136 |
+| `supabase-rls-safety-check` | Proactive Row Level Security and anon-key audit for Supabase projects. | self-authored | MIT | experimental | 49 |
+
+**Not bundled, install from upstream (8)**
+
+| Skill | Upstream | Install |
 |---|---|---|
-| 1 | Clone the repo | anywhere convenient |
-| 2 | Decide: want local Ollama pre-compression? | see [Optional: Local AI](#optional-local-ai-ollama-pre-compression) |
-| 3 | Copy configs into `~/.claude/` | `CLAUDE.md`, `agents/*.md`, `hooks/*.py`, `skills/*`, `tools/` — **rewrite "Installed Plugins" first** |
-| 4 | Merge settings | `global-config/settings.example.json` → `~/.claude/settings.json` (replace `<YOUR_HOME>`) |
-| 5 | Find-and-replace placeholders | full list in [How to adopt this](#how-to-adopt-this), step 8 |
-| 6 | Install the plugin ecosystems | see [What you'll still need to install](#what-youll-still-need-to-install-separately) |
-| 7 | Copy `notes/` + `memory-examples/` (optional) | your own vault / auto-memory folder |
-| 8 | Verify | ask for an implementation plan — does `/plan-pro` fire? |
-
-Multi-agent shop (Codex, Cursor, Gemini CLI, ...)? Also copy `global-config/AGENTS.md` into each project root — see [Compatibility with other AI coding tools](#compatibility-with-other-ai-coding-tools).
-
-The rest of this README explains each piece in detail.
-
-## What's in here
-
-```
-claude-clone-template/
-├── README.md
-├── LICENSE                                # MIT license for this repo's own content
-├── ATTRIBUTION.md                         # Credits for the upstream repos the third-party skills were adopted from
-├── .claude/commands/adopt.md              # Run `/adopt` in this repo to interview + auto-apply the steps below
-├── global-config/
-│   ├── CLAUDE.md                          # Global instruction file (~/.claude/CLAUDE.md equivalent)
-│   ├── AGENTS.md                          # Portable subset of CLAUDE.md for non-Claude-Code agents (Codex, Cursor, Gemini CLI, ...)
-│   ├── settings.example.json              # Sanitized ~/.claude/settings.json — hooks, plugins, model default
-│   ├── agents/                            # 4 pinned-model subagent definitions (opus, sonnet-worker, haiku-batch, fable-medium)
-│   ├── hooks/i-have-adhd/always-on.sh       # Optional hook script for the i-have-adhd output style (wire it into settings.json yourself)
-│   ├── hooks/block-dangerous-git.py       # PreToolUse gate that asks before risky git commands
-│   ├── hooks/graphify-auto-update.py      # PostToolUse hook — keeps the graphify knowledge graph in sync after edits
-│   ├── rules/ecc-common/                  # 10 engineering-discipline rule files (ecc plugin ecosystem)
-│   ├── skills/                            # 66 curated skill folders (the actual SKILL.md instructions, not just an index — see sources.json for provenance)
-│   ├── SKILLS_INDEX.md                    # Personal index of installed skills/plugins + when to use which
-│   ├── memory-examples/                   # 7 real auto-memory entries showing the memory system's format/patterns
-│   ├── templates/                         # 2 starter templates to copy into a new repo (project-CLAUDE.md, conventions.md)
-│   └── tools/
-│       ├── skill-update-check/
-│       │   ├── check.ps1                  # Weekly update checker — reads sources.json from this same folder
-│       │   └── sources.json               # Real provenance manifest: 66 personal skills + 3 pip + 2 npm + 1 binary tool
-│       └── ollama/ollama-digest.ps1       # On-demand local-model pre-digest helper (see the Ollama section below)
-└── notes/                                 # 3 notes: a personal cross-project "second brain" vault (example content)
-```
-
-### `global-config/CLAUDE.md`
-The heart of the setup. It encodes:
-
-- **Cost-aware model routing** — main loop on your choice of Opus 5.5 (judgment-heavy work) or Sonnet 5.5 (cheaper routine sessions) as orchestrator, delegating to Haiku/Sonnet/Opus/Fable subagents by task difficulty, with hard rules about who reads raw files vs. who reads conclusions.
-- **Heavy-execution offloading** — spawning big jobs into separate sessions instead of bloating (and billing) the current one.
-- **Planning workflow** — `/plan-pro` as the default planner.
-- **Second-brain vault convention** — a single rule ("is it tied to one repo?") deciding what lives in the vault vs. in a repo's docs/ADRs.
-- **Git safety hook** — a PreToolUse gate that asks before destructive git commands.
-- **graphify auto-sync hook** — a PostToolUse hook that keeps the knowledge graph up to date after every edit, without blocking the edit itself.
-- **Auto Mode classifier workaround** — what to do when Auto Mode's own safety classifier silently re-blocks a command you already approved in chat, including a permanent `permissions.ask` fix for the "editing your own Claude Code config" case specifically.
-- **Shell gotchas** — Bash tool vs. PowerShell tool heredoc syntax rules (Windows-specific pain, learned the hard way).
-- **Context self-monitoring** — when Claude should proactively suggest `/compact`.
-- **Anti-AI-tell writing rules** — a full Thai + English ruleset for making drafted text read as human-written (vocab to avoid, structural patterns, register matching); the largest, most broadly reusable piece in the file. Backing detail lives in `memory-examples/`.
-- **PR draft-first default**, **ask-before-scheduling cron/cloud agents**, **terse narration during long-running commands**, a **claude-in-chrome shared-tab-group gotcha** for parallel sessions, and a **proactive Supabase RLS check** for any project using Supabase.
-
-### `global-config/rules/ecc-common/`
-General engineering discipline from the ecc (everything-claude-code) plugin ecosystem: TDD workflow, immutability, commit format, security checklist, code-review severity levels, agent delegation. Only useful if you also run ecc (see "What you'll still need to install" below).
-
-### `global-config/skills/`
-66 curated `SKILL.md` folders (plus supporting scripts/reference/data files where a skill has them) covering writing/marketing craft (copywriting, copy-editing, hallmark, marketing-council, pricing...), engineering process (debug-mantra, poka-yoke, second-brain, dependency-audit, secrets-audit...), design (design-system, ui-ux-pro-max, banner-design, mobbin-references...), and meta-skills for managing Claude Code itself (skillify, grilling, second-brain, graphify, plan-pro, shipping-a-branch...). `poka-yoke`, `plan-pro`, and `shipping-a-branch` are self-authored from scratch; `graphify`, `dembrandt`, `markitdown`, and `mobbin-references` are self-written wrapper skills whose SKILL.md is original but whose underlying tools are third-party (credited in `ATTRIBUTION.md` and version-tracked in `sources.json`); `deslop-defaults` is adapted (harvested from `ibelick/ui-skills` and rewritten stack-agnostic); the rest are adopted from upstream repos — see `sources.json` for per-skill provenance and `ATTRIBUTION.md` for upstream credits. These are genuinely reusable prompt-engineering artifacts, not just descriptions of skills — copy them into `~/.claude/skills/` and they work immediately.
-
-<details>
-<summary><b>See all 45 skills, grouped by category</b> (click to expand)</summary>
-
-**Engineering process & workflow (15)**
-
-| Skill | What it does |
-|---|---|
-| `debug-mantra` | Four-step debugging discipline (reproduce → trace → falsify → cross-reference) recited before proposing any fix. |
-| `poka-yoke` *(self-authored)* | Mistake-proofing review — makes a bad state impossible/obvious at the source instead of catching it after the fact. |
-| `post-mortem` | Writes the canonical root-cause writeup after a bug is fixed and validated. |
-| `scrutinize` | Outsider-perspective review of a plan/PR/diff — checks intent first, then traces the real code path. |
-| `shipping-a-branch` *(self-authored)* | Drives commit → push → PR → review → merge end to end, confirming each risky step separately. |
-| `plan-pro` *(self-authored)* | Implementation-plan writer with a spawned multi-agent review loop and an HTML before/after output. |
-| `dependency-audit` | Checks project dependencies for known CVEs and supply-chain risks. |
-| `secrets-audit` | Scans source, git history, and infra for leaked credentials and weak secrets-management posture. |
-| `prompt-injection` | Audits apps/agents for prompt-injection and LLM permission-boundary vulnerabilities. |
-| `decide` | Structured decision workflow (37signals-style question set) that also archives the rationale. |
-| `unstuck` | Lateral-thinking technique bank for cracking a roadblock instead of reporting "not possible". |
-| `teach` | Teaches the user a new concept/skill within the current workspace. |
-| `wait-what` | Flags a message that didn't land and re-pitches it. |
-| `skillify` | Creates, adapts, or updates a Claude Code skill (from chat, video, dump, or an external repo). |
-| `wizard` | Generates an interactive bash wizard for steps only a human can perform (credentials, dashboards, migrations). |
-
-**Design & UI (11)**
-
-| Skill | What it does |
-|---|---|
-| `banner-design` | Designs social/ad/web/print banners across many art-direction styles. |
-| `design` | Broad design skill — logos, CIP mockups, slides, banners, icons, social photos. |
-| `design-system` | Three-layer design-token architecture (primitive → semantic → component) plus slide generation. |
-| `deslop-defaults` *(adapted)* | Structural defaults that stop AI-generated UI from looking averaged-out (z-index, accent restraint, states). |
-| `hallmark` | Anti-AI-slop design skill for greenfield pages, redesigns, and design extraction from URLs/screenshots. |
-| `ui-styling` | Builds accessible UI with shadcn/ui, Tailwind, and dark-mode-aware theming. |
-| `ui-ux-pro-max` | Searchable UI/UX database — styles, palettes, font pairings, UX guidelines, motion presets, chart types. |
-| `mobbin-references` | Pulls real-app reference screenshots (onboarding, paywalls, empty states...) before a UI is designed. |
-| `dembrandt` *(wrapper)* | Extracts a live website's actual design tokens (colors, type, spacing) via DOM/CSS inspection. |
-| `image` | Generates/edits/optimizes marketing images (heroes, social graphics, mockups, OG images). |
-| `slides` | Builds strategic HTML presentations with Chart.js and design-token theming. |
-
-**Marketing, content & brand (13)**
-
-| Skill | What it does |
-|---|---|
-| `brand` | Brand voice, visual identity, messaging frameworks, and consistency checks. |
-| `community-marketing` | Community-led growth strategy (Discord/Slack/forum, ambassador programs, advocacy). |
-| `content-strategy` | Decides what content to create — topic clusters, editorial calendars, content pillars. |
-| `copy-editing` | Edits/tightens/refreshes existing marketing copy. |
-| `copywriting` | Writes new marketing copy for landing/pricing/feature/about pages. |
-| `launch` | Plans a product launch, feature announcement, or go-to-market checklist. |
-| `management-talk` | Rewrites engineer-to-engineer writing for leadership, shaped to the target channel (Slack/email/standup). |
-| `marketing-council` | Simulated advisory board of named marketers debating a positioning question. |
-| `marketing-ideas` | Growth/marketing idea generator for SaaS and software products. |
-| `marketing-psychology` | Applies behavioral-science principles (anchoring, social proof, framing) to marketing decisions. |
-| `pricing` | Pricing/packaging strategy and pricing-page audits. |
-| `product-marketing` | Builds the reusable product/audience/positioning context doc other marketing skills reference. |
-| `social` | Social content creation, scheduling, repurposing, and social listening across platforms. |
-
-**Research & knowledge management (6)**
-
-| Skill | What it does |
-|---|---|
-| `deep-research` | Multi-source, multi-pass research brief with citations, contradictions, and gaps. |
-| `graphify` *(wrapper, self-authored)* | Turns any input (code/docs/papers/images) into a clustered knowledge graph with an audit report. |
-| `grilling` | Interviews the user relentlessly to stress-test a plan before building it. |
-| `second-brain` | Capture/compile/query/lint/connect workflow for a personal Obsidian-style knowledge vault. |
-| `watch-video` | Extracts transcript/visual/multimodal content from any yt-dlp-supported video source. |
-| `markitdown` *(wrapper)* | Converts PDFs/slides/sheets/audio/HTML/etc. into clean Markdown for LLM/RAG use. |
-
-Full provenance (source repo, adoption date, self-authored vs. adopted vs. adapted) for every entry is in `global-config/tools/skill-update-check/sources.json`; upstream credits are in `ATTRIBUTION.md`.
+| `archify` | [tt-a1i/archify](https://github.com/tt-a1i/archify/tree/3ca198d867ce4b616332f846ff66e5c8e5e60f95/archify) | see the upstream README for install steps |
+| `debug-mantra` | [thananon/9arm-skills](https://github.com/thananon/9arm-skills/tree/a1fc303b274ed06c32d405ba5a6db00ded6e5663/skills/engineering/debug-mantra) | npx skills add thananon/9arm-skills |
+| `diagram-design` | [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design/tree/0eeda75a708f419560d5e032693618bb9954f17b/skills/diagram-design) | see the upstream README for install steps |
+| `management-talk` | [thananon/9arm-skills](https://github.com/thananon/9arm-skills/tree/a1fc303b274ed06c32d405ba5a6db00ded6e5663/skills/productivity/management-talk) | npx skills add thananon/9arm-skills |
+| `post-mortem` | [thananon/9arm-skills](https://github.com/thananon/9arm-skills/tree/a1fc303b274ed06c32d405ba5a6db00ded6e5663/skills/engineering/post-mortem) | npx skills add thananon/9arm-skills |
+| `scroll-craft` | [nateherkai/scroll-craft](https://github.com/nateherkai/scroll-craft/tree/75d81f74e83692add18cd7a8a8e078b8a887a579/plugins/nateherk-design/skills/scroll-craft) | see the upstream README for install steps |
+| `scrutinize` | [thananon/9arm-skills](https://github.com/thananon/9arm-skills/tree/a1fc303b274ed06c32d405ba5a6db00ded6e5663/skills/engineering/scrutinize) | npx skills add thananon/9arm-skills |
+| `ui-styling` | [mrgoonie/claudekit-skills](https://github.com/mrgoonie/claudekit-skills/tree/80113d86bc4407f105af40a2c4ea58194f7c370a/.claude/skills/ui-styling) | /plugin marketplace add mrgoonie/claudekit-skills (then install the plugin that contains ui-styling) |
+<!-- gen:skills-table:end -->
 
 </details>
-
-### Bonus skills (21 added in the October 2026 patch)
-
-Added after the first release. Nothing above changed. Several are written for one specific workflow (Thai documents), with SKILL.md text partly in Thai. Read each one and adapt it before relying on it.
-
-| Skill | What it is for |
-|---|---|
-| `close-out-log` | End-of-task ritual: append a dated entry to `docs/log/YYYY-MM-DD.md` (why-now / decisions / watch-out / not-done) so the next session inherits the reasons. |
-| `project-bootstrap` | One-shot scaffold for a repo: thin CLAUDE.md router, `docs/log/`, `docs/adr/`, conventions. |
-| `domain-modeling` / `grill-with-docs` | Pin down domain terms and record ADRs while a plan is being stress-tested. |
-| `ponytail` | Write the least code that is still correct: climb a ladder (YAGNI, stdlib, native, existing dependency) before adding anything. |
-| `git-guardrails-claude-code` | Gate dangerous git commands (push, force operations, clean, branch deletion) with a blocking hook. |
-| `github-pr-review-draft` / `pruning-branches` | Pending-review PR workflow and periodic branch cleanup. |
-| `memory-lint` | Read-only health check of a project's memory files. |
-| `prompt-master` | Writes and tunes prompts for other AI tools. |
-| `agent-reach` / `browserclaw` / `codeburn-cost-check` | Web research, driving a signed-in agent browser, and AI spend breakdowns. |
-| `i-have-adhd` | Output style for readers who want the next action first (numbered steps, short state recaps). Ships an optional `always-on.sh` hook. |
-| `english-writing-anti-ai-tell` / `thai-writing-anti-ai-tell` / `thai-no-quote-emphasis` | Checklists for drafts that should not read as AI-written. |
-| `docx-human-sounding-report` / `docx-python-docx-justify` / `docx-th-sarabun-sizing` | .docx report fixes, including Thai rendering in Word. |
-| `supabase-rls-safety-check` | Proactive Row Level Security and anon-key audit for Supabase projects. |
-
-### `global-config/memory-examples/`
-7 real entries from the owner's Claude Code auto-memory system (not project-specific facts — portable "how I work" habits): a naming-convention disambiguation for cross-session messaging, the local-Ollama-as-pre-compression pattern, a rule about what "update the skill notebook" actually means operationally, a shell-quoting gotcha (`\b` silently becoming a backspace byte), a feedback entry on how aggressively to trim context bloat, and the full backing detail (vocab tables + before/after examples) for the anti-AI-tell writing rules in CLAUDE.md, in both Thai and English. These exist to show the *shape* of a good memory entry (rule + why + how-to-apply) as much as their specific content — see `global-config/rules/ecc-common/` for how memory fits into the broader workflow, and CLAUDE.md's "จำ/บัญญัติ" section for the local-vs-global memory distinction this owner uses.
-
-### `global-config/tools/skill-update-check/sources.json`
-The owner's actual skill/tool adoption manifest — real provenance data (source repo URLs, install notes, version history) for all 66 personal skills (including the self-authored and adapted ones) plus 3 pip packages, 2 npm packages, and 1 binary tool. Paired with `check.ps1`, this is what lets a `claude-clone-template` adopter track upstream updates to the skills they copied into `~/.claude/skills/`, the same way the original owner does. Update `last_seen_commit` values are mostly `unknown`/stale from the recipient's perspective until they run `check.ps1 -Ack` once to establish their own baseline.
-
-### `global-config/templates/`
-Two small starter files (`project-CLAUDE.md`, `conventions.md`) to copy into a new repo on first setup — a ≤45-line "router" project CLAUDE.md and a conventions/green-gate template. Each has a comment block with a fill-in-the-blank PRESET for the stack you're bootstrapping (currently just a Python-web example); add your own preset the same way if your stack needs one.
-
-### `notes/`
-Example content from the owner's Obsidian second-brain vault: local Ollama model inventory, bookmarked repos, and misc reference notes. These show *what kind of thing* belongs in a cross-project vault — they are not universal must-haves. Keep the structure idea, replace the content with your own over time.
-
-## How to adopt this
-
-1. **Copy `global-config/CLAUDE.md`** into your own `~/.claude/CLAUDE.md`. Merge it with what you already have, or replace outright — your call. Read it first; delete sections that don't apply to you. **Rewrite the "Installed Plugins" section before you do anything else with this file** — it currently asserts specific plugins (superpowers, ecc, pordee, lazyweb, andrej-karpathy-skills) are installed and enabled, and tells Claude not to mention installing them. That's true for the original owner, not for you. Replace it with your own actual plugin list, or delete it until you've installed something.
-2. **Copy `global-config/agents/*.md`** into `~/.claude/agents/` and **`global-config/hooks/*.py`** into `~/.claude/hooks/`. These are what make the model-routing rules, the git safety gate, and the graphify auto-sync hook in CLAUDE.md actually functional, rather than just prose.
-3. **Copy `global-config/skills/*`** into `~/.claude/skills/`. This is the bulk of the actual value — 66 working skill folders, not just descriptions of them.
-4. **Merge `global-config/settings.example.json`** into your own `~/.claude/settings.json` (replace `<YOUR_HOME>` with your real home path first). Merge, don't overwrite, if you already have a settings.json — take the `hooks.PreToolUse`/`hooks.PostToolUse` entries, the `permissions.ask` block, and whatever else you want from `enabledPlugins`. The shipped hook commands use the Windows `py` launcher; on macOS/Linux, change them to `python3` first.
-5. **Copy `global-config/rules/ecc-common/`** into `~/.claude/rules/` **only if** you install the ecc plugin. Otherwise skip.
-6. **Copy `global-config/memory-examples/*.md`** into the auto-memory folder for whichever project you want them to apply to (Claude Code auto-memory is per-project, at `~/.claude/projects/<project>/memory/`), or read them as reference and write your own from scratch.
-7. **Copy `notes/`** into your own second-brain vault location (any folder Obsidian or plain markdown tools can see), or skip entirely if you don't want a vault.
-8. **Find-and-replace every placeholder** — this is the most important step:
-   - `<YOUR_USERNAME>`, `<YOUR_HOME>` → your actual Windows/system username and home path
-   - `<YOUR_VAULT_PATH>` → wherever you keep (or plan to keep) your second-brain vault
-9. **Copy `global-config/tools/`** (both `skill-update-check/` and, if you kept Ollama, `ollama/`) into `~/.claude/tools/`, then **set your own baseline in `sources.json`**: run `check.ps1 -Ack` once after copying the skills over, so `last_seen_commit` reflects a starting point you control rather than the original owner's history.
-
-## What you'll still need to install separately
-
-This repo contains **references to and rules for** skill ecosystems — not the ecosystems themselves. For the CLAUDE.md instructions to mean anything, you need to install:
-
-- **superpowers** (obra/superpowers) — brainstorming, writing-plans, TDD, debugging skills
-- **ecc / everything-claude-code** (affaan-m/ECC) — agents, skills, commands, MCP servers
-- Any other plugins named in `SKILLS_INDEX.md` that you decide you want
-
-Install them via Claude Code's plugin system on the new machine, then reconcile `SKILLS_INDEX.md` with what you actually installed.
-
----
-
-## A note on subscription plan and the Fable 5.2 tier
-
-`CLAUDE.md`'s routing ladder tops out at a `fable-medium` subagent, which needs a **Max** plan — on **Pro**, spawning it just fails. `/adopt` asks about this and fixes it for you.
-
-<details>
-<summary>Manual fix if you're not on Max</summary>
-
-The model-routing ladder in `CLAUDE.md` tops out at a `fable-medium` subagent — the most expensive tier, used as the preferred advisor/second-opinion model for hard decisions. The original owner is on a **Max** plan, where that model is available. If you're on **Pro** (or any plan without Fable 5.2 access), spawning `fable-medium` will just fail.
-
-Before copying `CLAUDE.md` as-is, check which plan you're on. If you don't have Fable 5.2:
-- Delete the `fable-medium` paragraphs and the "สุดบันได" (top-of-ladder) bullet from the model-routing section.
-- Change the ladder's ceiling to stop at `opus` — the routing logic (escalate to Opus on hard/high-stakes work) still holds, it just won't have a level above Opus to escalate to.
-- Drop `global-config/agents/fable-medium.md` from what you copy into `~/.claude/agents/`.
-
-`/adopt` asks this as part of its interview and does this edit for you; if you're copying files by hand instead, do it yourself so Claude doesn't keep trying to spawn a subagent your plan can't reach.
-
-</details>
-
----
-
-## Optional: Local AI (Ollama) pre-compression
-
-A **free, lossy pre-compression tier** — a local model digests long low-stakes text before it hits a paid model's context. Zero capability added, pure cost-saver. Skippable; nothing else here depends on it.
-
-<details>
-<summary>Details — do you want this?</summary>
-
-The original setup uses local Ollama models as a **free, lossy pre-compression tier** — piping long low-stakes text (logs, verbose docs) through a local model to digest it *before* it enters a paid model's context. It sits **below Haiku** in the cost ladder and is not a routing tier: no tool access, no repo context, text in / text out only. It saves money; it adds no capability. Nothing else in this repo depends on it.
-
-**So, a question you need to answer for yourself: do you want to set up local Ollama models for this?**
-
-### If no
-Skip this entire section. Delete the Ollama paragraphs from your copy of `CLAUDE.md` and drop `notes/local-ollama-models.md`. Everything else works fine without it.
-
-### If yes
-1. **Install Ollama** from [ollama.com](https://ollama.com).
-2. **Decide where the model store lives.** Models are large (a 27B model is tens of GB) and the default location is on your system drive (`%USERPROFILE%\.ollama` on Windows). If your system drive is tight on space, relocate the store to a bigger drive — the original setup used `D:\ollama` for exactly this reason. On Windows, set the `OLLAMA_MODELS` environment variable to your chosen path before pulling models; other platforms have equivalent env-var or symlink approaches.
-3. **Pull at least one general-purpose instruct model** (e.g. `ollama pull qwen2.5:7b-instruct` or a similar ~7–9B instruct model — small enough to run fast, good enough to summarize). The original inventory in `notes/local-ollama-models.md` shows one possible spread: a heavy 27B for best quality, mid-size 7–9B models for speed/reasoning/code, and one vision-capable model (`llava:7b`) — treat that list as inspiration, not a shopping list.
-4. **Learn the usage pattern:** pipe a file in, get a digest out —
-   ```powershell
-   Get-Content <file> | ollama run <model> "<instruction>"
-   ```
-   (Pipe the file; don't stuff long prompts into the argument.)
-5. **Know the one hard rule:** local-model output is **never ground truth**. It's lossy compression for low-stakes text. If a decision depends on the content, the paid model reads the original — always.
-
-This is 100% optional and skippable. It exists purely to shave token costs on bulk text.
-
-</details>
-
----
-
-## Compatibility with other AI coding tools
-
-Two files ship instead of one: `CLAUDE.md` (Claude Code-only) and `AGENTS.md` (the portable subset — [agents.md](https://agents.md), also read by Codex, Cursor, Gemini CLI, Copilot).
-
-<details>
-<summary>How the two interact</summary>
-
-This template is built specifically for **Claude Code**, but as of Claude Code 2.1.277 (September 2026), Claude Code itself also reads [`AGENTS.md`](https://agents.md) as a fallback when a project has no `CLAUDE.md` — the same convention Codex CLI, Cursor, Gemini CLI, and GitHub Copilot already read. That's why this template ships two files instead of one:
-
-- **`global-config/CLAUDE.md`** — the full setup: cost-aware model routing, `/plan-pro`, the skill catalog, hooks, subagent routing, everything that only means something inside Claude Code.
-- **`global-config/AGENTS.md`** — the portable subset (coding style, git workflow, testing, code review, security checklist, common patterns) with every Claude Code-only mechanism stripped out. Drop it into any project and any AGENTS.md-aware agent picks it up, Claude Code included.
-
-If a project has **both** files, Claude Code reads `CLAUDE.md` and ignores `AGENTS.md` — the two aren't merged, so don't expect the Claude Code-specific rules to apply just because AGENTS.md is also present. Other tools (Codex, Cursor, etc.) only ever read `AGENTS.md`; they have no concept of `CLAUDE.md`, the `Skill` tool, `settings.json` hooks, or subagent definitions, so those stay Claude Code-only no matter what.
-
-What else *can* be adapted by hand if you want more than the AGENTS.md subset:
-- Each skill under `global-config/skills/<name>/SKILL.md` is just a markdown instruction file. You can paste one into another tool's custom instructions, but you lose automatic triggering, and any bundled scripts assume a shell the tool can actually run.
-- Hooks (`settings.json`) and the subagent files (`agents/*.md`) are Claude Code-only — there's no equivalent to port them to.
-
-If you use Codex/Cursor/Gemini CLI day to day, `AGENTS.md` gets you the engineering-discipline rules out of the box; the rest of the repo (skills, hooks, the .docx fixes) is still there as reference material to copy/paste from.
-
-</details>
-
----
 
 ## License and credits
 
@@ -317,7 +182,6 @@ If you use Codex/Cursor/Gemini CLI day to day, `AGENTS.md` gets you the engineer
 - The upstream license texts and copyright lines are collected in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md). Two upstream repositories have no license file; they are listed there with a takedown note.
 - Spotted a missing credit or a skill you want removed? Open an issue and it will be fixed.
 
----
 
 ## Caveat: this is one person's setup
 

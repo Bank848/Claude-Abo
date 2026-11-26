@@ -1,0 +1,77 @@
+/* Tokens: "the exercise book". Cool paper, blue-black ink, one red margin line, one blue accent.
+   System fonts only. Text/background pairs are AA (checked by a script, see test/site-contrast.test.mjs). */
+:root {
+  --bg: #f7f9fc;
+  --surface: #ffffff;
+  --text: #14213d;
+  --muted: #4b5670;
+  --faint: #8a94a8;
+  --line: #d6deea;
+  --margin: #b42335;
+  --accent: #1d4ed8;
+  --accent-text: #ffffff;
+  --mark: #fff1a8;
+  --mark-text: #14213d;
+  --ok: #0f6b4f;
+  --focus: #b45309;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --serif: "Sitka Text", Charter, "Bitstream Charter", Cambria, Georgia, serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --s1: 0.25rem; --s2: 0.5rem; --s3: 0.75rem; --s4: 1rem; --s5: 1.5rem; --s6: 2.5rem; --s7: 4rem;
+  --t-sm: 0.875rem; --t-base: 1rem; --t-lg: 1.25rem; --t-xl: 1.563rem; --t-2xl: clamp(2rem, 6vw, 3.052rem);
+  --line-h: 1.75rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1522; --surface: #161e2e; --text: #e6ebf5; --muted: #a3adc2; --faint: #66728a; --line: #2a3448;
+    --margin: #f08a92; --accent: #8fb0ff; --accent-text: #0b1530; --mark: #3d3712; --mark-text: #f3f0d6;
+    --ok: #5fd3a6; --focus: #f5b14a;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1522; --surface: #161e2e; --text: #e6ebf5; --muted: #a3adc2; --faint: #66728a; --line: #2a3448;
+  --margin: #f08a92; --accent: #8fb0ff; --accent-text: #0b1530; --mark: #3d3712; --mark-text: #f3f0d6;
+  --ok: #5fd3a6; --focus: #f5b14a;
+}
+* { box-sizing: border-box; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { margin: 0; background: var(--bg); color: var(--text); font: var(--t-base)/1.6 var(--font); }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.skip { position: absolute; left: var(--s4); top: -4rem; background: var(--surface); padding: var(--s2) var(--s3); border: 1px solid var(--line); }
+.skip:focus { top: var(--s2); }
+.top { display: flex; flex-wrap: wrap; gap: var(--s3) var(--s5); align-items: baseline; justify-content: space-between; padding: var(--s4); border-bottom: 1px solid var(--line); background: var(--surface); }
+.brand { font: 600 var(--t-lg)/1.2 var(--serif); color: var(--text); text-decoration: none; }
+.top nav { display: flex; flex-wrap: wrap; gap: var(--s4); }
+.top nav a { color: var(--muted); text-decoration: none; padding: var(--s1) 0; }
+.top nav a:hover { color: var(--text); text-decoration: underline; }
+main { max-width: 64rem; margin: 0 auto; padding: 0 var(--s4); }
+main > section { padding: var(--s6) 0; border-bottom: 1px solid var(--line); }
+main > section:last-of-type { border-bottom: 0; }
+h1, h2 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; margin: 0 0 var(--s4); }
+h2 { font-size: var(--t-xl); }
+h1 { font-size: var(--t-2xl); }
+p { max-width: 38rem; margin: 0 0 var(--s4); }
+code, pre { font-family: var(--mono); font-size: 0.92em; }
+code { background: var(--surface); border: 1px solid var(--line); padding: 0 0.3em; border-radius: 3px; }
+.cmd { display: block; background: var(--surface); border: 1px solid var(--line); padding: var(--s3) var(--s4); overflow-x: auto; white-space: pre; }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: var(--t-sm); }
+th, td { text-align: left; padding: var(--s2) var(--s3); border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; }
+.foot { max-width: 64rem; margin: 0 auto; padding: var(--s5) var(--s4); color: var(--muted); font-size: var(--t-sm); }
+@media (min-width: 48rem) {
+  main { padding-left: 3.25rem; padding-right: var(--s5); border-left: 2px solid var(--margin); }
+}
+
+/* Sections are filled by script after load; reserve space so the content below does not jump. */
+#tour { min-height: 20rem; }
+#catalog { min-height: 80rem; }
+#audit { min-height: 30rem; }
+#learn { min-height: 26rem; }
+#about { min-height: 12rem; }
+
+/* One pencil rule between catalog and audit; plain border in forced-colors. */
+#catalog { border-bottom: 0; }
+#audit::before { content: ""; display: block; height: 10px; margin-bottom: var(--s6); background: var(--muted); -webkit-mask: url(assets/divider-pencil.svg) center / 100% 100% no-repeat; mask: url(assets/divider-pencil.svg) center / 100% 100% no-repeat; }
+@media (forced-colors: active) { #audit::before { display: none; } #catalog { border-bottom: 1px solid CanvasText; } }

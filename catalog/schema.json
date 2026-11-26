@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Claude-Abo skill manifest",
+  "description": "Documentation of catalog/skills.json. The enforced rules live in src/manifest.mjs (validateManifest), which also checks cross-field rules a schema cannot express.",
+  "type": "object",
+  "required": ["schemaVersion", "upstreams", "skills"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "upstreams": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["repo", "license"],
+        "properties": {
+          "repo": { "type": "string", "pattern": "^[\\w.-]+/[\\w.-]+$" },
+          "license": { "type": "string", "description": "SPDX id, or NOASSERTION" },
+          "copyright": { "type": ["string", "null"] },
+          "licenseUrl": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "path", "summary", "category", "origin", "upstream", "license", "tested", "status", "knownIssues", "security"],
+        "properties": {
+          "name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "path": { "type": ["string", "null"], "description": "null for pointer entries" },
+          "summary": { "type": "string", "maxLength": 120, "pattern": "^[^|]*$" },
+          "category": { "enum": ["engineering", "design", "marketing", "research", "writing", "docs", "meta", "security"] },
+          "origin": { "enum": ["self-authored", "wrapper", "adapted", "adopted", "vendor"] },
+          "upstream": { "type": ["string", "null"], "pattern": "^[\\w.-]+/[\\w.-]+$" },
+          "source": { "type": "object", "properties": { "subpath": { "type": "string" }, "commit": { "type": "string" }, "note": { "type": "string" } } },
+          "license": {
+            "type": "object",
+            "required": ["spdx", "redistribution"],
+            "properties": {
+              "spdx": { "type": "string" },
+              "redistribution": { "enum": ["self", "allowed", "permission-granted", "not-bundled"] },
+              "checked": { "type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+              "evidence": { "type": ["string", "null"] }
+            }
+          },
+          "pointer": {
+            "type": "object",
+            "required": ["url", "install", "note"],
+            "properties": { "url": { "type": "string" }, "install": { "type": "string" }, "note": { "type": "string" } }
+          },
+          "tested": { "type": "object", "properties": { "date": { "type": ["string", "null"] }, "claudeCode": { "type": ["string", "null"] }, "how": { "type": ["string", "null"] } } },
+          "status": { "enum": ["stable", "experimental", "workflow-specific", "pointer", "deprecated"] },
+          "knownIssues": { "type": "array", "items": { "type": "string" } },
+          "security": { "type": "object", "properties": { "scanned": { "type": ["string", "null"] }, "scanner": { "type": ["string", "null"] }, "errors": { "type": ["integer", "null"] }, "reviewed": { "type": "boolean" } } }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+#!/bin/sh
+# Runs the full private checks (denylist, near-copy) that CI cannot run.
+exec node bin/claude-abo.mjs check --local

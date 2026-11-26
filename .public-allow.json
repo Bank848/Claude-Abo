@@ -1,0 +1,68 @@
+[
+  {
+    "file": "global-config/skills/ui-ux-pro-max/data/stacks/avalonia.csv",
+    "rule": "win-path",
+    "match": "C:\\Users\\data\\config.json",
+    "reason": "bad-example code snippet in vendored data"
+  },
+  {
+    "file": "global-config/skills/ui-ux-pro-max/data/stacks/javafx.csv",
+    "rule": "posix-home",
+    "match": "/Users/me",
+    "reason": "bad-example code snippet in vendored data"
+  },
+  {
+    "file": "global-config/skills/ui-ux-pro-max/data/stacks/wpf.csv",
+    "rule": "win-path",
+    "match": "C:\\Resources\\icon.png",
+    "reason": "bad-example code snippet in vendored data"
+  },
+  {
+    "file": "global-config/skills/memory-lint/SKILL.md",
+    "rule": "win-path",
+    "match": "C:\\work\\my_project",
+    "reason": "generic example path in skill text"
+  },
+  {
+    "file": "global-config/skills/design-system/scripts/generate-slide.py",
+    "rule": "email",
+    "match": "hello@claudekit.ai",
+    "reason": "vendor contact address in vendored script"
+  },
+  {
+    "file": "global-config/skills/hallmark/references/study.md",
+    "rule": "ipv4",
+    "match": "127.0.0.0",
+    "reason": "documents blocked private ranges (SSRF guidance)"
+  },
+  {
+    "file": "global-config/skills/hallmark/references/study.md",
+    "rule": "ipv4",
+    "match": "10.0.0.0",
+    "reason": "documents blocked private ranges (SSRF guidance)"
+  },
+  {
+    "file": "global-config/skills/hallmark/references/study.md",
+    "rule": "ipv4",
+    "match": "172.16.0.0",
+    "reason": "documents blocked private ranges (SSRF guidance)"
+  },
+  {
+    "file": "global-config/skills/hallmark/references/study.md",
+    "rule": "ipv4",
+    "match": "192.168.0.0",
+    "reason": "documents blocked private ranges (SSRF guidance)"
+  },
+  {
+    "file": "global-config/skills/hallmark/references/study.md",
+    "rule": "ipv4",
+    "match": "169.254.0.0",
+    "reason": "documents blocked private ranges (SSRF guidance)"
+  },
+  {
+    "file": "global-config/skills/hallmark/references/study.md",
+    "rule": "ipv4",
+    "match": "169.254.169.254",
+    "reason": "documents blocked private ranges (SSRF guidance)"
+  }
+]

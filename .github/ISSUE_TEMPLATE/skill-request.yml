@@ -1,0 +1,36 @@
+name: Skill request
+description: Suggest a community skill for the catalog
+title: "[skill] "
+labels: ["skill-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A maintainer runs intake on the skill (licence check and a static scan) before anything is added. Please do not copy a skill into a pull request.
+  - type: input
+    id: repo
+    attributes:
+      label: Upstream repository
+      description: owner/name on GitHub
+      placeholder: owner/name
+    validations:
+      required: true
+  - type: input
+    id: subpath
+    attributes:
+      label: Folder that holds the skill
+      description: Leave empty if the repo root is the skill.
+  - type: textarea
+    id: why
+    attributes:
+      label: Why is it useful
+      description: One or two lines. Say what job it does that the catalog does not cover yet.
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Checks
+      options:
+        - label: The upstream repo is public and I did not paste any private data here.
+          required: true

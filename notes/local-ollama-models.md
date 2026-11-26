@@ -1,10 +1,10 @@
-# Local Ollama models (D:\ollama)
+# Local Ollama models (<YOUR_DRIVE>:\ollama)
 
 Ollama server + model store live on the D: drive, not the default `%USERPROFILE%\.ollama`. Server is normally running as a background Windows process (`ollama app.exe` + `ollama.exe`).
 
-- **Model store:** `D:\ollama\models\` (blobs + manifests) — 42 GB used as of 2026-08-10
-- **Staging folder:** `D:\ollama\gguf-downloads\` — currently empty, presumably meant for manually-downloaded GGUF files before `ollama create`/import. Not wired to anything yet.
-- **Logs:** `D:\ollama\pull.log`, `serve-out.log`, `serve-err.log`
+- **Model store:** `<YOUR_DRIVE>:\ollama\models\` (blobs + manifests) — 42 GB used as of 2026-08-10
+- **Staging folder:** `<YOUR_DRIVE>:\ollama\gguf-downloads\` — currently empty, presumably meant for manually-downloaded GGUF files before `ollama create`/import. Not wired to anything yet.
+- **Logs:** `<YOUR_DRIVE>:\ollama\pull.log`, `serve-out.log`, `serve-err.log`
 - **Disk headroom:** D: drive at 89% full, 77 GB free (2026-08-10) — worth watching before pulling more multi-GB models.
 - **Invoke:** `ollama run <name>` (interactive) or pipe stdin: `Get-Content <file> | ollama run <name> "<instruction>"`. No tool access, no repo context — text in, text out only.
 

@@ -1,0 +1,23 @@
+{
+  "name": "claude-abo",
+  "version": "0.1.0",
+  "description": "Manifest-driven Claude Code skill catalog with a setup audit.",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "claude-abo": "bin/claude-abo.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test",
+    "check": "node bin/claude-abo.mjs check",
+    "gen": "node bin/claude-abo.mjs gen"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "catalog/"
+  ]
+}

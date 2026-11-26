@@ -262,14 +262,14 @@ When drafting Thai-language content (homework, essays, reports, articles, chat) 
 - **Formatting overkill for the context**: bolding whole paragraphs, decorative emoji as section markers, unnecessary horizontal rules, tables in a chat/homework context where plain prose is fine — reserve heavy formatting for content actually requested as a document/deck.
 - **Suspiciously flawless (zero human noise)**: real human writing (especially chat/personal narrative) has natural stumbles, mid-sentence changes of mind, idiosyncratic word choices — don't polish every sentence to identical smoothness; let some natural voice through appropriate to the register.
 - **Overused Thai "GPT-isms"**: words like "เจาะลึก" (delve), "พลิกโฉม"/"เปลี่ยนโฉม" (revolutionize, overused), "ยกระดับ" (elevate, overused), "ตอกย้ำ" (underscore), "ตกผลึก" (used outside genuine idea-crystallization contexts), "หลากหลายมิติ"/"รอบด้าน" (multifaceted filler), "โอบรับ" (embrace, calqued), "องค์รวม" overused — only use these when they're genuinely the right word, not because they sound impressive.
-- Why: these aren't just word-level tells (em dash, quote marks) — they're structural/rhetorical patterns, and readers used to AI text catch these as easily as, or more easily than, individual words. See `global-config/memory-examples/anti-ai-tell-thai-detail.md` for the full backing detail and before/after examples.
+- Why: these aren't just word-level tells (em dash, quote marks) — they're structural/rhetorical patterns, and readers used to AI text catch these as easily as, or more easily than, individual words. See `global-config/reference/anti-ai-tell-thai-detail.md` for the full backing detail and before/after examples.
 
 # Don't wrap emphasized words/phrases in quote marks ("") in Thai writing
 When drafting Thai content, don't put quote marks around a word or phrase just to emphasize it — rewrite the sentence so the word carries weight from context instead, or use **bold** if emphasis is genuinely needed.
 - Why: quoting a word for emphasis (e.g. "คน-ประสบการณ์-ความทรงจำ") is a pattern readers immediately recognize as AI-assisted writing, especially in homework/writing that might get checked for AI content.
 
 # English writing anti-AI-tell rules
-When drafting English content (chat, email, DM, essay, report, post) avoid these patterns — full detail + vocab tables + before/after examples in `global-config/memory-examples/anti-ai-tell-english-detail.md`:
+When drafting English content (chat, email, DM, essay, report, post) avoid these patterns — full detail + vocab tables + before/after examples in `global-config/reference/anti-ai-tell-english-detail.md`:
 - **Em dash**: don't use an em dash to join two clauses, especially the "X — because Y" pattern — use a comma, a new sentence, or "and"/"so" instead.
 - **GPT-ism vocabulary**: avoid "delve", "tapestry", "boasts", "underscore(s)", "landscape" (metaphorical), "realm", "crucial/pivotal/vital" as a default intensifier, "intricate", "multifaceted", "leverage" (verb), "seamless(ly)", "robust", "foster", "navigate (challenges)", "embark", "elevate", "unlock", "game-changer", "in today's fast-paced world" — when unsure, use the plain verb ("use" not "utilize", "help" not "facilitate").
 - **"not just X, but Y"**: use at most once per piece, and never "It's not about X. It's about Y."

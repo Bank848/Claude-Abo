@@ -6,3 +6,11 @@ __pycache__/
 # /adopt writes this into the clone as it runs; it records the adopter's
 # real home path/username/vault path, so it must never be committed.
 .claude-adopt-journal.md
+
+# Claude-Abo tooling
+.public-denylist.txt
+.abo-local.json
+.claude-learn-journal.md
+docs/superpowers/
+_site/
+node_modules/

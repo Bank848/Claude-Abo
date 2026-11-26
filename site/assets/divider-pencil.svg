@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 10" aria-hidden="true" focusable="false">
+  <style>
+    @media (prefers-color-scheme: dark) {
+      :root { --divider-ink: #e6ebf5; }
+    }
+  </style>
+  <path d="M2 5.7C42 4.4 87 5.4 127 4.9S206 5 247 4.7Q288 4.3 318 5.3"
+        fill="none" stroke="var(--ink, var(--text, var(--divider-ink, #14213d)))"
+        stroke-width="1.35" stroke-opacity=".52" stroke-linecap="round"/>
+  <path d="M6 7Q26 6.2 44 6.6" fill="none"
+        stroke="var(--ink, var(--text, var(--divider-ink, #14213d)))"
+        stroke-width=".65" stroke-opacity=".23" stroke-linecap="round"/>
+</svg>

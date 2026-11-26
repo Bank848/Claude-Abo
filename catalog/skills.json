@@ -1,0 +1,2520 @@
+{
+  "schemaVersion": 1,
+  "upstreams": [
+    {
+      "repo": "ayghri/i-have-adhd",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2026 Ayoub Ghriss",
+      "licenseUrl": null
+    },
+    {
+      "repo": "briiirussell/cybersecurity-skills",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2026 Bri Russell",
+      "licenseUrl": null
+    },
+    {
+      "repo": "cathrynlavery/diagram-design",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2025 Cathryn Lavery",
+      "licenseUrl": null
+    },
+    {
+      "repo": "coreyhaines31/makerskills",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2026 Corey Haines",
+      "licenseUrl": null
+    },
+    {
+      "repo": "coreyhaines31/marketingskills",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2025 Corey Haines",
+      "licenseUrl": null
+    },
+    {
+      "repo": "DietrichGebert/ponytail",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2026 DietrichGebert",
+      "licenseUrl": null
+    },
+    {
+      "repo": "garrytan/gstack",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2026 Garry Tan",
+      "licenseUrl": null
+    },
+    {
+      "repo": "ibelick/ui-skills",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2026 Julien Thibeaut",
+      "licenseUrl": null
+    },
+    {
+      "repo": "idan-rubin/browserclaw",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2025 Peter Steinberger (OpenClaw); Copyright (c) 2026 Idan Rubin",
+      "licenseUrl": null
+    },
+    {
+      "repo": "mattpocock/skills",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2026 Matt Pocock",
+      "licenseUrl": null
+    },
+    {
+      "repo": "mrgoonie/claudekit-skills",
+      "license": "NOASSERTION",
+      "copyright": null,
+      "licenseUrl": null
+    },
+    {
+      "repo": "nateherkai/scroll-craft",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2026 Nate Herk",
+      "licenseUrl": null
+    },
+    {
+      "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2024 Next Level Builder",
+      "licenseUrl": null
+    },
+    {
+      "repo": "nexu-io/motion-anything",
+      "license": "Apache-2.0",
+      "copyright": "Apache License 2.0; the upstream LICENSE file carries no copyright line",
+      "licenseUrl": null
+    },
+    {
+      "repo": "nidhinjs/prompt-master",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2026 Nidhin Joseph Nelson",
+      "licenseUrl": null
+    },
+    {
+      "repo": "Nutlope/hallmark",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2026 Hallmark contributors",
+      "licenseUrl": null
+    },
+    {
+      "repo": "Panniantong/Agent-Reach",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2025 Agent Eyes",
+      "licenseUrl": null
+    },
+    {
+      "repo": "thananon/9arm-skills",
+      "license": "NOASSERTION",
+      "copyright": null,
+      "licenseUrl": null
+    },
+    {
+      "repo": "tt-a1i/archify",
+      "license": "Apache-2.0",
+      "copyright": "Apache License 2.0; the upstream LICENSE file carries no copyright line",
+      "licenseUrl": null
+    },
+    {
+      "repo": "utarn/engineer-skills",
+      "license": "MIT",
+      "copyright": "Copyright (c) 2026 Utharn Buranasaksee",
+      "licenseUrl": null
+    }
+  ],
+  "skills": [
+    {
+      "name": "agent-reach",
+      "path": "global-config/skills/agent-reach",
+      "summary": "Web research across sources an agent can reach.",
+      "category": "research",
+      "origin": "adopted",
+      "upstream": "Panniantong/Agent-Reach",
+      "source": {
+        "note": "Panniantong/Agent-Reach (MIT). Router for internet research across many platforms via a multi-backend CLI. Run check.ps1 -Ack once to set your own baseline. Added in the October 2026 patch."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/Panniantong/Agent-Reach/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "SKILL.md partly in Thai"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "archify",
+      "path": null,
+      "summary": "Interactive architecture diagrams derived from code, exported as a single HTML file.",
+      "category": "engineering",
+      "origin": "adopted",
+      "upstream": "tt-a1i/archify",
+      "source": {
+        "subpath": "archify",
+        "commit": "3ca198d867ce4b616332f846ff66e5c8e5e60f95",
+        "note": "Recorded by intake at 3ca198d867ce."
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "redistribution": "not-bundled",
+        "checked": "2026-11-24",
+        "evidence": "https://github.com/tt-a1i/archify/blob/3ca198d867ce4b616332f846ff66e5c8e5e60f95/archify/LICENSE"
+      },
+      "pointer": {
+        "url": "https://github.com/tt-a1i/archify/tree/3ca198d867ce4b616332f846ff66e5c8e5e60f95/archify",
+        "install": "see the upstream README for install steps",
+        "note": "Large folder (about 310 files) with a vendored parser bundle, so it is linked and not bundled."
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "pointer",
+      "knownIssues": [
+        "intake scan: 10 errors, 9 hidden-unicode hits inside the vendored deps.cjs and one binary file; read them before installing"
+      ],
+      "security": {
+        "scanned": null,
+        "scanner": null,
+        "errors": null,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "banner-design",
+      "path": "global-config/skills/banner-design",
+      "summary": "Designs social/ad/web/print banners across many art-direction styles.",
+      "category": "design",
+      "origin": "adopted",
+      "upstream": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "source": {
+        "subpath": ".claude/skills/banner-design",
+        "commit": "abb7f2fd5a083fa1ff55c326a963ff0d95c33f99",
+        "note": "ckm:banner-design (author: claudekit, MIT) — redistributed inside the nextlevelbuilder ui-ux-pro-max bundle. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/nextlevelbuilder/ui-ux-pro-max-skill/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "brand",
+      "path": "global-config/skills/brand",
+      "summary": "Brand voice, visual identity, messaging frameworks, and consistency checks.",
+      "category": "marketing",
+      "origin": "adopted",
+      "upstream": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "source": {
+        "subpath": ".claude/skills/brand",
+        "commit": "abb7f2fd5a083fa1ff55c326a963ff0d95c33f99",
+        "note": "ckm:brand (author: claudekit) — redistributed inside the nextlevelbuilder ui-ux-pro-max bundle. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/nextlevelbuilder/ui-ux-pro-max-skill/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "browserclaw",
+      "path": "global-config/skills/browserclaw",
+      "summary": "Drives a signed-in agent browser (BrowserOS integration instructions).",
+      "category": "research",
+      "origin": "adopted",
+      "upstream": "idan-rubin/browserclaw",
+      "source": {
+        "note": "Vendor-managed instructions for the BrowserOS browser integration; folder is browserclaw. No upstream URL recorded; checker reports it as unknown."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/idan-rubin/browserclaw/contents/LICENSE"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "needs BrowserOS",
+        "source commit not recorded"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "close-out-log",
+      "path": "global-config/skills/close-out-log",
+      "summary": "End-of-task ritual: append a dated entry to docs/log/ so the next session inherits the reasons.",
+      "category": "docs",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "Windows-specific commands"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "codeburn-cost-check",
+      "path": "global-config/skills/codeburn-cost-check",
+      "summary": "Breaks down AI spend per project and model from local usage data.",
+      "category": "meta",
+      "origin": "wrapper",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "community-marketing",
+      "path": "global-config/skills/community-marketing",
+      "summary": "Community-led growth strategy (Discord/Slack/forum, ambassador programs, advocacy).",
+      "category": "marketing",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/marketingskills",
+      "source": {
+        "subpath": "skills/community-marketing",
+        "commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+        "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — Discord/subreddit community building, flagged as the primary growth channel for small independent software products. MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/marketingskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "content-strategy",
+      "path": "global-config/skills/content-strategy",
+      "summary": "Decides what content to create — topic clusters, editorial calendars, content pillars.",
+      "category": "marketing",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/marketingskills",
+      "source": {
+        "subpath": "skills/content-strategy",
+        "commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+        "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — planning release notes/what to post pre-launch. MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/marketingskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "copy-editing",
+      "path": "global-config/skills/copy-editing",
+      "summary": "Edits/tightens/refreshes existing marketing copy.",
+      "category": "marketing",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/marketingskills",
+      "source": {
+        "subpath": "skills/copy-editing",
+        "commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+        "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — polishing existing copy/release notes. MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/marketingskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "copywriting",
+      "path": "global-config/skills/copywriting",
+      "summary": "Writes new marketing copy for landing/pricing/feature/about pages.",
+      "category": "marketing",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/marketingskills",
+      "source": {
+        "subpath": "skills/copywriting",
+        "commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+        "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — store/landing page copy for product launches. MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/marketingskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "council-deliberate",
+      "path": "global-config/skills/council-deliberate",
+      "summary": "Adds an anonymized cross-exam round and a hand-computed weighted tally to a four-voice decision council.",
+      "category": "meta",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "expects the ecc plugin council skill",
+        "spawns several subagents, so it costs real tokens"
+      ],
+      "security": {
+        "scanned": "2026-11-24",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "debug-mantra",
+      "path": null,
+      "summary": "Four-step debugging discipline (reproduce → trace → falsify → cross-reference) recited before proposing any fix.",
+      "category": "engineering",
+      "origin": "adopted",
+      "upstream": "thananon/9arm-skills",
+      "source": {
+        "subpath": "skills/engineering/debug-mantra",
+        "commit": "a1fc303b274ed06c32d405ba5a6db00ded6e5663",
+        "note": "9arm-skills (thananon). Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistribution": "not-bundled",
+        "checked": "2026-11-24",
+        "evidence": "gh api repos/thananon/9arm-skills/license returned no licence"
+      },
+      "pointer": {
+        "url": "https://github.com/thananon/9arm-skills/tree/a1fc303b274ed06c32d405ba5a6db00ded6e5663/skills/engineering/debug-mantra",
+        "install": "npx skills add thananon/9arm-skills",
+        "note": "Four-step debugging discipline. Not bundled: upstream has no licence file."
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "pointer",
+      "knownIssues": [],
+      "security": {
+        "scanned": null,
+        "scanner": null,
+        "errors": null,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "decide",
+      "path": "global-config/skills/decide",
+      "summary": "Structured decision workflow (37signals-style question set) that also archives the rationale.",
+      "category": "meta",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/makerskills",
+      "source": {
+        "subpath": "skills/decide",
+        "commit": "17218de201e94f7aebe8b0ddfb507175caf37343",
+        "note": "makerskills (Corey Haines). Selected (of 19) 2026-08-09 — 37signals decision framework, archives rationale + revisit date. MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/makerskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "deep-research",
+      "path": "global-config/skills/deep-research",
+      "summary": "Multi-source, multi-pass research brief with citations, contradictions, and gaps.",
+      "category": "research",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/makerskills",
+      "source": {
+        "subpath": "skills/deep-research",
+        "commit": "17218de201e94f7aebe8b0ddfb507175caf37343",
+        "note": "makerskills (Corey Haines). Selected (of 19) 2026-08-09 — multi-source research with citations + archive. MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/makerskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "dembrandt",
+      "path": "global-config/skills/dembrandt",
+      "summary": "Extracts a live website's actual design tokens (colors, type, spacing) via DOM/CSS inspection.",
+      "category": "design",
+      "origin": "wrapper",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "needs a Mobbin account"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "dependency-audit",
+      "path": "global-config/skills/dependency-audit",
+      "summary": "Checks project dependencies for known CVEs and supply-chain risks.",
+      "category": "security",
+      "origin": "adopted",
+      "upstream": "briiirussell/cybersecurity-skills",
+      "source": {
+        "subpath": "skills/dependency-audit",
+        "commit": "c9ade0349f8ecd5c9c68a82a05d2b6012c5fa1d7",
+        "note": "cybersecurity-skills (briiirussell). Subset selected via fable-medium review 2026-08-09: CVE/known-vuln checks for adopted packages/tools — matches the user's frequent tool-curation habit. MIT license. Confirmed in repo tree. NOTE: threat-modeling from this same repo was flagged 'optional/borderline' by the reviewer (application threat modeling) but NOT adopted — add manually if ever wanted."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/briiirussell/cybersecurity-skills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "design",
+      "path": "global-config/skills/design",
+      "summary": "Broad design skill — logos, CIP mockups, slides, banners, icons, social photos.",
+      "category": "design",
+      "origin": "adopted",
+      "upstream": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "source": {
+        "subpath": ".claude/skills/design",
+        "commit": "abb7f2fd5a083fa1ff55c326a963ff0d95c33f99",
+        "note": "ckm:design (author: claudekit, MIT) — redistributed inside the nextlevelbuilder ui-ux-pro-max bundle. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/nextlevelbuilder/ui-ux-pro-max-skill/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "design-system",
+      "path": "global-config/skills/design-system",
+      "summary": "Three-layer design-token architecture (primitive → semantic → component) plus slide generation.",
+      "category": "design",
+      "origin": "adopted",
+      "upstream": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "source": {
+        "subpath": ".claude/skills/design-system",
+        "commit": "abb7f2fd5a083fa1ff55c326a963ff0d95c33f99",
+        "note": "ckm:design-system (author: claudekit, MIT) — redistributed inside the nextlevelbuilder ui-ux-pro-max bundle. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/nextlevelbuilder/ui-ux-pro-max-skill/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "deslop-defaults",
+      "path": "global-config/skills/deslop-defaults",
+      "summary": "Structural defaults that stop AI-generated UI from looking averaged-out (z-index, accent restraint, states).",
+      "category": "design",
+      "origin": "adapted",
+      "upstream": "ibelick/ui-skills",
+      "source": {
+        "note": "ADAPTED, not adopted and not self-authored: harvested from ibelick/ui-skills (baseline-ui) and rewritten stack-agnostic, so upstream commits do not apply 1:1. No commit baseline was recorded at harvest time (last_seen_commit intentionally empty) -- the first weekly check will flag it; review, then run check.ps1 -Ack to set the baseline. subpath_in_repo left empty pending verification of baseline-ui's exact path upstream."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/ibelick/ui-skills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "diagram-design",
+      "path": null,
+      "summary": "Polished static diagrams and restyling of Mermaid or draw.io output.",
+      "category": "design",
+      "origin": "adopted",
+      "upstream": "cathrynlavery/diagram-design",
+      "source": {
+        "subpath": "skills/diagram-design",
+        "commit": "0eeda75a708f419560d5e032693618bb9954f17b",
+        "note": "Recorded by intake at 0eeda75a708f."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "not-bundled",
+        "checked": "2026-11-24",
+        "evidence": "https://github.com/cathrynlavery/diagram-design/blob/0eeda75a708f419560d5e032693618bb9954f17b/LICENSE"
+      },
+      "pointer": {
+        "url": "https://github.com/cathrynlavery/diagram-design/tree/0eeda75a708f419560d5e032693618bb9954f17b/skills/diagram-design",
+        "install": "see the upstream README for install steps",
+        "note": "Large folder (about 280 files), so it is linked and not bundled."
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "pointer",
+      "knownIssues": [
+        "example assets load fonts from fonts.googleapis.com"
+      ],
+      "security": {
+        "scanned": null,
+        "scanner": null,
+        "errors": null,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "docx-human-sounding-report",
+      "path": "global-config/skills/docx-human-sounding-report",
+      "summary": "Fixes for a .docx report that should not read as machine-made.",
+      "category": "docs",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "workflow-specific",
+      "knownIssues": [
+        "SKILL.md partly in Thai"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "docx-python-docx-justify",
+      "path": "global-config/skills/docx-python-docx-justify",
+      "summary": "python-docx: never justify formulas or code blocks that break their own lines.",
+      "category": "docs",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "workflow-specific",
+      "knownIssues": [
+        "SKILL.md partly in Thai"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "docx-th-sarabun-sizing",
+      "path": "global-config/skills/docx-th-sarabun-sizing",
+      "summary": "Thai Sarabun sizing scale for Word, fixing the base style instead of per-run sizes.",
+      "category": "docs",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "workflow-specific",
+      "knownIssues": [
+        "SKILL.md partly in Thai"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "domain-modeling",
+      "path": "global-config/skills/domain-modeling",
+      "summary": "Pins down domain terms and records ADRs while a plan is being stress-tested.",
+      "category": "engineering",
+      "origin": "adopted",
+      "upstream": "mattpocock/skills",
+      "source": {
+        "subpath": "skills/engineering/domain-modeling",
+        "note": "mattpocock/skills (MIT). Run check.ps1 -Ack to set your baseline."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/mattpocock/skills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "english-writing-anti-ai-tell",
+      "path": "global-config/skills/english-writing-anti-ai-tell",
+      "summary": "Checklist that keeps English drafts from reading as AI-written.",
+      "category": "writing",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "git-guardrails-claude-code",
+      "path": "global-config/skills/git-guardrails-claude-code",
+      "summary": "Blocks dangerous git commands (push, force, clean, branch deletion) with a hook.",
+      "category": "security",
+      "origin": "adopted",
+      "upstream": "utarn/engineer-skills",
+      "source": {
+        "subpath": "skills/misc/git-guardrails-claude-code",
+        "note": "utarn/engineer-skills (MIT). Original hook was jq/bash; a Python version is used in the author setup. Run check.ps1 -Ack once to set your own baseline. Added in the October 2026 patch. The same skill also exists in mattpocock/skills (MIT) under skills/misc/git-guardrails-claude-code."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/utarn/engineer-skills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "installs a Claude Code hook when its steps are followed (scanner warns hook-install by design)"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "github-pr-review-draft",
+      "path": "global-config/skills/github-pr-review-draft",
+      "summary": "Pending-review PR workflow: findings wait in the GitHub UI, nothing posts silently.",
+      "category": "engineering",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "git-retro",
+      "path": "global-config/skills/git-retro",
+      "summary": "Turns recent git history into a short retrospective of what changed and what keeps breaking.",
+      "category": "engineering",
+      "origin": "adapted",
+      "upstream": "garrytan/gstack",
+      "source": {
+        "note": "Standalone port of the idea in garrytan/gstack (MIT), rewritten without its preamble, telemetry or hooks. Ported at gstack commit 9a1dc81."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://github.com/garrytan/gstack/blob/main/LICENSE"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-24",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "graphify",
+      "path": "global-config/skills/graphify",
+      "summary": "Turns any input (code/docs/papers/images) into a clustered knowledge graph with an audit report.",
+      "category": "research",
+      "origin": "wrapper",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "Windows-specific commands"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "grilling",
+      "path": "global-config/skills/grilling",
+      "summary": "Interviews the user relentlessly to stress-test a plan before building it.",
+      "category": "research",
+      "origin": "adopted",
+      "upstream": "mattpocock/skills",
+      "source": {
+        "subpath": "skills/productivity/grilling",
+        "commit": "84fdeffd12f2ee307994d1eb6feb48173b6e0502",
+        "note": "mattpocock/skills. Confirmed same file structure as installed (SKILL.md + agents/openai.yaml) via diff 2026-08-08; content has drifted since original install (untracked until now). Added AFTER the single check.ps1 -Ack call in this session so baseline is not overwritten. NOTE (added after fable-5 review 2026-08-08): the recorded last_seen_commit is upstream HEAD at add-time, NOT a claim that installed content matches that commit -- installed content is drifted/stale as of this baseline. Future ok-baseline reports will not surface that pre-existing drift; sync manually if you want the installed skill current."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/mattpocock/skills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "grill-with-docs",
+      "path": "global-config/skills/grill-with-docs",
+      "summary": "Stress-tests a plan against the repo docs and records decisions as ADRs.",
+      "category": "engineering",
+      "origin": "adopted",
+      "upstream": "mattpocock/skills",
+      "source": {
+        "subpath": "skills/engineering/grill-with-docs",
+        "note": "mattpocock/skills (MIT). Run check.ps1 -Ack to set your baseline."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/mattpocock/skills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "hallmark",
+      "path": "global-config/skills/hallmark",
+      "summary": "Anti-AI-slop design skill for greenfield pages, redesigns, and design extraction from URLs/screenshots.",
+      "category": "design",
+      "origin": "adopted",
+      "upstream": "Nutlope/hallmark",
+      "source": {
+        "subpath": "skills/hallmark",
+        "commit": "13ac0ec7e148655948100b6396439e481361d690",
+        "note": "Together AI. Anti-AI-slop design skill (57 numbered slop-test gates, audit/redesign/study/build verbs, macrostructure diversity engine, mobile-responsiveness hard floor). Added 2026-08-09 from trendshift.io candidate evaluation (see CANDIDATE-EVALUATION.md). Installed via git clone --depth 1 + copy of skills/hallmark/ (107 files: SKILL.md + references/). Adopted as the default for full-page/greenfield UI generation + audit; deslop-defaults kept as the lighter structural-restraint companion for smaller edits -- not fully redundant, different scope (cross-reference added in both SKILL.md files)."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/Nutlope/hallmark/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "i-have-adhd",
+      "path": "global-config/skills/i-have-adhd",
+      "summary": "Output style for readers who want the next action first; ships an optional always-on hook.",
+      "category": "writing",
+      "origin": "adopted",
+      "upstream": "ayghri/i-have-adhd",
+      "source": {
+        "note": "Frontmatter declares MIT and Hermes metadata; upstream source not recorded. Checker reports it as unknown."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/ayghri/i-have-adhd/contents/LICENSE"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "source commit not recorded"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "image",
+      "path": "global-config/skills/image",
+      "summary": "Generates/edits/optimizes marketing images (heroes, social graphics, mockups, OG images).",
+      "category": "design",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/marketingskills",
+      "source": {
+        "subpath": "skills/image",
+        "commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+        "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — marketing graphics/banners/listing visuals, pairs with the existing banner-design skill. MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/marketingskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "instruction-lint",
+      "path": "global-config/skills/instruction-lint",
+      "summary": "Audits auto-loaded instruction files for byte bloat and says which rules can stop being resident.",
+      "category": "meta",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "partly written in Thai",
+        "example Python reads ~/.claude/CLAUDE.md"
+      ],
+      "security": {
+        "scanned": "2026-11-24",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "launch",
+      "path": "global-config/skills/launch",
+      "summary": "Plans a product launch, feature announcement, or go-to-market checklist.",
+      "category": "marketing",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/marketingskills",
+      "source": {
+        "subpath": "skills/launch",
+        "commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+        "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — product release planning, waitlist, early access. MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/marketingskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "management-talk",
+      "path": null,
+      "summary": "Rewrites engineer-to-engineer writing for leadership, shaped to the target channel (Slack/email/standup).",
+      "category": "marketing",
+      "origin": "adopted",
+      "upstream": "thananon/9arm-skills",
+      "source": {
+        "subpath": "skills/productivity/management-talk",
+        "commit": "a1fc303b274ed06c32d405ba5a6db00ded6e5663",
+        "note": "9arm-skills (thananon). Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistribution": "not-bundled",
+        "checked": "2026-11-24",
+        "evidence": "gh api repos/thananon/9arm-skills/license returned no licence"
+      },
+      "pointer": {
+        "url": "https://github.com/thananon/9arm-skills/tree/a1fc303b274ed06c32d405ba5a6db00ded6e5663/skills/productivity/management-talk",
+        "install": "npx skills add thananon/9arm-skills",
+        "note": "Rewrites engineer writing for leadership. Not bundled: upstream has no licence file."
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "pointer",
+      "knownIssues": [],
+      "security": {
+        "scanned": null,
+        "scanner": null,
+        "errors": null,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "marketing-council",
+      "path": "global-config/skills/marketing-council",
+      "summary": "Simulated advisory board of named marketers debating a positioning question.",
+      "category": "marketing",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/marketingskills",
+      "source": {
+        "subpath": "skills/marketing-council",
+        "commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+        "note": "marketingskills (Corey Haines). Borderline pick (reviewer flagged as 11th/12th, adopted anyway — MIT, zero install risk) 2026-08-09 — multi-perspective marketer-advisor framework, needs no infra. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/marketingskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "marketing-ideas",
+      "path": "global-config/skills/marketing-ideas",
+      "summary": "Growth/marketing idea generator for SaaS and software products.",
+      "category": "marketing",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/marketingskills",
+      "source": {
+        "subpath": "skills/marketing-ideas",
+        "commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+        "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — brainstorming aid, no infra required. MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/marketingskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "marketing-psychology",
+      "path": "global-config/skills/marketing-psychology",
+      "summary": "Applies behavioral-science principles (anchoring, social proof, framing) to marketing decisions.",
+      "category": "marketing",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/marketingskills",
+      "source": {
+        "subpath": "skills/marketing-psychology",
+        "commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+        "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — persuasion/behavioral-science framework, works as a planning aid pre-product. MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/marketingskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "markitdown",
+      "path": "global-config/skills/markitdown",
+      "summary": "Converts PDFs/slides/sheets/audio/HTML/etc. into clean Markdown for LLM/RAG use.",
+      "category": "research",
+      "origin": "wrapper",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "Windows-specific commands"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "memory-lint",
+      "path": "global-config/skills/memory-lint",
+      "summary": "Read-only health check of a project's memory files.",
+      "category": "meta",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "Windows-specific commands"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "mobbin-references",
+      "path": "global-config/skills/mobbin-references",
+      "summary": "Pulls real-app reference screenshots (onboarding, paywalls, empty states...) before a UI is designed.",
+      "category": "design",
+      "origin": "wrapper",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "needs a Mobbin account"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "plan-pro",
+      "path": "global-config/skills/plan-pro",
+      "summary": "Implementation-plan writer with a spawned multi-agent review loop and an HTML before/after output.",
+      "category": "engineering",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "expects the superpowers plugin"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "poka-yoke",
+      "path": "global-config/skills/poka-yoke",
+      "summary": "Mistake-proofing review — makes a bad state impossible/obvious at the source instead of catching it after the fact.",
+      "category": "engineering",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "ponytail",
+      "path": "global-config/skills/ponytail",
+      "summary": "Writes the least code that is still correct: climbs a ladder before adding anything.",
+      "category": "engineering",
+      "origin": "adapted",
+      "upstream": "DietrichGebert/ponytail",
+      "source": {
+        "note": "Adapted from DietrichGebert/ponytail (MIT)"
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/DietrichGebert/ponytail/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "post-mortem",
+      "path": null,
+      "summary": "Writes the canonical root-cause writeup after a bug is fixed and validated.",
+      "category": "engineering",
+      "origin": "adopted",
+      "upstream": "thananon/9arm-skills",
+      "source": {
+        "subpath": "skills/engineering/post-mortem",
+        "commit": "a1fc303b274ed06c32d405ba5a6db00ded6e5663",
+        "note": "9arm-skills (thananon). Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistribution": "not-bundled",
+        "checked": "2026-11-24",
+        "evidence": "gh api repos/thananon/9arm-skills/license returned no licence"
+      },
+      "pointer": {
+        "url": "https://github.com/thananon/9arm-skills/tree/a1fc303b274ed06c32d405ba5a6db00ded6e5663/skills/engineering/post-mortem",
+        "install": "npx skills add thananon/9arm-skills",
+        "note": "Root-cause write-up after a fix. Not bundled: upstream has no licence file."
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "pointer",
+      "knownIssues": [],
+      "security": {
+        "scanned": null,
+        "scanner": null,
+        "errors": null,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "pricing",
+      "path": "global-config/skills/pricing",
+      "summary": "Pricing/packaging strategy and pricing-page audits.",
+      "category": "marketing",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/marketingskills",
+      "source": {
+        "subpath": "skills/pricing",
+        "commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+        "note": "marketingskills (Corey Haines). Borderline pick (reviewer flagged as 11th/12th, adopted anyway — MIT, zero install risk) 2026-08-09 — subscription-tier / product-pricing willingness-to-pay frameworks. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/marketingskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "product-marketing",
+      "path": "global-config/skills/product-marketing",
+      "summary": "Builds the reusable product/audience/positioning context doc other marketing skills reference.",
+      "category": "marketing",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/marketingskills",
+      "source": {
+        "subpath": "skills/product-marketing",
+        "commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+        "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 (adopt 12 of 46): hub doc other marketing skills in this pack read for context — required foundation for the rest. MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/marketingskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "project-bootstrap",
+      "path": "global-config/skills/project-bootstrap",
+      "summary": "One-shot repo scaffold: thin CLAUDE.md router, docs/log/, docs/adr/, conventions.",
+      "category": "engineering",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "prompt-injection",
+      "path": "global-config/skills/prompt-injection",
+      "summary": "Audits apps/agents for prompt-injection and LLM permission-boundary vulnerabilities.",
+      "category": "security",
+      "origin": "adopted",
+      "upstream": "briiirussell/cybersecurity-skills",
+      "source": {
+        "subpath": "skills/prompt-injection",
+        "commit": "c9ade0349f8ecd5c9c68a82a05d2b6012c5fa1d7",
+        "note": "cybersecurity-skills (briiirussell). Subset selected via fable-medium review 2026-08-09 (adopt 3 of 29, 1 optional): audits agent/LLM/MCP permission boundaries and indirect injection — relevant since the user builds Claude Code workflows and a custom MCP server. MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/briiirussell/cybersecurity-skills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "prompt-master",
+      "path": "global-config/skills/prompt-master",
+      "summary": "Writes and tunes prompts for other AI tools.",
+      "category": "meta",
+      "origin": "adopted",
+      "upstream": "nidhinjs/prompt-master",
+      "source": {
+        "note": "nidhinjs/prompt-master (MIT). Whole-repo skill clone (root SKILL.md plus references/). Run check.ps1 -Ack once to set your own baseline. Added in the October 2026 patch."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/nidhinjs/prompt-master/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "pruning-branches",
+      "path": "global-config/skills/pruning-branches",
+      "summary": "Periodic branch and worktree cleanup with a survey first and a log entry after.",
+      "category": "engineering",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "repo-security-posture",
+      "path": "global-config/skills/repo-security-posture",
+      "summary": "Phased security review of an unfamiliar repo before you run or install anything from it.",
+      "category": "security",
+      "origin": "adapted",
+      "upstream": "garrytan/gstack",
+      "source": {
+        "note": "Standalone port of the idea in garrytan/gstack (MIT), rewritten without its preamble, telemetry or hooks. Ported at gstack commit 9a1dc81."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://github.com/garrytan/gstack/blob/main/LICENSE"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "skill-scan reports 6 findings in references/audit-phases.md: they are the grep patterns the skill tells you to search for, not code that runs"
+      ],
+      "security": {
+        "scanned": "2026-11-24",
+        "scanner": "skill-scan v1",
+        "errors": 6,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "review-specialists",
+      "path": "global-config/skills/review-specialists",
+      "summary": "Splits a code review into specialist passes (security, performance, testing, API contract, migration and more).",
+      "category": "engineering",
+      "origin": "adapted",
+      "upstream": "garrytan/gstack",
+      "source": {
+        "note": "Standalone port of the idea in garrytan/gstack (MIT), rewritten without its preamble, telemetry or hooks. Ported at gstack commit 9a1dc81."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://github.com/garrytan/gstack/blob/main/LICENSE"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-24",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "scroll-craft",
+      "path": null,
+      "summary": "Builds scroll-driven landing pages with a scrub engine and a feel checklist.",
+      "category": "design",
+      "origin": "adopted",
+      "upstream": "nateherkai/scroll-craft",
+      "source": {
+        "subpath": "plugins/nateherk-design/skills/scroll-craft",
+        "commit": "75d81f74e83692add18cd7a8a8e078b8a887a579",
+        "note": "Recorded by intake at 75d81f74e836."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "not-bundled",
+        "checked": "2026-11-24",
+        "evidence": "https://github.com/nateherkai/scroll-craft/blob/75d81f74e83692add18cd7a8a8e078b8a887a579/LICENSE"
+      },
+      "pointer": {
+        "url": "https://github.com/nateherkai/scroll-craft/tree/75d81f74e83692add18cd7a8a8e078b8a887a579/plugins/nateherk-design/skills/scroll-craft",
+        "install": "see the upstream README for install steps",
+        "note": "Linked, not bundled, because it ships an engine and scripts."
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "pointer",
+      "knownIssues": [
+        "intake scan: scripts/kie.mjs reads credentials in a file that also makes network calls (image generation API); review before use"
+      ],
+      "security": {
+        "scanned": null,
+        "scanner": null,
+        "errors": null,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "scrutinize",
+      "path": null,
+      "summary": "Outsider-perspective review of a plan/PR/diff — checks intent first, then traces the real code path.",
+      "category": "engineering",
+      "origin": "adopted",
+      "upstream": "thananon/9arm-skills",
+      "source": {
+        "subpath": "skills/engineering/scrutinize",
+        "commit": "a1fc303b274ed06c32d405ba5a6db00ded6e5663",
+        "note": "9arm-skills (thananon). Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "NOASSERTION",
+        "redistribution": "not-bundled",
+        "checked": "2026-11-24",
+        "evidence": "gh api repos/thananon/9arm-skills/license returned no licence"
+      },
+      "pointer": {
+        "url": "https://github.com/thananon/9arm-skills/tree/a1fc303b274ed06c32d405ba5a6db00ded6e5663/skills/engineering/scrutinize",
+        "install": "npx skills add thananon/9arm-skills",
+        "note": "Outsider-perspective review of a plan or diff. Not bundled: upstream has no licence file."
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "pointer",
+      "knownIssues": [],
+      "security": {
+        "scanned": null,
+        "scanner": null,
+        "errors": null,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "second-brain",
+      "path": "global-config/skills/second-brain",
+      "summary": "Capture/compile/query/lint/connect workflow for a personal Obsidian-style knowledge vault.",
+      "category": "research",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/makerskills",
+      "source": {
+        "subpath": "skills/second-brain",
+        "commit": "17218de201e94f7aebe8b0ddfb507175caf37343",
+        "note": "makerskills (Corey Haines). Selected (of 19) 2026-08-09 for fit with the <YOUR_VAULT_PATH> Obsidian vault workflow — wraps the Karpathy LLM Wiki schema (capture/compile/query/lint/connect/search over a markdown vault). MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/makerskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "secrets-audit",
+      "path": "global-config/skills/secrets-audit",
+      "summary": "Scans source, git history, and infra for leaked credentials and weak secrets-management posture.",
+      "category": "security",
+      "origin": "adopted",
+      "upstream": "briiirussell/cybersecurity-skills",
+      "source": {
+        "subpath": "skills/secrets-audit",
+        "commit": "c9ade0349f8ecd5c9c68a82a05d2b6012c5fa1d7",
+        "note": "cybersecurity-skills (briiirussell). Subset selected via fable-medium review 2026-08-09: git-history/build-artifact secret scanning + rotation posture, complements the existing pre-commit git-safety hook rather than duplicating it. MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/briiirussell/cybersecurity-skills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "shipping-a-branch",
+      "path": "global-config/skills/shipping-a-branch",
+      "summary": "Drives commit → push → PR → review → merge end to end, confirming each risky step separately.",
+      "category": "engineering",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "expects the superpowers plugin",
+        "expects the ecc plugin"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "skillify",
+      "path": "global-config/skills/skillify",
+      "summary": "Creates, adapts, or updates a Claude Code skill (from chat, video, dump, or an external repo).",
+      "category": "meta",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/makerskills",
+      "source": {
+        "subpath": "skills/skillify",
+        "commit": "17218de201e94f7aebe8b0ddfb507175caf37343",
+        "note": "makerskills (Corey Haines). Selected (of 19) 2026-08-09 — directly matches this user's habitual skill-vetting/adoption workflow (create/adapt/update skills, license+attribution check). MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/makerskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "slides",
+      "path": "global-config/skills/slides",
+      "summary": "Builds strategic HTML presentations with Chart.js and design-token theming.",
+      "category": "design",
+      "origin": "adopted",
+      "upstream": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "source": {
+        "subpath": ".claude/skills/slides",
+        "commit": "abb7f2fd5a083fa1ff55c326a963ff0d95c33f99",
+        "note": "ckm:slides (author: claudekit) — redistributed inside the nextlevelbuilder ui-ux-pro-max bundle. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/nextlevelbuilder/ui-ux-pro-max-skill/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "social",
+      "path": "global-config/skills/social",
+      "summary": "Social content creation, scheduling, repurposing, and social listening across platforms.",
+      "category": "marketing",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/marketingskills",
+      "source": {
+        "subpath": "skills/social",
+        "commit": "7868cb9251fad80a73d26e488a5ad5f6c4a9f335",
+        "note": "marketingskills (Corey Haines). Subset selected via fable-medium review 2026-08-09 — zero-budget social content, the cheapest promo channel. MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/marketingskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "supabase-rls-safety-check",
+      "path": "global-config/skills/supabase-rls-safety-check",
+      "summary": "Proactive Row Level Security and anon-key audit for Supabase projects.",
+      "category": "security",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "SKILL.md partly in Thai"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "teach",
+      "path": "global-config/skills/teach",
+      "summary": "Teaches the user a new concept/skill within the current workspace.",
+      "category": "meta",
+      "origin": "adopted",
+      "upstream": "mattpocock/skills",
+      "source": {
+        "subpath": "skills/productivity/teach",
+        "commit": "84fdeffd12f2ee307994d1eb6feb48173b6e0502",
+        "note": "mattpocock/skills. Confirmed same file structure as installed (SKILL.md, GLOSSARY-FORMAT.md, LEARNING-RECORD-FORMAT.md, MISSION-FORMAT.md, RESOURCES-FORMAT.md + agents/openai.yaml) via diff 2026-08-08; content has drifted since original install (untracked until now). Added AFTER the single check.ps1 -Ack call in this session so baseline is not overwritten. NOTE (added after fable-5 review 2026-08-08): the recorded last_seen_commit is upstream HEAD at add-time, NOT a claim that installed content matches that commit -- installed content is drifted/stale as of this baseline. Future ok-baseline reports will not surface that pre-existing drift; sync manually if you want the installed skill current."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/mattpocock/skills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "test-audit",
+      "path": "global-config/skills/test-audit",
+      "summary": "Rates which tests are worth their cost: a value bar, a low-value catalog and a regression-proof rule.",
+      "category": "engineering",
+      "origin": "adapted",
+      "upstream": "garrytan/gstack",
+      "source": {
+        "note": "Standalone port of the idea in garrytan/gstack (MIT), rewritten without its preamble, telemetry or hooks. Ported at gstack commit 9a1dc81."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://github.com/garrytan/gstack/blob/main/LICENSE"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-24",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "thai-no-quote-emphasis",
+      "path": "global-config/skills/thai-no-quote-emphasis",
+      "summary": "Rule against quote marks for emphasis in Thai text.",
+      "category": "writing",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "workflow-specific",
+      "knownIssues": [
+        "SKILL.md partly in Thai"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "thai-writing-anti-ai-tell",
+      "path": "global-config/skills/thai-writing-anti-ai-tell",
+      "summary": "Checklist that keeps Thai drafts from reading as AI-written.",
+      "category": "writing",
+      "origin": "self-authored",
+      "upstream": null,
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "self",
+        "checked": "2026-11-24",
+        "evidence": null
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "workflow-specific",
+      "knownIssues": [
+        "SKILL.md partly in Thai"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "ui-styling",
+      "path": null,
+      "summary": "Builds accessible UI with shadcn/ui, Tailwind, and dark-mode-aware theming.",
+      "category": "design",
+      "origin": "adopted",
+      "upstream": "mrgoonie/claudekit-skills",
+      "source": {
+        "subpath": ".claude/skills/ui-styling",
+        "commit": "80113d86bc4407f105af40a2c4ea58194f7c370a",
+        "note": "claudekit-skills (mrgoonie / ClaudeKit.cc). Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "redistribution": "not-bundled",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/mrgoonie/claudekit-skills/contents/.claude/skills/ui-styling/LICENSE.txt"
+      },
+      "pointer": {
+        "url": "https://github.com/mrgoonie/claudekit-skills/tree/80113d86bc4407f105af40a2c4ea58194f7c370a/.claude/skills/ui-styling",
+        "install": "/plugin marketplace add mrgoonie/claudekit-skills (then install the plugin that contains ui-styling)",
+        "note": "shadcn/ui and Tailwind styling. Not bundled by owner choice, although the upstream skill folder carries an Apache-2.0 licence file."
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "pointer",
+      "knownIssues": [],
+      "security": {
+        "scanned": null,
+        "scanner": null,
+        "errors": null,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "ui-ux-pro-max",
+      "path": "global-config/skills/ui-ux-pro-max",
+      "summary": "Searchable UI/UX database — styles, palettes, font pairings, UX guidelines, motion presets, chart types.",
+      "category": "design",
+      "origin": "adopted",
+      "upstream": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "source": {
+        "subpath": ".claude/skills/ui-ux-pro-max",
+        "commit": "abb7f2fd5a083fa1ff55c326a963ff0d95c33f99",
+        "note": "nextlevelbuilder. Confirmed in repo tree. (CLI alt: npm i -g uipro-cli)"
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/nextlevelbuilder/ui-ux-pro-max-skill/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "Windows-specific commands"
+      ],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "unstuck",
+      "path": "global-config/skills/unstuck",
+      "summary": "Lateral-thinking technique bank for cracking a roadblock instead of reporting \"not possible\".",
+      "category": "meta",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/makerskills",
+      "source": {
+        "subpath": "skills/unstuck",
+        "commit": "17218de201e94f7aebe8b0ddfb507175caf37343",
+        "note": "makerskills (Corey Haines). Selected (of 19) 2026-08-09 — lateral-thinking roadblock-breaker, upstream of decide. MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/makerskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "wait-what",
+      "path": "global-config/skills/wait-what",
+      "summary": "Flags a message that didn't land and re-pitches it.",
+      "category": "meta",
+      "origin": "adopted",
+      "upstream": "mattpocock/skills",
+      "source": {
+        "subpath": "skills/productivity/wait-what",
+        "commit": "84fdeffd12f2ee307994d1eb6feb48173b6e0502",
+        "note": "mattpocock/skills. Copied verbatim from source (SKILL.md only, disable-model-invocation) 2026-08-09; agents/openai.yaml intentionally not copied (Codex-only metadata). Baseline commit confirmed current via git ls-remote at add-time."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/mattpocock/skills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "watch-video",
+      "path": "global-config/skills/watch-video",
+      "summary": "Extracts transcript/visual/multimodal content from any yt-dlp-supported video source.",
+      "category": "research",
+      "origin": "adopted",
+      "upstream": "coreyhaines31/makerskills",
+      "source": {
+        "subpath": "skills/watch-video",
+        "commit": "17218de201e94f7aebe8b0ddfb507175caf37343",
+        "note": "makerskills (Corey Haines). Selected (of 19) 2026-08-09 — video transcript/summary extraction, occasional use for tutorial content. MIT license. Confirmed in repo tree."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/coreyhaines31/makerskills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "web-motion",
+      "path": "global-config/skills/web-motion",
+      "summary": "Restrained motion for web pages: token values, a motion budget and a scroll-reveal recipe.",
+      "category": "design",
+      "origin": "adapted",
+      "upstream": "nexu-io/motion-anything",
+      "source": {
+        "note": "Token values and restraint budget distilled from motion-anything MOTION-SPEC.md (Apache-2.0); the skill text is original. references/scroll-world-engine keeps its own MIT licence file."
+      },
+      "license": {
+        "spdx": "Apache-2.0",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://github.com/nexu-io/motion-anything/blob/main/LICENSE"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [
+        "pairs with a design skill; it does not pick colours or layout"
+      ],
+      "security": {
+        "scanned": "2026-11-24",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    },
+    {
+      "name": "wizard",
+      "path": "global-config/skills/wizard",
+      "summary": "Generates an interactive bash wizard for steps only a human can perform (credentials, dashboards, migrations).",
+      "category": "engineering",
+      "origin": "adopted",
+      "upstream": "mattpocock/skills",
+      "source": {
+        "subpath": "skills/engineering/wizard",
+        "commit": "84fdeffd12f2ee307994d1eb6feb48173b6e0502",
+        "note": "mattpocock/skills. Copied verbatim from source (SKILL.md + template.sh) 2026-08-09; agents/openai.yaml intentionally not copied (Codex-only metadata). Baseline commit confirmed current via git ls-remote at add-time."
+      },
+      "license": {
+        "spdx": "MIT",
+        "redistribution": "allowed",
+        "checked": "2026-11-24",
+        "evidence": "https://api.github.com/repos/mattpocock/skills/license"
+      },
+      "tested": {
+        "date": null,
+        "claudeCode": null,
+        "how": null
+      },
+      "status": "experimental",
+      "knownIssues": [],
+      "security": {
+        "scanned": "2026-11-23",
+        "scanner": "skill-scan v1",
+        "errors": 0,
+        "reviewed": false
+      }
+    }
+  ]
+}

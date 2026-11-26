@@ -1,0 +1,17 @@
+.learn-layout { display: grid; gap: var(--s5); margin-top: var(--s4); }
+.learn-list ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; max-height: 14rem; overflow-y: auto; }
+.learn-list a { display: block; padding: var(--s2) var(--s3); min-height: 44px; border-left: 3px solid transparent; color: var(--text); text-decoration: none; }
+.learn-list a:hover { text-decoration: underline; }
+.learn-list a[aria-current="page"] { border-left-color: var(--margin); font-weight: 600; text-decoration: underline 2px; text-underline-offset: 0.2em; }
+.learn-done { color: var(--ok); font-size: var(--t-sm); margin-left: var(--s2); }
+.learn-body { min-width: 0; }
+.learn-body h3 { font: 600 var(--t-lg)/1.3 var(--serif); margin: 0 0 var(--s3); }
+.learn-body h4, .learn-body h5 { margin: var(--s5) 0 var(--s2); }
+.learn-body pre { background: var(--surface); border: 1px solid var(--line); padding: var(--s3) var(--s4); overflow-x: auto; max-width: 100%; }
+.learn-body pre code { background: none; border: 0; padding: 0; }
+.learn-body ul, .learn-body ol { max-width: 42rem; padding-left: var(--s5); }
+.learn-run { margin: var(--s3) 0 var(--s4); }
+.learn-run p { margin: 0 0 var(--s1); font-weight: 600; }
+.learn-notice { border-left: 3px solid var(--focus); padding-left: var(--s3); }
+.learn-mark { margin-top: var(--s4); font: inherit; font-weight: 600; color: var(--accent-text); background: var(--accent); border: 0; border-radius: 4px; padding: var(--s3) var(--s5); min-height: 44px; cursor: pointer; }
+@media (min-width: 48rem) { .learn-layout { grid-template-columns: 16rem 1fr; } .learn-list ol { max-height: none; overflow: visible; } }

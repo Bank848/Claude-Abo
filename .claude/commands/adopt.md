@@ -5,9 +5,9 @@ argument-hint: (no arguments)
 
 # /adopt — guided setup for this template
 
-You are walking a new user through adopting this repo (`claude-clone-template`) into their own Claude Code setup. This replaces the manual "How to adopt this" steps in `README.md` with an interactive flow — but the README stays the source of truth for what each piece does; read it now if you have not already (`README.md`, especially the "What's in here" and "How to adopt this" sections).
+You are walking a new user through adopting this repo (Claude-Abo) into their own Claude Code setup. This replaces the manual "How to adopt this" steps in `docs/guide.md` with an interactive flow — but the guide stays the source of truth for what each piece does; read it now if you have not already (`docs/guide.md`, especially the "What's in here" and "How to adopt this" sections).
 
-**Scope discipline — this command does NOT do:** auto-translating Thai content to English, scaffolding a new second-brain vault structure, regenerating `SKILLS_INDEX.md`, writing a "first" memory entry on the user's behalf, or creating command aliases (`/setup`, `/onboard`, etc.). If the user asks for any of those, say it's out of scope for `/adopt` and point at the relevant README section to do by hand.
+**Scope discipline — this command does NOT do:** auto-translating Thai content to English, scaffolding a new second-brain vault structure, regenerating `SKILLS_INDEX.md`, writing a "first" memory entry on the user's behalf, or creating command aliases (`/setup`, `/onboard`, etc.). If the user asks for any of those, say it's out of scope for `/adopt` and point at the relevant guide section to do by hand.
 
 ## Step 0 — resume check
 
@@ -43,7 +43,7 @@ Ask one question: **"Have you used Claude Code before — skills, agents, CLAUDE
 Ask these questions together (one message, not one-by-one back-and-forth) so the user can answer in one pass. Accept "skip"/"later" for any of them — a skipped answer means "leave the placeholder in place," not "fail."
 
 1. **Target `~/.claude` directory** — confirm the actual path to use (default: detect the real home directory for the current OS/user rather than asking blindly; just show the detected path and ask them to confirm or correct it).
-2. **Ollama section** — keep or delete? (See README "Optional: Local AI (Ollama) pre-compression".)
+2. **Ollama section** — keep or delete? (See guide "Optional idea: local AI (Ollama) pre-compression" — an idea, not a requirement; default to "delete" unless they want it.)
 3. **Second-brain vault path** — for `<YOUR_VAULT_PATH>`. "Skip" is fine.
 4. **Username / home path** — for `<YOUR_USERNAME>` / `<YOUR_HOME>`. Prefer auto-detecting from the environment and just confirming, same as Q1.
 5. **Which of these plugins do you already have installed (or plan to install right now)?** List them explicitly: `superpowers`, `ecc` (everything-claude-code), `pordee`, `lazyweb`, `andrej-karpathy-skills`. This answer controls what the copied CLAUDE.md is allowed to claim — see Step 3 item 5's plugin-honesty fix, which is the most important correctness step in this whole command.
@@ -65,7 +65,7 @@ Do the low-risk, easily-reversible steps first, and check off each one in the jo
    - **If Step 2 Q6's answer was not Max:** before writing the copy, delete the `fable-medium` paragraphs and the "Top of the ladder" bullet from the model-routing section, and change the ladder's ceiling to stop at `opus` (the escalate-on-hard-work logic stays, it just has no level above Opus to go to). Note this edit in the journal and final report so the user knows the ladder was capped, not just silently left in a broken state.
    - **Fill in the "Browser tool choice" section's placeholder** with Step 2 Q7's answer — replace the HTML comment with a one-line note naming the chosen tool (or leave the comment as-is if the answer was "decide later").
 6. Merge `global-config/settings.example.json` into `<target>/settings.json`: read the existing file if present, merge in the `hooks.PreToolUse` entry (on macOS/Linux, change the hook command's `py` launcher to `python3` first) and whichever `enabledPlugins` entries match Step 2 Q5's answer — the example file only has ready-made entries for `superpowers`/`ecc`, so for `pordee`/`lazyweb`/`andrej-karpathy-skills` note in the final report that there's nothing to merge and the user should add their own `enabledPlugins` entry once installed. Do not blind-overwrite an existing settings.json. After writing, **parse the result as JSON before considering the step done**; if it fails to parse, revert to the pre-edit content, report the failure, and stop (do not continue to later steps with a broken settings.json).
-7. Copy `global-config/memory-examples/*.md` into the target project's auto-memory folder only if the user names a specific project to apply them to; otherwise leave them where they are and mention them in the final report as optional reading.
+7. Copy `examples/memory/*.md` (invented example entries; skip `README.md` there) into the target project's auto-memory folder only if the user names a specific project to apply them to; otherwise leave them where they are and mention them in the final report as optional reading.
 8. Copy `global-config/templates/*` into wherever the user is about to start a new project, only if they ask — this is a "use later" set of files, not part of the core adopt flow.
 9. Copy `global-config/tools/skill-update-check/` into `<target>/tools/skill-update-check/` always (it's what `check.ps1 -Ack` in the final report depends on). Copy `global-config/tools/ollama/` too, only if the Ollama answer was "keep".
 10. If a vault path was given: copy `notes/` there, EXCEPT `notes/local-ollama-models.md` if the Ollama answer was "delete" (skip the whole vault-copy step if the user only wanted content you're excluding — ask if unsure).
@@ -75,3 +75,7 @@ Do the low-risk, easily-reversible steps first, and check off each one in the jo
 ## Step 4 — final report
 
 List: what was copied, what was skipped and why, which placeholders still have unresolved values (and where), and the manual follow-ups that are genuinely out of this command's scope — installing the plugins themselves, running `check.ps1 -Ack` once to set their own `sources.json` baseline, and reconciling `SKILLS_INDEX.md` with whatever they actually installed. Close the journal with a `[complete]` marker line.
+
+## Step 5 — optional: see the difference
+
+Suggest running `npx github:Bank848/Claude-Abo audit` before and after the adoption. It estimates the fixed context of the setup in tokens; compare the figure with `/context`, and treat any saving as proven only by a `/context` before/after pair.

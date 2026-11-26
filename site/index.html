@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<title>Claude-Abo</title>
+<meta name="description" content="Find out what your Claude Code setup costs in context every session, and browse a catalog of skills with license, test date and known issues.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Claude-Abo">
+<meta property="og:description" content="Find out what your Claude Code setup costs in context, and browse a catalog of skills with licence, test date and known issues.">
+<meta property="og:image" content="https://bank848.github.io/Claude-Abo/og-card-1200x630.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://bank848.github.io/Claude-Abo/og-card-1200x630.png">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="audit.css">
+<link rel="stylesheet" href="catalog.css">
+<link rel="stylesheet" href="learn.css">
+<link rel="stylesheet" href="tour.css">
+<link rel="stylesheet" href="pick.css">
+<script type="module" src="app.mjs"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="#top" id="top">Claude-Abo</a>
+  <nav aria-label="Sections">
+    <a href="#tour">Tour</a>
+    <a href="#catalog">Catalog</a>
+    <a href="#audit">Audit</a>
+    <a href="#learn">Learn</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+<main id="main">
+  <section id="hero" aria-labelledby="hero-h">
+    <!-- include:assets/hero-doodle.svg -->
+    <h1 id="hero-h">Describe the job. Claude picks the skill.</h1>
+    <p>Claude reads one line about each skill and loads the one that fits your request. Type a request to see a rough version of that match.</p>
+    <label class="pick-label" for="pick-q">What do you want done?</label>
+    <input id="pick-q" class="pick-input" type="text" autocomplete="off" placeholder="Make my English draft stop reading as AI-written" aria-describedby="pick-note">
+    <p id="pick-note" class="pick-note">A rough illustration of how Claude matches descriptions.</p>
+    <p id="pick-live" class="pick-live" aria-live="polite"></p>
+    <ol class="pick" id="pick-list">
+      <li aria-current="true"><b>english-writing-anti-ai-tell</b> <span class="t">Checklist that keeps English drafts from reading as AI-written.</span></li>
+      <li><b>github-pr-review-draft</b> <span class="t">Pending-review PR workflow: findings wait in the GitHub UI, nothing posts silently.</span></li>
+      <li><b>markitdown</b> <span class="t">Converts PDFs/slides/sheets/audio/HTML/etc. into clean Markdown for LLM/RAG use.</span></li>
+      <li><b>dependency-audit</b> <span class="t">Checks project dependencies for known CVEs and supply-chain risks.</span></li>
+      <li><b>pruning-branches</b> <span class="t">Periodic branch and worktree cleanup with a survey first and a log entry after.</span></li>
+    </ol>
+  </section>
+  <section id="tour" aria-labelledby="tour-h"></section>
+  <section id="catalog" aria-labelledby="catalog-h"></section>
+  <section id="audit" aria-labelledby="audit-h"></section>
+  <section id="learn" aria-labelledby="learn-h"></section>
+  <section id="about" aria-labelledby="about-h"></section>
+  <noscript><p>This page needs JavaScript to list the catalog. The same information is in the <a href="https://github.com/Bank848/Claude-Abo#readme">README</a>.</p></noscript>
+</main>
+<footer class="foot"><p>MIT licensed. Nothing on this page sends data anywhere.</p></footer>
+</body>
+</html>
